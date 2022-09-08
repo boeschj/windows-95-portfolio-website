@@ -15,9 +15,11 @@ module.exports = {
     },
     extend: {
       colors: {
+        //main colors
         'windows-gray': '#c0c4c8',
-        'windows-blue':'#010082',
+        'windows-blue':'#0000a8',
         'windows-bg': '#55aaaa',
+        'windows-white': '#fcfcfc',
 
         //footer menu button gradients
         'menu-btn-l-1': '#e5e7e8',
@@ -77,6 +79,29 @@ module.exports = {
         'modal-l-2': '#fcfcfc',
         'modal-l-3': '#e9eaeb',
         'modal-l-4': '#c0c4c8',
+
+        //text area gradients
+        'text-t-1': '#ececec',
+        'text-t-2': '#000000',
+        'text-t-3': '#5a5d60',
+        'text-t-4': '#84888c',
+
+        'text-b-1': '#d6d9db',
+        'text-b-2': '#c0c4c8',
+        'text-b-3': '#fcfcfc',
+        'text-b-4': '#dadcde',
+
+        'text-l-1': '#3f3f3f',
+        'text-l-2': '#080808',
+        'text-l-3': '#84888c',
+        'text-l-4': '#adb1b5',
+
+        'text-r-1': '#c0c4c8',
+        'text-r-2': '#dadcde',
+        'text-r-3': '#fcfcfc',
+        'text-r-4': '#c0c4c8',
+
+
         
       },
       // fontFamily: {

@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
-import Modal from '../components/modal';
+import Modal from '../components/experience';
 import Clock from 'react-live-clock';
 import { useState, useEffect } from 'react';
-// import '../styles/global.css'
-// import 'tailwindcss/tailwind.css';
+import win95 from '../styles/win_95.svg'
+import closeBtn from '../styles/closeBtn.png'
+import About from '../components/about';
 
 interface ParentCompProps {
   childComp: React.ReactNode,
@@ -21,6 +22,20 @@ const Home: NextPage = (): JSX.Element => {
     'border border-t-modal-t-2 border-b-modal-b-2 border-l-modal-l-2 border-r-modal-r-2',
     'border border-t-modal-t-3 border-b-modal-b-3 border-l-modal-l-3 border-r-modal-r-3',
     'border border-t-modal-t-4 border-b-modal-b-4 border-l-modal-l-4 border-r-modal-r-4'
+  ];
+
+  const tabGradientBorders = [
+    'border rounded-t border-b-windows-gray border-t-modal-t-1 border-l-modal-l-1 border-r-modal-r-1',
+    'border rounded-t border-b-windows-gray border-t-modal-t-2 border-l-modal-l-2 border-r-modal-r-2',
+    'border rounded-t border-b-windows-gray border-t-modal-t-3 border-l-modal-l-3 border-r-modal-r-3',
+    'border rounded-t border-b-windows-gray border-t-modal-t-4 border-l-modal-l-4 border-r-modal-r-4'
+  ];
+
+  const coverTabGradientBorders = [
+    'border-l border-modal-l-1',
+    'border-l border-modal-l-2',
+    'border-l border-modal-l-3',
+    'border-l border-modal-l-4'
   ];
 
   const footerGradientBorders = [
@@ -42,38 +57,102 @@ const Home: NextPage = (): JSX.Element => {
     'border border-l-time-l-2 border-r-time-r-2 border-t-time-t-2 border-b-time-b-2',
   ];
 
+  const textAreaGradientBorder = [
+    'border border-l-text-l-1 border-r-text-r-1 border-t-text-t-1 border-b-text-b-1',
+    'border border-l-text-l-2 border-r-text-r-2 border-t-text-t-2 border-b-text-b-2',
+    'border border-l-text-l-3 border-r-text-r-3 border-t-text-t-3 border-b-text-b-3',
+    'border border-l-text-l-4 border-r-text-r-4 border-t-text-t-4 border-b-text-b-4',
+  ]
+
   const Footer: React.FC = () => {
-    const [dateState, setDateState] = useState(new Date());
-    // useEffect(() => {
-    //   setInterval(() => setDateState(new Date()), 1000);
-    // }, []);
 
     return (
-      <div className='h-12 flex items-center justify-between'>
-        <GradientWrapper style="w-24 text-center" gradientBorders={buttonGradientBorders} childComp={
-          <button className="font-extrabold text-2xl">
-            Start
-          </button>
+      <div className='h-[35px] flex items-center justify-between'>
+        <GradientWrapper style="h-8 w-24 text-center items-center flex" gradientBorders={buttonGradientBorders} childComp={
+          <div className="flex h-[28px] items-center space-x-2 px-1">
+            <Image src={win95} alt="Win95" height="28" width="28" />
+            <button className="font-[1100] text-lg tracking-wide">
+              Start
+            </button>
+          </div>
 
         } />
-        <GradientWrapper style="w-auto h-10" gradientBorders={timeGradientBorders} childComp={
-          <div className="h-10 text-center items-center text-lg grid content-center px-3">
-            {dateState.toLocaleString('en-US', {
-              hour: 'numeric',
-              minute: 'numeric',
-              second: 'numeric',
-              hour12: true,
-            })}
-          </div>
+        <GradientWrapper style="w-auto h-8" gradientBorders={timeGradientBorders} childComp={
+          < Clock />
         } />
       </div>
     )
   }
 
-  const WelcomeModal: React.FC = () => {
+  const ContentContainer: React.FC = () => {
     return (
-      <div className="bg-windows-gray mx-auto h-36">
-        asdf
+      <div className="bg-windows-gray mx-auto h-[810px] w-full">
+        <div className="bg-windows-blue px-1 flex items-center justify-between align-middle">
+          <div className="text-lg font-bold text-white">
+            Welcome
+          </div>
+          <Image src={closeBtn} width="20" height="20" />
+        </div>
+
+        <div className="flex flex-col p-5">
+          <div className="flex flex-row">
+
+            <GradientWrapper style={'bg-windows-gray h-[35px] w-[100px]'} gradientBorders={tabGradientBorders} childComp={
+              <button className={'bg-windows-gray h-[30px] w-full'}>
+                About Me
+              </button>
+            } />
+            <GradientWrapper style={'bg-windows-gray h-[35px] w-[100px]'} gradientBorders={tabGradientBorders} childComp={
+              <button className={'bg-windows-gray h-[30px] w-full'}>
+                Experience
+              </button>
+            } />
+            <GradientWrapper style={'bg-windows-gray h-[35px] w-[100px]'} gradientBorders={tabGradientBorders} childComp={
+              <button className={'bg-windows-gray h-[30px] w-full'}>
+                Skills
+              </button>
+            } />
+          </div>
+          <GradientWrapper style={'w-full'} gradientBorders={modalGradientBorders} childComp={
+            <div>
+              <div className="flex flex-row">
+                <GradientWrapper style={'bg-windows-gray h-[10px] w-[100px] -mt-[4px] -ml-[4px]'} gradientBorders={coverTabGradientBorders} childComp={
+                  <div className={'h-[10px] w-[95px]'} />
+                }
+                />
+                <div className={'bg-windows-gray h-[10px] w-[97px] border border-windows-gray mt-[5px] -ml-[1px]'} />
+                <div className={'bg-windows-gray h-[10px] w-[97px] border border-windows-gray mt-[5px] -ml-[1px]'} />
+              </div>
+
+
+
+              <div className="h-full">
+                <div className="text-[50px] font-extrabold w-full text-center">
+                  Hi, I'm Jordan 👋
+                </div>
+
+                < GradientWrapper
+                  style="w-full p-7"
+                  gradientBorders={textAreaGradientBorder}
+                  childComp={
+                    < About />
+                  }
+                />
+              </div>
+            </div>
+          } />
+        </div>
+        <div className="float-right flex flex-row space-x-5 px-5">
+          <GradientWrapper gradientBorders={modalGradientBorders} childComp={
+            <button className={'bg-windows-gray h-[30px] w-[150px] w-full'}>Github</button>
+          } />
+          <GradientWrapper gradientBorders={modalGradientBorders} childComp={
+            <button className={'bg-windows-gray h-[30px] w-[150px] w-full'}>LinkedIn</button>
+          } />
+          <GradientWrapper gradientBorders={modalGradientBorders} childComp={
+            <button className={'bg-windows-gray h-[30px] w-[150px] w-full'}>Resume</button>
+          } />
+        </div>
       </div>
     )
   }
@@ -106,11 +185,11 @@ const Home: NextPage = (): JSX.Element => {
         {/* <Modal open={true} /> */}
 
         <GradientWrapper childComp={
-          <WelcomeModal />
+          <ContentContainer />
 
         }
           gradientBorders={modalGradientBorders}
-          style={'2xl:container mb-10 bg-green-500'}
+          style={'mx-auto w-3/4 mb-10'}
         />
       </div>
 
