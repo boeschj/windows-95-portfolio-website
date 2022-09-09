@@ -1,17 +1,21 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Modal from '../components/experience';
-import Clock from 'react-live-clock';
 import { useState, useEffect } from 'react';
 import win95 from '../styles/win_95.svg'
+// import resumeLink from '../styles/jboeschResume2021.pdf'
 import closeBtn from '../styles/closeBtn.png'
 import About from '../components/about';
+import GradientWrapper from '../components/gradientWrapper';
+import Clock from '../components/clock';
+import Experience from '../components/experience';
+import Link from 'next/link';
 
-interface ParentCompProps {
-  childComp: React.ReactNode,
-  style?: string,
-  gradientBorders: string[]
-}
+// interface ParentCompProps {
+//   childComp: React.ReactNode,
+//   style?: string,
+//   gradientBorders: string[]
+// }
 
 const Home: NextPage = (): JSX.Element => {
 
@@ -62,7 +66,7 @@ const Home: NextPage = (): JSX.Element => {
     'border border-l-text-l-2 border-r-text-r-2 border-t-text-t-2 border-b-text-b-2',
     'border border-l-text-l-3 border-r-text-r-3 border-t-text-t-3 border-b-text-b-3',
     'border border-l-text-l-4 border-r-text-r-4 border-t-text-t-4 border-b-text-b-4',
-  ]
+  ];
 
   const Footer: React.FC = () => {
 
@@ -96,7 +100,6 @@ const Home: NextPage = (): JSX.Element => {
 
         <div className="flex flex-col p-5">
           <div className="flex flex-row">
-
             <GradientWrapper style={'bg-windows-gray h-[35px] w-[100px]'} gradientBorders={tabGradientBorders} childComp={
               <button className={'bg-windows-gray h-[30px] w-full'}>
                 About Me
@@ -127,7 +130,24 @@ const Home: NextPage = (): JSX.Element => {
 
 
               <div className="h-full">
-                <div className="text-[50px] font-extrabold w-full text-center">
+                <Experience />
+                {/* <div className="text-[50px] font-extrabold w-full text-center">
+                  Hi, I'm Jordan 👋
+                </div>
+
+                < GradientWrapper
+                  style="w-full p-7"
+                  gradientBorders={textAreaGradientBorder}
+                  childComp={
+                    <main className="h-[500px] w-full bg-windows-white p-10 text-2xl tracking-wide text-center flex flex-col space-y-10 justify-center overflow-auto">
+                    </main>
+                  }
+                />
+                
+                
+                
+                */}
+                {/* <div className="text-[50px] font-extrabold w-full text-center">
                   Hi, I'm Jordan 👋
                 </div>
 
@@ -137,46 +157,52 @@ const Home: NextPage = (): JSX.Element => {
                   childComp={
                     < About />
                   }
-                />
+                /> */}
               </div>
             </div>
           } />
         </div>
         <div className="float-right flex flex-row space-x-5 px-5">
           <GradientWrapper gradientBorders={modalGradientBorders} childComp={
-            <button className={'bg-windows-gray h-[30px] w-[150px] w-full'}>Github</button>
+            <button
+              onClick={() => window.open('https://github.com/boeschj', '_blank', 'noopener,noreferrer')}
+              className={'bg-windows-gray h-[30px] w-[150px] w-full'}>Github</button>
           } />
           <GradientWrapper gradientBorders={modalGradientBorders} childComp={
-            <button className={'bg-windows-gray h-[30px] w-[150px] w-full'}>LinkedIn</button>
+            <button
+              onClick={() => window.open('https://www.linkedin.com/in/jordan-boesch-39570b20b', '_blank', 'noopener,noreferrer')}
+              className={'bg-windows-gray h-[30px] w-[150px] w-full'}>LinkedIn</button>
           } />
           <GradientWrapper gradientBorders={modalGradientBorders} childComp={
-            <button className={'bg-windows-gray h-[30px] w-[150px] w-full'}>Resume</button>
+            <Link href='jboeschResume2021.pdf' target="_blank" download>
+              <button className={'bg-windows-gray h-[30px] w-[150px] w-full'}>Resume</button>
+            </Link>
           } />
         </div>
       </div>
     )
   }
 
-  const GradientWrapper: React.FC<ParentCompProps> = ({ childComp, style, gradientBorders }): JSX.Element => {
-    for (let i = 0; i < gradientBorders.length; i++) {
-      childComp = (
-        <div className={gradientBorders[i]}>
-          {childComp}
-        </div>
-      )
-    }
+  // const GradientWrapper: React.FC<ParentCompProps> = ({ childComp, style, gradientBorders }): JSX.Element => {
+  //   for (let i = 0; i < gradientBorders.length; i++) {
+  //     childComp = (
+  //       <div className={gradientBorders[i]}>
+  //         {childComp}
+  //       </div>
+  //     )
+  //   }
 
-    return (
-      style ?
-        <div className={style}>
-          {childComp}
-        </div>
-        :
-        <>
-          {childComp}
-        </>
-    )
-  }
+  //   return (
+  //     style ?
+  //       <div className={style}>
+  //         {childComp}
+  //       </div>
+  //       :
+  //       <>
+  //         {childComp}
+  //       </>
+  //   )
+  // }
 
   return (
     <div className="flex bg-windows-bg min-h-screen w-full flex-col justify-between content-center">
@@ -189,7 +215,7 @@ const Home: NextPage = (): JSX.Element => {
 
         }
           gradientBorders={modalGradientBorders}
-          style={'mx-auto w-3/4 mb-10'}
+          style={'mx-auto w-11/12 mb-10'}
         />
       </div>
 

@@ -102,11 +102,21 @@ module.exports = {
         'text-r-4': '#c0c4c8',
 
 
+        //button pressed state
+        'pressed-t-1': '#2d2e30',
+        'pressed-t-2': '#000000',
+        'pressed-t-3': '#000000',
+        'pressed-t-4': '#5a5d60',
+        'pressed-t-5': '#9ca0a4',
+
+        'pressed-b-1': '#fcfcfc',
         
+        'pressed-l-1': '#676a6d',
+        'pressed-l-2': '#060606',
+
+        'pressed-r-1': '#e7e8ea',
+        'pressed-r-1': '#e5e7e8',
       },
-      // fontFamily: {
-      //   'sans': ['Silkscreen-Regular']
-      // }
     },
   },
   plugins: [],

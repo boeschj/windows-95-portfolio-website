@@ -1,21 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */
-
-/* @layer base { */
-
-/* @font-face {
-        font-family: 'MS-Sans-Serif';
-        font-weight: 900;
-        src: url('./fonts/MS-Sans-Serif.ttf') format('ttf');
-    } */
-/* @font-face {
-        font-family: 'Silkscreen-Regular';
-        font-weight: 900;
-        src: url('./fonts/Silkscreen-Regular.ttf') format('ttf');
-    }
-} */
 
 @font-face {
     font-family: 'MS Sans Serif';
@@ -30,22 +15,16 @@
 
 * {
     font-family: 'MS Sans Serif';
-    /* box-sizing: border-box; */
 }
 
-/* body {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 5px;
-} */
+::-moz-selection {
+    background-color: #0000a8;
 
-/* body {
-    font-family: 'Silkscreen-Regular';
-    /* font-size: 8px;
-    font-smooth: never;
-    -webkit-font-smoothing: none;
-    -moz-osx-font-smoothing: none; */
+    color: #fff;
+}
 
-/* margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale; 
-} */
+::selection {
+    background-color: #0000a8;
+
+    color: #fff;
+}
