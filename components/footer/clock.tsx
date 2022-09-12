@@ -7,7 +7,7 @@ const Clock: React.FC = (): JSX.Element => {
     }, []);
 
     return (
-        <div suppressHydrationWarning className="h-8 text-center items-center text-md grid content-center px-3">
+        <div suppressHydrationWarning className="h-8 w-24 text-center items-center text-md grid content-center px-3">
             {dateState.toLocaleString('en-US', {
                 hour: 'numeric',
                 minute: 'numeric',

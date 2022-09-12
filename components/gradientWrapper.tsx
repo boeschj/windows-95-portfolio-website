@@ -1,24 +1,29 @@
 import React from "react"
 
 interface ParentCompProps {
-    childComp: React.ReactNode,
+    children: React.ReactNode,
     style?: string,
     gradientBorders: string[]
 }
 
-const GradientWrapper: React.FC<ParentCompProps> = ({ childComp, style, gradientBorders }): JSX.Element => {
-    for (let i = 0; i < gradientBorders.length; i++) {
+const GradientWrapper: React.FC<ParentCompProps> = (props: ParentCompProps): JSX.Element => {
+    let childComp = props.children;
+    for (let i = 0; i < props.gradientBorders.length; i++) {
         childComp = (
-            <div className={gradientBorders[i]}>
-                {childComp}
+            <div className={props.gradientBorders[i]}>
+                <>
+                    {childComp}
+                </>
             </div>
         )
     }
 
     return (
-        style ?
-            <div className={style}>
-                {childComp}
+        props.style ?
+            <div className={props.style}>
+                <>
+                    {childComp}
+                </>
             </div>
             :
             <>
