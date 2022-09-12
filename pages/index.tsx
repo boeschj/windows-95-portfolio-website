@@ -10,6 +10,7 @@ import GradientWrapper from '../components/gradientWrapper';
 import Clock from '../components/clock';
 import Experience from '../components/experience';
 import Link from 'next/link';
+import Skills from '../components/skills';
 
 // interface ParentCompProps {
 //   childComp: React.ReactNode,
@@ -17,8 +18,24 @@ import Link from 'next/link';
 //   gradientBorders: string[]
 // }
 
-const Home: NextPage = (): JSX.Element => {
+interface Dictionary<T> {
+  [Key: string]: T;
+}
 
+const Home: NextPage = (): JSX.Element => {
+  const [tabSelected, setTabSelected] = useState(0);
+  const [buttonClicked, setButtonClicked] = useState(false);
+
+  const tabComps: JSX.Element[] = [
+    <About />,
+    <Experience />,
+    <Skills />
+  ]
+
+  const handleButtonClickEvent = () => {
+    setButtonClicked(true);
+    setTimeout(() => { setButtonClicked(false) }, 400);
+  }
 
   //Would have been way easier to generate these dynamically, but sadly this doesn't work with tailwind: https://tailwindcss.com/docs/content-configuration#dynamic-class-names
   const modalGradientBorders = [
@@ -90,7 +107,7 @@ const Home: NextPage = (): JSX.Element => {
 
   const ContentContainer: React.FC = () => {
     return (
-      <div className="bg-windows-gray mx-auto h-[810px] w-full">
+      <div className="bg-windows-gray mx-auto h-fit md:h-[824px] w-full">
         <div className="bg-windows-blue px-1 flex items-center justify-between align-middle">
           <div className="text-lg font-bold text-white">
             Welcome
@@ -100,18 +117,18 @@ const Home: NextPage = (): JSX.Element => {
 
         <div className="flex flex-col p-5">
           <div className="flex flex-row">
-            <GradientWrapper style={'bg-windows-gray h-[35px] w-[100px]'} gradientBorders={tabGradientBorders} childComp={
-              <button className={'bg-windows-gray h-[30px] w-full'}>
+            <GradientWrapper style={`bg-windows-gray h-[35px] w-[100px] ${tabSelected === 0 ? 'mt-0' : 'mt-[3px]'}`} gradientBorders={tabGradientBorders} childComp={
+              <button className={'bg-windows-gray h-[30px] w-full'} onClick={() => setTabSelected(0)}>
                 About Me
               </button>
             } />
-            <GradientWrapper style={'bg-windows-gray h-[35px] w-[100px]'} gradientBorders={tabGradientBorders} childComp={
-              <button className={'bg-windows-gray h-[30px] w-full'}>
+            <GradientWrapper style={`bg-windows-gray h-[35px] w-[100px] ${tabSelected === 1 ? 'mt-0' : 'mt-[3px]'}`} gradientBorders={tabGradientBorders} childComp={
+              <button className={'bg-windows-gray h-[30px] w-full'} onClick={() => setTabSelected(1)}>
                 Experience
               </button>
             } />
-            <GradientWrapper style={'bg-windows-gray h-[35px] w-[100px]'} gradientBorders={tabGradientBorders} childComp={
-              <button className={'bg-windows-gray h-[30px] w-full'}>
+            <GradientWrapper style={`bg-windows-gray h-[35px] w-[100px] ${tabSelected === 2 ? 'mt-0' : 'mt-[3px]'}`} gradientBorders={tabGradientBorders} childComp={
+              <button className={'bg-windows-gray h-[30px] w-full'} onClick={() => setTabSelected(2)}>
                 Skills
               </button>
             } />
@@ -119,103 +136,55 @@ const Home: NextPage = (): JSX.Element => {
           <GradientWrapper style={'w-full'} gradientBorders={modalGradientBorders} childComp={
             <div>
               <div className="flex flex-row">
-                <GradientWrapper style={'bg-windows-gray h-[10px] w-[100px] -mt-[4px] -ml-[4px]'} gradientBorders={coverTabGradientBorders} childComp={
-                  <div className={'h-[10px] w-[95px]'} />
+                <GradientWrapper style={`bg-windows-gray h-[10px] w-[97px] -mt-[9px] -ml-[4px] ${tabSelected === 0 ? '' : 'bg-opacity-0'}`} gradientBorders={coverTabGradientBorders} childComp={
+                  < div className={'h-[10px] w-[95px]'} />
                 }
                 />
-                <div className={'bg-windows-gray h-[10px] w-[97px] border border-windows-gray mt-[5px] -ml-[1px]'} />
-                <div className={'bg-windows-gray h-[10px] w-[97px] border border-windows-gray mt-[5px] -ml-[1px]'} />
+                <div className={`bg-windows-gray h-[10px] w-[100px] border border-windows-gray ml-[3px] ${tabSelected === 1 ? '-mt-[5px]' : 'mt-[5px]'}`} />
+                <div className={`bg-windows-gray h-[10px] w-[100px] border border-windows-gray ${tabSelected === 2 ? '-mt-[5px]' : 'mt-[5px]'}`} />
               </div>
 
 
 
               <div className="h-full">
-                <Experience />
-                {/* <div className="text-[50px] font-extrabold w-full text-center">
-                  Hi, I'm Jordan 👋
-                </div>
-
-                < GradientWrapper
-                  style="w-full p-7"
-                  gradientBorders={textAreaGradientBorder}
-                  childComp={
-                    <main className="h-[500px] w-full bg-windows-white p-10 text-2xl tracking-wide text-center flex flex-col space-y-10 justify-center overflow-auto">
-                    </main>
-                  }
-                />
-                
-                
-                
-                */}
-                {/* <div className="text-[50px] font-extrabold w-full text-center">
-                  Hi, I'm Jordan 👋
-                </div>
-
-                < GradientWrapper
-                  style="w-full p-7"
-                  gradientBorders={textAreaGradientBorder}
-                  childComp={
-                    < About />
-                  }
-                /> */}
+                {tabComps[tabSelected]}
               </div>
             </div>
           } />
-        </div>
-        <div className="float-right flex flex-row space-x-5 px-5">
-          <GradientWrapper gradientBorders={modalGradientBorders} childComp={
-            <button
-              onClick={() => window.open('https://github.com/boeschj', '_blank', 'noopener,noreferrer')}
-              className={'bg-windows-gray h-[30px] w-[150px] w-full'}>Github</button>
-          } />
-          <GradientWrapper gradientBorders={modalGradientBorders} childComp={
-            <button
-              onClick={() => window.open('https://www.linkedin.com/in/jordan-boesch-39570b20b', '_blank', 'noopener,noreferrer')}
-              className={'bg-windows-gray h-[30px] w-[150px] w-full'}>LinkedIn</button>
-          } />
-          <GradientWrapper gradientBorders={modalGradientBorders} childComp={
-            <Link href='jboeschResume2021.pdf' target="_blank" download>
-              <button className={'bg-windows-gray h-[30px] w-[150px] w-full'}>Resume</button>
-            </Link>
-          } />
+
+          <div className="flex flex-row space-x-5 pt-5 justify-end">
+            <GradientWrapper gradientBorders={modalGradientBorders} childComp={
+              <button
+                onClick={() => {
+                  handleButtonClickEvent();
+                  // window.open('https://github.com/boeschj', '_blank', 'noopener,noreferrer')
+                }}
+                className={`${buttonClicked ? 'bg-blue-500 translate-y-[2px] translate-x-px' : 'bg-windows-gray'} h-[30px] w-[150px] w-full`}>Github</button>
+            } />
+            <GradientWrapper gradientBorders={modalGradientBorders} childComp={
+              <button
+                onClick={() => window.open('https://www.linkedin.com/in/jordan-boesch-39570b20b', '_blank', 'noopener,noreferrer')}
+                className={'bg-windows-gray h-[30px] w-[150px] w-full'}>LinkedIn</button>
+            } />
+            <GradientWrapper style="hidden md:flex" gradientBorders={modalGradientBorders} childComp={
+              <Link href='jboeschResume2021.pdf' target="_blank" download>
+                <button className={'bg-windows-gray h-[30px] w-[150px] w-full'}>Resume</button>
+              </Link>
+            } />
+          </div>
         </div>
       </div>
     )
   }
 
-  // const GradientWrapper: React.FC<ParentCompProps> = ({ childComp, style, gradientBorders }): JSX.Element => {
-  //   for (let i = 0; i < gradientBorders.length; i++) {
-  //     childComp = (
-  //       <div className={gradientBorders[i]}>
-  //         {childComp}
-  //       </div>
-  //     )
-  //   }
-
-  //   return (
-  //     style ?
-  //       <div className={style}>
-  //         {childComp}
-  //       </div>
-  //       :
-  //       <>
-  //         {childComp}
-  //       </>
-  //   )
-  // }
-
   return (
     <div className="flex bg-windows-bg min-h-screen w-full flex-col justify-between content-center">
       <div className="flex bg-windows-bg w-full flex-col justify-center grow content-center">
-
-        {/* <Modal open={true} /> */}
-
         <GradientWrapper childComp={
           <ContentContainer />
-
         }
           gradientBorders={modalGradientBorders}
-          style={'mx-auto w-11/12 mb-10'}
+          style={'mx-auto w-full md:w-10/12 mb-10'}
         />
       </div>
 
