@@ -12,19 +12,19 @@ const About: React.FC = (): JSX.Element => {
 
     const content: JSX.Element =
         (
-            <main className="h-[500px] w-full bg-windows-white p-10 text-2xl tracking-wide text-center flex flex-col space-y-10 justify-center overflow-auto">
+            <main className="h-[500px] w-full bg-windows-white p-2 md:p-5 lg:p-10 text-2xl tracking-wide text-center flex flex-row space-y-10 justify-center overflow-auto flex-wrap">
                 <span>
-                    I am a software developer who enjoys building new and innovative products from the ground up.
+                    I'm a software developer who enjoys building new and innovative products from the ground up.
                     I am also fascinated by the intersection of creativity and engineering, which has led me to focus on building in the crypto/web3 space.
                 </span>
 
                 <span>
-                    I've worked as a full-stack developer on 3 early stage companies, including my own that I founded in 2021.
+                    My interest in software development started in 2019 when I taught myself some Visual Basic to program an Excel macro script to automate parts of a data-entry job I was working at the time.
+                    Flash forward to the present, and I've now worked as a full-stack developer on 3 early stage companies, including my own that I founded in 2021.
                 </span>
 
                 <span>
-                    I'm experienced with JS frameworks such as React, Node.js (typescript), Next.js, and Python.
-                    I also have experience working with the full web3 stack on Ethereum.
+                    Most recently I've been working with React, Node.js (typescript), Next.js, and GraphQL.
                 </span>
             </main>
         );
@@ -37,7 +37,7 @@ const About: React.FC = (): JSX.Element => {
             </div>
 
             < GradientWrapper
-                style="w-full p-7"
+                style="w-full md:p-7"
                 gradientBorders={textAreaGradientBorder}
                 childComp={
                     content
