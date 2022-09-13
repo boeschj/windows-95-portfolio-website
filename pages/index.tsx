@@ -8,7 +8,7 @@ import Tabs from '../components/mainContainer/tabs';
 import LinkButtons from '../components/mainContainer/linkButtons';
 import { modalGradientBorders } from '../components/gradients/gradientStyles';
 import GradientWrapper from '../components/gradients/gradientWrapper';
-import { links } from '../config/ABOUT';
+import { links } from '../config/aboutMe';
 
 const Home: NextPage = (): JSX.Element => {
   const [tabSelected, setTabSelected] = useState(0);

@@ -1,4 +1,4 @@
-import { links } from "../../config/ABOUT";
+import { links } from "../../config/aboutMe";
 import LinkButton from "./linkButton";
 
 const LinkButtons: React.FC = (): JSX.Element => {

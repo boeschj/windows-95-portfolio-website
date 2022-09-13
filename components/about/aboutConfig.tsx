@@ -1,5 +1,5 @@
 import React from "react";
-import { aboutConfig } from "../../config/ABOUT";
+import { aboutConfig } from "../../config/aboutMe";
 import { textAreaGradientBorder } from "../gradients/gradientStyles";
 import GradientWrapper from "../gradients/gradientWrapper";
 
