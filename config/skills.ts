@@ -6,7 +6,6 @@ import python from "../styles/assets/languages/python.svg";
 import react from "../styles/assets/languages/react.svg";
 import solidity from "../styles/assets/languages/solidity.svg";
 import typescript from "../styles/assets/languages/typescript.svg";
-
 import alchemy from "../styles/assets/libraries/alchemy.jpg";
 import apollo from "../styles/assets/libraries/apollo.svg";
 import ethers from "../styles/assets/libraries/ethers.svg";
@@ -22,6 +21,7 @@ import wagmi from "../styles/assets/libraries/wagmi.png";
 import web3 from "../styles/assets/libraries/web3.svg";
 import zora from "../styles/assets/libraries/zora.jpg";
 
+//Note that skill ratings are on a scale of 0-10, any value that exceeds this is definitely going to mess something up
 export const skills = {
     p1: "I enjoy full stack development and contributing to features in whichever part of the product they are most needed. I have experience creating responsive and pixel perfect UIs with React and Next.js frontend frameworks and creating REST APIs with node.js and Firebase.",
     topSkill1: "React",
