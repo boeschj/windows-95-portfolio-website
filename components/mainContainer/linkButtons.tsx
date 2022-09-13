@@ -1,4 +1,4 @@
-import { links } from "../gradients/gradientStyles";
+import { links } from "../../config/ABOUT";
 import LinkButton from "./linkButton";
 
 const LinkButtons: React.FC = (): JSX.Element => {

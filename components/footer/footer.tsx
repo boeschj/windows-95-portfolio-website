@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react"
+import React, { Dispatch, SetStateAction } from "react"
 import Clock from "./clock";
 import Image from 'next/image';
 import win95 from '../../styles/win_95.svg';

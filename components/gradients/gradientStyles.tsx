@@ -1,9 +1,3 @@
-export const links = {
-    github: 'https://github.com/boeschj',
-    linkedIn: 'https://www.linkedin.com/in/jordan-boesch-39570b20b',
-    resume: 'jboeschResume2021.pdf'
-};
-
 export const textAreaGradientBorder = [
     'border border-l-text-l-1 border-r-text-r-1 border-t-text-t-1 border-b-text-b-1',
     'border border-l-text-l-2 border-r-text-r-2 border-t-text-t-2 border-b-text-b-2',
@@ -50,6 +44,7 @@ export const timeGradientBorders = [
     'border border-l-time-l-1 border-r-time-r-1 border-t-time-t-1 border-b-time-b-1',
     'border border-l-time-l-2 border-r-time-r-2 border-t-time-t-2 border-b-time-b-2',
 ];
+
 export const buttonClickedBorders = [
     'border border-l-pressed-l-1 border-r-pressed-r-1 border-t-pressed-t-1 border-b-pressed-b-1',
     'border border-l-pressed-l-2 border-r-pressed-r-2 border-t-pressed-t-2 border-b-windows-gray',

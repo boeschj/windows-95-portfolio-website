@@ -6,8 +6,9 @@ import Footer from '../components/footer/footer';
 import NavMenu from '../components/footer/navMenu';
 import Tabs from '../components/mainContainer/tabs';
 import LinkButtons from '../components/mainContainer/linkButtons';
-import { links, modalGradientBorders } from '../components/gradients/gradientStyles';
+import { modalGradientBorders } from '../components/gradients/gradientStyles';
 import GradientWrapper from '../components/gradients/gradientWrapper';
+import { links } from '../config/ABOUT';
 
 const Home: NextPage = (): JSX.Element => {
   const [tabSelected, setTabSelected] = useState(0);

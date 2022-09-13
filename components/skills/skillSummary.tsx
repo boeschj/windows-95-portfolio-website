@@ -1,4 +1,5 @@
 import React from "react";
+import { skills } from "../../config/skills";
 import ProgressBar from "./progressBar";
 
 const SkillSummary: React.FC = (): JSX.Element => {
@@ -10,13 +11,13 @@ const SkillSummary: React.FC = (): JSX.Element => {
                     Skills Summary
                 </h2>
                 <span className="text-2xl text-center">
-                    I enjoy full stack development and contributing to features in whichever part of the product they are most needed. I have experience creating responsive and pixel perfect UIs with React and Next.js frontend frameworks and creating REST APIs with node.js and Firebase.
+                    {skills.p1}
                 </span>
             </div>
             <div className="flex-col space-y-2 w-[300px] h-full mx-auto py-10 lg:py-0">
-                < ProgressBar skill="React" level={7} />
-                < ProgressBar skill="Node.js" level={7} />
-                < ProgressBar skill="GraphQL" level={4} />
+                < ProgressBar skill={skills.topSkill1} level={skills.topSkill1_rating} />
+                < ProgressBar skill={skills.topSkill2} level={skills.topSkill2_rating} />
+                < ProgressBar skill={skills.topSkill3} level={skills.topSkill3_rating} />
             </div>
         </div>
     )
