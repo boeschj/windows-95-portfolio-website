@@ -5,6 +5,7 @@ export const aboutConfig = {
     p3: "Most recently I've been working with React, Node.js (typescript), Next.js, and GraphQL."
 }
 
+//Note that the resume needs to be a PDF placed in the public folder or it will not download correctly
 export const links = {
     github: 'https://github.com/boeschj',
     linkedIn: 'https://www.linkedin.com/in/jordan-boesch-39570b20b',
