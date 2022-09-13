@@ -1,12 +1,12 @@
-import React from "react"
+import React from "react";
 
-interface ParentCompProps {
+interface IGradientWrapperProps {
     children: React.ReactNode,
     style?: string,
     gradientBorders: string[]
 }
 
-const GradientWrapper: React.FC<ParentCompProps> = (props: ParentCompProps): JSX.Element => {
+const GradientWrapper: React.FC<IGradientWrapperProps> = (props: IGradientWrapperProps): JSX.Element => {
     let childComp = props.children;
     for (let i = 0; i < props.gradientBorders.length; i++) {
         childComp = (

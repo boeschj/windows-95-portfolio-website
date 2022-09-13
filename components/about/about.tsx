@@ -1,6 +1,6 @@
-import React from "react"
-import { textAreaGradientBorder } from "../../pages";
-import GradientWrapper from "../gradientWrapper";
+import React from "react";
+import { textAreaGradientBorder } from "../gradients/gradientStyles";
+import GradientWrapper from "../gradients/gradientWrapper";
 
 const About: React.FC = (): JSX.Element => {
 

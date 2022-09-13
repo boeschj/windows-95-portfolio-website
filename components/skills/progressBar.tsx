@@ -1,5 +1,5 @@
-import { textAreaGradientBorder } from '../pages';
-import GradientWrapper from './gradientWrapper';
+import { textAreaGradientBorder } from '../gradients/gradientStyles';
+import GradientWrapper from '../gradients/gradientWrapper';
 
 interface IJobListItemProps {
     skill: string,
