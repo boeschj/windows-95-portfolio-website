@@ -10,9 +10,9 @@ const SkillSummary: React.FC = (): JSX.Element => {
                 <h2 className="text-center mx-auto text-3xl font-extrabold py-3 underline">
                     Skills Summary
                 </h2>
-                <span className="text-2xl text-center">
+                <div className="text-2xl text-center mx-auto">
                     {skills.p1}
-                </span>
+                </div>
             </div>
             <div className="flex-col space-y-2 w-[300px] h-full mx-auto py-10 lg:py-0">
                 < ProgressBar skill={skills.topSkill1} level={skills.topSkill1_rating} />

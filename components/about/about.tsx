@@ -9,7 +9,7 @@ const About: React.FC = (): JSX.Element => {
 
     const content: JSX.Element =
         (
-            <main className="h-[500px] md:h-[520px] w-full bg-windows-white p-2 md:p-5 lg:p-10 text-xl md:text-2xl tracking-wide text-center flex flex-row py-5 space-y-10 justify-center overflow-auto flex-wrap">
+            <main className="h-[370px] xs:h-[520px] overflow-y-auto w-full bg-windows-white p-2 md:p-5 lg:p-10 text-xl md:text-2xl tracking-wide text-center flex flex-row py-5 space-y-10 justify-center flex-wrap">
                 <div className="p-5">
                     <Image src={devPhoto} width="300" height={"300"} />
                 </div>

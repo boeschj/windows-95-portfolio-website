@@ -15,7 +15,10 @@ module.exports = {
       center: true
     },
     extend: {
-      colors: win95Colors.colors
+      colors: win95Colors.colors,
+      screens: {
+        'xs': '380px',
+      },
     },
   },
   plugins: [],
