@@ -20,10 +20,11 @@ import vscode from "../styles/assets/libraries/vscode.svg";
 import wagmi from "../styles/assets/libraries/wagmi.png";
 import web3 from "../styles/assets/libraries/web3.svg";
 import zora from "../styles/assets/libraries/zora.jpg";
+import figma from "../styles/assets/libraries/figma.svg";
 
 //Note that skill ratings are on a scale of 0-10, any value that exceeds this is definitely going to mess something up
 export const skills = {
-    p1: "I enjoy full stack development and contributing to features in whichever part of the product they are most needed. I have experience creating responsive and pixel perfect UIs with React and Next.js frontend frameworks and creating REST APIs with node.js and Firebase.",
+    p1: "I enjoy developing features that span the tech stack, adding value to a product where it's most needed. I have proven expertise taking product features from concept, to design, to implementation using React and Next.js frontend frameworks and creating REST APIs with node.js and Firebase.",
     topSkill1: "React",
     topSkill1_rating: 7,
     topSkill2: "Node.js",
@@ -73,6 +74,10 @@ export const libraries = [
     {
         name: "CSS/SASS",
         src: sass
+    },
+    {
+        name: "Figma",
+        src: figma
     },
     {
         name: "Firebase",

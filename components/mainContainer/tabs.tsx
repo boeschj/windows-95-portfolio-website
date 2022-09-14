@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import About from "../about/aboutConfig";
+import About from "../about/about";
 import { modalGradientBorders, coverTabGradientBorders } from "../gradients/gradientStyles";
 import Experience from "../experience/experience";
 import Skills from "../skills/skills";

@@ -5,7 +5,7 @@ import ProgressBar from "./progressBar";
 const SkillSummary: React.FC = (): JSX.Element => {
 
     return (
-        <div className="min-w-full flex flex-col-reverse lg:flex-row justify-around mb-10">
+        <div className="flex flex-col-reverse lg:flex-row justify-around mb-10">
             <div className="lg:w-1/2 content-center h-full mx-auto">
                 <h2 className="text-center mx-auto text-3xl font-extrabold py-3 underline">
                     Skills Summary

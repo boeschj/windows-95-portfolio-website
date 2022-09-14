@@ -1,7 +1,5 @@
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import { useState } from 'react';
-import closeBtn from '../styles/closeBtn.png'
 import Footer from '../components/footer/footer';
 import NavMenu from '../components/footer/navMenu';
 import Tabs from '../components/mainContainer/tabs';
@@ -21,7 +19,6 @@ const Home: NextPage = (): JSX.Element => {
           <div className="text-lg font-bold text-white">
             Welcome
           </div>
-          <Image src={closeBtn} width="20" height="20" />
         </div>
 
         <div className="flex flex-col p-5">
@@ -36,7 +33,7 @@ const Home: NextPage = (): JSX.Element => {
       <div className="flex bg-windows-bg w-full flex-col justify-center grow content-center">
         <GradientWrapper
           gradientBorders={modalGradientBorders}
-          style={'mx-auto w-full md:w-10/12 mb-10'}>
+          style={'mx-auto w-full md:w-10/12 md:mb-10'}>
           {contentContainer}
         </GradientWrapper>
       </div>

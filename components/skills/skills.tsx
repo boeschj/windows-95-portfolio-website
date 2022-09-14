@@ -14,14 +14,14 @@ const Skills: React.FC = (): JSX.Element => {
 
     return (
         <>
-            <div className="text-[50px] font-extrabold w-full text-center">
+            <div className="text-3xl pb-3 md:pb-0 md:mt-3 md:text-[50px] font-extrabold w-full text-center">
                 My Skills
             </div>
             <GradientWrapper
                 style="w-full md:p-7"
                 gradientBorders={textAreaGradientBorder}
             >
-                <main className="h-[500px] w-full bg-windows-gray flex px-5 md:px-0 md:p-5 flex-wrap flex-row overflow-auto flex-initial w-42">
+                <main className="h-[500px] md:h-[520px] w-full bg-windows-gray flex px-5 md:px-0 md:p-5 flex-wrap flex-row overflow-auto flex-initial w-42">
                     <div className="grow">
                         <SkillSummary />
                         <h3 className="text-center mx-auto grow-1 flex justify-center text-2xl font-extrabold py-3 underline">

@@ -7,14 +7,14 @@ import { workHistory } from "../../config/experience";
 const Experience: React.FC = (): JSX.Element => {
     return (
         <>
-            <div className="text-[50px] font-extrabold w-full text-center">
+            <div className="text-3xl md:text-[50px] pb-3 md:pb-0 md:mt-3 font-extrabold w-full text-center">
                 My Work
             </div>
             < GradientWrapper
                 style="w-full md:p-7"
                 gradientBorders={textAreaGradientBorder}
             >
-                <main className="h-[500px] content-start w-full bg-windows-white text-2xl tracking-wide text-center justify-around flex gap-10 px-5 md:px-0 md:p-5 overflow-auto flex-wrap">
+                <main className="h-[500px] md:h-[520px] content-start w-full bg-windows-white text-xl md:text-2xl tracking-wide text-center justify-around flex gap-10 px-5 md:px-0 md:p-5 overflow-auto flex-wrap">
                     <ul className="divide-y-2 divide-black divide-dashed">
                         <>
                             {workHistory.map((job: any, index: number) => {

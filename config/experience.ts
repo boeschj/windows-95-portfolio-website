@@ -11,7 +11,7 @@ export const workHistory = [
         jobTitle: "Lead Software Engineer",
         jobUrl: "https://www.ensemble.works/",
         jobDescription: "Ensemble empowers artists to tell the story behind their creative process and sell the artifacts which come from it as NFTs.",
-        workSummary: "I was contracted to build the backend of the application, including smart contract integration, metadata creation and uploading, and Firebase authentication using SIWE.",
+        workSummary: "I was hired to build the backend of the application, including smart contract integration, metadata creation and uploading, and Firebase authentication using SIWE.",
         datesWorked: "June 2022 - October 2022"
     },
     {
@@ -20,7 +20,7 @@ export const workHistory = [
         jobUrl: "https://www.bitverify.net/",
         jobTitle: "Founder",
         jobDescription: "I raised $100,000 through a startup accelerator to found BitVerify, which provides live risk assessment and monitoring solutions to banks looking to integrate digital assets into their service offering.",
-        workSummary: "While at BitVerify I built a blockchain data aggregation API and compliance solutions served via UI for the Bitcoin and Ethereum protocols.",
+        workSummary: "While at BitVerify I experienced every phase of managing a project. My contributions ranged from conducting customer interviews, managing a team and product roadmap in addition to contributing extensively to a blockchain data aggregation API and compliance solutions for the Bitcoin and Ethereum protocols.",
         datesWorked: "August 2021 - September 2022"
     },
     {
@@ -38,7 +38,7 @@ export const workHistory = [
         jobUrl: "https://www.infovisa.com/",
         jobTitle: "Software Engineer Intern",
         jobDescription: "Infovisa provides trust accounting software to banks.",
-        workSummary: "At Infovisa I created visual data displays and account grouping, enabling clients to gain insights into their holdings.",
+        workSummary: "At Infovisa I created highly performant, modular, and maintainable code following company best practices. I contributed a series of visual data-displays and account aggregation functions to the launch of their new flagship product.",
         datesWorked: "May 2021 - August 2021"
     },
     {

@@ -18,7 +18,7 @@ const JobListItem: React.FC<IJobListItemProps> = (jobListItem: IJobListItemProps
             <div>
                 <Image src={jobListItem.imageUrl} alt="test" width="75" height="75" className={jobListItem.jobUrl ? 'cursor-pointer' : ''} onClick={() => jobListItem.jobUrl ? window.open(jobListItem.jobUrl, '_blank', 'noopener,noreferrer') : ''} />
             </div>
-            <div className={`text-[50px] w-fit mx-auto font-extrabold leading-[50px] ${jobListItem.jobUrl ? 'hover:text-windows-blue hover:underline cursor-pointer' : ''}`} onClick={() => jobListItem.jobUrl ? window.open(jobListItem.jobUrl, '_blank', 'noopener,noreferrer') : ''}>
+            <div className={`text-3xl md:text-[50px] w-fit mx-auto font-extrabold leading-[50px] ${jobListItem.jobUrl ? 'hover:text-windows-blue hover:underline cursor-pointer' : ''}`} onClick={() => jobListItem.jobUrl ? window.open(jobListItem.jobUrl, '_blank', 'noopener,noreferrer') : ''}>
                 {jobListItem.jobName}
             </div>
             <div className={`font-bold`}>
