@@ -21,7 +21,7 @@ const Skills: React.FC = (): JSX.Element => {
                 style="w-full md:p-7"
                 gradientBorders={textAreaGradientBorder}
             >
-                <main className="h-[370px] xs:h-[520px] overflow-y-auto w-full bg-windows-gray flex px-5 md:px-0 md:p-5 flex-wrap flex-row overflow-y-auto overflow-x-clip flex-initial w-42">
+                <main className="xs:h-[500px] sm:h-[520px] overflow-y-auto w-full bg-windows-gray flex px-5 md:px-0 md:p-5 flex-wrap flex-row overflow-y-auto overflow-x-clip flex-initial w-42">
                     <div className="grow">
                         <SkillSummary />
                         <h3 className="text-center mx-auto grow-1 flex justify-center text-2xl font-extrabold py-3 underline">

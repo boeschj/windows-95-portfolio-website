@@ -14,7 +14,7 @@ const Experience: React.FC = (): JSX.Element => {
                 style="w-full md:p-7"
                 gradientBorders={textAreaGradientBorder}
             >
-                <main className="h-[370px] xs:h-[520px] overflow-y-auto content-start w-full bg-windows-white text-xl md:text-2xl tracking-wide text-center justify-around flex gap-10 px-5 md:px-0 md:p-5 overflow-auto flex-wrap">
+                <main className="xs:h-[500px] sm:h-[520px] overflow-y-auto content-start w-full bg-windows-white text-xl md:text-2xl tracking-wide text-center justify-around flex gap-10 px-5 md:px-0 md:p-5 overflow-auto flex-wrap">
                     <ul className="divide-y-2 divide-black divide-dashed">
                         <>
                             {workHistory.map((job: any, index: number) => {
