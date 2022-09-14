@@ -9,5 +9,5 @@ export const aboutConfig = {
 export const links = {
     github: 'https://github.com/boeschj',
     linkedIn: 'https://www.linkedin.com/in/jordan-boesch-39570b20b',
-    resume: 'jboeschResume2021.pdf'
+    resume: 'jboeschResume2022.pdf'
 };

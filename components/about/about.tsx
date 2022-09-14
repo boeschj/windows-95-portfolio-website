@@ -1,6 +1,6 @@
 import React from "react";
 import { aboutConfig } from "../../config/aboutMe";
-import { modalGradientBorders, textAreaGradientBorder } from "../gradients/gradientStyles";
+import { textAreaGradientBorder } from "../gradients/gradientStyles";
 import GradientWrapper from "../gradients/gradientWrapper";
 import devPhoto from "../../styles/assets/portfolioPhoto.png";
 import Image from 'next/image';
@@ -9,8 +9,8 @@ const About: React.FC = (): JSX.Element => {
 
     const content: JSX.Element =
         (
-            <main className="h-[370px] xs:h-[500px] sm:h-[520px] overflow-y-auto w-full bg-windows-white p-2 md:p-5 lg:p-10 text-xl md:text-2xl tracking-wide text-center flex flex-row py-5 space-y-10 justify-center flex-wrap">
-                <div className="p-5">
+            <main className="h-[370px] xs:h-[500px] md:h-[520px] overflow-y-auto w-full bg-windows-white p-2 md:p-5 lg:p-10 text-xl md:text-2xl tracking-wide text-center flex flex-row py-5 space-y-10 justify-center flex-wrap">
+                <div className="md:p-5">
                     <Image src={devPhoto} width="300" height={"300"} />
                 </div>
                 <span>

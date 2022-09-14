@@ -13,7 +13,7 @@ interface IFooterProps {
 const Footer: React.FC<IFooterProps> = ({ setShowNavMenu, showNavMenu }: IFooterProps): JSX.Element => {
     return (
         <GradientWrapper
-            style='mx-auto w-full bg-windows-gray content-center'
+            style='mx-auto w-full bg-windows-gray content-center hidden md:grid'
             gradientBorders={footerGradientBorders}>
             <div className='h-[35px] flex items-center justify-between'>
                 <GradientWrapper

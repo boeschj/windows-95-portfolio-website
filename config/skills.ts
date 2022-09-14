@@ -100,7 +100,7 @@ export const libraries = [
         src: vscode
     },
     {
-        name: "Alcehmy",
+        name: "Alchemy",
         src: alchemy
     },
     {

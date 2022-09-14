@@ -14,7 +14,7 @@ const Home: NextPage = (): JSX.Element => {
 
   const contentContainer: JSX.Element =
     (
-      <div className="bg-windows-gray mx-auto h-fit md:h-[824px] w-full">
+      <div className="bg-windows-gray mx-auto h-fit w-full">
         <div className="bg-windows-blue px-1 flex items-center justify-between align-middle">
           <div className="text-lg font-bold text-white">
             Welcome
