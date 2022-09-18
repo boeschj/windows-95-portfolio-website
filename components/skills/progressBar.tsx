@@ -2,12 +2,14 @@ import { textAreaGradientBorder } from '../gradients/gradientStyles';
 import GradientWrapper from '../gradients/gradientWrapper';
 
 interface IJobListItemProps {
-    skill: string,
-    level: number
+    skill: string;
+    level: number;
 }
 
-const ProgressBar: React.FC<IJobListItemProps> = ({ skill, level }: IJobListItemProps): JSX.Element => {
-
+const ProgressBar: React.FC<IJobListItemProps> = ({
+    skill,
+    level,
+}: IJobListItemProps): JSX.Element => {
     const bar: JSX.Element = <div className="bg-windows-blue w-5 h-8" />;
     const progress: JSX.Element[] = [];
 
@@ -27,9 +29,10 @@ const ProgressBar: React.FC<IJobListItemProps> = ({ skill, level }: IJobListItem
                     <div className="flex flex-row space-x-1 p-[2px] w-[248px] mx-auto">
                         {progress}
                     </div>
-                } />
+                }
+            />
         </div>
-    )
-}
+    );
+};
 
 export default ProgressBar;

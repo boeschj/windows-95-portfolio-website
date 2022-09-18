@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 const Clock: React.FC = (): JSX.Element => {
     const [dateState, setDateState] = useState(new Date());
@@ -7,7 +7,10 @@ const Clock: React.FC = (): JSX.Element => {
     }, []);
 
     return (
-        <div suppressHydrationWarning className="h-8 w-28 text-center items-center text-md grid content-center px-3">
+        <div
+            suppressHydrationWarning
+            className="h-8 w-28 text-center items-center text-md grid content-center px-3"
+        >
             {dateState.toLocaleString('en-US', {
                 hour: 'numeric',
                 minute: 'numeric',
@@ -16,6 +19,6 @@ const Clock: React.FC = (): JSX.Element => {
             })}
         </div>
     );
-}
+};
 
-export default Clock
+export default Clock;

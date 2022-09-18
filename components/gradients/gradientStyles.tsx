@@ -9,28 +9,28 @@ export const modalGradientBorders = [
     'border border-t-modal-t-1 border-b-modal-b-1 border-l-modal-l-1 border-r-modal-r-1',
     'border border-t-modal-t-2 border-b-modal-b-2 border-l-modal-l-2 border-r-modal-r-2',
     'border border-t-modal-t-3 border-b-modal-b-3 border-l-modal-l-3 border-r-modal-r-3',
-    'border border-t-modal-t-4 border-b-modal-b-4 border-l-modal-l-4 border-r-modal-r-4'
+    'border border-t-modal-t-4 border-b-modal-b-4 border-l-modal-l-4 border-r-modal-r-4',
 ];
 
 export const tabGradientBorders = [
     'border rounded-t border-b-windows-gray border-t-modal-t-1 border-l-modal-l-1 border-r-modal-r-1',
     'border rounded-t border-b-windows-gray border-t-modal-t-2 border-l-modal-l-2 border-r-modal-r-2',
     'border rounded-t border-b-windows-gray border-t-modal-t-3 border-l-modal-l-3 border-r-modal-r-3',
-    'border rounded-t border-b-windows-gray border-t-modal-t-4 border-l-modal-l-4 border-r-modal-r-4'
+    'border rounded-t border-b-windows-gray border-t-modal-t-4 border-l-modal-l-4 border-r-modal-r-4',
 ];
 
 export const coverTabGradientBorders = [
     'border-l border-modal-l-1',
     'border-l border-modal-l-2',
     'border-l border-modal-l-3',
-    'border-l border-modal-l-4'
+    'border-l border-modal-l-4',
 ];
 
 export const footerGradientBorders = [
     'border border-windows-gray border-t-footer-t-1',
     'border border-windows-gray border-t-footer-t-2',
     'border border-windows-gray border-t-footer-t-3',
-    'border border-windows-gray border-t-footer-t-4'
+    'border border-windows-gray border-t-footer-t-4',
 ];
 
 export const buttonGradientBorders = [

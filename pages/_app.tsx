@@ -1,9 +1,9 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
 import 'tailwindcss/tailwind.css';
 import type { AppProps } from 'next/app';
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
-  return <Component {...pageProps} />
-}
+    return <Component {...pageProps} />;
+};
 
-export default App
+export default App;
