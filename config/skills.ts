@@ -29,7 +29,7 @@ export const skills = {
     topSkill1: 'React',
     topSkill1_rating: 7,
     topSkill2: 'Node.js',
-    topSkill2_rating: 7,
+    topSkill2_rating: 6,
     topSkill3: 'GraphQL',
     topSkill3_rating: 4,
 };
