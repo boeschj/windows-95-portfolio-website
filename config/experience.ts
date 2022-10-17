@@ -13,7 +13,7 @@ export const workHistory = [
         jobDescription:
             'Ensemble empowers artists to tell the story behind their creative process and sell the artifacts which come from it as NFTs.',
         workSummary:
-            'I was hired to build the backend of the application, including smart contract integration, metadata creation and uploading, and Firebase authentication using SIWE.',
+            'I worked on Ensemble with a small team and led the development of the product. As lead developer I played a key role in everything from determining software architecture, setting up CI/CD and establishing best practices, to implementing a responsive and pixel-perfect UI along with vital features and workflows such as smart contract integration, metadata creation and uploading, and Firebase authentication using Sign In With Ethereum.',
         datesWorked: 'June 2022 - October 2022',
     },
     {
@@ -24,7 +24,7 @@ export const workHistory = [
         jobDescription:
             'I raised $100,000 through a startup accelerator to found BitVerify, which provides live risk assessment and monitoring solutions to banks looking to integrate digital assets into their service offering.',
         workSummary:
-            'While at BitVerify I experienced every phase of managing a project. My contributions ranged from conducting customer interviews, managing a team and product roadmap in addition to contributing extensively to a blockchain data aggregation API and compliance solutions for the Bitcoin and Ethereum protocols.',
+            'While at BitVerify I experienced every phase of building and managing a product. I was responsible for most of the core development of the entire platform, and built Figma wireframes, a React web application and GraphQL API to efficiently aggregate, process, and serve data to end-users, enabling underwriting teams to account for and manage digital assets while issuing loans. I also established CI/CD, best practices, and led a development team operating in an Agile environment. My non-dev related contributions ranged from managing a team and product roadmap, conducting customer interviews, and working with top state and federal regulators to build a safe and compliant platform suited to customer needs.',
         datesWorked: 'August 2021 - September 2022',
     },
     {

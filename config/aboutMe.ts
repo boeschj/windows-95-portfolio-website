@@ -1,6 +1,6 @@
 export const aboutConfig = {
     welcomeGreeting: "Hi, I'm Jordan 👋",
-    p1: "I'm a software developer who enjoys building new and innovative products from the ground up. I am primarily a frontend developer, but am comfortable working across the tech stack.",
+    p1: "I'm a software developer who enjoys building new and innovative products from the ground up.",
     p2: "My interest in software development started in 2019 when I taught myself some Visual Basic to program an Excel macro script to automate parts of a job I was working at the time. I quickly learned that I had a passion for solving tough problems with code and focused on pursuing a career in software development. Flash forward to the present, I've now worked as a full-stack developer on 3 early stage companies, including my own that I founded in 2021.",
     p3: "Most recently, I've been working with React, Node.js (typescript), Next.js, and GraphQL.",
 };

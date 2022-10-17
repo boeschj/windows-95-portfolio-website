@@ -25,9 +25,9 @@ import ipfs from '../styles/assets/libraries/ipfs.svg';
 
 //Note that skill ratings are on a scale of 0-10, any value that exceeds this is definitely going to mess something up
 export const skills = {
-    p1: "I enjoy developing features that span the tech stack, adding value to a product where it's most needed. I have proven expertise taking product features from concept, to design, to implementation using React and Next.js frontend frameworks and creating REST APIs with node.js and Firebase.",
+    p1: "I'm primarily a frontend/product focused developer, but I also enjoy developing features that span the tech stack, adding value to a product where it's most needed. I have proven expertise taking product features from concept, to design, to implementation using React and Next.js frontend frameworks and creating REST APIs with node.js and Firebase.",
     topSkill1: 'React',
-    topSkill1_rating: 7,
+    topSkill1_rating: 8,
     topSkill2: 'Node.js',
     topSkill2_rating: 6,
     topSkill3: 'GraphQL',
