@@ -3,8 +3,20 @@ import bitverifyImg from '../styles/assets/jobs/bitverify.png';
 import infovisaImg from '../styles/assets/jobs/infovisa.jpg';
 import sandhillsImg from '../styles/assets/jobs/sandhills.jpg';
 import tappImg from '../styles/assets/jobs/tapp.png';
+import fireImg from '../styles/assets/jobs/fire.png';
 
 export const workHistory = [
+    {
+        imageUrl: fireImg,
+        jobName: 'Fire',
+        jobTitle: 'Full Stack Engineer',
+        jobUrl: 'https://www.joinfire.xyz/',
+        jobDescription:
+            'Fire is a browser extension that simulates blockchain transactions, showing you exactly what will go in and out of your wallet before you sign the contract.',
+        workSummary:
+            'At Fire I have worked across the tech stack, building features ranging from adding new browser and wallet compatibility, intercepting malicious transactions and building advanced simulations for more complex contract interactions.',
+        datesWorked: 'November 2022 - Present',
+    },
     {
         imageUrl: ensembleImg,
         jobName: 'Ensemble',
@@ -14,7 +26,7 @@ export const workHistory = [
             'Ensemble empowers artists to tell the story behind their creative process and sell the artifacts which come from it as NFTs.',
         workSummary:
             'I worked on Ensemble with a small team and led the development of the product. As lead developer I played a key role in everything from determining software architecture, setting up CI/CD and establishing best practices, to implementing a responsive and pixel-perfect UI along with vital features and workflows such as smart contract integration, metadata creation and uploading, and Firebase authentication using Sign In With Ethereum.',
-        datesWorked: 'June 2022 - October 2022',
+        datesWorked: 'June 2022 - November 2022',
     },
     {
         imageUrl: bitverifyImg,
