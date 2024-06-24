@@ -6,17 +6,19 @@ const Clock: React.FC = (): JSX.Element => {
         setInterval(() => setDateState(new Date()), 1000);
     }, []);
 
+    const formattedDateString = dateState.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true,
+    });
+
     return (
         <div
             suppressHydrationWarning
             className="h-8 w-28 text-center items-center text-md grid content-center px-3"
         >
-            {dateState.toLocaleString('en-US', {
-                hour: 'numeric',
-                minute: 'numeric',
-                second: 'numeric',
-                hour12: true,
-            })}
+            {formattedDateString}
         </div>
     );
 };

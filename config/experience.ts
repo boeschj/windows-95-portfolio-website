@@ -1,9 +1,9 @@
-import ensembleImg from '../styles/assets/jobs/ensemble.png';
 import bitverifyImg from '../styles/assets/jobs/bitverify.png';
+import ensembleImg from '../styles/assets/jobs/ensemble.png';
+import fireImg from '../styles/assets/jobs/fire.png';
 import infovisaImg from '../styles/assets/jobs/infovisa.jpg';
 import sandhillsImg from '../styles/assets/jobs/sandhills.jpg';
 import tappImg from '../styles/assets/jobs/tapp.png';
-import fireImg from '../styles/assets/jobs/fire.png';
 
 export const workHistory = [
     {
@@ -12,9 +12,9 @@ export const workHistory = [
         jobTitle: 'Full Stack Engineer',
         jobUrl: 'https://www.joinfire.xyz/',
         jobDescription:
-            'Fire is a browser extension that simulates blockchain transactions, showing you exactly what will go in and out of your wallet before you sign the contract.',
+            'Fire is a chrome browser extension that simulates blockchain transactions, showing you exactly what will go in and out of your wallet before you sign a transaction.',
         workSummary:
-            'At Fire I have worked across the tech stack, building features ranging from adding new browser and wallet compatibility, intercepting malicious transactions and building advanced simulations for more complex contract interactions.',
+            "At Fire I've played an instrumental role in the design and development of a transaction simulation engine that allows users to see exactly what will happen when they sign a contract. I've also filled a primary role in the UI development of an MPC wallet.",
         datesWorked: 'November 2022 - Present',
     },
     {

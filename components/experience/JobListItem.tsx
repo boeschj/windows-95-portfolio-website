@@ -1,5 +1,5 @@
-import React from 'react';
 import Image from 'next/image';
+import React from 'react';
 
 interface IJobListItemProps {
     imageUrl: any;
@@ -24,13 +24,12 @@ const JobListItem: React.FC<IJobListItemProps> = (
                     height="75"
                     className={jobListItem.jobUrl ? 'cursor-pointer' : ''}
                     onClick={() =>
-                        jobListItem.jobUrl
-                            ? window.open(
-                                  jobListItem.jobUrl,
-                                  '_blank',
-                                  'noopener,noreferrer'
-                              )
-                            : ''
+                        jobListItem.jobUrl &&
+                        window.open(
+                            jobListItem.jobUrl,
+                            '_blank',
+                            'noopener,noreferrer'
+                        )
                     }
                 />
             </div>

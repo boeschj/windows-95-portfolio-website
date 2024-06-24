@@ -34,7 +34,7 @@ const LinkButton: React.FC<ILinkButtonProps> = ({
             }}
             className={`${
                 buttonClicked ? 'h-[28px]' : 'h-[30px]'
-            } bg-windows-gray w-[150px] w-full`}
+            } bg-windows-gray w-full`}
         >
             {buttonTitle}
         </button>

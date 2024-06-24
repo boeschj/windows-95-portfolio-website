@@ -9,9 +9,11 @@ import typescript from '../styles/assets/languages/typescript.svg';
 import alchemy from '../styles/assets/libraries/alchemy.jpg';
 import apollo from '../styles/assets/libraries/apollo.svg';
 import ethers from '../styles/assets/libraries/ethers.svg';
+import figma from '../styles/assets/libraries/figma.svg';
 import firebase from '../styles/assets/libraries/firebase.svg';
 import github from '../styles/assets/libraries/github.svg';
 import hardhat from '../styles/assets/libraries/hardhat.svg';
+import ipfs from '../styles/assets/libraries/ipfs.svg';
 import overmind from '../styles/assets/libraries/overmind.png';
 import sass from '../styles/assets/libraries/sass.svg';
 import tailwind from '../styles/assets/libraries/tailwind.svg';
@@ -20,17 +22,15 @@ import vscode from '../styles/assets/libraries/vscode.svg';
 import wagmi from '../styles/assets/libraries/wagmi.png';
 import web3 from '../styles/assets/libraries/web3.svg';
 import zora from '../styles/assets/libraries/zora.jpg';
-import figma from '../styles/assets/libraries/figma.svg';
-import ipfs from '../styles/assets/libraries/ipfs.svg';
 
 //Note that skill ratings are on a scale of 0-10, any value that exceeds this is definitely going to mess something up
 export const skills = {
-    p1: "I'm primarily a frontend/product focused developer, but I also enjoy developing features that span the tech stack, adding value to a product where it's most needed. I have proven expertise taking product features from concept, to design, to implementation using React and Next.js frontend frameworks and creating REST APIs with node.js and Firebase.",
+    p1: "I'm a product-focused fullstack developer and enjoy taking a feature from concept, to design, to implementation using javascript/typescript frameworks and libraries. I also have experience using Cloudflare, AWS and GCP to deploy and manage both server and serverless applications.",
     topSkill1: 'React',
-    topSkill1_rating: 8,
+    topSkill1_rating: 7,
     topSkill2: 'Node.js',
     topSkill2_rating: 6,
-    topSkill3: 'GraphQL',
+    topSkill3: 'Python',
     topSkill3_rating: 4,
 };
 

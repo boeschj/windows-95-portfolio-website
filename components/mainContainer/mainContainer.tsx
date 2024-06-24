@@ -1,31 +1,41 @@
 import { Dispatch, SetStateAction } from 'react';
 import LinkButtons from './linkButtons';
-import Tabs from './tabs';
+import TabContentWindow from './tabContentWindow';
+import { modalGradientBorders } from '../gradients/gradientStyles';
+import GradientWrapper from '../gradients/gradientWrapper';
 
 interface IMainContainerProps {
     tabSelected: number;
     setTabSelected: Dispatch<SetStateAction<number>>;
+    className?: string;
 }
 
 const MainContainer: React.FC<IMainContainerProps> = ({
     tabSelected,
     setTabSelected,
+    className,
 }: IMainContainerProps): JSX.Element => {
     return (
-        <div className="bg-windows-gray mx-auto h-fit w-full">
-            <div className="bg-windows-blue px-1 flex items-center justify-between align-middle">
-                <div className="text-lg font-bold text-white">Welcome</div>
-            </div>
-
-            <div className="flex flex-col p-5">
-                <Tabs
+        <GradientWrapper
+            containerClassName="flex flex-grow flex-col"
+            gradientBorders={modalGradientBorders}
+        >
+            <Header />
+            <div className="bg-windows-gray flex flex-grow flex-col md:p-5">
+                <TabContentWindow
                     tabSelected={tabSelected}
                     setTabSelected={setTabSelected}
                 />
-                <LinkButtons />
+                <LinkButtons style="py-2 w-96 self-end" />
             </div>
-        </div>
+        </GradientWrapper>
     );
 };
+
+const Header = () => (
+    <div className="bg-windows-blue px-1 flex items-center justify-between align-middle">
+        <div className="text-lg font-bold text-white">Welcome</div>
+    </div>
+);
 
 export default MainContainer;

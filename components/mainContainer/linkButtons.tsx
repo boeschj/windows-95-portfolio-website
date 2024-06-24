@@ -1,18 +1,24 @@
 import { links } from '../../config/aboutMe';
 import LinkButton from './linkButton';
 
-const LinkButtons: React.FC = (): JSX.Element => {
+interface LinkButtonProps {
+    style?: string;
+}
+
+const LinkButtons: React.FC<LinkButtonProps> = ({ style }): JSX.Element => {
     return (
-        <div className="flex flex-row space-x-5 pt-5 justify-end">
+        <div
+            className={`flex flex-row space-x-5 items-center h-fit justify-end ${
+                style || ''
+            }`}
+        >
             <LinkButton profileUrl={links.github} text={'Github'} />
             <LinkButton profileUrl={links.linkedIn} text={'LinkedIn'} />
-            <div className="hidden md:flex">
-                <LinkButton
-                    profileUrl={links.resume}
-                    text={'Resume'}
-                    isResume={true}
-                />
-            </div>
+            <LinkButton
+                profileUrl={links.resume}
+                text={'Resume'}
+                isResume={true}
+            />
         </div>
     );
 };

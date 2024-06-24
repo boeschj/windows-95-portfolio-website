@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { tabGradientBorders } from '../gradients/gradientStyles';
 import GradientWrapper from '../gradients/gradientWrapper';
+import { cn } from '../../utils';
 
 interface ITabProps {
     tabSelected: number;
@@ -15,11 +16,13 @@ const Tab: React.FC<ITabProps> = ({
     text,
     tabNumber,
 }: ITabProps) => {
+    const isTabSelected = tabSelected === tabNumber;
     return (
         <GradientWrapper
-            style={`bg-windows-gray h-[35px] w-[100px] ${
-                tabSelected === tabNumber ? 'mt-0' : 'mt-[3px]'
-            }`}
+            className={cn(
+                `bg-windows-gray w-[100px]`,
+                isTabSelected ? 'mt-0 h-[38px]' : 'mt-[3px] h-[35px]'
+            )}
             gradientBorders={tabGradientBorders}
         >
             <button

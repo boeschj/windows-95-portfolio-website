@@ -1,7 +1,8 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { modalGradientBorders } from '../gradients/gradientStyles';
 import GradientWrapper from '../gradients/gradientWrapper';
+import NavListItem from './navListItem';
 
 interface ILinks {
     github: string;
@@ -16,14 +17,14 @@ interface IFooterProps {
     links: ILinks;
 }
 
-const NavMenu: React.FC<IFooterProps> = ({
+const NavMenuModal: React.FC<IFooterProps> = ({
     setShowNavMenu,
     showNavMenu,
     setTabSelected,
     links,
-}: IFooterProps): JSX.Element => {
-    //listen for click outside of nav menu to close
+}) => {
     const impactRef = useRef<HTMLDivElement>(null);
+
     const useOutsideClick = (
         ref: React.RefObject<HTMLDivElement>,
         callback: { (): void }
@@ -40,45 +41,41 @@ const NavMenu: React.FC<IFooterProps> = ({
             };
         });
     };
+
     useOutsideClick(impactRef, () => setShowNavMenu(false));
 
     return (
         <div
             className={`${
                 showNavMenu ? `display-flex` : `hidden`
-            } divide-y-2 divide-windows-gray bg-windows-gray flex flex-col w-72 h-fit absolute bottom-10 left-1`}
+            } divide-y-2 divide-windows-gray bg-windows-gray flex flex-col w-72 h-fit absolute bottom-11 left-1`}
             ref={impactRef}
         >
             <GradientWrapper gradientBorders={modalGradientBorders}>
                 <ul className="divide-y-2 divide-windows-gray bg-windows-gray h-fit">
-                    <li
+                    <NavListItem
+                        label="About Me"
                         onClick={() => {
                             setTabSelected(0);
                             setShowNavMenu(!showNavMenu);
                         }}
-                        className="hover:bg-windows-blue hover:text-white h-10 text-xl h-full flex w-full justify-center py-1 cursor-pointer"
-                    >
-                        About Me
-                    </li>
-                    <li
+                    />
+                    <NavListItem
+                        label="Experience"
                         onClick={() => {
                             setTabSelected(1);
                             setShowNavMenu(!showNavMenu);
                         }}
-                        className="hover:bg-windows-blue hover:text-white h-10 text-xl h-full flex w-full justify-center py-1 cursor-pointer"
-                    >
-                        Experience
-                    </li>
-                    <li
+                    />
+                    <NavListItem
+                        label="Skills"
                         onClick={() => {
                             setTabSelected(2);
                             setShowNavMenu(!showNavMenu);
                         }}
-                        className="hover:bg-windows-blue hover:text-white h-10 text-xl h-full flex w-full justify-center py-1 cursor-pointer"
-                    >
-                        Skills
-                    </li>
-                    <li
+                    />
+                    <NavListItem
+                        label="Github"
                         onClick={() => {
                             window.open(
                                 links.github,
@@ -87,11 +84,9 @@ const NavMenu: React.FC<IFooterProps> = ({
                             );
                             setShowNavMenu(!showNavMenu);
                         }}
-                        className="hover:bg-windows-blue hover:text-white h-10 text-xl h-full flex w-full justify-center py-1 cursor-pointer"
-                    >
-                        Github
-                    </li>
-                    <li
+                    />
+                    <NavListItem
+                        label="LinkedIn"
                         onClick={() => {
                             window.open(
                                 links.linkedIn,
@@ -100,17 +95,12 @@ const NavMenu: React.FC<IFooterProps> = ({
                             );
                             setShowNavMenu(!showNavMenu);
                         }}
-                        className="hover:bg-windows-blue hover:text-white h-10 text-xl h-full flex w-full justify-center py-1 cursor-pointer"
-                    >
-                        LinkedIn
-                    </li>
+                    />
                     <Link href={links.resume} target="_blank" download>
-                        <li
+                        <NavListItem
+                            label="Resume"
                             onClick={() => setShowNavMenu(!showNavMenu)}
-                            className="hover:bg-windows-blue hover:text-white h-10 text-xl h-full flex w-full justify-center py-1 cursor-pointer"
-                        >
-                            Resume
-                        </li>
+                        />
                     </Link>
                 </ul>
             </GradientWrapper>
@@ -118,4 +108,4 @@ const NavMenu: React.FC<IFooterProps> = ({
     );
 };
 
-export default NavMenu;
+export default NavMenuModal;

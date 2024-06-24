@@ -1,91 +1,73 @@
-import React from 'react';
 import Image, { StaticImageData } from 'next/image';
-import SkillSummary from './skillSummary';
-import { textAreaGradientBorder } from '../gradients/gradientStyles';
-import GradientWrapper from '../gradients/gradientWrapper';
+import React from 'react';
 import { languages, libraries } from '../../config/skills';
+import SkillSummary from './skillSummary';
+import TabContentLayout from '../mainContainer/tabContentLayout';
+import { cn } from '../../utils';
 
-interface ISkill {
+const IMAGE_SIZE_PX = 50;
+
+interface Skill {
     name: string;
-    src: StaticImageData | any;
+    src: StaticImageData;
 }
 
-const Skills: React.FC = (): JSX.Element => {
-    const languageSkills: JSX.Element = (
-        <>
+interface SkillSectionProps {
+    title: string;
+    skills: Skill[];
+    type: 'lang' | 'tool';
+}
+
+const SkillSection: React.FC<SkillSectionProps> = ({ title, skills, type }) => {
+    const isTool = type === 'tool';
+    return (
+        <div className={cn(isTool && 'mt-10')}>
             <h3 className="text-center mx-auto grow-1 flex justify-center text-2xl font-extrabold py-3 underline">
-                Languages/Frameworks
+                {title}
             </h3>
             <div className="px-5 text-center grid grid-cols-3 lg:grid-cols-8">
-                <>
-                    {languages.map((skill: ISkill, index: number) => {
-                        return (
-                            <div className="p-1" key={index}>
-                                <Image
-                                    src={skill.src}
-                                    key={index}
-                                    alt=""
-                                    width="50"
-                                    height="50"
-                                />
-                                <div className="text-xl">{skill.name}</div>
-                            </div>
-                        );
-                    })}
-                </>
-            </div>
-        </>
-    );
-
-    const toolSkills: JSX.Element = (
-        <div className="mt-10">
-            <h3 className="text-center mx-auto grow-1 flex justify-center text-2xl font-extrabold py-3 underline">
-                Tools/Libraries
-            </h3>
-            <div className="px-5 text-center grid grid-cols-3 lg:grid-cols-8 py-1 space-y-5">
-                <>
-                    {libraries.map((skill: ISkill, index: number) => {
-                        return (
-                            <div
-                                className={`p-1 ${
-                                    index === 0 ? 'my-auto mt-5' : ''
-                                }`}
-                                key={index}
-                            >
-                                <Image
-                                    src={skill.src}
-                                    key={index}
-                                    alt=""
-                                    width="50"
-                                    height="50"
-                                />
-                                <div className="text-xl">{skill.name}</div>
-                            </div>
-                        );
-                    })}
-                </>
+                {skills.map((skill: Skill, index: number) => (
+                    <div
+                        className={cn(
+                            `p-1`,
+                            isTool && 'first:my-auto first:mt-5'
+                        )}
+                        key={`${type}-${skill.name}-${index}`}
+                    >
+                        <Image
+                            src={skill.src}
+                            key={`${type}-${skill.name}-img-${index}`}
+                            alt={`${
+                                type === 'lang' ? 'technology' : 'library'
+                            } icon`}
+                            width={IMAGE_SIZE_PX}
+                            height={IMAGE_SIZE_PX}
+                        />
+                        <div className="text-xl">{skill.name}</div>
+                    </div>
+                ))}
             </div>
         </div>
     );
+};
 
+const Skills: React.FC = (): JSX.Element => {
     return (
-        <>
-            <div className="text-3xl pb-3 md:pb-0 md:mt-3 md:text-[50px] font-extrabold w-full text-center">
-                My Skills
+        <TabContentLayout className="bg-windows-gray">
+            <div className="grow">
+                <SkillSummary />
+                <SkillSection
+                    title="Languages/Frameworks"
+                    skills={languages}
+                    type="lang"
+                />
+                <SkillSection
+                    title="Tools/Libraries"
+                    skills={libraries}
+                    type="tool"
+                />
             </div>
-            <GradientWrapper
-                style="w-full md:p-7"
-                gradientBorders={textAreaGradientBorder}
-            >
-                <main className="xs:h-[500px] sm:h-[520px] overflow-y-auto w-full bg-windows-gray flex px-5 md:px-0 md:p-5 flex-wrap flex-row overflow-y-auto overflow-x-clip flex-initial w-42">
-                    <div className="grow">
-                        <SkillSummary />
-                        {languageSkills}
-                        {toolSkills}
-                    </div>
-                </main>
-            </GradientWrapper>
-        </>
+        </TabContentLayout>
     );
 };
 

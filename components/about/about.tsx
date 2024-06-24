@@ -1,34 +1,31 @@
+import Image from 'next/image';
 import React from 'react';
 import { aboutConfig } from '../../config/aboutMe';
-import { textAreaGradientBorder } from '../gradients/gradientStyles';
-import GradientWrapper from '../gradients/gradientWrapper';
 import devPhoto from '../../styles/assets/portfolioPhoto.png';
-import Image from 'next/image';
+import TabContentLayout from '../mainContainer/tabContentLayout';
 
 const About: React.FC = (): JSX.Element => {
-    const aboutContent: JSX.Element = (
-        <main className="h-[370px] xs:h-[500px] md:h-[520px] overflow-y-auto w-full bg-windows-white p-2 md:p-5 lg:p-10 text-xl md:text-2xl tracking-wide text-center flex flex-row py-5 space-y-10 justify-center flex-wrap">
-            <div className="md:p-5 w-full">
-                <Image src={devPhoto} alt="" width="300" height={'300'} />
-            </div>
-            <span>{aboutConfig.p1}</span>
-            <span>{aboutConfig.p2}</span>
-            <span>{aboutConfig.p3}</span>
-        </main>
-    );
-
     return (
-        <>
-            <div className="text-3xl md:text-[50px] pb-3 md:pb-0 md:mt-3 font-extrabold w-full text-center">
-                {aboutConfig.welcomeGreeting}
+        <TabContentLayout>
+            <div className="flex flex-col items-center w-full h-full">
+                <div className="flex-shrink-0 mt-4">
+                    <Image
+                        src={devPhoto}
+                        alt="portfolioImage"
+                        width={300}
+                        height={300}
+                        className="w-auto h-auto max-w-full max-h-[300px] object-contain"
+                    />
+                </div>
+                <div className="w-full md:w-3/4 flex flex-col justify-center p-4">
+                    <div className="text-lg md:text-xl space-y-6 text-center">
+                        <p>{aboutConfig.p1}</p>
+                        <p>{aboutConfig.p2}</p>
+                        <p>{aboutConfig.p3}</p>
+                    </div>
+                </div>
             </div>
-            <GradientWrapper
-                style="w-full md:p-7"
-                gradientBorders={textAreaGradientBorder}
-            >
-                {aboutContent}
-            </GradientWrapper>
-        </>
+        </TabContentLayout>
     );
 };
 
