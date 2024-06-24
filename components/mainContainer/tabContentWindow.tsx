@@ -71,7 +71,7 @@ const TabContentWindow: React.FC<ITabsProps> = ({
                 {tabBorderCovers}
             </div>
             <GradientWrapper
-                containerClassName="flex flex-grow flex-col"
+                containerClassName="flex grow flex-col"
                 gradientBorders={modalGradientBorders}
             >
                 <div className="p-1 md:p-7">
@@ -79,8 +79,7 @@ const TabContentWindow: React.FC<ITabsProps> = ({
                         My Work
                     </div>
                     <GradientWrapper
-                        className="flex grow flex-col h-full"
-                        containerClassName="flex flex-grow flex-col"
+                        containerClassName="flex grow flex-col"
                         gradientBorders={textAreaGradientBorder}
                     >
                         {tabComponents[tabSelected]}

@@ -16,19 +16,16 @@ const MainContainer: React.FC<IMainContainerProps> = ({
     className,
 }: IMainContainerProps): JSX.Element => {
     return (
-        <GradientWrapper
-            containerClassName="flex flex-grow flex-col"
-            gradientBorders={modalGradientBorders}
-        >
+        <div className="w95-modal">
             <Header />
-            <div className="bg-windows-gray flex flex-grow flex-col md:p-5">
+            <div className="bg-windows-gray flex grow flex-col md:p-5">
                 <TabContentWindow
                     tabSelected={tabSelected}
                     setTabSelected={setTabSelected}
                 />
                 <LinkButtons style="py-2 w-96 self-end" />
             </div>
-        </GradientWrapper>
+        </div>
     );
 };
 
