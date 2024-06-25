@@ -2,8 +2,6 @@ import type { NextPage } from 'next';
 import { useState } from 'react';
 import Footer from '../components/footer/footer';
 import NavMenuModal from '../components/footer/navMenuModal';
-import { modalGradientBorders } from '../components/gradients/gradientStyles';
-import GradientWrapper from '../components/gradients/gradientWrapper';
 import MainContainer from '../components/mainContainer/mainContainer';
 import { links } from '../config/aboutMe';
 

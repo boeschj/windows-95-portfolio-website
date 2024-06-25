@@ -1,7 +1,4 @@
-import Link from 'next/link';
 import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
-import { modalGradientBorders } from '../gradients/gradientStyles';
-import GradientWrapper from '../gradients/gradientWrapper';
 import NavListItem from './navListItem';
 import { cn } from '../../utils';
 
@@ -53,8 +50,7 @@ const NavMenuModal: React.FC<IFooterProps> = ({
             )}
             ref={impactRef}
         >
-            {/* <GradientWrapper gradientBorders={modalGradientBorders}> */}
-            <div className="w95-border-raised">
+            <div className="win95-border-raised">
                 <ul className="divide-y-2 divide-windows-gray bg-windows-gray h-fit">
                     <NavListItem
                         label="About Me"
@@ -101,7 +97,6 @@ const NavMenuModal: React.FC<IFooterProps> = ({
                     />
                 </ul>
             </div>
-            {/* </GradientWrapper> */}
         </div>
     );
 };

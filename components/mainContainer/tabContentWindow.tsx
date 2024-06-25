@@ -1,12 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import About from '../about/about';
 import Experience from '../experience/experience';
-import {
-    coverTabGradientBorders,
-    modalGradientBorders,
-    textAreaGradientBorder,
-} from '../gradients/gradientStyles';
-import GradientWrapper from '../gradients/gradientWrapper';
 import Skills from '../skills/skills';
 import Tab from './tab';
 
@@ -24,28 +18,6 @@ const TabContentWindow: React.FC<ITabsProps> = ({
         <Experience key={2} />,
         <Skills key={3} />,
     ];
-
-    // const tabBorderCovers: JSX.Element = (
-    //     <div className="flex flex-row absolute -bottom-5 left-1">
-    //         <GradientWrapper
-    //             className={`bg-windows-gray h-[10px] w-[97px] -mt-[11px] -ml-[4px] ${
-    //                 tabSelected === 0 ? '' : 'bg-opacity-0'
-    //             }`}
-    //             gradientBorders={coverTabGradientBorders}
-    //             children={<div className={'h-[10px] w-[95px]'} />}
-    //         />
-    //         <div
-    //             className={`bg-windows-gray h-[10px] w-[100px] border border-windows-gray ml-[3px] ${
-    //                 tabSelected === 1 ? '-mt-[5px]' : 'mt-[5px]'
-    //             }`}
-    //         />
-    //         <div
-    //             className={`bg-windows-gray h-[10px] w-[100px] border border-windows-gray ${
-    //                 tabSelected === 2 ? '-mt-[5px]' : 'mt-[5px]'
-    //             }`}
-    //         />
-    //     </div>
-    // );
 
     return (
         <div className="flex grow flex-col">
@@ -68,28 +40,17 @@ const TabContentWindow: React.FC<ITabsProps> = ({
                     text={'Skills'}
                     tabNumber={2}
                 />
-                {/* {tabBorderCovers} */}
             </div>
-            {/* <GradientWrapper
-                containerClassName="flex grow flex-col"
-                gradientBorders={modalGradientBorders}
-            > */}
-            <div className="w95-modal">
+            <div className="win95-border-raised">
                 <div className="p-1 md:p-7">
                     <div className="text-3xl md:text-[50px] font-extrabold w-full text-center mb-2 md:mb-5">
                         My Work
                     </div>
-                    {/* <GradientWrapper
-                        containerClassName="flex grow flex-col"
-                        gradientBorders={textAreaGradientBorder}
-                    > */}
-                    <div className="w95-border-sunken">
+                    <div className="win95-border-sunken">
                         {tabComponents[tabSelected]}
                     </div>
-                    {/* </GradientWrapper> */}
                 </div>
             </div>
-            {/* </GradientWrapper> */}
         </div>
     );
 };

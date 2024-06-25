@@ -1,8 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import LinkButtons from './linkButtons';
 import TabContentWindow from './tabContentWindow';
-import { modalGradientBorders } from '../gradients/gradientStyles';
-import GradientWrapper from '../gradients/gradientWrapper';
 
 interface IMainContainerProps {
     tabSelected: number;
@@ -16,7 +14,7 @@ const MainContainer: React.FC<IMainContainerProps> = ({
     className,
 }: IMainContainerProps): JSX.Element => {
     return (
-        <div className="w95-modal">
+        <div className="win95-border-raised">
             <Header />
             <div className="bg-windows-gray flex grow justify-between flex-col md:p-5 gap-5">
                 <TabContentWindow

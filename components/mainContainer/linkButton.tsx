@@ -1,10 +1,4 @@
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import {
-    buttonClickedBorders,
-    modalGradientBorders,
-} from '../gradients/gradientStyles';
-import GradientWrapper from '../gradients/gradientWrapper';
 
 interface ILinkButtonProps {
     profileUrl: string;
@@ -24,23 +18,16 @@ const LinkButton: React.FC<ILinkButtonProps> = ({
     }, [buttonClicked]);
 
     return (
-        // <GradientWrapper
-        //     gradientBorders={
-        //         buttonClicked ? buttonClickedBorders : modalGradientBorders
-        //     }
-        // >
         <button
             onClick={() => {
                 setButtonClicked(true);
 
                 window.open(profileUrl, '_blank', 'noopener,noreferrer');
             }}
-            className={`bg-windows-gray h-8 w95-border-raised w-36`}
+            className={`bg-windows-gray h-8 win95-border-raised w-36`}
         >
             {buttonTitle}
         </button>
-
-        // </GradientWrapper>
     );
 };
 

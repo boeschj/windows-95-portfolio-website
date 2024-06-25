@@ -1,7 +1,3 @@
-import { useMemo } from 'react';
-import { textAreaGradientBorder } from '../gradients/gradientStyles';
-import GradientWrapper from '../gradients/gradientWrapper';
-
 interface IJobListItemProps {
     skill: string;
     level: number;
@@ -20,7 +16,7 @@ const ProgressBar: React.FC<IJobListItemProps> = ({
             <div className="py-1 tracking-wide text-center text-2xl">
                 {skill}
             </div>
-            <div className="mx-auto w-[248px] w95-border-sunken">
+            <div className="mx-auto w-[248px] win95-border-sunken">
                 <div className="flex flex-row space-x-1 p-[2px] w-[248px] mx-auto">
                     {progressBar}
                 </div>

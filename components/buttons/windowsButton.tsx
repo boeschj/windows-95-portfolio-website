@@ -1,11 +1,6 @@
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
 import win95 from '../../styles/win_95.svg';
-import {
-    buttonClickedBorders,
-    modalGradientBorders,
-} from '../gradients/gradientStyles';
-import GradientWrapper from '../gradients/gradientWrapper';
 import { cn } from '../../utils';
 
 interface IWindowsButtonProps {
@@ -18,15 +13,9 @@ const WindowsButton: React.FC<IWindowsButtonProps> = ({
     showNavMenu,
 }): JSX.Element => {
     return (
-        // <GradientWrapper
-        //     className="h-8 w-24 text-center items-center flex justify-center"
-        //     gradientBorders={
-        //         showNavMenu ? buttonClickedBorders : modalGradientBorders
-        //     }
-        // >
         <div
             className={cn(
-                showNavMenu ? 'w95-border-sunken' : 'w95-border-raised'
+                showNavMenu ? 'win95-border-sunken' : 'win95-border-raised'
             )}
         >
             <button
@@ -37,7 +26,6 @@ const WindowsButton: React.FC<IWindowsButtonProps> = ({
                 <div>Start</div>
             </button>
         </div>
-        // </GradientWrapper>
     );
 };
 
