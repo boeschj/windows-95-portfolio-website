@@ -25,27 +25,27 @@ const TabContentWindow: React.FC<ITabsProps> = ({
         <Skills key={3} />,
     ];
 
-    const tabBorderCovers: JSX.Element = (
-        <div className="flex flex-row absolute -bottom-5 left-1">
-            <GradientWrapper
-                className={`bg-windows-gray h-[10px] w-[97px] -mt-[11px] -ml-[4px] ${
-                    tabSelected === 0 ? '' : 'bg-opacity-0'
-                }`}
-                gradientBorders={coverTabGradientBorders}
-                children={<div className={'h-[10px] w-[95px]'} />}
-            />
-            <div
-                className={`bg-windows-gray h-[10px] w-[100px] border border-windows-gray ml-[3px] ${
-                    tabSelected === 1 ? '-mt-[5px]' : 'mt-[5px]'
-                }`}
-            />
-            <div
-                className={`bg-windows-gray h-[10px] w-[100px] border border-windows-gray ${
-                    tabSelected === 2 ? '-mt-[5px]' : 'mt-[5px]'
-                }`}
-            />
-        </div>
-    );
+    // const tabBorderCovers: JSX.Element = (
+    //     <div className="flex flex-row absolute -bottom-5 left-1">
+    //         <GradientWrapper
+    //             className={`bg-windows-gray h-[10px] w-[97px] -mt-[11px] -ml-[4px] ${
+    //                 tabSelected === 0 ? '' : 'bg-opacity-0'
+    //             }`}
+    //             gradientBorders={coverTabGradientBorders}
+    //             children={<div className={'h-[10px] w-[95px]'} />}
+    //         />
+    //         <div
+    //             className={`bg-windows-gray h-[10px] w-[100px] border border-windows-gray ml-[3px] ${
+    //                 tabSelected === 1 ? '-mt-[5px]' : 'mt-[5px]'
+    //             }`}
+    //         />
+    //         <div
+    //             className={`bg-windows-gray h-[10px] w-[100px] border border-windows-gray ${
+    //                 tabSelected === 2 ? '-mt-[5px]' : 'mt-[5px]'
+    //             }`}
+    //         />
+    //     </div>
+    // );
 
     return (
         <div className="flex grow flex-col">
@@ -68,24 +68,28 @@ const TabContentWindow: React.FC<ITabsProps> = ({
                     text={'Skills'}
                     tabNumber={2}
                 />
-                {tabBorderCovers}
+                {/* {tabBorderCovers} */}
             </div>
-            <GradientWrapper
+            {/* <GradientWrapper
                 containerClassName="flex grow flex-col"
                 gradientBorders={modalGradientBorders}
-            >
+            > */}
+            <div className="w95-modal">
                 <div className="p-1 md:p-7">
                     <div className="text-3xl md:text-[50px] font-extrabold w-full text-center mb-2 md:mb-5">
                         My Work
                     </div>
-                    <GradientWrapper
+                    {/* <GradientWrapper
                         containerClassName="flex grow flex-col"
                         gradientBorders={textAreaGradientBorder}
-                    >
+                    > */}
+                    <div className="w95-border-sunken">
                         {tabComponents[tabSelected]}
-                    </GradientWrapper>
+                    </div>
+                    {/* </GradientWrapper> */}
                 </div>
-            </GradientWrapper>
+            </div>
+            {/* </GradientWrapper> */}
         </div>
     );
 };

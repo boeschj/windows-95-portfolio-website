@@ -18,12 +18,12 @@ const MainContainer: React.FC<IMainContainerProps> = ({
     return (
         <div className="w95-modal">
             <Header />
-            <div className="bg-windows-gray flex grow flex-col md:p-5">
+            <div className="bg-windows-gray flex grow justify-between flex-col md:p-5 gap-5">
                 <TabContentWindow
                     tabSelected={tabSelected}
                     setTabSelected={setTabSelected}
                 />
-                <LinkButtons style="py-2 w-96 self-end" />
+                <LinkButtons />
             </div>
         </div>
     );

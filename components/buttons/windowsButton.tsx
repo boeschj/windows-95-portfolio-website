@@ -6,6 +6,7 @@ import {
     modalGradientBorders,
 } from '../gradients/gradientStyles';
 import GradientWrapper from '../gradients/gradientWrapper';
+import { cn } from '../../utils';
 
 interface IWindowsButtonProps {
     setShowNavMenu: Dispatch<SetStateAction<boolean>>;
@@ -17,11 +18,16 @@ const WindowsButton: React.FC<IWindowsButtonProps> = ({
     showNavMenu,
 }): JSX.Element => {
     return (
-        <GradientWrapper
-            className="h-8 w-24 text-center items-center flex justify-center"
-            gradientBorders={
-                showNavMenu ? buttonClickedBorders : modalGradientBorders
-            }
+        // <GradientWrapper
+        //     className="h-8 w-24 text-center items-center flex justify-center"
+        //     gradientBorders={
+        //         showNavMenu ? buttonClickedBorders : modalGradientBorders
+        //     }
+        // >
+        <div
+            className={cn(
+                showNavMenu ? 'w95-border-sunken' : 'w95-border-raised'
+            )}
         >
             <button
                 onClick={() => setShowNavMenu(!showNavMenu)}
@@ -30,7 +36,8 @@ const WindowsButton: React.FC<IWindowsButtonProps> = ({
                 <Image src={win95} alt="Win95" height="28" width="28" />
                 <div>Start</div>
             </button>
-        </GradientWrapper>
+        </div>
+        // </GradientWrapper>
     );
 };
 

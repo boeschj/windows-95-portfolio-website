@@ -3,6 +3,7 @@ import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { modalGradientBorders } from '../gradients/gradientStyles';
 import GradientWrapper from '../gradients/gradientWrapper';
 import NavListItem from './navListItem';
+import { cn } from '../../utils';
 
 interface ILinks {
     github: string;
@@ -46,12 +47,14 @@ const NavMenuModal: React.FC<IFooterProps> = ({
 
     return (
         <div
-            className={`${
+            className={cn(
+                `divide-y-2 divide-windows-gray bg-windows-gray flex flex-col w-72 h-fit absolute bottom-11 left-1`,
                 showNavMenu ? `display-flex` : `hidden`
-            } divide-y-2 divide-windows-gray bg-windows-gray flex flex-col w-72 h-fit absolute bottom-11 left-1`}
+            )}
             ref={impactRef}
         >
-            <GradientWrapper gradientBorders={modalGradientBorders}>
+            {/* <GradientWrapper gradientBorders={modalGradientBorders}> */}
+            <div className="w95-border-raised">
                 <ul className="divide-y-2 divide-windows-gray bg-windows-gray h-fit">
                     <NavListItem
                         label="About Me"
@@ -96,14 +99,9 @@ const NavMenuModal: React.FC<IFooterProps> = ({
                             setShowNavMenu(!showNavMenu);
                         }}
                     />
-                    <Link href={links.resume} target="_blank" download>
-                        <NavListItem
-                            label="Resume"
-                            onClick={() => setShowNavMenu(!showNavMenu)}
-                        />
-                    </Link>
                 </ul>
-            </GradientWrapper>
+            </div>
+            {/* </GradientWrapper> */}
         </div>
     );
 };

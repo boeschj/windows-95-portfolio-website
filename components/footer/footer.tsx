@@ -17,23 +17,29 @@ const Footer: React.FC<IFooterProps> = ({
     showNavMenu,
 }: IFooterProps): JSX.Element => {
     return (
-        <GradientWrapper
-            className="mx-auto w-full bg-windows-gray content-center hidden md:grid bottom-0 fixed"
-            gradientBorders={footerGradientBorders}
-        >
-            <div className="h-[35px] flex items-center justify-between">
-                <WindowsButton
-                    setShowNavMenu={setShowNavMenu}
-                    showNavMenu={showNavMenu}
-                />
-                <GradientWrapper
-                    className="w-auto h-8"
-                    gradientBorders={timeGradientBorders}
-                >
-                    <Clock />
-                </GradientWrapper>
+        // <GradientWrapper
+        //     className="mx-auto w-full bg-windows-gray content-center hidden md:grid bottom-0 fixed"
+        //     gradientBorders={footerGradientBorders}
+        // >
+        <div className="mx-auto w-full bg-windows-gray content-center hidden md:grid bottom-0 fixed">
+            <div className="w95-footer">
+                <div className="h-[35px] flex items-center justify-between">
+                    <WindowsButton
+                        setShowNavMenu={setShowNavMenu}
+                        showNavMenu={showNavMenu}
+                    />
+                    {/* <GradientWrapper
+                        className="w-auto h-8"
+                        gradientBorders={timeGradientBorders}
+                    > */}
+                    <div className="w95-time">
+                        <Clock />
+                    </div>
+                    {/* </GradientWrapper> */}
+                </div>
             </div>
-        </GradientWrapper>
+        </div>
+        // </GradientWrapper>
     );
 };
 

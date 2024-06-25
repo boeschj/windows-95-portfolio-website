@@ -9,14 +9,12 @@ import GradientWrapper from '../gradients/gradientWrapper';
 interface ILinkButtonProps {
     profileUrl: string;
     text: string;
-    isResume?: boolean;
 }
 
 const LinkButton: React.FC<ILinkButtonProps> = ({
     profileUrl,
     text: buttonTitle,
-    isResume,
-}: ILinkButtonProps): JSX.Element => {
+}): JSX.Element => {
     const [buttonClicked, setButtonClicked] = useState(false);
 
     useEffect(() => {
@@ -25,33 +23,24 @@ const LinkButton: React.FC<ILinkButtonProps> = ({
         }, 400);
     }, [buttonClicked]);
 
-    const button = (
+    return (
+        // <GradientWrapper
+        //     gradientBorders={
+        //         buttonClicked ? buttonClickedBorders : modalGradientBorders
+        //     }
+        // >
         <button
             onClick={() => {
                 setButtonClicked(true);
-                if (!isResume)
-                    window.open(profileUrl, '_blank', 'noopener,noreferrer');
+
+                window.open(profileUrl, '_blank', 'noopener,noreferrer');
             }}
-            className={`${
-                buttonClicked ? 'h-[28px]' : 'h-[30px]'
-            } bg-windows-gray w-full`}
+            className={`bg-windows-gray h-8 w95-border-raised w-36`}
         >
             {buttonTitle}
         </button>
-    );
 
-    const resumeButton = (
-        <Link href={profileUrl} target="_blank" download children={button} />
-    );
-
-    return (
-        <GradientWrapper
-            gradientBorders={
-                buttonClicked ? buttonClickedBorders : modalGradientBorders
-            }
-        >
-            {isResume ? resumeButton : button}
-        </GradientWrapper>
+        // </GradientWrapper>
     );
 };
 
