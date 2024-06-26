@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
-import { cn } from '../../utils';
 import { NavListItem } from './NavListItem';
+import { cn } from '../../utils';
 
 interface Links {
     github: string;

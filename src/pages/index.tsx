@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
 import { useState } from 'react';
-import { links } from '../config/aboutMe';
 import { Footer } from '../components/footer/Footer';
 import { NavMenuModal } from '../components/footer/NavMenuModal';
 import { WelcomeView } from '../components/welcomeView/WelcomeView';
+import { links } from '../config/aboutMe';
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
     const title = "Jordan's Portfolio Site";

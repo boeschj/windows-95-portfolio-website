@@ -1,5 +1,5 @@
-import { cn } from '../../../utils';
 import Image, { StaticImageData } from 'next/image';
+import { cn } from '../../../utils';
 
 const IMAGE_SIZE_PX = 50;
 
@@ -29,12 +29,13 @@ export const SkillSection: React.FC<SkillSectionProps> = ({
                 {skills.map((skill: Skill, index: number) => (
                     <div
                         className={cn(
-                            `p-1`,
+                            `p-1 flex flex-col items-center justify-center`,
                             isTool && 'first:my-auto first:mt-5'
                         )}
                         key={`${type}-${skill.name}-${index}`}
                     >
                         <Image
+                            className="m-1"
                             src={skill.src}
                             key={`${type}-${skill.name}-img-${index}`}
                             alt={`${

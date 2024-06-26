@@ -1,6 +1,6 @@
 import React from 'react';
-import { skills } from '../../../config/skills';
 import { ProgressBar } from './ProgressBar';
+import { skills } from '../../../config/skills';
 
 export const SkillSummary: React.FC = (): JSX.Element => {
     return (

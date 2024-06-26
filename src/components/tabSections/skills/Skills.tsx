@@ -1,10 +1,8 @@
 import React from 'react';
-import { languages, libraries } from '../../../config/skills';
 import { TabContentLayout } from '../../welcomeView/TabContentLayout';
 import { SkillSection } from './SkillSection';
 import { SkillSummary } from './SkillSummary';
-
-const IMAGE_SIZE_PX = 50;
+import { languages, libraries } from '../../../config/skills';
 
 export const Skills: React.FC = (): JSX.Element => {
     return (

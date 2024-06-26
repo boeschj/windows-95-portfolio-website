@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import React from 'react';
-import { aboutConfig } from '../../../config/aboutMe';
 import devPhoto from '../../../styles/assets/portfolioPhoto.png';
 import { TabContentLayout } from '../../welcomeView/TabContentLayout';
+import { aboutConfig } from '../../../config/aboutMe';
 
 export const About: React.FC = (): JSX.Element => {
     return (
@@ -11,7 +11,7 @@ export const About: React.FC = (): JSX.Element => {
                 <div className="flex-shrink-0 mt-4">
                     <Image
                         src={devPhoto}
-                        alt="portfolioImage"
+                        alt="It's me!"
                         width={300}
                         height={300}
                         className="w-auto h-auto max-w-full max-h-[300px] object-contain"

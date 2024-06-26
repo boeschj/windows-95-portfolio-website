@@ -7,7 +7,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
     return (
         <>
             <Head>
-                <link rel="shortcut icon" href="/images/favicon.ico" />
+                <link rel="shortcut icon" href="/favicon.ico" />
                 <link
                     rel="apple-touch-icon"
                     sizes="180x180"
@@ -26,7 +26,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
                     href="favicon-16x16.png"
                 />
             </Head>
-            <Component {...pageProps} />;
+            <Component {...pageProps} />
         </>
     );
 };
