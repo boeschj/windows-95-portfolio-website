@@ -16,7 +16,7 @@ const JobListItem: React.FC<IJobListItemProps> = (
     jobListItem: IJobListItemProps
 ): JSX.Element => {
     return (
-        <div className="flex flex-col space-y-5 grow py-5 w-full md:w-3/4 mx-auto">
+        <div className="flex flex-col space-y-5 grow py-5 w-full px-4 md:px-6 mx-auto">
             <div>
                 <Image
                     src={jobListItem.imageUrl}
