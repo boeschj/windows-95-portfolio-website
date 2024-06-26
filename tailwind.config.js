@@ -1,5 +1,5 @@
 const plugin = require('tailwindcss/plugin');
-const win95Colors = require('./win95Colors.json');
+const win95Colors = require('./src/styles/win95Colors.json');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

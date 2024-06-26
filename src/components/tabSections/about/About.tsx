@@ -7,7 +7,7 @@ export const About: React.FC = (): JSX.Element => {
     return (
         <TabContentLayout className="h-auto flex flex-col overflow-auto grow">
             <div className="flex flex-col items-center justify-center w-full h-screen">
-                <div className="flex-shrink-0 mt-4">
+                <div className="flex-shrink-0 m-4">
                     <Image
                         src={'/images/portfolioPhoto.png'}
                         alt="It's me!"
