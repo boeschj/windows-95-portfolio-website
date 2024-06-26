@@ -22,7 +22,7 @@ const TabContentWindow: React.FC<ITabsProps> = ({
     const tabTitles: string[] = ["Hi, I'm Jordan 👋", 'My Work', 'My Skills'];
 
     return (
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-[calc(max(100%-90px))]">
             <div className="flex flex-row">
                 <Tab
                     tabSelected={tabSelected}
@@ -43,11 +43,11 @@ const TabContentWindow: React.FC<ITabsProps> = ({
                     tabNumber={2}
                 />
             </div>
-            <div className="win95-border-raised p-1 md:p-6">
-                <div className="text-3xl md:text-[50px] font-extrabold w-full text-center mb-2 md:mb-5">
+            <div className="win95-border-raised p-4 md:p-6 flex flex-col h-full">
+                <div className="text-3xl md:text-[50px] h-10 font-extrabold w-full text-center mb-2 md:mb-5">
                     {tabTitles[tabSelected]}
                 </div>
-                <div className="win95-border-sunken">
+                <div className="win95-border-sunken flex flex-col h-[calc(max(100%-40px))] md:h-[calc(max(100%-60px))]">
                     {tabComponents[tabSelected]}
                 </div>
             </div>

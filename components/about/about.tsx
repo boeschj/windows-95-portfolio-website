@@ -6,8 +6,8 @@ import TabContentLayout from '../mainContainer/tabContentLayout';
 
 const About: React.FC = (): JSX.Element => {
     return (
-        <TabContentLayout>
-            <div className="flex flex-col items-center w-full h-full">
+        <TabContentLayout className="h-auto flex flex-col overflow-auto grow">
+            <div className="flex flex-col items-center w-full h-screen">
                 <div className="flex-shrink-0 mt-4">
                     <Image
                         src={devPhoto}
@@ -18,7 +18,7 @@ const About: React.FC = (): JSX.Element => {
                     />
                 </div>
                 <div className="w-full md:w-3/4 flex flex-col justify-center p-4">
-                    <div className="text-lg md:text-xl space-y-6 text-center">
+                    <div className="text-lg md:text-2xl space-y-6 text-center">
                         <p>{aboutConfig.p1}</p>
                         <p>{aboutConfig.p2}</p>
                         <p>{aboutConfig.p3}</p>

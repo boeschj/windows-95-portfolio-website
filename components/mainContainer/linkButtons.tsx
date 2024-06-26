@@ -10,7 +10,7 @@ const LinkButtons: React.FC<LinkButtonProps> = ({ className }): JSX.Element => {
     return (
         <div
             className={cn(
-                `flex flex-row space-x-5 items-end justify-end`,
+                `flex flex-row space-x-5 items-end justify-end pb-2 md:p-0`,
                 className
             )}
         >

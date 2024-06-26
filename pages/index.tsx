@@ -11,7 +11,7 @@ const HomePage: NextPage = (): JSX.Element => {
 
     return (
         <div className="flex flex-col min-h-screen justify-center items-center w-full bg-windows-bg">
-            <div className="flex grow flex-col p-4 2xl:p-12 max-w-screen-2xl">
+            <div className="flex grow flex-col md:p-12 h-36 items-center justify-center max-w-screen-2xl">
                 <MainContainer
                     tabSelected={tabSelected}
                     setTabSelected={setTabSelected}

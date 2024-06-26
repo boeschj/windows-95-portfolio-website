@@ -10,14 +10,16 @@ const TabContentLayout: React.FC<TabContentLayoutProps> = ({
     className,
 }) => {
     return (
-        <main
-            className={cn(
-                'xs:h-[500px] sm:h-[520px] w-full bg-white flex px-5 md:px-0 md:p-5 flex-wrap overflow-y-auto grow overflow-x-clip flex-initial w-42',
-                className
-            )}
-        >
-            {children}
-        </main>
+        <div className={cn('h-full w-full', className)}>
+            <div
+                className={cn(
+                    'max-h-full overflow-y-auto w-full bg-white flex px-5 md:px-0 md:p-5 flex-wrap grow overflow-x-clip flex-initial',
+                    className
+                )}
+            >
+                {children}
+            </div>
+        </div>
     );
 };
 

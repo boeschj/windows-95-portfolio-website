@@ -53,8 +53,8 @@ const SkillSection: React.FC<SkillSectionProps> = ({ title, skills, type }) => {
 
 const Skills: React.FC = (): JSX.Element => {
     return (
-        <TabContentLayout className="bg-windows-gray">
-            <div className="grow">
+        <TabContentLayout className="bg-windows-gray flex grow overflow-auto">
+            <div className="flex flex-col h-screen">
                 <SkillSummary />
                 <SkillSection
                     title="Languages/Frameworks"

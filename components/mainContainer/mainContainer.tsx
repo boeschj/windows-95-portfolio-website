@@ -14,9 +14,9 @@ const MainContainer: React.FC<IMainContainerProps> = ({
     className,
 }: IMainContainerProps): JSX.Element => {
     return (
-        <div className="win95-border-raised">
+        <div className="win95-border-raised h-full pb-6 bg-windows-gray">
             <Header />
-            <div className="bg-windows-gray flex grow justify-between flex-col md:p-5 gap-5">
+            <div className="flex grow justify-between flex-col p-2 md:p-5 gap-5 h-full">
                 <TabContentWindow
                     tabSelected={tabSelected}
                     setTabSelected={setTabSelected}

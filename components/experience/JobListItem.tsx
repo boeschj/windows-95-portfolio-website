@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
+import { cn } from '../../utils';
 
 interface IJobListItemProps {
     imageUrl: any;
@@ -19,10 +20,10 @@ const JobListItem: React.FC<IJobListItemProps> = (
             <div>
                 <Image
                     src={jobListItem.imageUrl}
-                    alt="test"
+                    alt="company logo"
                     width="75"
                     height="75"
-                    className={jobListItem.jobUrl ? 'cursor-pointer' : ''}
+                    className={cn(jobListItem.jobUrl && 'cursor-pointer')}
                     onClick={() =>
                         jobListItem.jobUrl &&
                         window.open(
@@ -34,19 +35,18 @@ const JobListItem: React.FC<IJobListItemProps> = (
                 />
             </div>
             <div
-                className={`text-3xl md:text-[50px] w-fit mx-auto font-extrabold leading-[50px] ${
-                    jobListItem.jobUrl
-                        ? 'hover:text-windows-blue hover:underline cursor-pointer'
-                        : ''
-                }`}
+                className={cn(
+                    `text-3xl md:text-[50px] w-fit mx-auto font-extrabold leading-[50px]`,
+                    jobListItem.jobUrl &&
+                        'hover:text-windows-blue hover:underline cursor-pointer'
+                )}
                 onClick={() =>
-                    jobListItem.jobUrl
-                        ? window.open(
-                              jobListItem.jobUrl,
-                              '_blank',
-                              'noopener,noreferrer'
-                          )
-                        : ''
+                    jobListItem.jobUrl &&
+                    window.open(
+                        jobListItem.jobUrl,
+                        '_blank',
+                        'noopener,noreferrer'
+                    )
                 }
             >
                 {jobListItem.jobName}

@@ -6,7 +6,7 @@ import TabContentLayout from '../mainContainer/tabContentLayout';
 const Experience: React.FC = (): JSX.Element => {
     return (
         <TabContentLayout className="content-start text-xl md:text-2xl tracking-wide text-center justify-around flex gap-10 overflow-auto flex-wrap">
-            <ul className="divide-y-2 divide-black divide-dashed">
+            <ul className="divide-y-2 divide-black divide-dashed h-screen">
                 {workHistory.map((job, index) => (
                     <li key={index}>
                         <JobListItem
