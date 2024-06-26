@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React from 'react';
-import devPhoto from '../../../styles/assets/portfolioPhoto.png';
 import { TabContentLayout } from '../../welcomeView/TabContentLayout';
 import { aboutConfig } from '../../../config/aboutMe';
 
@@ -10,7 +9,7 @@ export const About: React.FC = (): JSX.Element => {
             <div className="flex flex-col items-center justify-center w-full h-screen">
                 <div className="flex-shrink-0 mt-4">
                     <Image
-                        src={devPhoto}
+                        src={'/images/portfolioPhoto.png'}
                         alt="It's me!"
                         width={300}
                         height={300}

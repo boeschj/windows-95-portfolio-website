@@ -1,9 +1,9 @@
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import React from 'react';
 import { cn } from '../../../utils';
 
 interface JobListItemProps {
-    imageUrl: StaticImageData;
+    imageUrl: string;
     jobName: string;
     jobTitle: string;
     jobUrl?: string;

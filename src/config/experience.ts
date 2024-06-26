@@ -1,13 +1,6 @@
-import bitverifyImg from '../styles/assets/jobs/bitverify.png';
-import ensembleImg from '../styles/assets/jobs/ensemble.png';
-import fireImg from '../styles/assets/jobs/fire.png';
-import infovisaImg from '../styles/assets/jobs/infovisa.jpg';
-import sandhillsImg from '../styles/assets/jobs/sandhills.jpg';
-import tappImg from '../styles/assets/jobs/tapp.png';
-
 export const workHistory = [
     {
-        imageUrl: fireImg,
+        imageUrl: '/images/jobs/fire.png',
         jobName: 'Fire',
         jobTitle: 'Full Stack Engineer',
         jobUrl: 'https://www.joinfire.xyz/',
@@ -18,7 +11,7 @@ export const workHistory = [
         datesWorked: 'November 2022 - Present',
     },
     {
-        imageUrl: ensembleImg,
+        imageUrl: '/images/jobs/ensemble.png',
         jobName: 'Ensemble',
         jobTitle: 'Lead Software Engineer',
         jobUrl: 'https://www.ensemble.works/',
@@ -29,7 +22,7 @@ export const workHistory = [
         datesWorked: 'July 2022 - November 2022',
     },
     {
-        imageUrl: bitverifyImg,
+        imageUrl: '/images/jobs/bitverify.png',
         jobName: 'BitVerify',
         jobUrl: 'https://www.bitverify.net/',
         jobTitle: 'Founder',
@@ -40,7 +33,7 @@ export const workHistory = [
         datesWorked: 'August 2021 - September 2022',
     },
     {
-        imageUrl: tappImg,
+        imageUrl: '/images/jobs/tapp.png',
         jobName: 'tapp',
         jobUrl: 'https://vizn-stats.web.app/',
         jobTitle: 'Full-Stack Software Engineer',
@@ -51,7 +44,7 @@ export const workHistory = [
         datesWorked: 'January 2021 - May 2022',
     },
     {
-        imageUrl: infovisaImg,
+        imageUrl: '/images/jobs/infovisa.jpg',
         jobName: 'Infovisa',
         jobUrl: 'https://www.infovisa.com/',
         jobTitle: 'Software Engineer Intern',
@@ -61,7 +54,7 @@ export const workHistory = [
         datesWorked: 'May 2021 - August 2021',
     },
     {
-        imageUrl: sandhillsImg,
+        imageUrl: '/images/jobs/sandhills.jpg',
         jobName: 'Sandhills Global',
         jobUrl: 'https://point2ship.com/',
         jobTitle: 'Software Engineer Intern',
