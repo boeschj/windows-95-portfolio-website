@@ -26,7 +26,7 @@ export const workHistory = [
             'Ensemble empowers artists to tell the story behind their creative process and sell the artifacts which come from it as NFTs.',
         workSummary:
             'I worked on Ensemble as a contract developer with a small team and led the development of the product on the blockchain integration side. At Ensemble I played a key role in everything from determining software architecture, setting up CI/CD and establishing best practices, to implementing a responsive and pixel-perfect UI along with vital features and workflows such as smart contract integration, metadata creation and uploading, and Firebase authentication using Sign In With Ethereum.',
-        datesWorked: 'June 2022 - November 2022',
+        datesWorked: 'July 2022 - November 2022',
     },
     {
         imageUrl: bitverifyImg,
