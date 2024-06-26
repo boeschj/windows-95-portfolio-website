@@ -1,29 +1,20 @@
+'use client';
+
 import React from 'react';
 import { Tab } from './Tab';
 import { TAB_CONFIG } from '../../config/main';
+import { useAtom } from 'jotai';
+import { tabSelectedAtom } from '../../store';
 
-interface TabContentContainer {
-    tabSelected: number;
-    setTabSelected: React.Dispatch<React.SetStateAction<number>>;
-}
-
-export const TabContentContainer: React.FC<TabContentContainer> = ({
-    tabSelected,
-    setTabSelected,
-}) => {
+export const TabContentContainer: React.FC = () => {
+    const [tabSelected] = useAtom(tabSelectedAtom);
     const ActiveComponent = TAB_CONFIG[tabSelected].component;
 
     return (
         <div className="flex flex-col h-[calc(100%-90px)]">
             <div className="flex flex-row">
                 {TAB_CONFIG.map((tab, index) => (
-                    <Tab
-                        key={index}
-                        tabSelected={tabSelected}
-                        setTabSelected={setTabSelected}
-                        text={tab.text}
-                        tabNumber={index}
-                    />
+                    <Tab key={index} text={tab.text} tabNumber={index} />
                 ))}
             </div>
             <div className="win95-border-raised p-4 md:p-6 flex flex-col h-full">

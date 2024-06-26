@@ -1,5 +1,5 @@
 export const skills = {
-    p1: "I'm a product-focused fullstack developer and have expertise developing highly performant UIs and animations on web/mobile. My backend focus has primarily been on serverless architectures using Vercel and Firebase, though I do have some experience using AWS.",
+    p1: "I'm a product-focused fullstack developer and have expertise building in all areas of a product. I have experience developing highly performant UIs and animations on web/mobile using React, RN and Next.js. My backend focus has primarily been on serverless architectures using Vercel and Firebase, though I do also have experience using AWS.",
     topSkill1: 'Frontend',
     topSkill1_rating: 7,
     topSkill2: 'Backend',

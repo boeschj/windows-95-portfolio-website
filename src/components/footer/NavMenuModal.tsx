@@ -1,6 +1,11 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+'use client';
+
+import React from 'react';
 import { NavListItem } from './NavListItem';
 import { cn } from '../../utils';
+import { useAtom } from 'jotai';
+import { tabSelectedAtom } from '../../store';
+import { useNavMenu } from '../../hooks/useNavMenu';
 
 interface Links {
     github: string;
@@ -9,46 +14,20 @@ interface Links {
 }
 
 interface FooterProps {
-    setShowNavMenu: Dispatch<SetStateAction<boolean>>;
-    showNavMenu: boolean;
-    setTabSelected: Dispatch<SetStateAction<number>>;
     links: Links;
 }
 
-export const NavMenuModal: React.FC<FooterProps> = ({
-    setShowNavMenu,
-    showNavMenu,
-    setTabSelected,
-    links,
-}) => {
-    const impactRef = useRef<HTMLDivElement>(null);
-
-    const useOutsideClick = (
-        ref: React.RefObject<HTMLDivElement>,
-        callback: { (): void }
-    ) => {
-        useEffect(() => {
-            const handleClickOutside = (event: any) => {
-                if (ref.current && !ref.current.contains(event.target)) {
-                    callback();
-                }
-            };
-            document.addEventListener('mousedown', handleClickOutside);
-            return () => {
-                document.removeEventListener('mousedown', handleClickOutside);
-            };
-        });
-    };
-
-    useOutsideClick(impactRef, () => setShowNavMenu(false));
+export const NavMenuModal: React.FC<FooterProps> = ({ links }) => {
+    const [_, setTabSelected] = useAtom(tabSelectedAtom);
+    const { navMenuOpen, closeMenu } = useNavMenu();
 
     return (
         <div
+            id="nav-menu"
             className={cn(
                 `divide-y-2 divide-windows-gray bg-windows-gray flex flex-col w-72 h-fit absolute bottom-11 left-1`,
-                showNavMenu ? `display-flex` : `hidden`
+                navMenuOpen ? `display-flex` : `hidden`
             )}
-            ref={impactRef}
         >
             <div className="win95-border-raised">
                 <ul className="divide-y-2 divide-windows-gray bg-windows-gray h-fit">
@@ -56,21 +35,21 @@ export const NavMenuModal: React.FC<FooterProps> = ({
                         label="About Me"
                         onClick={() => {
                             setTabSelected(0);
-                            setShowNavMenu(!showNavMenu);
+                            closeMenu();
                         }}
                     />
                     <NavListItem
                         label="Experience"
                         onClick={() => {
                             setTabSelected(1);
-                            setShowNavMenu(!showNavMenu);
+                            closeMenu();
                         }}
                     />
                     <NavListItem
                         label="Skills"
                         onClick={() => {
                             setTabSelected(2);
-                            setShowNavMenu(!showNavMenu);
+                            closeMenu();
                         }}
                     />
                     <NavListItem
@@ -81,7 +60,7 @@ export const NavMenuModal: React.FC<FooterProps> = ({
                                 '_blank',
                                 'noopener,noreferrer'
                             );
-                            setShowNavMenu(!showNavMenu);
+                            closeMenu();
                         }}
                     />
                     <NavListItem
@@ -92,7 +71,7 @@ export const NavMenuModal: React.FC<FooterProps> = ({
                                 '_blank',
                                 'noopener,noreferrer'
                             );
-                            setShowNavMenu(!showNavMenu);
+                            closeMenu();
                         }}
                     />
                 </ul>

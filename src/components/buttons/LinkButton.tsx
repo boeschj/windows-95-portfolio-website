@@ -1,20 +1,24 @@
+import Link from 'next/link';
+
 interface LinkButtonProps {
     profileUrl: string;
     text: string;
 }
 
-export const LinkButton: React.FC<LinkButtonProps> = ({
+export const LinkButton = ({
     profileUrl,
     text: buttonTitle,
-}): JSX.Element => {
+}: LinkButtonProps): JSX.Element => {
     return (
-        <button
-            onClick={() =>
-                window.open(profileUrl, '_blank', 'noopener,noreferrer')
-            }
-            className={`bg-windows-gray h-8 win95-border-raised w-36`}
+        <Link
+            href={profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            passHref
         >
-            {buttonTitle}
-        </button>
+            <button className="bg-windows-gray h-8 win95-border-raised w-36">
+                {buttonTitle}
+            </button>
+        </Link>
     );
 };

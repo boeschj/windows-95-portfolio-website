@@ -1,19 +1,16 @@
-import { Dispatch, SetStateAction } from 'react';
+'use client';
+
 import { cn } from '../../utils';
+import { useAtom } from 'jotai';
+import { tabSelectedAtom } from '../../store';
 
 interface TabProps {
-    tabSelected: number;
-    setTabSelected: Dispatch<SetStateAction<number>>;
     text: string;
     tabNumber: number;
 }
 
-export const Tab: React.FC<TabProps> = ({
-    tabSelected,
-    setTabSelected,
-    text,
-    tabNumber,
-}: TabProps) => {
+export const Tab: React.FC<TabProps> = ({ text, tabNumber }: TabProps) => {
+    const [tabSelected, setTabSelected] = useAtom(tabSelectedAtom);
     const isTabSelected = tabSelected === tabNumber;
     return (
         <div

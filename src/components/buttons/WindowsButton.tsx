@@ -1,24 +1,22 @@
+'use client';
+
+import React from 'react';
 import Image from 'next/image';
-import { Dispatch, SetStateAction } from 'react';
 import { cn } from '../../utils';
+import { useNavMenu } from '../../hooks/useNavMenu';
 
-interface WindowsButtonProps {
-    setShowNavMenu: Dispatch<SetStateAction<boolean>>;
-    showNavMenu: boolean;
-}
+export const WindowsButton: React.FC = (): JSX.Element => {
+    const { navMenuOpen, toggleMenu } = useNavMenu();
 
-export const WindowsButton: React.FC<WindowsButtonProps> = ({
-    setShowNavMenu,
-    showNavMenu,
-}): JSX.Element => {
     return (
         <div
+            id="windows-button"
             className={cn(
-                showNavMenu ? 'win95-border-sunken' : 'win95-border-raised'
+                navMenuOpen ? 'win95-border-sunken' : 'win95-border-raised'
             )}
         >
             <button
-                onClick={() => setShowNavMenu(!showNavMenu)}
+                onClick={toggleMenu}
                 className="flex h-[28px] items-center justify-center pb-1 space-x-2 px-1 font-[1100] text-lg tracking-wide"
             >
                 <Image

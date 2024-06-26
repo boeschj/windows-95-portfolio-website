@@ -1,7 +1,7 @@
 import React from 'react';
-import JobListItem from './JobListItem';
 import { TabContentLayout } from '../../welcomeView/TabContentLayout';
 import { workHistory } from '../../../config/experience';
+import { JobListItem } from './JobListItem';
 
 export const Experience: React.FC = (): JSX.Element => {
     return (

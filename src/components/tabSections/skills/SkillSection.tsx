@@ -5,7 +5,7 @@ const IMAGE_SIZE_PX = 50;
 
 interface Skill {
     name: string;
-    src: StaticImageData;
+    src: string;
 }
 
 interface SkillSectionProps {

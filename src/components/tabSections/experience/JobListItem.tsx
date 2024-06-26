@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react';
+import Link from 'next/link';
 import { cn } from '../../../utils';
 
 interface JobListItemProps {
@@ -12,52 +12,52 @@ interface JobListItemProps {
     datesWorked: string;
 }
 
-const JobListItem: React.FC<JobListItemProps> = (
-    jobListItem: JobListItemProps
-): JSX.Element => {
-    return (
-        <div className="flex flex-col items-center justify-center space-y-5 grow py-5 w-full px-4 md:px-6 mx-auto">
+export const JobListItem = ({
+    imageUrl,
+    jobName,
+    jobTitle,
+    jobUrl,
+    jobDescription,
+    workSummary,
+    datesWorked,
+}: JobListItemProps): JSX.Element => {
+    const JobContent = () => (
+        <div className="flex flex-col justify-center items-center gap-4">
             <Image
-                src={jobListItem.imageUrl}
+                src={imageUrl}
                 alt="company logo"
-                width="75"
-                height="75"
-                className={cn(jobListItem.jobUrl && 'cursor-pointer')}
-                onClick={() =>
-                    jobListItem.jobUrl &&
-                    window.open(
-                        jobListItem.jobUrl,
-                        '_blank',
-                        'noopener,noreferrer'
-                    )
-                }
+                width={75}
+                height={75}
+                className={cn(jobUrl && 'cursor-pointer')}
             />
             <div
                 className={cn(
                     `text-3xl md:text-[50px] w-fit mx-auto font-extrabold leading-[50px]`,
-                    jobListItem.jobUrl &&
+                    jobUrl &&
                         'hover:text-windows-blue hover:underline cursor-pointer'
                 )}
-                onClick={() =>
-                    jobListItem.jobUrl &&
-                    window.open(
-                        jobListItem.jobUrl,
-                        '_blank',
-                        'noopener,noreferrer'
-                    )
-                }
             >
-                {jobListItem.jobName}
+                {jobName}
             </div>
-            <div className={`font-bold`}>{jobListItem.jobTitle}</div>
-            <div>{jobListItem.datesWorked}</div>
+        </div>
+    );
+
+    return (
+        <div className="flex flex-col items-center justify-center space-y-5 grow py-5 w-full px-4 md:px-6 mx-auto">
+            {jobUrl ? (
+                <Link href={jobUrl} target="_blank" rel="noopener noreferrer">
+                    <JobContent />
+                </Link>
+            ) : (
+                <JobContent />
+            )}
+            <div className="font-bold">{jobTitle}</div>
+            <div>{datesWorked}</div>
             <div>
-                <div className="text-center">{jobListItem.jobDescription}</div>
+                <div className="text-center">{jobDescription}</div>
                 <br />
-                <div className="text-center">{jobListItem.workSummary}</div>
+                <div className="text-center">{workSummary}</div>
             </div>
         </div>
     );
 };
-
-export default JobListItem;
