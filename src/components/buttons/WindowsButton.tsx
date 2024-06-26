@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
-import win95 from '../../styles/win_95.svg';
 import { cn } from '../../utils';
 
 interface WindowsButtonProps {
@@ -22,7 +21,12 @@ export const WindowsButton: React.FC<WindowsButtonProps> = ({
                 onClick={() => setShowNavMenu(!showNavMenu)}
                 className="flex h-[28px] items-center justify-center pb-1 space-x-2 px-1 font-[1100] text-lg tracking-wide"
             >
-                <Image src={win95} alt="Win95" height="28" width="28" />
+                <Image
+                    src={'/images/icons/win_95.svg'}
+                    alt="Win95"
+                    height="28"
+                    width="28"
+                />
                 <div>Start</div>
             </button>
         </div>

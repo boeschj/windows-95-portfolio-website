@@ -4,11 +4,11 @@
 
 @font-face {
     font-family: 'MS Sans Serif';
-    src: url('./fonts/MS-Sans-Serif.eot');
-    src: url('./fonts/MS-Sans-Serif.woff2') format('woff2'),
-        url('./fonts/MS-Sans-Serif.woff') format('woff'),
-        url('./fonts/MS-Sans-Serif.ttf') format('truetype'),
-        url('./fonts/MS-Sans-Serif.eot?#iefix') format('embedded-opentype');
+    src: url('/fonts/MS-Sans-Serif.eot');
+    src: url('/fonts/MS-Sans-Serif.woff2') format('woff2'),
+        url('/fonts/MS-Sans-Serif.woff') format('woff'),
+        url('/fonts/MS-Sans-Serif.ttf') format('truetype'),
+        url('/fonts/MS-Sans-Serif.eot?#iefix') format('embedded-opentype');
     font-weight: normal;
     font-style: normal;
 }
@@ -18,13 +18,11 @@
 }
 
 ::-moz-selection {
-    background-color: #0000a8;
-
-    color: #fff;
+    background-color: theme('colors.windows-blue');
+    color: theme('colors.white');
 }
 
 ::selection {
-    background-color: #0000a8;
-
-    color: #fff;
+    background-color: theme('colors.windows-blue');
+    color: theme('colors.white');
 }
