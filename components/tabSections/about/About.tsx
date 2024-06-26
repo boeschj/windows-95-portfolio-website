@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import React from 'react';
-import { aboutConfig } from '../../config/aboutMe';
-import devPhoto from '../../styles/assets/portfolioPhoto.png';
-import TabContentLayout from '../mainContainer/tabContentLayout';
+import { aboutConfig } from '../../../config/aboutMe';
+import devPhoto from '../../../styles/assets/portfolioPhoto.png';
+import { TabContentLayout } from '../../welcomeView/TabContentLayout';
 
-const About: React.FC = (): JSX.Element => {
+export const About: React.FC = (): JSX.Element => {
     return (
         <TabContentLayout className="h-auto flex flex-col overflow-auto grow">
-            <div className="flex flex-col items-center w-full h-screen">
+            <div className="flex flex-col items-center justify-center w-full h-screen">
                 <div className="flex-shrink-0 mt-4">
                     <Image
                         src={devPhoto}
@@ -28,5 +28,3 @@ const About: React.FC = (): JSX.Element => {
         </TabContentLayout>
     );
 };
-
-export default About;

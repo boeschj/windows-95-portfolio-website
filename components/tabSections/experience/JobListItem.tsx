@@ -1,9 +1,9 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import React from 'react';
-import { cn } from '../../utils';
+import { cn } from '../../../utils';
 
-interface IJobListItemProps {
-    imageUrl: any;
+interface JobListItemProps {
+    imageUrl: StaticImageData;
     jobName: string;
     jobTitle: string;
     jobUrl?: string;
@@ -12,8 +12,8 @@ interface IJobListItemProps {
     datesWorked: string;
 }
 
-const JobListItem: React.FC<IJobListItemProps> = (
-    jobListItem: IJobListItemProps
+const JobListItem: React.FC<JobListItemProps> = (
+    jobListItem: JobListItemProps
 ): JSX.Element => {
     return (
         <div className="flex flex-col space-y-5 grow py-5 w-full px-4 md:px-6 mx-auto">

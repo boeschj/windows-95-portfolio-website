@@ -1,9 +1,9 @@
-interface IJobListItemProps {
+interface JobListItemProps {
     skill: string;
     level: number;
 }
 
-const ProgressBar: React.FC<IJobListItemProps> = ({
+export const ProgressBar: React.FC<JobListItemProps> = ({
     skill,
     level,
 }): JSX.Element => {
@@ -24,5 +24,3 @@ const ProgressBar: React.FC<IJobListItemProps> = ({
         </div>
     );
 };
-
-export default ProgressBar;

@@ -5,7 +5,7 @@ interface NavListItemProps {
     onClick: () => void;
 }
 
-const NavListItem = React.forwardRef<HTMLLIElement, NavListItemProps>(
+export const NavListItem = React.forwardRef<HTMLLIElement, NavListItemProps>(
     ({ label, onClick }, ref) => (
         <li
             ref={ref}
@@ -18,5 +18,3 @@ const NavListItem = React.forwardRef<HTMLLIElement, NavListItemProps>(
 );
 
 NavListItem.displayName = 'ListItem';
-
-export default NavListItem;

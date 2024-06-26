@@ -1,19 +1,19 @@
 import { Dispatch, SetStateAction } from 'react';
 import { cn } from '../../utils';
 
-interface ITabProps {
+interface TabProps {
     tabSelected: number;
     setTabSelected: Dispatch<SetStateAction<number>>;
     text: string;
     tabNumber: number;
 }
 
-const Tab: React.FC<ITabProps> = ({
+export const Tab: React.FC<TabProps> = ({
     tabSelected,
     setTabSelected,
     text,
     tabNumber,
-}: ITabProps) => {
+}: TabProps) => {
     const isTabSelected = tabSelected === tabNumber;
     return (
         <div
@@ -35,5 +35,3 @@ const Tab: React.FC<ITabProps> = ({
         </div>
     );
 };
-
-export default Tab;

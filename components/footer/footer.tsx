@@ -1,16 +1,16 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import WindowsButton from '../buttons/windowsButton';
-import Clock from './clock';
+import { Clock } from './Clock';
+import { WindowsButton } from '../buttons/WindowsButton';
 
-interface IFooterProps {
+interface FooterProps {
     setShowNavMenu: Dispatch<SetStateAction<boolean>>;
     showNavMenu: boolean;
 }
 
-const Footer: React.FC<IFooterProps> = ({
+export const Footer: React.FC<FooterProps> = ({
     setShowNavMenu,
     showNavMenu,
-}: IFooterProps): JSX.Element => {
+}: FooterProps): JSX.Element => {
     return (
         <div className="mx-auto w-full bg-windows-gray content-center hidden md:grid bottom-0 fixed">
             <div className="win95-border-top">
@@ -19,7 +19,6 @@ const Footer: React.FC<IFooterProps> = ({
                         setShowNavMenu={setShowNavMenu}
                         showNavMenu={showNavMenu}
                     />
-
                     <div className="win95-border-sunken-light">
                         <Clock />
                     </div>
@@ -28,5 +27,3 @@ const Footer: React.FC<IFooterProps> = ({
         </div>
     );
 };
-
-export default Footer;

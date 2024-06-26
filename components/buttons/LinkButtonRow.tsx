@@ -1,12 +1,14 @@
 import { links } from '../../config/aboutMe';
 import { cn } from '../../utils';
-import LinkButton from './linkButton';
+import { LinkButton } from './LinkButton';
 
-interface LinkButtonProps {
+interface LinkButtonRowProps {
     className?: string;
 }
 
-const LinkButtons: React.FC<LinkButtonProps> = ({ className }): JSX.Element => {
+export const LinkButtonRow: React.FC<LinkButtonRowProps> = ({
+    className,
+}): JSX.Element => {
     return (
         <div
             className={cn(
@@ -19,5 +21,3 @@ const LinkButtons: React.FC<LinkButtonProps> = ({ className }): JSX.Element => {
         </div>
     );
 };
-
-export default LinkButtons;

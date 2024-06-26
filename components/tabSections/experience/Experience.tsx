@@ -1,9 +1,9 @@
 import React from 'react';
-import { workHistory } from '../../config/experience';
+import { workHistory } from '../../../config/experience';
 import JobListItem from './JobListItem';
-import TabContentLayout from '../mainContainer/tabContentLayout';
+import { TabContentLayout } from '../../welcomeView/TabContentLayout';
 
-const Experience: React.FC = (): JSX.Element => {
+export const Experience: React.FC = (): JSX.Element => {
     return (
         <TabContentLayout className="content-start text-xl md:text-2xl tracking-wide text-center justify-around flex gap-10 overflow-auto flex-wrap">
             <ul className="divide-y-2 divide-black divide-dashed h-screen">
@@ -24,5 +24,3 @@ const Experience: React.FC = (): JSX.Element => {
         </TabContentLayout>
     );
 };
-
-export default Experience;

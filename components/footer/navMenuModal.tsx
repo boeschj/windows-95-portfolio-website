@@ -1,21 +1,21 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
-import NavListItem from './navListItem';
 import { cn } from '../../utils';
+import { NavListItem } from './NavListItem';
 
-interface ILinks {
+interface Links {
     github: string;
     linkedIn: string;
     resume: string;
 }
 
-interface IFooterProps {
+interface FooterProps {
     setShowNavMenu: Dispatch<SetStateAction<boolean>>;
     showNavMenu: boolean;
     setTabSelected: Dispatch<SetStateAction<number>>;
-    links: ILinks;
+    links: Links;
 }
 
-const NavMenuModal: React.FC<IFooterProps> = ({
+export const NavMenuModal: React.FC<FooterProps> = ({
     setShowNavMenu,
     showNavMenu,
     setTabSelected,
@@ -100,5 +100,3 @@ const NavMenuModal: React.FC<IFooterProps> = ({
         </div>
     );
 };
-
-export default NavMenuModal;

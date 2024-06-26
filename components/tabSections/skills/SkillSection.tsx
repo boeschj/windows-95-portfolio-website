@@ -1,9 +1,5 @@
+import { cn } from '../../../utils';
 import Image, { StaticImageData } from 'next/image';
-import React from 'react';
-import { languages, libraries } from '../../config/skills';
-import SkillSummary from './skillSummary';
-import TabContentLayout from '../mainContainer/tabContentLayout';
-import { cn } from '../../utils';
 
 const IMAGE_SIZE_PX = 50;
 
@@ -18,7 +14,11 @@ interface SkillSectionProps {
     type: 'lang' | 'tool';
 }
 
-const SkillSection: React.FC<SkillSectionProps> = ({ title, skills, type }) => {
+export const SkillSection: React.FC<SkillSectionProps> = ({
+    title,
+    skills,
+    type,
+}) => {
     const isTool = type === 'tool';
     return (
         <div className={cn(isTool && 'mt-10')}>
@@ -50,25 +50,3 @@ const SkillSection: React.FC<SkillSectionProps> = ({ title, skills, type }) => {
         </div>
     );
 };
-
-const Skills: React.FC = (): JSX.Element => {
-    return (
-        <TabContentLayout className="bg-windows-gray flex grow overflow-auto">
-            <div className="flex flex-col h-screen">
-                <SkillSummary />
-                <SkillSection
-                    title="Languages/Frameworks"
-                    skills={languages}
-                    type="lang"
-                />
-                <SkillSection
-                    title="Tools/Libraries"
-                    skills={libraries}
-                    type="tool"
-                />
-            </div>
-        </TabContentLayout>
-    );
-};
-
-export default Skills;

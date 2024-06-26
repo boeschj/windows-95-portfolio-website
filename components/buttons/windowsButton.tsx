@@ -3,12 +3,12 @@ import { Dispatch, SetStateAction } from 'react';
 import win95 from '../../styles/win_95.svg';
 import { cn } from '../../utils';
 
-interface IWindowsButtonProps {
+interface WindowsButtonProps {
     setShowNavMenu: Dispatch<SetStateAction<boolean>>;
     showNavMenu: boolean;
 }
 
-const WindowsButton: React.FC<IWindowsButtonProps> = ({
+export const WindowsButton: React.FC<WindowsButtonProps> = ({
     setShowNavMenu,
     showNavMenu,
 }): JSX.Element => {
@@ -28,5 +28,3 @@ const WindowsButton: React.FC<IWindowsButtonProps> = ({
         </div>
     );
 };
-
-export default WindowsButton;

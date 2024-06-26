@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
-const Clock: React.FC = (): JSX.Element => {
-    const [dateState, setDateState] = useState(new Date());
-    useEffect(() => {
-        setInterval(() => setDateState(new Date()), 1000);
+export const Clock: React.FC = () => {
+    const [time, setTime] = useState<string>('');
+
+    const updateTime = useCallback(() => {
+        const now = new Date();
+        const formattedTime = now.toLocaleString('en-US', {
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true,
+        });
+        setTime(formattedTime);
     }, []);
 
-    const formattedDateString = dateState.toLocaleString('en-US', {
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: true,
-    });
+    useEffect(() => {
+        updateTime();
+        const intervalId = setInterval(updateTime, 1000);
+
+        return () => clearInterval(intervalId);
+    }, [updateTime]);
 
     return (
-        <div
-            suppressHydrationWarning
-            className="h-8 w-28 text-center items-center text-md grid content-center px-3"
-        >
-            {formattedDateString}
+        <div className="h-8 w-28 text-center items-center text-md grid content-center px-3">
+            {time}
         </div>
     );
 };
-
-export default Clock;

@@ -5,7 +5,7 @@ interface TabContentLayoutProps {
     className?: string;
 }
 
-const TabContentLayout: React.FC<TabContentLayoutProps> = ({
+export const TabContentLayout: React.FC<TabContentLayoutProps> = ({
     children,
     className,
 }) => {
@@ -22,5 +22,3 @@ const TabContentLayout: React.FC<TabContentLayoutProps> = ({
         </div>
     );
 };
-
-export default TabContentLayout;

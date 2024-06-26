@@ -1,8 +1,8 @@
 import React from 'react';
-import { skills } from '../../config/skills';
-import ProgressBar from './progressBar';
+import { skills } from '../../../config/skills';
+import { ProgressBar } from './ProgressBar';
 
-const SkillSummary: React.FC = (): JSX.Element => {
+export const SkillSummary: React.FC = (): JSX.Element => {
     return (
         <div className="flex flex-col-reverse lg:flex-row justify-around mb-10">
             <div className="lg:w-1/2 content-center h-full mx-auto">
@@ -28,5 +28,3 @@ const SkillSummary: React.FC = (): JSX.Element => {
         </div>
     );
 };
-
-export default SkillSummary;
