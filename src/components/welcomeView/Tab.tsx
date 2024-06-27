@@ -25,7 +25,9 @@ export const Tab: React.FC<TabProps> = ({ text, tabNumber }: TabProps) => {
                     isTabSelected &&
                         'after:content-[""] after:absolute after:left-[1px] after:right-0 after:bottom-[-3px] after:w-[98px] after:border-x-[1px] after:border-white after:h-[3px] after:bg-windows-gray after:z-30'
                 )}
-                onClick={() => setTabSelected(tabNumber)}
+                onClick={() => {
+                    setTabSelected(tabNumber);
+                }}
             >
                 {text}
             </button>

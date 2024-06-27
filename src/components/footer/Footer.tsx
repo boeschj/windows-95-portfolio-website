@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { Clock } from './Clock';
 import { WindowsButton } from '../buttons/WindowsButton';
 

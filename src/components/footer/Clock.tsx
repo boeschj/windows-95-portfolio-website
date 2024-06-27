@@ -19,7 +19,9 @@ export const Clock: React.FC = () => {
         updateTime();
         const intervalId = setInterval(updateTime, 1000);
 
-        return () => clearInterval(intervalId);
+        return () => {
+            clearInterval(intervalId);
+        };
     }, [updateTime]);
 
     return (
