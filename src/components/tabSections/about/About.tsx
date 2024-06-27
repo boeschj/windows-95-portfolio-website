@@ -6,14 +6,14 @@ import { aboutConfig } from '../../../config/aboutMe';
 export const About: React.FC = (): JSX.Element => {
     return (
         <TabContentLayout className="flex h-auto grow flex-col overflow-auto">
-            <div className="flex h-screen w-full flex-col items-center justify-center">
-                <div className="m-4 flex-shrink-0">
+            <div className="flex md:h-screen w-full flex-col items-center justify-center">
+                <div className="m-4">
                     <Image
                         src={'/images/portfolioPhoto.png'}
                         alt="It's me!"
                         width={300}
                         height={300}
-                        className="h-auto max-h-[300px] w-auto max-w-full object-contain"
+                        className=" size-[150px] xs:size-[200px] md:size-[300px] object-contain"
                     />
                 </div>
                 <div className="flex w-full flex-col justify-center p-4 md:px-6">

@@ -28,7 +28,10 @@ export const JobListItem = ({
                 alt="company logo"
                 width={75}
                 height={75}
-                className={cn(jobUrl && 'cursor-pointer')}
+                className={cn(
+                    'w-14 h-auto md:w-[75px]',
+                    jobUrl && 'cursor-pointer'
+                )}
             />
             <div
                 className={cn(

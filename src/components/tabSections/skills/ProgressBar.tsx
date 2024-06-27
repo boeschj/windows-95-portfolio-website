@@ -12,8 +12,8 @@ export const ProgressBar: React.FC<JobListItemProps> = ({
     ));
 
     return (
-        <div className="px-5">
-            <div className="py-1 text-center text-2xl tracking-wide">
+        <div className="md:px-5">
+            <div className="py-1 text-center text-lg sm:text-xl md:text-2xl tracking-wide">
                 {skill}
             </div>
             <div className="win95-border-sunken mx-auto w-[248px]">

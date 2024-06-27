@@ -23,7 +23,7 @@ export const Tab: React.FC<TabProps> = ({ text, tabNumber }: TabProps) => {
                 className={cn(
                     'h-[30px] w-full bg-windows-gray',
                     isTabSelected &&
-                        'after:absolute after:bottom-[-3px] after:left-[1px] after:right-0 after:z-30 after:h-[3px] after:w-[98px] after:border-x-[1px] after:border-white after:bg-windows-gray after:content-[""]'
+                        'after:absolute after:bottom-[-4px] after:left-[1px] after:right-0 after:z-30 after:h-[4px] after:w-[98px] after:border-x-[1px] after:border-white after:bg-windows-gray after:content-[""]'
                 )}
                 onClick={() => {
                     setTabSelected(tabNumber);
