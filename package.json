@@ -16,9 +16,8 @@
         "precommit": "npm run lint && npm run format && npm run typecheck"
     },
     "engines": {
-        "node": ">=21.4.0"
+        "node": ">=18.0.0"
     },
-    "packageManager": "npm@10.8.1",
     "dependencies": {
         "clsx": "^2.1.1",
         "jotai": "^2.8.3",
