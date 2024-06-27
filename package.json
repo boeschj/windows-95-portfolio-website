@@ -1,16 +1,19 @@
 {
-    "name": "portfolio",
+    "name": "jordans-portfolio-site",
     "version": "2.0.0",
     "type": "module",
     "private": true,
     "scripts": {
-        "dev": "next dev",
+        "dev": "echo \"- Local Network: http://\"$(ifconfig $(route -n get default | awk '/interface: / {print $2}') | awk '/inet / {print $2}')\":[INSERT_PORT_NUMBER_HERE]\" & next dev",
         "build": "next build",
         "start": "next start",
         "run": " next build && next start",
-        "lint": "next lint",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
         "format": "prettier --check --ignore-path .gitignore .",
-        "format:fix": "prettier --write --ignore-path .gitignore ."
+        "format:fix": "prettier --write --ignore-path .gitignore .",
+        "typecheck": "tsc --noEmit",
+        "precommit": "npm run lint:eslint && npm run format && npm run typecheck"
     },
     "engines": {
         "node": ">=18.0.0"
