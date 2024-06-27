@@ -29,7 +29,7 @@ export const JobListItem = ({
                 width={75}
                 height={75}
                 className={cn(
-                    'w-14 h-auto md:w-[75px]',
+                    'h-auto w-14 md:w-[75px]',
                     jobUrl && 'cursor-pointer'
                 )}
             />

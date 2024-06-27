@@ -8,7 +8,7 @@ export default function Page() {
         <div className="flex min-h-screen w-full flex-col items-center justify-center bg-windows-bg">
             <div
                 className={
-                    'flex max-w-screen-2xl grow h-dvh md:h-36 flex-col items-center justify-center md:p-12'
+                    'flex h-dvh max-w-screen-2xl grow flex-col items-center justify-center md:h-36 md:p-12'
                 }
             >
                 <WelcomeView />
