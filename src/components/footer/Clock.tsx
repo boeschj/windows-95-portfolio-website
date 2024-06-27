@@ -25,7 +25,7 @@ export const Clock: React.FC = () => {
     }, [updateTime]);
 
     return (
-        <div className="h-8 w-28 text-center items-center text-md grid content-center px-3">
+        <div className="text-md grid h-8 w-28 content-center items-center px-3 text-center">
             {time}
         </div>
     );

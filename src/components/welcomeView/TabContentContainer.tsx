@@ -11,17 +11,17 @@ export const TabContentContainer: React.FC = () => {
     const ActiveComponent = TAB_CONFIG[tabSelected].component;
 
     return (
-        <div className="flex flex-col h-[calc(100%-90px)]">
+        <div className="flex h-[calc(100%-90px)] flex-col">
             <div className="flex flex-row">
                 {TAB_CONFIG.map((tab, index) => (
                     <Tab key={index} text={tab.text} tabNumber={index} />
                 ))}
             </div>
-            <div className="win95-border-raised p-4 md:p-6 flex flex-col h-full">
-                <h1 className="text-3xl md:text-[50px] h-10 font-extrabold w-full text-center mb-2 md:mb-5">
+            <div className="win95-border-raised flex h-full flex-col p-4 md:p-6">
+                <h1 className="mb-2 h-10 w-full text-center text-3xl font-extrabold md:mb-5 md:text-[50px]">
                     {TAB_CONFIG[tabSelected].title}
                 </h1>
-                <div className="win95-border-sunken flex flex-col h-[calc(100%-40px)] md:h-[calc(100%-60px)]">
+                <div className="win95-border-sunken flex h-[calc(100%-40px)] flex-col md:h-[calc(100%-60px)]">
                     <ActiveComponent />
                 </div>
             </div>

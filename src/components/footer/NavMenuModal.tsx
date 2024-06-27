@@ -25,12 +25,12 @@ export const NavMenuModal: React.FC<FooterProps> = ({ links }) => {
         <div
             id="nav-menu"
             className={cn(
-                `divide-y-2 divide-windows-gray bg-windows-gray flex flex-col w-72 h-fit absolute bottom-11 left-1`,
+                `absolute bottom-11 left-1 flex h-fit w-72 flex-col divide-y-2 divide-windows-gray bg-windows-gray`,
                 navMenuOpen ? `display-flex` : `hidden`
             )}
         >
             <div className="win95-border-raised">
-                <ul className="divide-y-2 divide-windows-gray bg-windows-gray h-fit">
+                <ul className="h-fit divide-y-2 divide-windows-gray bg-windows-gray">
                     <NavListItem
                         label="About Me"
                         onClick={() => {

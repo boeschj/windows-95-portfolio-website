@@ -11,7 +11,7 @@ export const NavListItem = React.forwardRef<HTMLLIElement, NavListItemProps>(
         <li
             ref={ref}
             onClick={onClick}
-            className="hover:bg-windows-blue hover:text-white h-10 text-xl flex w-full justify-center py-1 cursor-pointer"
+            className="flex h-10 w-full cursor-pointer justify-center py-1 text-xl hover:bg-windows-blue hover:text-white"
         >
             {label}
         </li>

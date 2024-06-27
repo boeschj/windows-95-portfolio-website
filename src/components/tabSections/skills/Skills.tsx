@@ -6,8 +6,8 @@ import { languages, libraries } from '../../../config/skills';
 
 export const Skills: React.FC = (): JSX.Element => {
     return (
-        <TabContentLayout className="bg-windows-gray flex grow overflow-auto">
-            <div className="flex flex-col h-screen">
+        <TabContentLayout className="flex grow overflow-auto bg-windows-gray">
+            <div className="flex h-screen flex-col">
                 <SkillSummary />
                 <SkillSection
                     title="Languages/Frameworks"

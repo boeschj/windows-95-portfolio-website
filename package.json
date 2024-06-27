@@ -13,7 +13,7 @@
         "format": "prettier --check --ignore-path .gitignore .",
         "format:fix": "prettier --write --ignore-path .gitignore .",
         "typecheck": "tsc --noEmit",
-        "precommit": "npm run lint:eslint && npm run format && npm run typecheck"
+        "precommit": "npm run lint && npm run format && npm run typecheck"
     },
     "engines": {
         "node": ">=18.0.0"

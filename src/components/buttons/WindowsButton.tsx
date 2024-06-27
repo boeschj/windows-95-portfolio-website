@@ -17,7 +17,7 @@ export const WindowsButton: React.FC = (): JSX.Element => {
         >
             <button
                 onClick={toggleMenu}
-                className="flex h-[28px] items-center justify-center pb-1 space-x-2 px-1 font-[1100] text-lg tracking-wide"
+                className="flex h-[28px] items-center justify-center space-x-2 px-1 pb-1 text-lg font-[1100] tracking-wide"
             >
                 <Image
                     src={'/images/icons/win_95.svg'}

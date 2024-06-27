@@ -15,15 +15,15 @@ export const Tab: React.FC<TabProps> = ({ text, tabNumber }: TabProps) => {
     return (
         <div
             className={cn(
-                ` w-[100px] win95-border-tab rounded-t relative `,
+                `win95-border-tab relative w-[100px] rounded-t`,
                 isTabSelected ? 'h-[38px]' : 'mt-[3px] h-[35px]'
             )}
         >
             <button
                 className={cn(
-                    'bg-windows-gray h-[30px] w-full',
+                    'h-[30px] w-full bg-windows-gray',
                     isTabSelected &&
-                        'after:content-[""] after:absolute after:left-[1px] after:right-0 after:bottom-[-3px] after:w-[98px] after:border-x-[1px] after:border-white after:h-[3px] after:bg-windows-gray after:z-30'
+                        'after:absolute after:bottom-[-3px] after:left-[1px] after:right-0 after:z-30 after:h-[3px] after:w-[98px] after:border-x-[1px] after:border-white after:bg-windows-gray after:content-[""]'
                 )}
                 onClick={() => {
                     setTabSelected(tabNumber);

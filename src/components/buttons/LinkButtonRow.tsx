@@ -12,7 +12,7 @@ export const LinkButtonRow: React.FC<LinkButtonRowProps> = ({
     return (
         <div
             className={cn(
-                `flex flex-row space-x-5 items-end justify-end pb-2 md:p-0`,
+                `flex flex-row items-end justify-end space-x-5 pb-2 md:p-0`,
                 className
             )}
         >

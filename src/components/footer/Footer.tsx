@@ -4,9 +4,9 @@ import { WindowsButton } from '../buttons/WindowsButton';
 
 export const Footer: React.FC = (): JSX.Element => {
     return (
-        <div className="mx-auto w-full bg-windows-gray content-center hidden md:grid bottom-0 fixed">
+        <div className="fixed bottom-0 mx-auto hidden w-full content-center bg-windows-gray md:grid">
             <div className="win95-border-top">
-                <div className="h-[35px] flex items-center justify-between">
+                <div className="flex h-[35px] items-center justify-between">
                     <WindowsButton />
                     <div className="win95-border-sunken-light">
                         <Clock />

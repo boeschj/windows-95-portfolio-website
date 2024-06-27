@@ -16,7 +16,7 @@ export const LinkButton = ({
             rel="noopener noreferrer"
             passHref
         >
-            <button className="bg-windows-gray h-8 win95-border-raised w-36">
+            <button className="win95-border-raised h-8 w-36 bg-windows-gray">
                 {buttonTitle}
             </button>
         </Link>

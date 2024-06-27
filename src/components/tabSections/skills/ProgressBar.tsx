@@ -8,16 +8,16 @@ export const ProgressBar: React.FC<JobListItemProps> = ({
     level,
 }): JSX.Element => {
     const progressBar = Array.from({ length: level }).map((_, index) => (
-        <div key={index} className="bg-windows-blue w-5 h-8" />
+        <div key={index} className="h-8 w-5 bg-windows-blue" />
     ));
 
     return (
         <div className="px-5">
-            <div className="py-1 tracking-wide text-center text-2xl">
+            <div className="py-1 text-center text-2xl tracking-wide">
                 {skill}
             </div>
-            <div className="mx-auto w-[248px] win95-border-sunken">
-                <div className="flex flex-row space-x-1 p-[2px] w-[248px] mx-auto">
+            <div className="win95-border-sunken mx-auto w-[248px]">
+                <div className="mx-auto flex w-[248px] flex-row space-x-1 p-[2px]">
                     {progressBar}
                 </div>
             </div>

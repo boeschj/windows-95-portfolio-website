@@ -22,7 +22,7 @@ export const JobListItem = ({
     datesWorked,
 }: JobListItemProps): JSX.Element => {
     const JobContent = () => (
-        <div className="flex flex-col justify-center items-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-4">
             <Image
                 src={imageUrl}
                 alt="company logo"
@@ -32,9 +32,9 @@ export const JobListItem = ({
             />
             <div
                 className={cn(
-                    `text-3xl md:text-[50px] w-fit mx-auto font-extrabold leading-[50px]`,
+                    `mx-auto w-fit text-3xl font-extrabold leading-[50px] md:text-[50px]`,
                     jobUrl &&
-                        'hover:text-windows-blue hover:underline cursor-pointer'
+                        'cursor-pointer hover:text-windows-blue hover:underline'
                 )}
             >
                 {jobName}
@@ -43,7 +43,7 @@ export const JobListItem = ({
     );
 
     return (
-        <div className="flex flex-col items-center justify-center space-y-5 grow py-5 w-full px-4 md:px-6 mx-auto">
+        <div className="mx-auto flex w-full grow flex-col items-center justify-center space-y-5 px-4 py-5 md:px-6">
             {jobUrl ? (
                 <Link href={jobUrl} target="_blank" rel="noopener noreferrer">
                     <JobContent />
