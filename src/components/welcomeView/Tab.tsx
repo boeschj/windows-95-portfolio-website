@@ -3,15 +3,31 @@
 import { cn } from '../../utils';
 import { useAtom } from 'jotai';
 import { tabSelectedAtom } from '../../store';
+import { TabKey } from '../../types/application.types';
 
 interface TabProps {
     text: string;
-    tabNumber: number;
+    tabNumber: TabKey;
 }
 
 export const Tab: React.FC<TabProps> = ({ text, tabNumber }: TabProps) => {
     const [tabSelected, setTabSelected] = useAtom(tabSelectedAtom);
     const isTabSelected = tabSelected === tabNumber;
+
+    const activeTabBottomBorderCover = `
+    after:absolute 
+    after:bottom-[-4px] 
+    after:left-[1px] 
+    after:right-0 
+    after:z-30 
+    after:h-[4px] 
+    after:w-[98px] 
+    after:border-x-[1px] 
+    after:border-white 
+    after:bg-windows-gray 
+    after:content-[""]
+    `;
+
     return (
         <div
             className={cn(
@@ -22,8 +38,7 @@ export const Tab: React.FC<TabProps> = ({ text, tabNumber }: TabProps) => {
             <button
                 className={cn(
                     'h-[30px] w-full bg-windows-gray',
-                    isTabSelected &&
-                        'after:absolute after:bottom-[-4px] after:left-[1px] after:right-0 after:z-30 after:h-[4px] after:w-[98px] after:border-x-[1px] after:border-white after:bg-windows-gray after:content-[""]'
+                    isTabSelected && activeTabBottomBorderCover
                 )}
                 onClick={() => {
                     setTabSelected(tabNumber);

@@ -14,7 +14,7 @@ export const TabContentContainer: React.FC = () => {
         <div className="flex h-[calc(100%-90px)] flex-col">
             <div className="flex flex-row">
                 {TAB_CONFIG.map((tab, index) => (
-                    <Tab key={index} text={tab.text} tabNumber={index} />
+                    <Tab key={index} text={tab.label} tabNumber={index} />
                 ))}
             </div>
             <div className="win95-border-raised flex h-full flex-col p-4 md:p-6">

@@ -1,33 +1,32 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '../../../utils';
+import { WorkHistoryItem } from '../../../types/configTypes';
+
+const IMAGE_SIZE_PX = 75;
 
 interface JobListItemProps {
-    imageUrl: string;
-    jobName: string;
-    jobTitle: string;
-    jobUrl?: string;
-    jobDescription: string;
-    workSummary: string;
-    datesWorked: string;
+    job: WorkHistoryItem;
 }
 
-export const JobListItem = ({
-    imageUrl,
-    jobName,
-    jobTitle,
-    jobUrl,
-    jobDescription,
-    workSummary,
-    datesWorked,
-}: JobListItemProps): JSX.Element => {
+export const JobListItem = ({ job }: JobListItemProps): JSX.Element => {
+    const {
+        imageUrl,
+        jobName,
+        jobTitle,
+        jobUrl,
+        jobDescription,
+        workSummary,
+        datesWorked,
+    } = job;
+
     const JobContent = () => (
         <div className="flex flex-col items-center justify-center gap-4">
             <Image
                 src={imageUrl}
                 alt="company logo"
-                width={75}
-                height={75}
+                width={IMAGE_SIZE_PX}
+                height={IMAGE_SIZE_PX}
                 className={cn(
                     'h-auto w-14 md:w-[75px]',
                     jobUrl && 'cursor-pointer'

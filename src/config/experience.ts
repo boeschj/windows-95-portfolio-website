@@ -1,6 +1,11 @@
-export const workHistory = [
+import { IMAGE_PATH } from '../constants/application.constants';
+import { WorkHistoryItem } from '../types/configTypes';
+
+const BASE_IMAGE_URL = `${IMAGE_PATH}/jobs`;
+
+export const workHistory: WorkHistoryItem[] = [
     {
-        imageUrl: '/images/jobs/fire.png',
+        imageUrl: `${BASE_IMAGE_URL}/fire.png`,
         jobName: 'Fire',
         jobTitle: 'Full Stack Engineer',
         jobUrl: 'https://www.joinfire.xyz/',
@@ -11,7 +16,7 @@ export const workHistory = [
         datesWorked: 'November 2022 - Present',
     },
     {
-        imageUrl: '/images/jobs/ensemble.png',
+        imageUrl: `${BASE_IMAGE_URL}/ensemble.png`,
         jobName: 'Ensemble',
         jobTitle: 'Lead Software Engineer',
         jobUrl: 'https://www.ensemble.works/',
@@ -22,7 +27,7 @@ export const workHistory = [
         datesWorked: 'July 2022 - November 2022',
     },
     {
-        imageUrl: '/images/jobs/bitverify.png',
+        imageUrl: `${BASE_IMAGE_URL}/bitverify.png`,
         jobName: 'BitVerify',
         jobUrl: 'https://www.bitverify.net/',
         jobTitle: 'Founder',
@@ -33,7 +38,7 @@ export const workHistory = [
         datesWorked: 'August 2021 - September 2022',
     },
     {
-        imageUrl: '/images/jobs/tapp.png',
+        imageUrl: `${BASE_IMAGE_URL}/tapp.png`,
         jobName: 'tapp',
         jobUrl: 'https://vizn-stats.web.app/',
         jobTitle: 'Full-Stack Software Engineer',
@@ -44,7 +49,7 @@ export const workHistory = [
         datesWorked: 'January 2021 - May 2022',
     },
     {
-        imageUrl: '/images/jobs/infovisa.jpg',
+        imageUrl: `${BASE_IMAGE_URL}/infovisa.jpg`,
         jobName: 'Infovisa',
         jobUrl: 'https://www.infovisa.com/',
         jobTitle: 'Software Engineer Intern',
@@ -54,7 +59,7 @@ export const workHistory = [
         datesWorked: 'May 2021 - August 2021',
     },
     {
-        imageUrl: '/images/jobs/sandhills.jpg',
+        imageUrl: `${BASE_IMAGE_URL}/sandhills.jpg`,
         jobName: 'Sandhills Global',
         jobUrl: 'https://point2ship.com/',
         jobTitle: 'Software Engineer Intern',

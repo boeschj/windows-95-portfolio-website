@@ -1,6 +1,8 @@
 'use client';
 import React, { useEffect, useState, useCallback } from 'react';
 
+const ONE_SECOND = 1000;
+
 export const Clock: React.FC = () => {
     const [time, setTime] = useState<string>('');
 
@@ -17,7 +19,7 @@ export const Clock: React.FC = () => {
 
     useEffect(() => {
         updateTime();
-        const intervalId = setInterval(updateTime, 1000);
+        const intervalId = setInterval(updateTime, ONE_SECOND);
 
         return () => {
             clearInterval(intervalId);

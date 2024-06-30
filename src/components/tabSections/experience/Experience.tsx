@@ -9,15 +9,7 @@ export const Experience: React.FC = (): JSX.Element => {
             <ul className="h-screen divide-y-2 divide-dashed divide-black">
                 {workHistory.map((job, index) => (
                     <li key={index}>
-                        <JobListItem
-                            imageUrl={job.imageUrl}
-                            jobName={job.jobName}
-                            jobTitle={job.jobTitle}
-                            jobUrl={job.jobUrl}
-                            jobDescription={job.jobDescription}
-                            workSummary={job.workSummary}
-                            datesWorked={job.datesWorked}
-                        />
+                        <JobListItem job={job} />
                     </li>
                 ))}
             </ul>
