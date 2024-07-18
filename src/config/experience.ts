@@ -32,10 +32,10 @@ export const workHistory: WorkHistoryItem[] = [
         jobUrl: 'https://www.bitverify.net/',
         jobTitle: 'Founder',
         jobDescription:
-            "I raised a $100,000 pre-seed fundraising round to found BitVerify, which provided live risk assessment and monitoring solutions to banks looking to integrate digital assets into their service offering, but couldn't build the infrastructure in-house",
+            "I started BitVerify as a side project to create an easy-to-use crypto trading platform for consumers. After a series of pivots, I raised a $100,000 pre-seed fundraising round through the NMotion Accelerator Studio program in 2021 to build a live risk assessment and monitoring solution for banks looking to integrate digital assets into their service offering, but couldn't build the infrastructure in-house.",
         workSummary:
             'While at BitVerify I experienced every phase of building and managing a product. I led a team and established the company vision, product roadmap, conducted customer interviews, and worked with top state and federal regulators to build a safe and compliant platform suited to customer needs. On the tech side I led the core development of the platform and built Figma wireframes, a React web application and GraphQL API to efficiently aggregate, process, and serve data to end-users, enabling underwriting teams to account for and manage digital assets while issuing loans.',
-        datesWorked: 'August 2021 - September 2022',
+        datesWorked: 'April 2020 - September 2022',
     },
     {
         imageUrl: `${BASE_IMAGE_URL}/tapp.png`,
@@ -43,9 +43,11 @@ export const workHistory: WorkHistoryItem[] = [
         jobUrl: 'https://vizn-stats.web.app/',
         jobTitle: 'Full-Stack Software Engineer',
         jobDescription:
-            'tapp modernizes practice charting for baseball coaches.',
-        workSummary:
-            'While at tapp I contributed to many core features of the application, including payment integration, roster importing, automated onboarding and landing page design/analytics.',
+            "Tapp Sports is an athletic evaluation tool that helps coaches input and analyze player performance data. Using Tapp's customizable evaluation templates, coaches can save hours each day spent aggregating, formatting, and comprehending data.",
+        workSummary: `I joined the Tapp team in January of 2021 in a part-time capacity, later taking a more significant role in development as part of an Honors Design Studio program in college. 
+            My focus at Tapp was helping the team scale the product to onboard new teams at scale. The existing onboarding process was very hands-on, and required considerable attention from the team which could instead be spent developing the product. 
+            To optimize the process of scaling the product, I implemented several key feature including Stripe payment integration, automatic roster importing, account creation and landing page design/analytics, where I improved initial render time by 45% 
+            and established product analytics to track conversions from the landing page. My contributions also fully automated the process of onboarding a new team, which allowed the company to easily scale.`,
         datesWorked: 'January 2021 - May 2022',
     },
     {
