@@ -13,7 +13,7 @@ export interface WorkHistoryItem {
     imageUrl: string;
     jobName: string;
     jobTitle: string;
-    jobUrl: string;
+    jobUrl?: string;
     jobDescription: string;
     workSummary: string;
     datesWorked: string;
@@ -26,8 +26,7 @@ export interface TabItem {
     component: React.FC;
 }
 
-//I'll admit that this isn't the most elegant solution (😅), but I found it more preferable than this madness (or something similar): https://dev.to/tylim88/typescript-numeric-range-type-15a5
-type SkillLevelRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+export type SkillLevelRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 export interface SkillLevel {
     skill: string;

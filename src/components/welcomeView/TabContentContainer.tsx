@@ -7,13 +7,16 @@ import { tabSelectedAtom } from '../../store';
 import { TAB_CONFIG } from '../../config/main';
 import { cn } from '../../utils';
 
+import type { TabKey } from '../../types/application.types';
 import type { TabItem } from '../../types/configTypes';
 
 export const TabContentContainer: React.FC = () => {
     const [tabSelected, setTabSelected] = useAtom(tabSelectedAtom);
 
-    const handleValueChange = (value: number) => {
-        setTabSelected(value);
+    const handleValueChange = (value: unknown) => {
+        if (isValidTabKey(value)) {
+            setTabSelected(value);
+        }
     };
 
     return (
@@ -68,6 +71,12 @@ const ACTIVE_TAB_BOTTOM_BORDER_COVER = `
 interface Win95TabProps {
     tab: TabItem;
     isActive: boolean;
+}
+
+const VALID_TAB_KEYS = new Set<number>(TAB_CONFIG.map((tab) => tab.tabKey));
+
+function isValidTabKey(value: unknown): value is TabKey {
+    return typeof value === 'number' && VALID_TAB_KEYS.has(value);
 }
 
 function Win95Tab({ tab, isActive }: Win95TabProps) {

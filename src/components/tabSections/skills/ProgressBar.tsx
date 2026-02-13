@@ -1,9 +1,11 @@
-interface JobListItemProps {
+import type { SkillLevelRange } from '../../../types/configTypes';
+
+interface ProgressBarProps {
     skill: string;
-    level: number;
+    level: SkillLevelRange;
 }
 
-export const ProgressBar: React.FC<JobListItemProps> = ({
+export const ProgressBar: React.FC<ProgressBarProps> = ({
     skill,
     level,
 }): JSX.Element => {

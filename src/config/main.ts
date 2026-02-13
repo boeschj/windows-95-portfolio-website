@@ -1,9 +1,9 @@
 import { About } from '../components/tabSections/about/About';
 import { Experience } from '../components/tabSections/experience/Experience';
 import { Skills } from '../components/tabSections/skills/Skills';
-import { TabItem } from '../types/configTypes';
+import type { TabItem } from '../types/configTypes';
 
-export const TAB_CONFIG: TabItem[] = [
+export const TAB_CONFIG = [
     {
         tabKey: 0,
         title: "Hi, I'm Jordan 👋",
@@ -12,4 +12,4 @@ export const TAB_CONFIG: TabItem[] = [
     },
     { tabKey: 1, title: 'My Work', label: 'Experience', component: Experience },
     { tabKey: 2, title: 'My Skills', label: 'Skills', component: Skills },
-];
+] as const satisfies readonly TabItem[];

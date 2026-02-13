@@ -15,7 +15,9 @@ export const useNavMenu = () => {
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            const target = event.target as HTMLElement;
+            const target = event.target;
+            if (!(target instanceof HTMLElement)) return;
+
             if (
                 !target.closest('#nav-menu') &&
                 !target.closest('#windows-button')

@@ -1,6 +1,12 @@
 import { Provider } from 'jotai';
 import '../styles/globals.css';
-import Head from 'next/head';
+
+import type { Viewport } from 'next';
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+};
 
 export function generateMetadata() {
     const title = "Jordan's Portfolio Site";
@@ -42,12 +48,6 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <Head>
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0"
-                />
-            </Head>
             <body>
                 <Provider>{children}</Provider>
             </body>

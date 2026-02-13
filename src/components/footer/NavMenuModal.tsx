@@ -32,7 +32,7 @@ export const NavMenuModal: React.FC<FooterProps> = ({ links }) => {
             id="nav-menu"
             className={cn(
                 `absolute bottom-11 left-1 flex h-fit w-72 flex-col divide-y-2 divide-windows-gray bg-windows-gray`,
-                navMenuOpen ? `display-flex` : `hidden`
+                navMenuOpen ? 'flex' : 'hidden'
             )}
         >
             <div className="win95-border-raised">
