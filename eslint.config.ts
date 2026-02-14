@@ -1,29 +1,35 @@
-// @ts-check
-
 import eslint from '@eslint/js';
 import nextPlugin from '@next/eslint-plugin-next';
+import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
-import jsxAccessibilityPlugin from 'eslint-plugin-jsx-a11y';
+import prettierConfig from 'eslint-config-prettier';
 import tseslint from 'typescript-eslint';
-import tailwindPlugin from 'eslint-plugin-tailwindcss';
 
+// eslint-disable-next-line @typescript-eslint/no-deprecated -- tseslint.config() still works; will migrate to defineConfig() when ecosystem stabilizes
 export default tseslint.config(
     eslint.configs.recommended,
     ...tseslint.configs.strictTypeChecked,
     ...tseslint.configs.stylisticTypeChecked,
-    ...tseslint.configs.recommendedTypeChecked,
+    reactPlugin.configs.flat.recommended,
+    reactPlugin.configs.flat['jsx-runtime'],
+    reactHooksPlugin.configs.flat['recommended-latest'],
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access -- jsx-a11y lacks flat config types
+    jsxA11yPlugin.flatConfigs.recommended,
+    nextPlugin.configs.recommended,
+
+    {
+        settings: {
+            react: {
+                version: 'detect',
+            },
+        },
+    },
 
     {
         files: ['**/*.{ts,tsx}'],
-        plugins: {
-            nextPlugin,
-            reactPlugin,
-            reactHooksPlugin,
-            jsxAccessibilityPlugin,
-            tailwindPlugin,
-        },
         rules: {
+            'react/prop-types': 'off',
             '@typescript-eslint/no-unused-vars': [
                 'error',
                 { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
@@ -44,19 +50,21 @@ export default tseslint.config(
             },
         },
     },
+
     {
         files: ['**/*.js'],
         ...tseslint.configs.disableTypeChecked,
     },
+
+    prettierConfig,
+
     {
         ignores: [
-            '.eslintrc.js',
-            '.prettierrc.js',
             'node_modules/**',
             'dist/**',
             'build/**',
             '.next/**',
-            '**/*.config.js',
+            'eslint.config.ts',
         ],
     }
 );
