@@ -1,5 +1,5 @@
 import { Provider } from 'jotai';
-import '../styles/globals.css';
+import '@/styles/globals.css';
 
 import type { Viewport } from 'next';
 
