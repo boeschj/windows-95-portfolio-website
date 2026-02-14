@@ -3,11 +3,24 @@
 import { Tabs } from '@base-ui/react/tabs';
 import { useAtom } from 'jotai';
 import { tabSelectedAtom } from '@/store';
-import { TAB_CONFIG } from '@/config/main';
+import { About } from '@/components/tabSections/about/About';
+import { Experience } from '@/components/tabSections/experience/Experience';
+import { Skills } from '@/components/tabSections/skills/Skills';
 import { cn } from '@/utils';
 
-import type { TabKey } from '@/types/application.types';
-import type { TabItem } from '@/types/configTypes';
+export const TABS = [
+    { key: 0, title: "Hi, I'm Jordan 👋", label: 'About Me' },
+    { key: 1, title: 'My Work', label: 'Experience' },
+    { key: 2, title: 'My Skills', label: 'Skills' },
+] as const;
+
+export type TabKey = (typeof TABS)[number]['key'];
+
+const VALID_TAB_KEYS = new Set<number>(TABS.map((tab) => tab.key));
+
+function isValidTabKey(value: unknown): value is TabKey {
+    return typeof value === 'number' && VALID_TAB_KEYS.has(value);
+}
 
 export function TabContentContainer() {
     const [tabSelected, setTabSelected] = useAtom(tabSelectedAtom);
@@ -25,28 +38,38 @@ export function TabContentContainer() {
             className="flex h-[calc(100%-90px)] flex-col"
         >
             <Tabs.List className="flex flex-row">
-                {TAB_CONFIG.map((tab) => (
+                {TABS.map((tab) => (
                     <Win95Tab
-                        key={tab.tabKey}
-                        tab={tab}
-                        isActive={tabSelected === tab.tabKey}
+                        key={tab.key}
+                        value={tab.key}
+                        label={tab.label}
+                        isActive={tabSelected === tab.key}
                     />
                 ))}
             </Tabs.List>
             <div className="win95-border-raised flex h-full flex-col p-4 md:p-6">
                 <h1 className="mb-2 h-10 w-full text-center text-3xl leading-10 font-extrabold md:mb-5 md:text-[50px]">
-                    {TAB_CONFIG[tabSelected].title}
+                    {TABS[tabSelected].title}
                 </h1>
                 <div className="win95-border-sunken flex h-[calc(100%-40px)] flex-col md:h-[calc(100%-60px)]">
-                    {TAB_CONFIG.map((tab) => (
-                        <Tabs.Panel
-                            key={tab.tabKey}
-                            value={tab.tabKey}
-                            className="flex h-full min-h-0 w-full flex-col"
-                        >
-                            <tab.component />
-                        </Tabs.Panel>
-                    ))}
+                    <Tabs.Panel
+                        value={0}
+                        className="flex h-full min-h-0 w-full flex-col"
+                    >
+                        <About />
+                    </Tabs.Panel>
+                    <Tabs.Panel
+                        value={1}
+                        className="flex h-full min-h-0 w-full flex-col"
+                    >
+                        <Experience />
+                    </Tabs.Panel>
+                    <Tabs.Panel
+                        value={2}
+                        className="flex h-full min-h-0 w-full flex-col"
+                    >
+                        <Skills />
+                    </Tabs.Panel>
                 </div>
             </div>
         </Tabs.Root>
@@ -68,17 +91,12 @@ const ACTIVE_TAB_BOTTOM_BORDER_COVER = `
 `;
 
 interface Win95TabProps {
-    tab: TabItem;
+    value: TabKey;
+    label: string;
     isActive: boolean;
 }
 
-const VALID_TAB_KEYS = new Set<number>(TAB_CONFIG.map((tab) => tab.tabKey));
-
-function isValidTabKey(value: unknown): value is TabKey {
-    return typeof value === 'number' && VALID_TAB_KEYS.has(value);
-}
-
-function Win95Tab({ tab, isActive }: Win95TabProps) {
+function Win95Tab({ value, label, isActive }: Win95TabProps) {
     return (
         <div
             className={cn(
@@ -87,13 +105,13 @@ function Win95Tab({ tab, isActive }: Win95TabProps) {
             )}
         >
             <Tabs.Tab
-                value={tab.tabKey}
+                value={value}
                 className={cn(
                     'bg-windows-gray h-[30px] w-full',
                     isActive && ACTIVE_TAB_BOTTOM_BORDER_COVER
                 )}
             >
-                {tab.label}
+                {label}
             </Tabs.Tab>
         </div>
     );

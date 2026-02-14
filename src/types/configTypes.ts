@@ -19,13 +19,6 @@ export interface WorkHistoryItem {
     datesWorked: string;
 }
 
-export interface TabItem {
-    tabKey: number;
-    title: string;
-    label: string;
-    component: () => React.ReactElement;
-}
-
 export type SkillLevelRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 export interface SkillLevel {

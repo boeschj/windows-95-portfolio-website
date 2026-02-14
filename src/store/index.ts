@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-import type { TabKey } from '@/types/application.types';
+import type { TabKey } from '@/components/welcomeView/TabContentContainer';
 
 const INITIAL_TAB_SELECTED = 0;
 

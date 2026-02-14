@@ -4,12 +4,12 @@ import Image from 'next/image';
 import { Menu } from '@base-ui/react/menu';
 import { useAtom } from 'jotai';
 import { tabSelectedAtom } from '@/store';
-import { TAB_CONFIG } from '@/config/main';
+import { TABS } from '@/components/welcomeView/TabContentContainer';
 import { links } from '@/config/aboutMe';
 import { IMAGE_PATH } from '@/constants/application.constants';
 import { cn } from '@/utils';
 
-import type { TabKey } from '@/types/application.types';
+import type { TabKey } from '@/components/welcomeView/TabContentContainer';
 
 export function StartMenu() {
     const [, setTabSelected] = useAtom(tabSelectedAtom);
@@ -49,10 +49,10 @@ export function StartMenu() {
                     sideOffset={4}
                 >
                     <Menu.Popup className="win95-border-raised bg-windows-gray w-72">
-                        {TAB_CONFIG.map((tab) => (
+                        {TABS.map((tab) => (
                             <Menu.Item
-                                key={tab.tabKey}
-                                onClick={handleTabSelection(tab.tabKey)}
+                                key={tab.key}
+                                onClick={handleTabSelection(tab.key)}
                                 className="data-[highlighted]:bg-windows-blue flex h-10 w-full cursor-pointer items-center justify-center text-xl data-[highlighted]:text-white"
                             >
                                 {tab.label}
