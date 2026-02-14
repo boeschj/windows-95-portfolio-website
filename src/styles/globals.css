@@ -1,6 +1,123 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+    --color-windows-gray: #c0c4c8;
+    --color-windows-blue: #0000a8;
+    --color-windows-bg: #55aaaa;
+
+    --color-raised-t-1: #c7cbce;
+    --color-raised-t-2: #fcfcfc;
+    --color-raised-t-3: #cfd2d5;
+    --color-raised-t-4: #b9c2c6;
+    --color-raised-b-1: #a9adb1;
+    --color-raised-b-2: #84888c;
+    --color-raised-b-3: #000000;
+    --color-raised-b-4: #1a3434;
+
+    --color-raised-light-t-1: #c7cbce;
+    --color-raised-light-t-2: #fcfcfc;
+    --color-raised-light-t-3: #cfd2d5;
+    --color-raised-light-b-1: #a9adb1;
+    --color-raised-light-b-2: #84888c;
+    --color-raised-light-b-3: #000000;
+
+    --color-sunken-t-1: #c7cbce;
+    --color-sunken-t-2: #fcfcfc;
+    --color-sunken-t-3: #cfd2d5;
+    --color-sunken-t-4: #b9c2c6;
+    --color-sunken-b-1: #a9adb1;
+    --color-sunken-b-2: #84888c;
+    --color-sunken-b-3: #000000;
+    --color-sunken-b-4: #1a3434;
+
+    --color-sunken-light-t-1: #84888c;
+    --color-sunken-light-t-2: #9a9ea2;
+    --color-sunken-light-b-1: #e1e3e5;
+    --color-sunken-light-b-2: #fcfcfc;
+
+    --color-tab-t-1: #c7cbce;
+    --color-tab-t-2: #fcfcfc;
+    --color-tab-t-3: #cfd2d5;
+    --color-tab-b-1: #a9adb1;
+    --color-tab-b-2: #84888c;
+    --color-tab-b-3: #000000;
+
+    --color-top-t-1: #d2d5d8;
+    --color-top-t-2: #fcfcfc;
+    --color-top-t-3: #c3c7cb;
+    --color-top-t-4: #a5bdc0;
+
+    --breakpoint-xs: 380px;
+
+    --font-ms-sans-serif: 'MS Sans Serif';
+}
+
+@layer components {
+    .win95-border-raised {
+        padding: 4px;
+        box-shadow:
+            inset -1px -1px var(--color-raised-b-4),
+            inset -2px -2px var(--color-raised-b-3),
+            inset -3px -3px var(--color-raised-b-2),
+            inset -4px -4px var(--color-raised-b-1),
+            inset 1px 1px var(--color-raised-t-1),
+            inset 2px 2px var(--color-raised-t-2),
+            inset 3px 3px var(--color-raised-t-3),
+            inset 4px 4px var(--color-raised-t-4);
+    }
+
+    .win95-border-raised-light {
+        padding: 4px;
+        box-shadow:
+            inset -1px -1px var(--color-raised-light-b-3),
+            inset -2px -2px var(--color-raised-light-b-2),
+            inset -3px -3px var(--color-raised-light-b-1),
+            inset 1px 1px var(--color-raised-light-t-1),
+            inset 2px 2px var(--color-raised-light-t-2),
+            inset 3px 3px var(--color-raised-light-t-3);
+    }
+
+    .win95-border-sunken {
+        padding: 4px;
+        box-shadow:
+            inset -1px -1px var(--color-sunken-t-1),
+            inset -2px -2px var(--color-sunken-t-2),
+            inset -3px -3px var(--color-sunken-t-3),
+            inset -4px -4px var(--color-sunken-t-4),
+            inset 1px 1px var(--color-sunken-b-1),
+            inset 2px 2px var(--color-sunken-b-2),
+            inset 3px 3px var(--color-sunken-b-3),
+            inset 4px 4px var(--color-sunken-b-4);
+    }
+
+    .win95-border-sunken-light {
+        box-shadow:
+            inset -1px -1px var(--color-sunken-light-b-1),
+            inset -2px -2px var(--color-sunken-light-b-2),
+            inset 1px 1px var(--color-sunken-light-t-1),
+            inset 2px 2px var(--color-sunken-light-t-2);
+    }
+
+    .win95-border-tab {
+        padding: 4px 8px 2px;
+        box-shadow:
+            inset -1px 0 var(--color-tab-b-3),
+            inset -2px 0 var(--color-tab-b-2),
+            inset -3px 0 var(--color-tab-b-1),
+            inset 1px 1px var(--color-tab-t-1),
+            inset 2px 2px var(--color-tab-t-2),
+            inset 3px 3px var(--color-tab-t-3);
+    }
+
+    .win95-border-top {
+        padding: 4px;
+        box-shadow:
+            inset 0 1px var(--color-top-t-1),
+            inset 0 2px var(--color-top-t-2),
+            inset 0 3px var(--color-top-t-3),
+            inset 0 4px var(--color-top-t-4);
+    }
+}
 
 @font-face {
     font-family: 'MS Sans Serif';
@@ -18,12 +135,12 @@
     font-family: 'MS Sans Serif';
 }
 
-::-moz-selection {
-    background-color: theme('colors.windows-blue');
-    color: theme('colors.white');
+::selection {
+    background-color: var(--color-windows-blue);
+    color: white;
 }
 
-::selection {
-    background-color: theme('colors.windows-blue');
-    color: theme('colors.white');
+::-moz-selection {
+    background-color: var(--color-windows-blue);
+    color: white;
 }
