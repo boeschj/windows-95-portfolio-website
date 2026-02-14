@@ -1,10 +1,9 @@
-import React from 'react';
 import { Clock } from './Clock';
-import { WindowsButton } from '../buttons/WindowsButton';
+import { WindowsButton } from '@/components/buttons/WindowsButton';
 
-export const Footer: React.FC = (): JSX.Element => {
+export function Footer() {
     return (
-        <div className="fixed bottom-0 mx-auto hidden w-full content-center bg-windows-gray md:grid">
+        <div className="bg-windows-gray fixed bottom-0 mx-auto hidden w-full content-center md:grid">
             <div className="win95-border-top">
                 <div className="flex h-[35px] items-center justify-between">
                     <WindowsButton />
@@ -15,4 +14,4 @@ export const Footer: React.FC = (): JSX.Element => {
             </div>
         </div>
     );
-};
+}

@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { cn } from '../../../utils';
-import { WorkHistoryItem } from '../../../types/configTypes';
+import { cn } from '@/utils';
+
+import type { WorkHistoryItem } from '@/types/configTypes';
 
 const IMAGE_SIZE_PX = 75;
 
@@ -9,7 +10,7 @@ interface JobListItemProps {
     job: WorkHistoryItem;
 }
 
-export const JobListItem = ({ job }: JobListItemProps): JSX.Element => {
+export function JobListItem({ job }: JobListItemProps) {
     const {
         imageUrl,
         jobName,
@@ -20,7 +21,7 @@ export const JobListItem = ({ job }: JobListItemProps): JSX.Element => {
         datesWorked,
     } = job;
 
-    const JobContent = () => (
+    const jobContent = (
         <div className="flex flex-col items-center justify-center gap-4">
             <Image
                 src={imageUrl}
@@ -34,9 +35,9 @@ export const JobListItem = ({ job }: JobListItemProps): JSX.Element => {
             />
             <div
                 className={cn(
-                    `mx-auto w-fit text-3xl font-extrabold leading-[50px] md:text-[50px]`,
+                    'mx-auto w-fit text-3xl leading-[50px] font-extrabold md:text-[50px]',
                     jobUrl &&
-                        'cursor-pointer hover:text-windows-blue hover:underline'
+                        'hover:text-windows-blue cursor-pointer hover:underline'
                 )}
             >
                 {jobName}
@@ -48,10 +49,10 @@ export const JobListItem = ({ job }: JobListItemProps): JSX.Element => {
         <div className="mx-auto flex w-full grow flex-col items-center justify-center space-y-5 px-4 py-5 md:px-6">
             {jobUrl ? (
                 <Link href={jobUrl} target="_blank" rel="noopener noreferrer">
-                    <JobContent />
+                    {jobContent}
                 </Link>
             ) : (
-                <JobContent />
+                jobContent
             )}
             <div className="font-bold">{jobTitle}</div>
             <div>{datesWorked}</div>
@@ -62,4 +63,4 @@ export const JobListItem = ({ job }: JobListItemProps): JSX.Element => {
             </div>
         </div>
     );
-};
+}

@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import { cn } from '../../../utils';
-import { TechItem } from '../../../types/configTypes';
+import { cn } from '@/utils';
+
+import type { TechItem } from '@/types/configTypes';
 
 const IMAGE_SIZE_PX = 50;
 
@@ -10,21 +11,17 @@ interface SkillSectionProps {
     className?: string;
 }
 
-export const SkillSection: React.FC<SkillSectionProps> = ({
-    title,
-    skills,
-    className,
-}) => {
+export function SkillSection({ title, skills, className }: SkillSectionProps) {
     return (
         <div className={className}>
-            <h3 className="grow-1 mx-auto flex justify-center py-3 text-center text-2xl font-extrabold underline">
+            <h3 className="mx-auto flex grow-1 justify-center py-3 text-center text-2xl font-extrabold underline">
                 {title}
             </h3>
             <div className="grid grid-cols-3 px-5 text-center lg:grid-cols-8">
                 {skills.map((skill: TechItem, index: number) => (
                     <div
                         className={cn(
-                            `flex flex-col items-center justify-center p-1`,
+                            'flex flex-col items-center justify-center p-1',
                             skill.type === 'tool' && 'first:my-auto first:mt-5'
                         )}
                         key={`${skill.type}-${skill.name}-${index}`}
@@ -43,4 +40,4 @@ export const SkillSection: React.FC<SkillSectionProps> = ({
             </div>
         </div>
     );
-};
+}

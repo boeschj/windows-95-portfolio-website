@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { TabKey } from '../types/application.types';
+import { TabKey } from '@/types/application.types';
 
 const INITIAL_TAB_SELECTED = 0;
 const INITIAL_SHOW_NAV_MENU = false;

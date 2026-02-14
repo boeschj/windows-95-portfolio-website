@@ -1,10 +1,10 @@
 import { TabContentContainer } from './TabContentContainer';
-import { LinkButtonRow } from '../buttons/LinkButtonRow';
+import { LinkButtonRow } from '@/components/buttons/LinkButtonRow';
 import { Header } from './Header';
 
-export const WelcomeView: React.FC = (): JSX.Element => {
+export function WelcomeView() {
     return (
-        <div className="win95-border-raised h-full bg-windows-gray pb-6">
+        <div className="win95-border-raised bg-windows-gray h-full pb-6">
             <Header />
             <div className="flex h-full grow flex-col justify-between gap-5 p-2 md:p-5">
                 <TabContentContainer />
@@ -12,4 +12,4 @@ export const WelcomeView: React.FC = (): JSX.Element => {
             </div>
         </div>
     );
-};
+}

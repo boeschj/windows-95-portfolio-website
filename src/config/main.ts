@@ -1,7 +1,7 @@
-import { About } from '../components/tabSections/about/About';
-import { Experience } from '../components/tabSections/experience/Experience';
-import { Skills } from '../components/tabSections/skills/Skills';
-import type { TabItem } from '../types/configTypes';
+import { About } from '@/components/tabSections/about/About';
+import { Experience } from '@/components/tabSections/experience/Experience';
+import { Skills } from '@/components/tabSections/skills/Skills';
+import type { TabItem } from '@/types/configTypes';
 
 export const TAB_CONFIG = [
     {

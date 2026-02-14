@@ -1,5 +1,5 @@
-import { IMAGE_PATH } from '../constants/application.constants';
-import { SkillSummary, TechItem } from '../types/configTypes';
+import { IMAGE_PATH } from '@/constants/application.constants';
+import { SkillSummary, TechItem } from '@/types/configTypes';
 
 const LANGUAGES_PATH = `${IMAGE_PATH}/languages`;
 const LIBRARIES_PATH = `${IMAGE_PATH}/libraries`;

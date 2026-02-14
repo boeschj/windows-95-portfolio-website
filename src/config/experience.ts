@@ -1,5 +1,5 @@
-import { IMAGE_PATH } from '../constants/application.constants';
-import { WorkHistoryItem } from '../types/configTypes';
+import { IMAGE_PATH } from '@/constants/application.constants';
+import { WorkHistoryItem } from '@/types/configTypes';
 
 const BASE_IMAGE_URL = `${IMAGE_PATH}/jobs`;
 

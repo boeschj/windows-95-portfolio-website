@@ -1,19 +1,19 @@
 'use client';
 
-import React from 'react';
 import { NavListItem } from './NavListItem';
-import { cn } from '../../utils';
+import { cn } from '@/utils';
 import { useAtom } from 'jotai';
-import { tabSelectedAtom } from '../../store';
-import { useNavMenu } from '../../hooks/useNavMenu';
-import { Links } from '../../types/configTypes';
-import { TabKey } from '../../types/application.types';
+import { tabSelectedAtom } from '@/store';
+import { useNavMenu } from '@/hooks/useNavMenu';
 
-interface FooterProps {
+import type { Links } from '@/types/configTypes';
+import type { TabKey } from '@/types/application.types';
+
+interface NavMenuModalProps {
     links: Links;
 }
 
-export const NavMenuModal: React.FC<FooterProps> = ({ links }) => {
+export function NavMenuModal({ links }: NavMenuModalProps) {
     const [_, setTabSelected] = useAtom(tabSelectedAtom);
     const { navMenuOpen, closeMenu } = useNavMenu();
 
@@ -31,12 +31,12 @@ export const NavMenuModal: React.FC<FooterProps> = ({ links }) => {
         <div
             id="nav-menu"
             className={cn(
-                `absolute bottom-11 left-1 flex h-fit w-72 flex-col divide-y-2 divide-windows-gray bg-windows-gray`,
+                'divide-windows-gray bg-windows-gray absolute bottom-11 left-1 flex h-fit w-72 flex-col divide-y-2',
                 navMenuOpen ? 'flex' : 'hidden'
             )}
         >
             <div className="win95-border-raised">
-                <ul className="h-fit divide-y-2 divide-windows-gray bg-windows-gray">
+                <ul className="divide-windows-gray bg-windows-gray h-fit divide-y-2">
                     <NavListItem
                         label="About Me"
                         onClick={handleTabSelection(0)}
@@ -61,4 +61,4 @@ export const NavMenuModal: React.FC<FooterProps> = ({ links }) => {
             </div>
         </div>
     );
-};
+}

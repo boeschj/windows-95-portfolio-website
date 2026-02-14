@@ -1,12 +1,11 @@
 'use client';
 
-import React from 'react';
 import Image from 'next/image';
-import { cn } from '../../utils';
-import { useNavMenu } from '../../hooks/useNavMenu';
-import { IMAGE_PATH } from '../../constants/application.constants';
+import { cn } from '@/utils';
+import { useNavMenu } from '@/hooks/useNavMenu';
+import { IMAGE_PATH } from '@/constants/application.constants';
 
-export const WindowsButton: React.FC = (): JSX.Element => {
+export function WindowsButton() {
     const { navMenuOpen, toggleMenu } = useNavMenu();
 
     return (
@@ -30,4 +29,4 @@ export const WindowsButton: React.FC = (): JSX.Element => {
             </button>
         </div>
     );
-};
+}

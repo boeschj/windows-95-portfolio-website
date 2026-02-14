@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import { useCallback, useEffect } from 'react';
-import { showNavMenuAtom } from '../store';
+import { showNavMenuAtom } from '@/store';
 
 export const useNavMenu = () => {
     const [navMenuOpen, setNavMenuOpen] = useAtom(showNavMenuAtom);

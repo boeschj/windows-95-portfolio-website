@@ -1,16 +1,13 @@
-import type { SkillLevelRange } from '../../../types/configTypes';
+import type { SkillLevelRange } from '@/types/configTypes';
 
 interface ProgressBarProps {
     skill: string;
     level: SkillLevelRange;
 }
 
-export const ProgressBar: React.FC<ProgressBarProps> = ({
-    skill,
-    level,
-}): JSX.Element => {
+export function ProgressBar({ skill, level }: ProgressBarProps) {
     const progressBar = Array.from({ length: level }).map((_, index) => (
-        <div key={index} className="h-8 w-5 bg-windows-blue" />
+        <div key={index} className="bg-windows-blue h-8 w-5" />
     ));
 
     return (
@@ -25,4 +22,4 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
             </div>
         </div>
     );
-};
+}

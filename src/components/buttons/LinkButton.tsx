@@ -5,10 +5,7 @@ interface LinkButtonProps {
     text: string;
 }
 
-export const LinkButton = ({
-    profileUrl,
-    text: buttonTitle,
-}: LinkButtonProps): JSX.Element => {
+export function LinkButton({ profileUrl, text: buttonTitle }: LinkButtonProps) {
     return (
         <Link
             href={profileUrl}
@@ -16,9 +13,9 @@ export const LinkButton = ({
             rel="noopener noreferrer"
             passHref
         >
-            <button className="win95-border-raised h-8 w-36 bg-windows-gray">
+            <button className="win95-border-raised bg-windows-gray h-8 w-36">
                 {buttonTitle}
             </button>
         </Link>
     );
-};
+}

@@ -1,16 +1,15 @@
 'use client';
 
-import React from 'react';
 import { Tabs } from '@base-ui/react/tabs';
 import { useAtom } from 'jotai';
-import { tabSelectedAtom } from '../../store';
-import { TAB_CONFIG } from '../../config/main';
-import { cn } from '../../utils';
+import { tabSelectedAtom } from '@/store';
+import { TAB_CONFIG } from '@/config/main';
+import { cn } from '@/utils';
 
-import type { TabKey } from '../../types/application.types';
-import type { TabItem } from '../../types/configTypes';
+import type { TabKey } from '@/types/application.types';
+import type { TabItem } from '@/types/configTypes';
 
-export const TabContentContainer: React.FC = () => {
+export function TabContentContainer() {
     const [tabSelected, setTabSelected] = useAtom(tabSelectedAtom);
 
     const handleValueChange = (value: unknown) => {
@@ -35,7 +34,7 @@ export const TabContentContainer: React.FC = () => {
                 ))}
             </Tabs.List>
             <div className="win95-border-raised flex h-full flex-col p-4 md:p-6">
-                <h1 className="mb-2 h-10 w-full text-center text-3xl font-extrabold md:mb-5 md:text-[50px]">
+                <h1 className="mb-2 h-10 w-full text-center text-3xl leading-10 font-extrabold md:mb-5 md:text-[50px]">
                     {TAB_CONFIG[tabSelected].title}
                 </h1>
                 <div className="win95-border-sunken flex h-[calc(100%-40px)] flex-col md:h-[calc(100%-60px)]">
@@ -43,7 +42,7 @@ export const TabContentContainer: React.FC = () => {
                         <Tabs.Panel
                             key={tab.tabKey}
                             value={tab.tabKey}
-                            className="flex min-h-0 h-full w-full flex-col"
+                            className="flex h-full min-h-0 w-full flex-col"
                         >
                             <tab.component />
                         </Tabs.Panel>
@@ -52,7 +51,7 @@ export const TabContentContainer: React.FC = () => {
             </div>
         </Tabs.Root>
     );
-};
+}
 
 const ACTIVE_TAB_BOTTOM_BORDER_COVER = `
     after:absolute
@@ -90,7 +89,7 @@ function Win95Tab({ tab, isActive }: Win95TabProps) {
             <Tabs.Tab
                 value={tab.tabKey}
                 className={cn(
-                    'h-[30px] w-full bg-windows-gray',
+                    'bg-windows-gray h-[30px] w-full',
                     isActive && ACTIVE_TAB_BOTTOM_BORDER_COVER
                 )}
             >
