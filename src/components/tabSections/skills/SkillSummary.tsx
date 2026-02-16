@@ -13,9 +13,9 @@ export function SkillSummary() {
                 </div>
             </div>
             <div className="h-full w-[300px] space-y-2 py-10 lg:py-0">
-                {skillSummarySection.skillLevels.map((skillLevel, index) => (
+                {skillSummarySection.skillLevels.map((skillLevel) => (
                     <ProgressBar
-                        key={index}
+                        key={skillLevel.skill}
                         skill={skillLevel.skill}
                         level={skillLevel.level}
                     />

@@ -8,10 +8,10 @@ const IMAGE_SIZE_PX = 300;
 export function About() {
     return (
         <TabContentLayout className="flex h-auto grow flex-col overflow-auto">
-            <div className="flex w-full flex-col items-center justify-center md:h-screen">
+            <div className="flex w-full flex-col items-center justify-center md:min-h-full">
                 <div className="m-4">
                     <Image
-                        src={`${IMAGE_PATH}/portfolioPhoto.png`}
+                        src={`${IMAGE_PATH}/portfolio-photo.png`}
                         alt="It's me!"
                         width={IMAGE_SIZE_PX}
                         height={IMAGE_SIZE_PX}

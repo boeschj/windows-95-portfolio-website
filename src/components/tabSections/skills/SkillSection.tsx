@@ -14,30 +14,41 @@ interface SkillSectionProps {
 export function SkillSection({ title, skills, className }: SkillSectionProps) {
     return (
         <div className={className}>
-            <h3 className="mx-auto flex grow-1 justify-center py-3 text-center text-2xl font-extrabold underline">
+            <h3 className="mx-auto flex grow justify-center py-3 text-center text-2xl font-extrabold underline">
                 {title}
             </h3>
             <div className="grid grid-cols-3 px-5 text-center lg:grid-cols-8">
-                {skills.map((skill: TechItem, index: number) => (
-                    <div
-                        className={cn(
-                            'flex flex-col items-center justify-center p-1',
-                            skill.type === 'tool' && 'first:my-auto first:mt-5'
-                        )}
-                        key={`${skill.type}-${skill.name}-${index}`}
-                    >
-                        <Image
-                            className="m-1"
-                            src={skill.imageUrl}
-                            key={`${skill.type}-${skill.name}-img-${index}`}
-                            alt={`Tech icon`}
-                            width={IMAGE_SIZE_PX}
-                            height={IMAGE_SIZE_PX}
-                        />
-                        <div className="text-xl">{skill.name}</div>
-                    </div>
+                {skills.map((skill) => (
+                    <SkillIcon
+                        key={`${skill.type}-${skill.name}`}
+                        skill={skill}
+                    />
                 ))}
             </div>
+        </div>
+    );
+}
+
+interface SkillIconProps {
+    skill: TechItem;
+}
+
+function SkillIcon({ skill }: SkillIconProps) {
+    return (
+        <div
+            className={cn(
+                'flex flex-col items-center justify-center p-1',
+                skill.type === 'tool' && 'first:my-auto first:mt-5'
+            )}
+        >
+            <Image
+                className="m-1"
+                src={skill.imageUrl}
+                alt={`${skill.name} icon`}
+                width={IMAGE_SIZE_PX}
+                height={IMAGE_SIZE_PX}
+            />
+            <div className="text-xl">{skill.name}</div>
         </div>
     );
 }

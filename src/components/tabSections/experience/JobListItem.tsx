@@ -21,11 +21,11 @@ export function JobListItem({ job }: JobListItemProps) {
         datesWorked,
     } = job;
 
-    const jobContent = (
+    const jobHeader = (
         <div className="flex flex-col items-center justify-center gap-4">
             <Image
                 src={imageUrl}
-                alt="company logo"
+                alt={`${jobName} company logo`}
                 width={IMAGE_SIZE_PX}
                 height={IMAGE_SIZE_PX}
                 className={cn(
@@ -47,15 +47,21 @@ export function JobListItem({ job }: JobListItemProps) {
 
     return (
         <div className="mx-auto flex w-full grow flex-col items-center justify-center space-y-5 px-4 py-5 md:px-6">
-            {jobUrl ? (
-                <Link href={jobUrl} target="_blank" rel="noopener noreferrer">
-                    {jobContent}
-                </Link>
-            ) : (
-                jobContent
-            )}
-            <div className="font-bold">{jobTitle}</div>
-            <div>{datesWorked}</div>
+            <div className="flex flex-col items-center gap-2">
+                {jobUrl ? (
+                    <Link
+                        href={jobUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {jobHeader}
+                    </Link>
+                ) : (
+                    jobHeader
+                )}
+                <div className="font-bold">{jobTitle}</div>
+                <div>{datesWorked}</div>
+            </div>
             <div>
                 <div className="text-center">{jobDescription}</div>
                 <br />
