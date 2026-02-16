@@ -26,8 +26,8 @@ No test framework is configured.
 - **Next.js 16** (App Router, React Compiler enabled) with **React 19**
 - **TypeScript 5.9** (strict mode, path alias `@/*` → `./src/*`)
 - **Tailwind CSS v4** (CSS-first config in `globals.css` `@theme` block, no JS config)
-- **Jotai** for state (2 atoms: `tabSelectedAtom`, `showNavMenuAtom`)
-- **@base-ui/react** for headless UI primitives (Tabs)
+- **Jotai** for state (1 atom: `tabSelectedAtom`)
+- **@base-ui/react** for headless UI primitives (Tabs, Menu, Progress, Tooltip, Collapsible, ScrollArea)
 - **ESLint 9** flat config with `strictTypeChecked` + `stylisticTypeChecked`
 - **Prettier** (4-space indent, single quotes, semicolons, tailwind plugin)
 
@@ -37,19 +37,20 @@ No test framework is configured.
 
 **Config-driven content** — all portfolio data (bio, work history, skills, tab definitions) lives in `src/config/`. Components render from config; content is never hardcoded in components.
 
-**Server components by default** — `'use client'` is used only in components that need interactivity (tab container, clock, nav menu, buttons with handlers).
+**Server components by default** — `'use client'` is used only in components that need interactivity (tab container, clock, start menu). Tab content (About, Experience, Skills) are server components passed into the client boundary via composition.
 
-**Tab system** — `TAB_CONFIG` in `src/config/main.ts` maps tab keys to titles, labels, and component references using `as const satisfies`. The `TabKey` type in `src/types/application.types.ts` is derived from this config at the type level.
+**Tab system** — `TABS` in `src/config/tabs.ts` maps tab keys to titles and labels using `as const satisfies`. The `TabKey` type is derived from this config at the type level. `WelcomeView` passes server-rendered tab content as children into the client `TabContentContainer`.
 
-**Win95 design system** — custom border utilities (`win95-border-raised`, `win95-border-sunken`, etc.) are defined as Tailwind `@layer components` in `globals.css` using `box-shadow` compositions. Theme colors (windows-gray, windows-blue, windows-bg) and a custom `xs: 380px` breakpoint are in the `@theme` block.
+**Win95 design system** — custom border utilities (`win95-border-raised`, `win95-border-sunken`, etc.) are defined as Tailwind `@layer components` in `globals.css` using `box-shadow` compositions. Theme colors (windows-gray, windows-blue, windows-bg), a custom `xs: 380px` breakpoint, and shared spacing tokens (taskbar-height) are in the `@theme` block.
 
 **Utility:** `cn()` in `src/utils.ts` — standard `clsx` + `tailwind-merge` wrapper for conditional classes.
 
 ## Key Patterns
 
-- Types derived from runtime values (`TabKey` from `TAB_CONFIG`) — avoid parallel type definitions
+- Types derived from runtime values (`TabKey` from `TABS`) — avoid parallel type definitions
 - `as const satisfies` on config arrays for inference + type safety
 - React Compiler is enabled — manual `useMemo`/`useCallback` is rarely needed
 - `useSyncExternalStore` for the Clock (not useState + useEffect)
 - Named constants for all magic numbers and repeated strings
 - Separate `import type` statements on their own line
+- `next/font/local` for MS Sans Serif with CSS variable `--font-ms-sans-serif`
