@@ -1,29 +1,21 @@
 'use client';
 
+import React from 'react';
 import { Tabs } from '@base-ui/react/tabs';
 import { useAtom } from 'jotai';
 import { tabSelectedAtom } from '@/store';
-import { About } from '@/components/tabSections/about/About';
-import { Experience } from '@/components/tabSections/experience/Experience';
-import { Skills } from '@/components/tabSections/skills/Skills';
+import { TABS, isValidTabKey } from '@/config/tabs';
 import { cn } from '@/utils';
 
-export const TABS = [
-    { key: 0, title: "Hi, I'm Jordan 👋", label: 'About Me' },
-    { key: 1, title: 'My Work', label: 'Experience' },
-    { key: 2, title: 'My Skills', label: 'Skills' },
-] as const;
+const TAB_PANEL_CLASS = 'flex h-full min-h-0 w-full flex-col';
 
-export type TabKey = (typeof TABS)[number]['key'];
-
-const VALID_TAB_KEYS = new Set<number>(TABS.map((tab) => tab.key));
-
-function isValidTabKey(value: unknown): value is TabKey {
-    return typeof value === 'number' && VALID_TAB_KEYS.has(value);
+interface TabContentContainerProps {
+    children: React.ReactNode;
 }
 
-export function TabContentContainer() {
+export function TabContentContainer({ children }: TabContentContainerProps) {
     const [tabSelected, setTabSelected] = useAtom(tabSelectedAtom);
+    const childArray = React.Children.toArray(children);
 
     const handleValueChange = (value: unknown) => {
         if (isValidTabKey(value)) {
@@ -52,24 +44,16 @@ export function TabContentContainer() {
                     {TABS[tabSelected].title}
                 </h1>
                 <div className="win95-border-sunken flex h-[calc(100%-40px)] flex-col md:h-[calc(100%-60px)]">
-                    <Tabs.Panel
-                        value={0}
-                        className="flex h-full min-h-0 w-full flex-col"
-                    >
-                        <About />
-                    </Tabs.Panel>
-                    <Tabs.Panel
-                        value={1}
-                        className="flex h-full min-h-0 w-full flex-col"
-                    >
-                        <Experience />
-                    </Tabs.Panel>
-                    <Tabs.Panel
-                        value={2}
-                        className="flex h-full min-h-0 w-full flex-col"
-                    >
-                        <Skills />
-                    </Tabs.Panel>
+                    {TABS.map((tab, index) => (
+                        <Tabs.Panel
+                            key={tab.key}
+                            value={tab.key}
+                            keepMounted
+                            className={TAB_PANEL_CLASS}
+                        >
+                            {childArray[index]}
+                        </Tabs.Panel>
+                    ))}
                 </div>
             </div>
         </Tabs.Root>
@@ -91,7 +75,7 @@ const ACTIVE_TAB_BOTTOM_BORDER_COVER = `
 `;
 
 interface Win95TabProps {
-    value: TabKey;
+    value: (typeof TABS)[number]['key'];
     label: string;
     isActive: boolean;
 }
