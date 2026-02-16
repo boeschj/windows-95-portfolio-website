@@ -47,7 +47,12 @@
     --color-top-t-3: #c3c7cb;
     --color-top-t-4: #a5bdc0;
 
+    --color-focus-outline: #3f3f3f;
+    --color-tooltip-bg: #ffffe1;
+
     --breakpoint-xs: 380px;
+
+    --spacing-taskbar-height: 35px;
 
     --font-ms-sans-serif: 'MS Sans Serif';
 }
@@ -117,30 +122,30 @@
             inset 0 3px var(--color-top-t-3),
             inset 0 4px var(--color-top-t-4);
     }
-}
 
-@font-face {
-    font-family: 'MS Sans Serif';
-    src: url('/fonts/MS-Sans-Serif.eot');
-    src:
-        url('/fonts/MS-Sans-Serif.woff2') format('woff2'),
-        url('/fonts/MS-Sans-Serif.woff') format('woff'),
-        url('/fonts/MS-Sans-Serif.ttf') format('truetype'),
-        url('/fonts/MS-Sans-Serif.eot?#iefix') format('embedded-opentype');
-    font-weight: normal;
-    font-style: normal;
+    .win95-scrollbar-track {
+        background: repeating-conic-gradient(
+                var(--color-windows-gray) 0% 25%,
+                white 0% 50%
+            )
+            0 0 / 2px 2px;
+    }
 }
 
 * {
-    font-family: 'MS Sans Serif';
+    font-family: var(--font-ms-sans-serif);
+}
+
+:focus {
+    outline: 1px dotted var(--color-focus-outline);
+    outline-offset: -1px;
+}
+
+.win95-focus-inset:focus {
+    outline-offset: -8px;
 }
 
 ::selection {
-    background-color: var(--color-windows-blue);
-    color: white;
-}
-
-::-moz-selection {
     background-color: var(--color-windows-blue);
     color: white;
 }

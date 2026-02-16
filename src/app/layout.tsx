@@ -1,45 +1,48 @@
+import localFont from 'next/font/local';
 import { Provider } from 'jotai';
 import '@/styles/globals.css';
 
-import type { Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
+
+const msSansSerif = localFont({
+    src: [
+        { path: '../../public/fonts/MS-Sans-Serif.woff2', weight: '400' },
+        { path: '../../public/fonts/MS-Sans-Serif.woff', weight: '400' },
+    ],
+    variable: '--font-ms-sans-serif',
+    display: 'swap',
+});
 
 export const viewport: Viewport = {
     width: 'device-width',
     initialScale: 1,
 };
 
-export function generateMetadata() {
-    const title = "Jordan's Portfolio Site";
-    const description = "Jordan's portfolio site.";
-    const creator = 'Jordan Boesch';
-
-    return {
-        title,
-        description,
-        creator,
-        icons: {
-            icon: 'favicons/favicon-32x32.png',
-            shortcut: 'favicons/favicon-32x32.png',
-            apple: 'favicons/apple-touch-icon.png',
-            other: {
-                rel: 'favicons/favicon-32x32.png',
-                url: 'favicons/favicon-32x32.png',
-            },
+export const metadata: Metadata = {
+    title: "Jordan's Portfolio Site",
+    description: "Jordan's portfolio site.",
+    creator: 'Jordan Boesch',
+    icons: {
+        icon: 'favicons/favicon-32x32.png',
+        shortcut: 'favicons/favicon-32x32.png',
+        apple: 'favicons/apple-touch-icon.png',
+        other: {
+            rel: 'icon',
+            url: 'favicons/favicon-32x32.png',
         },
-        twitter: {
-            card: 'summary_large_image',
-            title,
-            description,
-            creator,
-        },
-        openGraph: {
-            title,
-            description,
-            type: 'website',
-            authors: [creator],
-        },
-    };
-}
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: "Jordan's Portfolio Site",
+        description: "Jordan's portfolio site.",
+        creator: 'Jordan Boesch',
+    },
+    openGraph: {
+        title: "Jordan's Portfolio Site",
+        description: "Jordan's portfolio site.",
+        authors: ['Jordan Boesch'],
+    },
+};
 
 export default function RootLayout({
     children,
@@ -47,7 +50,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html lang="en" className={msSansSerif.variable}>
             <body>
                 <Provider>{children}</Provider>
             </body>
