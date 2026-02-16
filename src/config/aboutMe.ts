@@ -1,4 +1,4 @@
-import { AboutConfig, Links } from '@/types/configTypes';
+import type { AboutConfig, Links } from '@/types/configTypes';
 
 export const aboutConfig: AboutConfig = {
     p1: "I'm a creative problem solver with a passion for taking ideas from zero to one.",
