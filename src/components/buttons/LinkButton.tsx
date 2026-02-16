@@ -1,21 +1,25 @@
 import Link from 'next/link';
+import { Button } from './Button';
 
 interface LinkButtonProps {
     profileUrl: string;
     text: string;
 }
 
-export function LinkButton({ profileUrl, text: buttonTitle }: LinkButtonProps) {
+export function LinkButton({ profileUrl, text }: LinkButtonProps) {
     return (
-        <Link
-            href={profileUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            passHref
+        <Button
+            className="h-8 w-36 text-center"
+            nativeButton={false}
+            render={
+                <Link
+                    href={profileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                />
+            }
         >
-            <button className="win95-border-raised bg-windows-gray h-8 w-36">
-                {buttonTitle}
-            </button>
-        </Link>
+            {text}
+        </Button>
     );
 }
