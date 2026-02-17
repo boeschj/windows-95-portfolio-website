@@ -13,7 +13,11 @@
         "format": "prettier --check --ignore-path .gitignore .",
         "format:fix": "prettier --write --ignore-path .gitignore .",
         "typecheck": "tsc --noEmit",
-        "precommit": "pnpm run lint && pnpm run format && pnpm run typecheck"
+        "precommit": "pnpm run lint && pnpm run format && pnpm run typecheck",
+        "db:push": "drizzle-kit push",
+        "db:generate": "drizzle-kit generate",
+        "db:migrate": "drizzle-kit migrate",
+        "db:studio": "drizzle-kit studio"
     },
     "engines": {
         "node": ">=25.6.1"
@@ -21,6 +25,7 @@
     "dependencies": {
         "@base-ui/react": "^1.2.0",
         "@neondatabase/serverless": "^1.0.2",
+        "@t3-oss/env-nextjs": "^0.13.10",
         "clsx": "^2.1.1",
         "dotenv": "^17.3.1",
         "drizzle-orm": "^0.45.1",
@@ -29,7 +34,8 @@
         "react": "^19.2.4",
         "react-dom": "^19.2.4",
         "sharp": "^0.34.0",
-        "tailwind-merge": "^2.3.0"
+        "tailwind-merge": "^2.3.0",
+        "zod": "^4.3.6"
     },
     "devDependencies": {
         "@eslint/js": "^9.39.2",
