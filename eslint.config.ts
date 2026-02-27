@@ -65,6 +65,8 @@ export default tseslint.config(
             'build/**',
             '.next/**',
             'eslint.config.ts',
+            'src/app/(payload)/**',
+            'src/payload-types.ts',
         ],
     }
 );

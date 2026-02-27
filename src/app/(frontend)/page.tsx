@@ -11,7 +11,7 @@ export default function Page() {
             >
                 <WelcomeView />
             </div>
-            <div className="w-full pt-0 md:pt-(--spacing-taskbar-height)">
+            <div className="md:pt-taskbar-height w-full pt-0">
                 <Footer />
             </div>
         </div>

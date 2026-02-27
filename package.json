@@ -17,20 +17,28 @@
         "db:push": "drizzle-kit push",
         "db:generate": "drizzle-kit generate",
         "db:migrate": "drizzle-kit migrate",
-        "db:studio": "drizzle-kit studio"
+        "db:studio": "drizzle-kit studio",
+        "payload:generate-types": "payload generate:types",
+        "payload:generate-importmap": "payload generate:importmap"
     },
     "engines": {
-        "node": ">=25.6.1"
+        "node": ">=24.0.0"
     },
     "dependencies": {
         "@base-ui/react": "^1.2.0",
         "@neondatabase/serverless": "^1.0.2",
+        "@payloadcms/db-postgres": "^3.76.1",
+        "@payloadcms/next": "^3.76.1",
+        "@payloadcms/richtext-lexical": "^3.76.1",
+        "@payloadcms/storage-s3": "^3.76.1",
         "@t3-oss/env-nextjs": "^0.13.10",
         "clsx": "^2.1.1",
         "dotenv": "^17.3.1",
         "drizzle-orm": "^0.45.1",
+        "graphql": "^16.12.0",
         "jotai": "^2.17.1",
         "next": "16.2.0-canary.10",
+        "payload": "^3.76.1",
         "react": "^19.2.4",
         "react-dom": "^19.2.4",
         "sharp": "^0.34.0",

@@ -6,8 +6,8 @@ import type { Metadata, Viewport } from 'next';
 
 const msSansSerif = localFont({
     src: [
-        { path: '../../public/fonts/MS-Sans-Serif.woff2', weight: '400' },
-        { path: '../../public/fonts/MS-Sans-Serif.woff', weight: '400' },
+        { path: '../../../public/fonts/MS-Sans-Serif.woff2', weight: '400' },
+        { path: '../../../public/fonts/MS-Sans-Serif.woff', weight: '400' },
     ],
     variable: '--font-ms-sans-serif',
     display: 'swap',
