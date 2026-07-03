@@ -1,14 +1,36 @@
-import type { CollectionConfig } from 'payload';
+import type { Access, CollectionConfig } from 'payload';
+
+export const POST_STATUS = {
+    DRAFT: 'draft',
+    PUBLISHED: 'published',
+} as const;
 
 const POST_STATUS_OPTIONS = [
-    { label: 'Draft', value: 'draft' },
-    { label: 'Published', value: 'published' },
-] as const;
+    { label: 'Draft', value: POST_STATUS.DRAFT },
+    { label: 'Published', value: POST_STATUS.PUBLISHED },
+];
+
+const readPublishedOrAuthenticated: Access = ({ req }) => {
+    const isAuthenticated = Boolean(req.user);
+
+    if (isAuthenticated) {
+        return true;
+    }
+
+    return {
+        status: {
+            equals: POST_STATUS.PUBLISHED,
+        },
+    };
+};
 
 export const Posts: CollectionConfig = {
     slug: 'posts',
     admin: {
         useAsTitle: 'title',
+    },
+    access: {
+        read: readPublishedOrAuthenticated,
     },
     fields: [
         {
@@ -32,8 +54,8 @@ export const Posts: CollectionConfig = {
         {
             name: 'status',
             type: 'select',
-            defaultValue: 'draft',
-            options: [...POST_STATUS_OPTIONS],
+            defaultValue: POST_STATUS.DRAFT,
+            options: POST_STATUS_OPTIONS,
             admin: {
                 position: 'sidebar',
             },
