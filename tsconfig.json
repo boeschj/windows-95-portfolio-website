@@ -31,9 +31,5 @@
         ".next/types/**/*.ts",
         ".next/dev/types/**/*.ts"
     ],
-    "exclude": [
-        "node_modules",
-        "eslint.config.ts",
-        ".next/dev/types/validator.ts"
-    ]
+    "exclude": ["node_modules", "eslint.config.ts"]
 }
