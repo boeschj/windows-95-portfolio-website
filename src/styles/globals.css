@@ -220,8 +220,10 @@
 }
 
 .notepad-prose {
+    max-width: 68ch;
+    margin-inline: auto;
     color: #000;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .notepad-prose h1 {
