@@ -4,6 +4,10 @@ import { ImageResponse } from 'next/og';
 import { getPostBySlug } from '@/data/posts';
 import { BLOG_AUTHOR, postFilename } from '@/data/postView';
 
+// The OG image is a separate route segment, so revalidatePath('/blog/[slug]')
+// doesn't cover it; refresh it on the same ISR cadence as the page.
+export const revalidate = 3600;
+
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 export const alt = `${BLOG_AUTHOR} — Blog`;

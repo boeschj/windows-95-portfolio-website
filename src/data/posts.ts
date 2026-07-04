@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { cache } from 'react';
 import { getPayload } from 'payload';
 import config from '@payload-config';
 import { POST_STATUS } from '@/collections/Posts';
@@ -37,20 +38,24 @@ export async function getPublishedSlugs(): Promise<string[]> {
     return docs.map((doc) => doc.slug);
 }
 
-export async function getPostBySlug(slug: string): Promise<Post | null> {
-    const payload = await getPayload({ config });
+// Deduped per request: generateMetadata and the page body both call this for
+// the same slug within one render.
+export const getPostBySlug = cache(
+    async (slug: string): Promise<Post | null> => {
+        const payload = await getPayload({ config });
 
-    const { docs } = await payload.find({
-        collection: POSTS_COLLECTION,
-        where: {
-            and: [
-                { slug: { equals: slug } },
-                { status: { equals: POST_STATUS.PUBLISHED } },
-            ],
-        },
-        limit: 1,
-        depth: 1,
-    });
+        const { docs } = await payload.find({
+            collection: POSTS_COLLECTION,
+            where: {
+                and: [
+                    { slug: { equals: slug } },
+                    { status: { equals: POST_STATUS.PUBLISHED } },
+                ],
+            },
+            limit: 1,
+            depth: 1,
+        });
 
-    return docs[0] ?? null;
-}
+        return docs[0] ?? null;
+    }
+);
