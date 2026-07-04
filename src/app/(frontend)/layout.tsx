@@ -2,6 +2,7 @@ import localFont from 'next/font/local';
 import { SITE_URL } from '@/constants/application.constants';
 import { PERSON_SCHEMA } from '@/data/seoSchema';
 import { JsonLd } from '@/components/JsonLd';
+import '@react95/fonts/serif/12pt';
 import '@/styles/globals.css';
 
 import type { Metadata, Viewport } from 'next';

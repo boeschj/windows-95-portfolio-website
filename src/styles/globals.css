@@ -236,6 +236,21 @@
     line-height: 1.6;
 }
 
+/* Reading body uses the authentic Win95 MS Serif bitmap face at its native
+   19px height; headings and chrome keep MS Sans Serif. Descendants (links,
+   bold, italic) are covered too so the global sans rule can't override them;
+   inline code keeps its higher-specificity monospace rule. */
+.notepad-prose p,
+.notepad-prose p *,
+.notepad-prose li,
+.notepad-prose li *,
+.notepad-prose blockquote,
+.notepad-prose blockquote *,
+.notepad-prose figcaption {
+    font-family: 'R95 Serif 12pt', 'Times New Roman', serif;
+    -webkit-font-smoothing: none;
+}
+
 .notepad-prose h1 {
     margin: 0 0 6px;
     font-size: 30px;
@@ -267,7 +282,7 @@
 
 .notepad-prose p {
     margin: 0 0 16px;
-    font-size: 17px;
+    font-size: 19px;
 }
 
 .notepad-prose a {
@@ -279,7 +294,7 @@
 .notepad-prose ol {
     margin: 0 0 16px;
     padding-left: 26px;
-    font-size: 17px;
+    font-size: 19px;
 }
 
 .notepad-prose ul {
@@ -328,7 +343,7 @@
 .notepad-prose blockquote {
     margin: 0 0 18px;
     padding: 8px 18px;
-    font-size: 17px;
+    font-size: 19px;
     font-style: italic;
     color: #333;
     background: #f6f6f6;

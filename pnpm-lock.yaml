@@ -23,6 +23,9 @@ importers:
       '@payloadcms/storage-s3':
         specifier: ^3.85.2
         version: 3.85.2(@types/react@19.2.17)(monaco-editor@0.55.1)(next@16.2.10(@babel/core@7.29.7)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(sass@1.97.3))(payload@3.85.2(graphql@16.14.2)(typescript@5.9.3))(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(typescript@5.9.3)
+      '@react95/fonts':
+        specifier: ^1.0.1
+        version: 1.0.1
       '@t3-oss/env-nextjs':
         specifier: ^0.13.11
         version: 0.13.11(typescript@5.9.3)(zod@4.4.3)
@@ -1396,6 +1399,9 @@ packages:
 
   '@preact/signals-core@1.14.3':
     resolution: {integrity: sha512-m0K3vnbSLC5rHs2ZVfeAMvBtT1zIyq4mxx5OlNncSgMj5Iz6W5Rn3kPrDxAC+iIKmiVe0lSl6U37t5ZkEWoVAw==}
+
+  '@react95/fonts@1.0.1':
+    resolution: {integrity: sha512-4/0XCB+fz2uqL+7foWOcCYcodVfPzXbJTTBcvCSa6kf+C2U38Tz7y53CnbR22stt3+g0P78s0EgMQIn1s3FEfw==}
 
   '@smithy/core@3.29.1':
     resolution: {integrity: sha512-qoiY4nrk5OCu1+eIR1VB8l5DmON/oKiqrd5zZFAhXJXjJlLWQusKEW/SkBDAtGDcPaz86m9kfcE1lngU0GlM6A==}
@@ -5325,6 +5331,8 @@ snapshots:
   '@pinojs/redact@0.4.0': {}
 
   '@preact/signals-core@1.14.3': {}
+
+  '@react95/fonts@1.0.1': {}
 
   '@smithy/core@3.29.1':
     dependencies:

@@ -26,6 +26,7 @@
         "@payloadcms/next": "^3.85.2",
         "@payloadcms/richtext-lexical": "^3.85.2",
         "@payloadcms/storage-s3": "^3.85.2",
+        "@react95/fonts": "^1.0.1",
         "@t3-oss/env-nextjs": "^0.13.11",
         "clsx": "^2.1.1",
         "graphql": "^16.14.2",
