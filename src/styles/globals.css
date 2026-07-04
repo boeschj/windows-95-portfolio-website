@@ -247,7 +247,7 @@
 .notepad-prose blockquote,
 .notepad-prose blockquote *,
 .notepad-prose figcaption {
-    font-family: 'R95 Serif 12pt', 'Times New Roman', serif;
+    font-family: 'R95 Serif 14pt', 'Times New Roman', serif;
     -webkit-font-smoothing: none;
 }
 
@@ -261,7 +261,8 @@
 .notepad-prose .notepad-meta {
     margin: 0 0 22px;
     padding-bottom: 14px;
-    font-size: 14px;
+    font-family: 'R95 Serif 10pt', 'Times New Roman', serif;
+    font-size: 16px;
     color: #555;
     border-bottom: 1px solid #c8c8c8;
 }
@@ -282,7 +283,7 @@
 
 .notepad-prose p {
     margin: 0 0 16px;
-    font-size: 19px;
+    font-size: 21px;
 }
 
 .notepad-prose a {
@@ -294,7 +295,7 @@
 .notepad-prose ol {
     margin: 0 0 16px;
     padding-left: 26px;
-    font-size: 19px;
+    font-size: 21px;
 }
 
 .notepad-prose ul {
@@ -343,7 +344,7 @@
 .notepad-prose blockquote {
     margin: 0 0 18px;
     padding: 8px 18px;
-    font-size: 19px;
+    font-size: 21px;
     font-style: italic;
     color: #333;
     background: #f6f6f6;
