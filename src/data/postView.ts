@@ -1,3 +1,5 @@
+import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext';
+
 import type { Post } from '@/payload-types';
 
 export const MARKDOWN_FILE_TYPE = 'Markdown File';
@@ -60,7 +62,7 @@ export function fileCountLabel(count: number): string {
 }
 
 export function postDescription(post: Post): string {
-    const text = collectText(post.content?.root).replace(/\s+/g, ' ').trim();
+    const text = postPlainText(post).replace(/\s+/g, ' ').trim();
 
     if (text.length <= DESCRIPTION_MAX_LENGTH) {
         return text;
@@ -101,32 +103,20 @@ function formatPostDate(post: Post): string {
 }
 
 function formatReadTime(post: Post): string {
-    const words = countWords(post.content?.root);
+    const words = countWords(post);
     const minutes = Math.max(1, Math.ceil(words / WORDS_PER_MINUTE));
 
     return `${String(minutes)} min read`;
 }
 
-function countWords(node: unknown): number {
-    return collectText(node).trim().split(/\s+/).filter(Boolean).length;
+function countWords(post: Post): number {
+    return postPlainText(post).trim().split(/\s+/).filter(Boolean).length;
 }
 
-function collectText(node: unknown): string {
-    if (typeof node !== 'object' || node === null) {
+function postPlainText(post: Post): string {
+    if (!post.content) {
         return '';
     }
 
-    let text = '';
-
-    if ('text' in node && typeof node.text === 'string') {
-        text += `${node.text} `;
-    }
-
-    if ('children' in node && Array.isArray(node.children)) {
-        for (const child of node.children) {
-            text += collectText(child);
-        }
-    }
-
-    return text;
+    return convertLexicalToPlaintext({ data: post.content });
 }
