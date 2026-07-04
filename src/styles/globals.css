@@ -346,7 +346,10 @@
     font-smooth: never;
 }
 
-.notepad-code pre code {
+/* Shiki wraps every token in a <span>; the global `*` sans rule targets those
+   spans directly, so they must be pulled back to the code font explicitly. */
+.notepad-code pre code,
+.notepad-code pre code * {
     font-family: inherit;
     background: none;
 }
