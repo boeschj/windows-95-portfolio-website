@@ -12,6 +12,11 @@ import type { BlogListItem } from '@/data/postView';
 const SORT_DIRECTION = { asc: 'asc', desc: 'desc' } as const;
 type SortDirection = (typeof SORT_DIRECTION)[keyof typeof SORT_DIRECTION];
 
+const TOUCH_POINTER_QUERY = '(pointer: coarse)';
+
+const isTouchPrimaryDevice = () =>
+    window.matchMedia(TOUCH_POINTER_QUERY).matches;
+
 const COLUMNS = [
     { key: 'name', label: 'Name', className: 'flex flex-1 min-w-0' },
     { key: 'size', label: 'Size', className: 'hidden w-[90px] md:flex' },
@@ -233,12 +238,20 @@ function PostRow({
     onOpen,
     onKeyDown,
 }: PostRowProps) {
+    const handleClick = () => {
+        if (isTouchPrimaryDevice()) {
+            onOpen(item.slug);
+            return;
+        }
+        onSelect();
+    };
+
     return (
         <div
             role="option"
             aria-selected={isSelected}
             tabIndex={isActive ? 0 : -1}
-            onClick={onSelect}
+            onClick={handleClick}
             onDoubleClick={() => {
                 onOpen(item.slug);
             }}
