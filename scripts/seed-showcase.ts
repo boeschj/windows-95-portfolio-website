@@ -106,10 +106,7 @@ const run = async () => {
         markdown: markdown.replace(/—/g, '-'),
     });
     convertFencedParagraphs(content);
-    insertImagesAfterHeadings(content, [
-        'The moving parts',
-        'Failure modes',
-    ]);
+    insertImagesAfterHeadings(content, ['The moving parts', 'Failure modes']);
 
     const existing = await payload.find({
         collection: 'posts',
@@ -164,10 +161,13 @@ function convertFencedParagraphs(content: {
             return node;
         }
 
-        const language = (first.text ?? '').replace(/^```/, '').trim() || 'text';
+        const language =
+            (first.text ?? '').replace(/^```/, '').trim() || 'text';
         const codeChildren = node.children
             .slice(1)
-            .filter((child) => !(child.type === 'text' && child.text === '```'));
+            .filter(
+                (child) => !(child.type === 'text' && child.text === '```')
+            );
 
         while (codeChildren[0]?.type === 'linebreak') {
             codeChildren.shift();

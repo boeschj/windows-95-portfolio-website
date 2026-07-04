@@ -22,78 +22,76 @@ export default async function BlogPostOgImage({ params }: OgImageProps) {
     const fontData = await readFile(FONT_PATH);
 
     return new ImageResponse(
-        (
+        <div
+            style={{
+                display: 'flex',
+                height: '100%',
+                width: '100%',
+                padding: '64px',
+                background: '#55aaaa',
+                fontFamily: 'MS Sans Serif',
+            }}
+        >
             <div
                 style={{
                     display: 'flex',
-                    height: '100%',
+                    flexDirection: 'column',
                     width: '100%',
-                    padding: '64px',
-                    background: '#55aaaa',
-                    fontFamily: 'MS Sans Serif',
+                    padding: '4px',
+                    background: '#c0c4c8',
+                    borderTop: '3px solid #fff',
+                    borderLeft: '3px solid #fff',
+                    borderRight: '3px solid #000',
+                    borderBottom: '3px solid #000',
                 }}
             >
                 <div
                     style={{
                         display: 'flex',
+                        alignItems: 'center',
+                        padding: '12px 18px',
+                        background: '#0000a8',
+                        color: '#fff',
+                        fontSize: 30,
+                        fontWeight: 700,
+                    }}
+                >
+                    {windowTitle}
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
                         flexDirection: 'column',
-                        width: '100%',
-                        padding: '4px',
-                        background: '#c0c4c8',
-                        borderTop: '3px solid #fff',
-                        borderLeft: '3px solid #fff',
-                        borderRight: '3px solid #000',
-                        borderBottom: '3px solid #000',
+                        flex: 1,
+                        justifyContent: 'center',
+                        padding: '64px',
+                        background: '#fff',
                     }}
                 >
                     <div
                         style={{
                             display: 'flex',
-                            alignItems: 'center',
-                            padding: '12px 18px',
-                            background: '#0000a8',
-                            color: '#fff',
-                            fontSize: 30,
-                            fontWeight: 700,
+                            fontSize: 72,
+                            fontWeight: 800,
+                            lineHeight: 1.1,
+                            color: '#000',
                         }}
                     >
-                        {windowTitle}
+                        {title}
                     </div>
                     <div
                         style={{
                             display: 'flex',
-                            flexDirection: 'column',
-                            flex: 1,
-                            justifyContent: 'center',
-                            padding: '64px',
-                            background: '#fff',
+                            marginTop: 36,
+                            fontSize: 32,
+                            color: '#555',
                         }}
                     >
-                        <div
-                            style={{
-                                display: 'flex',
-                                fontSize: 72,
-                                fontWeight: 800,
-                                lineHeight: 1.1,
-                                color: '#000',
-                            }}
-                        >
-                            {title}
-                        </div>
-                        <div
-                            style={{
-                                display: 'flex',
-                                marginTop: 36,
-                                fontSize: 32,
-                                color: '#555',
-                            }}
-                        >
-                            {BLOG_AUTHOR}
-                        </div>
+                        {BLOG_AUTHOR}
                     </div>
                 </div>
             </div>
-        ),
+        </div>,
         {
             ...size,
             fonts: [

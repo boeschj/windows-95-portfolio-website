@@ -1,11 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import {
-    TAB_QUERY_PARAM,
-    getTabByRoute,
-    hrefForTab,
-} from '@/config/tabs';
+import { TAB_QUERY_PARAM, getTabByRoute, hrefForTab } from '@/config/tabs';
 
 import type { Tab, TabRoute } from '@/config/tabs';
 

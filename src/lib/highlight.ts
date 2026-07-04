@@ -15,6 +15,9 @@ export async function highlightCode(
         return await codeToHtml(code, { lang, theme: THEME });
     } catch {
         // Unknown/unsupported language falls back to plain text.
-        return await codeToHtml(code, { lang: FALLBACK_LANGUAGE, theme: THEME });
+        return await codeToHtml(code, {
+            lang: FALLBACK_LANGUAGE,
+            theme: THEME,
+        });
     }
 }

@@ -30,7 +30,8 @@ const ARROW = {
 
 type ArrowDirection = keyof typeof ARROW;
 
-const THUMB_CLASS = 'win95-scroll-thumb win95-border-raised bg-windows-gray flex-1';
+const THUMB_CLASS =
+    'win95-scroll-thumb win95-border-raised bg-windows-gray flex-1';
 
 interface Win95ScrollAreaProps {
     children: React.ReactNode;
@@ -49,7 +50,10 @@ export function Win95ScrollArea({
 
     return (
         <ScrollArea.Root className="h-full w-full">
-            <ScrollArea.Viewport ref={viewportRef} className={viewportClassName}>
+            <ScrollArea.Viewport
+                ref={viewportRef}
+                className={viewportClassName}
+            >
                 <ScrollArea.Content>{children}</ScrollArea.Content>
             </ScrollArea.Viewport>
 

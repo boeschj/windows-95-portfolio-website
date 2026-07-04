@@ -26,7 +26,7 @@ export async function PostReader({ post }: PostReaderProps) {
     await highlightCodeNodes(post.content);
 
     return (
-        <div className="bg-windows-gray fixed inset-0 flex flex-col overflow-hidden md:pb-taskbar-height">
+        <div className="bg-windows-gray md:pb-taskbar-height fixed inset-0 flex flex-col overflow-hidden">
             <div className="win95-border-raised bg-windows-gray flex min-h-0 flex-1 flex-col">
                 <TitleBar title={windowTitle} />
                 <MenuBar />
@@ -92,8 +92,7 @@ function findCodeNodes(value: unknown): CodeNode[] {
     const fromChildren = Array.isArray(node.children)
         ? node.children.flatMap(findCodeNodes)
         : [];
-    const fromRoot =
-        node.root !== undefined ? findCodeNodes(node.root) : [];
+    const fromRoot = node.root !== undefined ? findCodeNodes(node.root) : [];
 
     return [...self, ...fromChildren, ...fromRoot];
 }
@@ -175,7 +174,11 @@ function TitleBarButton({ kind }: { kind: 'minimize' | 'maximize' }) {
 
 function CloseButton() {
     return (
-        <Link href={BLOG_HREF} aria-label="Close" className={TITLE_BUTTON_CLASS}>
+        <Link
+            href={BLOG_HREF}
+            aria-label="Close"
+            className={TITLE_BUTTON_CLASS}
+        >
             <svg width="8" height="8" viewBox="0 0 8 8" aria-hidden="true">
                 <path
                     d="M0.5 0.5 L7.5 7.5 M7.5 0.5 L0.5 7.5"
@@ -213,4 +216,3 @@ function NotepadTaskbarButton({ title }: { title: string }) {
         </Link>
     );
 }
-
