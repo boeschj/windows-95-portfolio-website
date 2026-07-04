@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fileCountLabel } from '@/data/postView';
 import { cn } from '@/utils';
+import { Win95ScrollArea } from '@/components/Win95ScrollArea';
 import { DocumentIcon } from './DocumentIcon';
 
 import type { BlogListItem } from '@/data/postView';
@@ -71,24 +72,20 @@ export function BlogExplorer({ items }: BlogExplorerProps) {
 
     return (
         <div className="bg-windows-gray flex min-h-0 flex-1 flex-col">
-            <div className="flex min-h-0 flex-1">
-                <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-                    <ColumnHeaderRow
-                        sortKey={sortKey}
-                        sortDirection={sortDirection}
-                        onSort={handleSort}
+            <ColumnHeaderRow
+                sortKey={sortKey}
+                sortDirection={sortDirection}
+                onSort={handleSort}
+            />
+            <div className="min-h-0 flex-1">
+                <Win95ScrollArea viewportClassName="bg-white">
+                    <PostRows
+                        items={sortedItems}
+                        selectedSlug={selectedSlug}
+                        onSelect={setSelectedSlug}
+                        onOpen={openPost}
                     />
-                    <div className="hide-native-scrollbar min-h-0 flex-1 overflow-x-hidden overflow-y-auto bg-white">
-                        <PostRows
-                            items={sortedItems}
-                            selectedSlug={selectedSlug}
-                            onSelect={setSelectedSlug}
-                            onOpen={openPost}
-                        />
-                    </div>
-                    <HorizontalScrollbar />
-                </div>
-                <VerticalScrollbar />
+                </Win95ScrollArea>
             </div>
             <StatusBar count={items.length} />
         </div>
@@ -276,72 +273,6 @@ function StatusBar({ count }: { count: number }) {
             <div className="win95-status-panel relative w-[200px] px-[10px] py-[2px]">
                 <ResizeGrip />
             </div>
-        </div>
-    );
-}
-
-const VERTICAL_SCROLL_THUMB_HEIGHT_PX = 80;
-const HORIZONTAL_SCROLL_THUMB_WIDTH_PX = 70;
-
-function VerticalScrollbar() {
-    return (
-        <div className="flex w-5 flex-none flex-col">
-            <ScrollButton direction="up" />
-            <div className="win95-scrollbar-track relative flex-1">
-                <div
-                    className="win95-thin-raised bg-windows-gray absolute inset-x-0 top-0"
-                    style={{ height: VERTICAL_SCROLL_THUMB_HEIGHT_PX }}
-                />
-            </div>
-            <ScrollButton direction="down" />
-        </div>
-    );
-}
-
-function HorizontalScrollbar() {
-    return (
-        <div className="flex h-5 flex-none">
-            <ScrollButton direction="left" />
-            <div className="win95-scrollbar-track relative flex-1">
-                <div
-                    className="win95-thin-raised bg-windows-gray absolute inset-y-0 left-0"
-                    style={{ width: HORIZONTAL_SCROLL_THUMB_WIDTH_PX }}
-                />
-            </div>
-            <ScrollButton direction="right" />
-        </div>
-    );
-}
-
-const TRIANGLE_STYLES = {
-    up: {
-        borderLeft: '4px solid transparent',
-        borderRight: '4px solid transparent',
-        borderBottom: '5px solid #000',
-    },
-    down: {
-        borderLeft: '4px solid transparent',
-        borderRight: '4px solid transparent',
-        borderTop: '5px solid #000',
-    },
-    left: {
-        borderTop: '4px solid transparent',
-        borderBottom: '4px solid transparent',
-        borderRight: '5px solid #000',
-    },
-    right: {
-        borderTop: '4px solid transparent',
-        borderBottom: '4px solid transparent',
-        borderLeft: '5px solid #000',
-    },
-} as const;
-
-type ScrollDirection = keyof typeof TRIANGLE_STYLES;
-
-function ScrollButton({ direction }: { direction: ScrollDirection }) {
-    return (
-        <div className="win95-thin-raised bg-windows-gray flex size-5 flex-none items-center justify-center">
-            <span className="block h-0 w-0" style={TRIANGLE_STYLES[direction]} />
         </div>
     );
 }
