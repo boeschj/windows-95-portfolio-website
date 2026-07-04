@@ -65,7 +65,7 @@ const ACTIVE_TAB_BOTTOM_BORDER_COVER = `
     after:absolute
     after:bottom-[-4px]
     after:left-0
-    after:right-0
+    after:right-[-1px]
     after:z-30
     after:h-[7px]
     after:border-l-[1px]
