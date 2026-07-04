@@ -130,6 +130,75 @@
             )
             0 0 / 2px 2px;
     }
+
+    .win95-header-button {
+        box-shadow:
+            inset -1px -1px #000,
+            inset -2px -2px #808080,
+            inset 1px 1px #fff,
+            inset 2px 2px #dfdfdf;
+    }
+
+    .win95-header-button:active {
+        box-shadow:
+            inset 1px 1px #000,
+            inset 2px 2px #808080,
+            inset -1px -1px #fff,
+            inset -2px -2px #dfdfdf;
+    }
+
+    .win95-thin-raised {
+        box-shadow:
+            inset -1px -1px #000,
+            inset -2px -2px #808080,
+            inset 1px 1px #fff,
+            inset 2px 2px #dfdfdf;
+    }
+
+    .win95-thin-sunken {
+        box-shadow:
+            inset -1px -1px #fff,
+            inset -2px -2px #dfdfdf,
+            inset 1px 1px #000,
+            inset 2px 2px #808080;
+    }
+
+    .win95-status-panel {
+        box-shadow:
+            inset -1px -1px #fff,
+            inset -2px -2px #dfdfdf,
+            inset 1px 1px #808080,
+            inset 2px 2px #c0c4c8;
+    }
+}
+
+.hide-native-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.hide-native-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.blog-row {
+    outline: none;
+}
+
+.blog-filename-selected {
+    background: var(--color-windows-blue);
+    color: #fff;
+    outline: 1px dotted #fff;
+    outline-offset: -1px;
+}
+
+.win95-scrollbar-track[data-orientation='vertical']:not([data-has-overflow-y])
+    .win95-scroll-thumb,
+.win95-scrollbar-track[data-orientation='horizontal']:not(
+        [data-has-overflow-x]
+    )
+    .win95-scroll-thumb {
+    visibility: hidden;
 }
 
 * {
@@ -148,4 +217,125 @@
 ::selection {
     background-color: var(--color-windows-blue);
     color: white;
+}
+
+.notepad-prose {
+    color: #000;
+    line-height: 1.5;
+}
+
+.notepad-prose h1 {
+    margin: 0 0 6px;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.notepad-prose .notepad-meta {
+    margin: 0 0 22px;
+    padding-bottom: 14px;
+    font-size: 14px;
+    color: #555;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+.notepad-prose h2 {
+    margin: 26px 0 10px;
+    padding-bottom: 4px;
+    font-size: 22px;
+    font-weight: 800;
+    border-bottom: 2px solid #000;
+}
+
+.notepad-prose h3 {
+    margin: 22px 0 8px;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.notepad-prose p {
+    margin: 0 0 16px;
+    font-size: 17px;
+}
+
+.notepad-prose a {
+    color: var(--color-windows-blue);
+    text-decoration: underline;
+}
+
+.notepad-prose ul,
+.notepad-prose ol {
+    margin: 0 0 16px;
+    padding-left: 26px;
+    font-size: 17px;
+}
+
+.notepad-prose ul {
+    list-style: disc;
+}
+
+.notepad-prose ol {
+    list-style: decimal;
+}
+
+.notepad-prose li {
+    margin-bottom: 6px;
+}
+
+.notepad-prose :not(pre) > code {
+    padding: 1px 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    background: #eceff1;
+    box-shadow: inset 0 0 0 1px #cdd3d6;
+}
+
+.notepad-prose pre {
+    margin: 0 0 18px;
+    padding: 16px 18px;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #1a1a1a;
+    background: #f4f4f4;
+    box-shadow:
+        inset -1px -1px #fff,
+        inset -2px -2px #dfdfdf,
+        inset 1px 1px #808080,
+        inset 2px 2px #c0c4c8;
+}
+
+.notepad-prose pre code {
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    font-size: inherit;
+}
+
+.notepad-prose blockquote {
+    margin: 0 0 18px;
+    padding: 8px 18px;
+    font-size: 17px;
+    font-style: italic;
+    color: #333;
+    background: #f6f6f6;
+    border-left: 4px solid #84888c;
+}
+
+.notepad-prose figure {
+    margin: 22px 0;
+    text-align: center;
+}
+
+.notepad-prose img {
+    max-width: 100%;
+    height: auto;
+}
+
+.notepad-prose figcaption {
+    margin-top: 8px;
+    font-size: 13px;
+    font-style: italic;
+    color: #666;
 }

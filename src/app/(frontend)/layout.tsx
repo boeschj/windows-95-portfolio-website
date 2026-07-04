@@ -1,5 +1,4 @@
 import localFont from 'next/font/local';
-import { Provider } from 'jotai';
 import '@/styles/globals.css';
 
 import type { Metadata, Viewport } from 'next';
@@ -51,9 +50,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className={msSansSerif.variable}>
-            <body>
-                <Provider>{children}</Provider>
-            </body>
+            <body>{children}</body>
         </html>
     );
 }

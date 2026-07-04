@@ -2,23 +2,22 @@
 
 import Image from 'next/image';
 import { Menu } from '@base-ui/react/menu';
-import { useSetAtom } from 'jotai';
-import { tabSelectedAtom } from '@/store';
 import { TABS } from '@/config/tabs';
+import { useTabRoute } from '@/hooks/useTabRoute';
 import { links } from '@/config/aboutMe';
 import { IMAGE_PATH } from '@/constants/application.constants';
 import { Button } from '@/components/buttons/Button';
 
-import type { TabKey } from '@/config/tabs';
+import type { TabRoute } from '@/config/tabs';
 
 const MENU_ITEM_CLASS =
     'data-[highlighted]:bg-windows-blue flex h-10 w-full cursor-pointer items-center justify-center text-xl data-[highlighted]:text-white';
 
 export function StartMenu() {
-    const setTabSelected = useSetAtom(tabSelectedAtom);
+    const { selectTab } = useTabRoute();
 
-    const handleTabSelection = (tabKey: TabKey) => () => {
-        setTabSelected(tabKey);
+    const handleTabSelection = (route: TabRoute) => () => {
+        selectTab(route);
     };
 
     return (
@@ -46,7 +45,7 @@ export function StartMenu() {
                         {TABS.map((tab) => (
                             <Menu.Item
                                 key={tab.key}
-                                onClick={handleTabSelection(tab.key)}
+                                onClick={handleTabSelection(tab.route)}
                                 className={MENU_ITEM_CLASS}
                             >
                                 {tab.label}
