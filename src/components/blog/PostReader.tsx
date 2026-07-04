@@ -7,6 +7,7 @@ import { NotepadIcon } from './NotepadIcon';
 import { hrefForTab } from '@/config/tabs';
 
 import type { Post } from '@/payload-types';
+import type { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react';
 
 const BLOG_HREF = hrefForTab('blog');
 const NOTEPAD_TITLE_SUFFIX = ' - Notepad';
@@ -42,12 +43,49 @@ export function PostReader({ post }: PostReaderProps) {
     );
 }
 
+function collectCodeText(node: unknown): string {
+    if (
+        typeof node !== 'object' ||
+        node === null ||
+        !('children' in node) ||
+        !Array.isArray(node.children)
+    ) {
+        return '';
+    }
+
+    return node.children
+        .map((child: unknown) => {
+            if (typeof child !== 'object' || child === null) {
+                return '';
+            }
+            if ('type' in child && child.type === 'linebreak') {
+                return '\n';
+            }
+            if ('text' in child && typeof child.text === 'string') {
+                return child.text;
+            }
+            return '';
+        })
+        .join('');
+}
+
+const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
+    ...defaultConverters,
+    code: ({ node }) => <pre>{collectCodeText(node)}</pre>,
+});
+
 function PostBody({ post }: PostReaderProps) {
     if (!post.content) {
         return <p>This post has no content yet.</p>;
     }
 
-    return <RichText data={post.content} disableContainer />;
+    return (
+        <RichText
+            data={post.content}
+            disableContainer
+            converters={jsxConverters}
+        />
+    );
 }
 
 function TitleBar({ title }: { title: string }) {
