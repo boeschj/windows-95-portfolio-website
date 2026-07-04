@@ -1,4 +1,5 @@
 import localFont from 'next/font/local';
+import { SITE_URL } from '@/constants/application.constants';
 import '@/styles/globals.css';
 
 import type { Metadata, Viewport } from 'next';
@@ -18,6 +19,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+    metadataBase: new URL(SITE_URL),
     title: "Jordan's Portfolio Site",
     description: "Jordan's portfolio site.",
     creator: 'Jordan Boesch',

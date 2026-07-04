@@ -6,6 +6,7 @@ export const BLOG_AUTHOR = 'Jordan Boesch';
 const BYTES_PER_KILOBYTE = 1024;
 const WORDS_PER_MINUTE = 200;
 const META_SEPARATOR = ' · ';
+const DESCRIPTION_MAX_LENGTH = 155;
 
 export interface BlogListItem {
     slug: string;
@@ -58,6 +59,16 @@ export function fileCountLabel(count: number): string {
     return `${String(count)} file(s) found`;
 }
 
+export function postDescription(post: Post): string {
+    const text = collectText(post.content?.root).replace(/\s+/g, ' ').trim();
+
+    if (text.length <= DESCRIPTION_MAX_LENGTH) {
+        return text;
+    }
+
+    return `${text.slice(0, DESCRIPTION_MAX_LENGTH).trimEnd()}…`;
+}
+
 function contentSizeBytes(post: Post): number {
     return JSON.stringify(post.content ?? {}).length;
 }
@@ -97,21 +108,25 @@ function formatReadTime(post: Post): string {
 }
 
 function countWords(node: unknown): number {
+    return collectText(node).trim().split(/\s+/).filter(Boolean).length;
+}
+
+function collectText(node: unknown): string {
     if (typeof node !== 'object' || node === null) {
-        return 0;
+        return '';
     }
 
-    let words = 0;
+    let text = '';
 
     if ('text' in node && typeof node.text === 'string') {
-        words += node.text.trim().split(/\s+/).filter(Boolean).length;
+        text += `${node.text} `;
     }
 
     if ('children' in node && Array.isArray(node.children)) {
         for (const child of node.children) {
-            words += countWords(child);
+            text += collectText(child);
         }
     }
 
-    return words;
+    return text;
 }

@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getPostBySlug, getPublishedSlugs } from '@/data/posts';
+import { BLOG_AUTHOR, postDescription } from '@/data/postView';
 import { PostReader } from '@/components/blog/PostReader';
 
 import type { Metadata } from 'next';
@@ -26,7 +27,29 @@ export async function generateMetadata({
         return {};
     }
 
-    return { title: `${post.title} — Jordan Boesch` };
+    const description = postDescription(post);
+    const canonicalUrl = `/blog/${slug}`;
+
+    return {
+        title: `${post.title} — ${BLOG_AUTHOR}`,
+        description,
+        alternates: { canonical: canonicalUrl },
+        openGraph: {
+            type: 'article',
+            title: post.title,
+            description,
+            url: canonicalUrl,
+            siteName: `${BLOG_AUTHOR} — Blog`,
+            publishedTime: post.publishedAt ?? undefined,
+            modifiedTime: post.updatedAt,
+            authors: [BLOG_AUTHOR],
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: post.title,
+            description,
+        },
+    };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
