@@ -17,6 +17,18 @@ const msSansSerif = localFont({
     display: 'swap',
 });
 
+const fixedsys = localFont({
+    src: [
+        {
+            path: '../../../public/fonts/Fixedsys-Excelsior.woff',
+            weight: '400',
+        },
+        { path: '../../../public/fonts/Fixedsys-Excelsior.ttf', weight: '400' },
+    ],
+    variable: '--font-fixedsys',
+    display: 'swap',
+});
+
 export const viewport: Viewport = {
     width: 'device-width',
     initialScale: 1,
@@ -55,7 +67,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en" className={msSansSerif.variable}>
+        <html
+            lang="en"
+            className={`${msSansSerif.variable} ${fixedsys.variable}`}
+        >
             <body>
                 <JsonLd data={PERSON_SCHEMA} />
                 {children}

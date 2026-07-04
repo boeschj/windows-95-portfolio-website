@@ -25,7 +25,7 @@ export function CopyButton({ code }: CopyButtonProps) {
             type="button"
             onClick={handleCopy}
             aria-label="Copy code"
-            className="win95-thin-raised bg-windows-gray absolute top-[6px] right-[6px] z-10 px-2 py-[1px] text-[13px] text-black"
+            className="notepad-copy-button bg-windows-gray absolute top-[6px] right-[6px] z-10 px-2 py-[1px] text-[13px] text-black"
         >
             {copied ? 'Copied' : 'Copy'}
         </button>

@@ -263,8 +263,8 @@
     padding-bottom: 14px;
     font-family: 'R95 Serif 10pt', 'Times New Roman', serif;
     font-size: 16px;
-    color: #555;
-    border-bottom: 1px solid #c8c8c8;
+    color: #333;
+    border-bottom: 1px solid #808080;
 }
 
 .notepad-prose h2 {
@@ -311,11 +311,13 @@
 }
 
 .notepad-prose :not(pre) > code {
-    padding: 1px 5px;
-    font-family: 'Courier New', monospace;
-    font-size: 15px;
-    background: #eceff1;
-    box-shadow: inset 0 0 0 1px #cdd3d6;
+    padding: 0 6px;
+    font-family: var(--font-fixedsys), 'Courier New', monospace;
+    font-size: 18px;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    background: #dfe3e6;
+    box-shadow: inset 0 0 0 1px #808080;
 }
 
 .notepad-code {
@@ -337,14 +339,36 @@
 .notepad-code pre {
     margin: 0;
     background: transparent !important;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 1.55;
+    font-family: var(--font-fixedsys), 'Courier New', monospace;
+    font-size: 17px;
+    line-height: 1.5;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
 }
 
 .notepad-code pre code {
     font-family: inherit;
     background: none;
+}
+
+/* Raised until pressed, then sinks and nudges 1px down-right like a real
+   Win95 button. Mirrors .win95-header-button:active from the components layer. */
+.notepad-copy-button {
+    box-shadow:
+        inset -1px -1px #000,
+        inset -2px -2px #808080,
+        inset 1px 1px #fff,
+        inset 2px 2px #dfdfdf;
+    transition: transform 60ms ease-out;
+}
+
+.notepad-copy-button:active {
+    box-shadow:
+        inset 1px 1px #000,
+        inset 2px 2px #808080,
+        inset -1px -1px #fff,
+        inset -2px -2px #dfdfdf;
+    transform: translate(1px, 1px);
 }
 
 .notepad-prose blockquote {
