@@ -23,7 +23,7 @@ export async function PostReader({ post }: PostReaderProps) {
     const { filename, title, metaLine } = toPostView(post);
     const windowTitle = `${filename}${NOTEPAD_TITLE_SUFFIX}`;
 
-    await highlightCodeNodes(post.content);
+    const highlights = await buildHighlightMap(post.content);
 
     return (
         <div className="bg-windows-gray md:pb-taskbar-height fixed inset-0 flex flex-col overflow-hidden">
@@ -35,7 +35,7 @@ export async function PostReader({ post }: PostReaderProps) {
                         <article className="notepad-prose">
                             <h1>{title}</h1>
                             <p className="notepad-meta">{metaLine}</p>
-                            <PostBody post={post} />
+                            <PostBody post={post} highlights={highlights} />
                         </article>
                     </Win95ScrollArea>
                 </div>
@@ -52,9 +52,14 @@ interface CodeNode {
     language?: string;
     root?: unknown;
     children?: unknown[];
-    highlightedHtml?: string;
-    rawCode?: string;
 }
+
+interface HighlightedCode {
+    html: string;
+    code: string;
+}
+
+type HighlightMap = WeakMap<CodeNode, HighlightedCode>;
 
 function asNode(value: unknown): CodeNode | null {
     return typeof value === 'object' && value !== null ? value : null;
@@ -97,37 +102,47 @@ function findCodeNodes(value: unknown): CodeNode[] {
     return [...self, ...fromChildren, ...fromRoot];
 }
 
-// Highlighting is async (Shiki), so it runs here at render/build time and the
-// result is stashed on each code node for the synchronous JSX converter below.
-async function highlightCodeNodes(content: unknown): Promise<void> {
+// Highlighting is async (Shiki), so it runs at render/build time and the result
+// is keyed off each code node in a side map — the node objects are never
+// mutated, so a shared/ISR-cached post object stays untouched.
+async function buildHighlightMap(content: unknown): Promise<HighlightMap> {
+    const highlights: HighlightMap = new WeakMap();
     const codeNodes = findCodeNodes(content);
 
     await Promise.all(
         codeNodes.map(async (node) => {
             const code = collectCodeText(node);
-            node.rawCode = code;
-            node.highlightedHtml = await highlightCode(
+            const html = await highlightCode(
                 code,
                 typeof node.language === 'string' ? node.language : 'text'
             );
+            highlights.set(node, { html, code });
         })
     );
+
+    return highlights;
 }
 
-const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
-    ...defaultConverters,
-    code: ({ node }) => {
-        const codeNode = asNode(node);
-        return (
-            <CodeBlock
-                html={codeNode?.highlightedHtml ?? ''}
-                code={codeNode?.rawCode ?? ''}
-            />
-        );
-    },
-});
+function createCodeConverters(highlights: HighlightMap): JSXConvertersFunction {
+    return ({ defaultConverters }) => ({
+        ...defaultConverters,
+        code: ({ node }) => {
+            const codeNode = asNode(node);
+            const highlighted = codeNode ? highlights.get(codeNode) : undefined;
+            const code =
+                highlighted?.code ??
+                (codeNode ? collectCodeText(codeNode) : '');
+            return <CodeBlock html={highlighted?.html ?? ''} code={code} />;
+        },
+    });
+}
 
-function PostBody({ post }: PostReaderProps) {
+interface PostBodyProps {
+    post: Post;
+    highlights: HighlightMap;
+}
+
+function PostBody({ post, highlights }: PostBodyProps) {
     if (!post.content) {
         return <p>This post has no content yet.</p>;
     }
@@ -136,7 +151,7 @@ function PostBody({ post }: PostReaderProps) {
         <RichText
             data={post.content}
             disableContainer
-            converters={jsxConverters}
+            converters={createCodeConverters(highlights)}
         />
     );
 }
