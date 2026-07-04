@@ -180,6 +180,13 @@
     min-width: 0 !important;
 }
 
+/* base-ui positions the scrollbar as an absolute overlay; make it an in-flow
+   flex channel instead so the viewport reserves real space beside it and
+   content never runs underneath the scrollbar. */
+.win95-scrollbar-track {
+    position: relative !important;
+}
+
 .hide-native-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;

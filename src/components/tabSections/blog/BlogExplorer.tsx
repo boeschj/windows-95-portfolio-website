@@ -262,7 +262,7 @@ function PostRow({
                 <DocumentIcon />
                 <span
                     className={cn(
-                        'inline-flex items-center px-[3px] whitespace-nowrap',
+                        'min-w-0 truncate px-[3px]',
                         isSelected && 'blog-filename-selected'
                     )}
                 >

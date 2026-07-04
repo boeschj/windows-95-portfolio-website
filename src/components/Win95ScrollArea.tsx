@@ -49,10 +49,10 @@ export function Win95ScrollArea({
     };
 
     return (
-        <ScrollArea.Root className="h-full w-full">
+        <ScrollArea.Root className="flex h-full w-full">
             <ScrollArea.Viewport
                 ref={viewportRef}
-                className={viewportClassName}
+                className={cn('min-w-0 flex-1', viewportClassName)}
             >
                 <ScrollArea.Content className="win95-scroll-content">
                     {children}
