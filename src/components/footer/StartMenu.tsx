@@ -13,6 +13,31 @@ import type { TabRoute } from '@/config/tabs';
 const MENU_ITEM_CLASS =
     'data-[highlighted]:bg-windows-blue flex h-10 w-full cursor-pointer items-center justify-center text-xl data-[highlighted]:text-white';
 
+const START_BUTTON_CLASS =
+    'flex h-[28px] cursor-pointer items-center justify-center space-x-2 px-1 pb-1 text-lg font-[1100] tracking-wide';
+
+function StartButtonContent() {
+    return (
+        <>
+            <Image
+                src={`${IMAGE_PATH}/icons/win_95.svg`}
+                alt="Win95"
+                height="28"
+                width="28"
+            />
+            <div>Start</div>
+        </>
+    );
+}
+
+export function StartMenuFallback() {
+    return (
+        <Button className={START_BUTTON_CLASS}>
+            <StartButtonContent />
+        </Button>
+    );
+}
+
 export function StartMenu() {
     const { selectTab } = useTabRoute();
 
@@ -27,15 +52,9 @@ export function StartMenu() {
                     <Button
                         {...triggerProps}
                         pressed={state.open}
-                        className="flex h-[28px] cursor-pointer items-center justify-center space-x-2 px-1 pb-1 text-lg font-[1100] tracking-wide"
+                        className={START_BUTTON_CLASS}
                     >
-                        <Image
-                            src={`${IMAGE_PATH}/icons/win_95.svg`}
-                            alt="Win95"
-                            height="28"
-                            width="28"
-                        />
-                        <div>Start</div>
+                        <StartButtonContent />
                     </Button>
                 )}
             />

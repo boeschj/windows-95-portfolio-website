@@ -1,9 +1,42 @@
-import type { Access, CollectionConfig } from 'payload';
+import type {
+    Access,
+    CollectionAfterChangeHook,
+    CollectionAfterDeleteHook,
+    CollectionConfig,
+} from 'payload';
+import type { Post } from '@/payload-types';
 
 export const POST_STATUS = {
     DRAFT: 'draft',
     PUBLISHED: 'published',
 } as const;
+
+const BLOG_INDEX_PATH = '/';
+
+async function revalidatePostPaths(slug: string) {
+    try {
+        const { revalidatePath } = await import('next/cache');
+        revalidatePath(BLOG_INDEX_PATH);
+        revalidatePath(`/blog/${slug}`);
+    } catch {
+        // revalidatePath only works inside the Next.js request context (the
+        // admin API routes); ignore when Payload runs elsewhere (CLI, seeds).
+    }
+}
+
+const revalidateAfterChange: CollectionAfterChangeHook<Post> = async ({
+    doc,
+}) => {
+    await revalidatePostPaths(doc.slug);
+    return doc;
+};
+
+const revalidateAfterDelete: CollectionAfterDeleteHook<Post> = async ({
+    doc,
+}) => {
+    await revalidatePostPaths(doc.slug);
+    return doc;
+};
 
 const POST_STATUS_OPTIONS = [
     { label: 'Draft', value: POST_STATUS.DRAFT },
@@ -31,6 +64,10 @@ export const Posts: CollectionConfig = {
     },
     access: {
         read: readPublishedOrAuthenticated,
+    },
+    hooks: {
+        afterChange: [revalidateAfterChange],
+        afterDelete: [revalidateAfterDelete],
     },
     fields: [
         {

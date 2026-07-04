@@ -1,10 +1,16 @@
 import { notFound } from 'next/navigation';
-import { getPostBySlug } from '@/data/posts';
+import { getPostBySlug, getPublishedSlugs } from '@/data/posts';
 import { PostReader } from '@/components/blog/PostReader';
 
 import type { Metadata } from 'next';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
+
+export async function generateStaticParams() {
+    const slugs = await getPublishedSlugs();
+
+    return slugs.map((slug) => ({ slug }));
+}
 
 interface BlogPostPageProps {
     params: Promise<{ slug: string }>;

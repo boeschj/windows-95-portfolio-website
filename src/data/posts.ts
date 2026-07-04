@@ -23,6 +23,20 @@ export async function getPublishedPosts(): Promise<Post[]> {
     return docs;
 }
 
+export async function getPublishedSlugs(): Promise<string[]> {
+    const payload = await getPayload({ config });
+
+    const { docs } = await payload.find({
+        collection: POSTS_COLLECTION,
+        where: { status: { equals: POST_STATUS.PUBLISHED } },
+        limit: MAX_POSTS,
+        depth: 0,
+        select: { slug: true },
+    });
+
+    return docs.map((doc) => doc.slug);
+}
+
 export async function getPostBySlug(slug: string): Promise<Post | null> {
     const payload = await getPayload({ config });
 
