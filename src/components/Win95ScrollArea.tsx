@@ -54,7 +54,9 @@ export function Win95ScrollArea({
                 ref={viewportRef}
                 className={viewportClassName}
             >
-                <ScrollArea.Content>{children}</ScrollArea.Content>
+                <ScrollArea.Content className="win95-scroll-content">
+                    {children}
+                </ScrollArea.Content>
             </ScrollArea.Viewport>
 
             <ScrollArea.Scrollbar

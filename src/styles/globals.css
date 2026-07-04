@@ -172,6 +172,14 @@
     }
 }
 
+/* base-ui ScrollArea.Content defaults to inline min-width: fit-content so wide
+   content can scroll horizontally. This area is vertical-only, so let content
+   shrink to the viewport and reflow instead of overflowing sideways. */
+.win95-scroll-content {
+    width: 100%;
+    min-width: 0 !important;
+}
+
 .hide-native-scrollbar {
     scrollbar-width: none;
     -ms-overflow-style: none;
