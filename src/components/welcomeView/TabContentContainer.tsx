@@ -79,9 +79,10 @@ const ACTIVE_TAB_BOTTOM_BORDER_COVER = `
 const ACTIVE_TAB_SEAM_OVERHANG = 'after:right-[-1px]';
 
 // The last tab has no neighbour to seal against, so the overhang would paint
-// over its own raised right border. Carry that border down the seam instead.
+// over its own raised right border. Carry that border down the seam instead,
+// reproducing win95-border-tab's full 3px right edge so it lines up exactly.
 const ACTIVE_TAB_RIGHT_EDGE =
-    'after:right-0 after:border-r-[1px] after:border-r-tab-b-3';
+    'after:right-0 after:[box-shadow:inset_-1px_0_var(--color-tab-b-3),inset_-2px_0_var(--color-tab-b-2),inset_-3px_0_var(--color-tab-b-1)]';
 
 interface Win95TabProps {
     value: (typeof TABS)[number]['key'];
