@@ -197,13 +197,18 @@
     outline-offset: -1px;
 }
 
-.win95-scrollbar-track[data-orientation='vertical']:not([data-has-overflow-y])
-    .win95-scroll-thumb,
-.win95-scrollbar-track[data-orientation='horizontal']:not(
-        [data-has-overflow-x]
-    )
-    .win95-scroll-thumb {
+/* Keep the scrollbar rail + arrows visible when content fits, but hide the
+   thumb and grey the arrows to read as a disabled Win95 scrollbar. */
+.win95-scrollbar-track:not([data-has-overflow-y]) .win95-scroll-thumb {
     visibility: hidden;
+}
+
+.win95-scroll-arrow {
+    color: #000;
+}
+
+.win95-scrollbar-track:not([data-has-overflow-y]) .win95-scroll-arrow {
+    color: #808080;
 }
 
 * {

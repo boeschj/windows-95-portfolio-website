@@ -11,35 +11,19 @@ const SCROLL_BUTTON_SIZE_PX = 24;
 
 const ARROW = {
     up: {
-        position: 'top-0 inset-x-0',
+        position: 'top-0',
         style: {
             borderLeft: '4px solid transparent',
             borderRight: '4px solid transparent',
-            borderBottom: '4px solid black',
+            borderBottom: '4px solid currentColor',
         },
     },
     down: {
-        position: 'bottom-0 inset-x-0',
+        position: 'bottom-0',
         style: {
             borderLeft: '4px solid transparent',
             borderRight: '4px solid transparent',
-            borderTop: '4px solid black',
-        },
-    },
-    left: {
-        position: 'left-0 inset-y-0',
-        style: {
-            borderTop: '4px solid transparent',
-            borderBottom: '4px solid transparent',
-            borderRight: '4px solid black',
-        },
-    },
-    right: {
-        position: 'right-0 inset-y-0',
-        style: {
-            borderTop: '4px solid transparent',
-            borderBottom: '4px solid transparent',
-            borderLeft: '4px solid black',
+            borderTop: '4px solid currentColor',
         },
     },
 } as const;
@@ -51,22 +35,16 @@ const THUMB_CLASS = 'win95-scroll-thumb win95-border-raised bg-windows-gray flex
 interface Win95ScrollAreaProps {
     children: React.ReactNode;
     viewportClassName?: string;
-    horizontal?: boolean;
 }
 
 export function Win95ScrollArea({
     children,
     viewportClassName,
-    horizontal = false,
 }: Win95ScrollAreaProps) {
     const viewportRef = useRef<HTMLDivElement>(null);
 
     const scrollVerticalBy = (pixels: number) => {
         viewportRef.current?.scrollBy({ top: pixels, behavior: 'instant' });
-    };
-
-    const scrollHorizontalBy = (pixels: number) => {
-        viewportRef.current?.scrollBy({ left: pixels, behavior: 'instant' });
     };
 
     return (
@@ -98,35 +76,6 @@ export function Win95ScrollArea({
                     }}
                 />
             </ScrollArea.Scrollbar>
-
-            {horizontal ? (
-                <>
-                    <ScrollArea.Scrollbar
-                        keepMounted
-                        orientation="horizontal"
-                        className="win95-scrollbar-track m-0 flex h-6 touch-none select-none"
-                        style={{
-                            paddingLeft: SCROLL_BUTTON_SIZE_PX,
-                            paddingRight: SCROLL_BUTTON_SIZE_PX,
-                        }}
-                    >
-                        <ScrollArea.Thumb className={THUMB_CLASS} />
-                        <ScrollArrowButton
-                            direction="left"
-                            onClick={() => {
-                                scrollHorizontalBy(-SCROLL_STEP_PX);
-                            }}
-                        />
-                        <ScrollArrowButton
-                            direction="right"
-                            onClick={() => {
-                                scrollHorizontalBy(SCROLL_STEP_PX);
-                            }}
-                        />
-                    </ScrollArea.Scrollbar>
-                    <ScrollArea.Corner className="bg-windows-gray" />
-                </>
-            ) : null}
         </ScrollArea.Root>
     );
 }
@@ -145,10 +94,10 @@ function ScrollArrowButton({ direction, onClick }: ScrollArrowButtonProps) {
             aria-label={`Scroll ${direction}`}
             onClick={onClick}
             className={cn(
-                'win95-border-raised bg-windows-gray absolute flex items-center justify-center',
+                'win95-scroll-arrow win95-border-raised bg-windows-gray absolute right-0 left-0 flex items-center justify-center',
                 arrow.position
             )}
-            style={{ width: SCROLL_BUTTON_SIZE_PX, height: SCROLL_BUTTON_SIZE_PX }}
+            style={{ height: SCROLL_BUTTON_SIZE_PX }}
         >
             <span className="block h-0 w-0" style={arrow.style} />
         </button>

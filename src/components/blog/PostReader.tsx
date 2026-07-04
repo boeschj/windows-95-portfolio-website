@@ -26,10 +26,7 @@ export function PostReader({ post }: PostReaderProps) {
                 <TitleBar title={windowTitle} />
                 <MenuBar />
                 <div className="win95-border-sunken bg-windows-gray flex min-h-0 flex-1">
-                    <Win95ScrollArea
-                        horizontal
-                        viewportClassName="h-full w-full bg-white px-6 py-8 md:px-12 md:py-9"
-                    >
+                    <Win95ScrollArea viewportClassName="h-full w-full bg-white px-6 py-8 md:px-12 md:py-9">
                         <article className="notepad-prose">
                             <h1>{title}</h1>
                             <p className="notepad-meta">{metaLine}</p>

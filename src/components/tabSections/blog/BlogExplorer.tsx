@@ -12,15 +12,14 @@ const SORT_DIRECTION = { asc: 'asc', desc: 'desc' } as const;
 type SortDirection = (typeof SORT_DIRECTION)[keyof typeof SORT_DIRECTION];
 
 const COLUMNS = [
-    { key: 'name', label: 'Name', className: 'flex-1 min-w-0', align: 'left' },
-    { key: 'size', label: 'Size', className: 'w-[90px]', align: 'right' },
-    { key: 'type', label: 'Type', className: 'w-[140px]', align: 'left' },
-    { key: 'modified', label: 'Modified', className: 'w-[170px]', align: 'left' },
+    { key: 'name', label: 'Name', className: 'flex-1 min-w-0' },
+    { key: 'size', label: 'Size', className: 'w-[90px]' },
+    { key: 'type', label: 'Type', className: 'w-[140px]' },
+    { key: 'modified', label: 'Modified', className: 'w-[170px]' },
 ] as const satisfies readonly {
     key: string;
     label: string;
     className: string;
-    align: 'left' | 'right';
 }[];
 
 type ColumnKey = (typeof COLUMNS)[number]['key'];
@@ -34,11 +33,6 @@ const COMPARATORS = {
     ColumnKey,
     (a: BlogListItem, b: BlogListItem) => number
 >;
-
-const CELL_ALIGN = {
-    left: 'text-left',
-    right: 'text-right',
-} as const;
 
 interface BlogExplorerProps {
     items: BlogListItem[];
@@ -133,9 +127,7 @@ function ColumnHeaderRow({
                             onSort(column.key);
                         }}
                         className={cn(
-                            'win95-header-button bg-windows-gray flex items-center gap-1 px-2 py-[3px]',
-                            CELL_ALIGN[column.align],
-                            column.align === 'right' && 'justify-end',
+                            'win95-header-button bg-windows-gray flex items-center gap-1 px-2 py-[3px] text-left',
                             column.className
                         )}
                     >
@@ -267,7 +259,7 @@ function PostRow({
                     {item.filename}
                 </span>
             </div>
-            <div className="w-[90px] px-2 py-[2px] text-right">{item.size}</div>
+            <div className="w-[90px] px-2 py-[2px]">{item.size}</div>
             <div className="w-[140px] px-2 py-[2px]">{item.type}</div>
             <div className="w-[170px] px-2 py-[2px]">{item.modified}</div>
         </div>
