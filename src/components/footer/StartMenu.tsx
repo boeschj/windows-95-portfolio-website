@@ -30,14 +30,6 @@ function StartButtonContent() {
     );
 }
 
-export function StartMenuFallback() {
-    return (
-        <Button className={START_BUTTON_CLASS}>
-            <StartButtonContent />
-        </Button>
-    );
-}
-
 export function StartMenu() {
     const { selectTab } = useTabRoute();
 

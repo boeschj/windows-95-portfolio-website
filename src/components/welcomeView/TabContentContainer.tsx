@@ -1,20 +1,21 @@
 'use client';
 
-import React from 'react';
 import { Tabs } from '@base-ui/react/tabs';
 import { TABS } from '@/config/tabs';
 import { useTabRoute } from '@/hooks/useTabRoute';
 import { cn } from '@/utils';
 
+import type { TabRoute } from '@/config/tabs';
+import type { ReactNode } from 'react';
+
 const TAB_PANEL_CLASS = 'flex h-full min-h-0 w-full flex-col';
 
 interface TabContentContainerProps {
-    children: React.ReactNode;
+    panels: Record<TabRoute, ReactNode>;
 }
 
-export function TabContentContainer({ children }: TabContentContainerProps) {
+export function TabContentContainer({ panels }: TabContentContainerProps) {
     const { selectedTab, selectTab } = useTabRoute();
-    const childArray = React.Children.toArray(children);
 
     const handleValueChange = (value: unknown) => {
         const nextTab = TABS.find((tab) => tab.key === value);
@@ -46,14 +47,14 @@ export function TabContentContainer({ children }: TabContentContainerProps) {
                     {selectedTab.title}
                 </h1>
                 <div className="win95-border-sunken flex h-[calc(100%-40px)] flex-col md:h-[calc(100%-60px)]">
-                    {TABS.map((tab, index) => (
+                    {TABS.map((tab) => (
                         <Tabs.Panel
                             key={tab.key}
                             value={tab.key}
                             keepMounted
                             className={TAB_PANEL_CLASS}
                         >
-                            {childArray[index]}
+                            {panels[tab.route]}
                         </Tabs.Panel>
                     ))}
                 </div>

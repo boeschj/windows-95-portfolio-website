@@ -1,7 +1,7 @@
 import { Footer } from '@/components/footer/Footer';
 import { WelcomeView } from '@/components/welcomeView/WelcomeView';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 export default function Page() {
     return (
