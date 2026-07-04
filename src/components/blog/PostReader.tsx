@@ -164,8 +164,9 @@ function TitleBar({ title }: { title: string }) {
                 <span className="text-base font-bold text-white">{title}</span>
             </div>
             <div className="flex items-center gap-[2px]">
-                <TitleBarButton kind="minimize" />
-                <TitleBarButton kind="maximize" />
+                {TITLE_BAR_BUTTON_KINDS.map((kind) => (
+                    <TitleBarButton key={kind} kind={kind} />
+                ))}
                 <CloseButton />
             </div>
         </div>
@@ -175,14 +176,20 @@ function TitleBar({ title }: { title: string }) {
 const TITLE_BUTTON_CLASS =
     'win95-thin-raised bg-windows-gray relative flex h-4 w-[18px] items-center justify-center';
 
-function TitleBarButton({ kind }: { kind: 'minimize' | 'maximize' }) {
+const TITLE_BAR_BUTTON_KINDS = ['minimize', 'maximize'] as const;
+type TitleBarButtonKind = (typeof TITLE_BAR_BUTTON_KINDS)[number];
+
+function TitleBarButton({ kind }: { kind: TitleBarButtonKind }) {
+    const icon =
+        kind === 'minimize' ? (
+            <span className="absolute bottom-[3px] left-1 h-[2px] w-2 bg-black" />
+        ) : (
+            <span className="absolute top-[3px] left-1 h-2 w-[10px] border border-t-2 border-black" />
+        );
+
     return (
         <Link href={BLOG_HREF} aria-label={kind} className={TITLE_BUTTON_CLASS}>
-            {kind === 'minimize' ? (
-                <span className="absolute bottom-[3px] left-1 h-[2px] w-2 bg-black" />
-            ) : (
-                <span className="absolute top-[3px] left-1 h-2 w-[10px] border border-t-2 border-black" />
-            )}
+            {icon}
         </Link>
     );
 }

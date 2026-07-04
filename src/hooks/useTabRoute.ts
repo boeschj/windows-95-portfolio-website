@@ -5,7 +5,7 @@ import { TAB_QUERY_PARAM, getTabByRoute, hrefForTab } from '@/config/tabs';
 
 import type { Tab, TabRoute } from '@/config/tabs';
 
-interface UseTabRoute {
+interface UseTabRouteReturn {
     selectedTab: Tab;
     selectTab: (route: TabRoute) => void;
 }
@@ -30,7 +30,7 @@ function readRouteFromUrl(): string | null {
 // than useSearchParams, so the page stays static/ISR instead of being forced
 // dynamic. Switching tabs is a client-only URL swap (all panels are already
 // mounted), so it never triggers server work.
-export function useTabRoute(): UseTabRoute {
+export function useTabRoute(): UseTabRouteReturn {
     const route = useSyncExternalStore(subscribe, readRouteFromUrl, () => null);
     const selectedTab = getTabByRoute(route);
 

@@ -17,11 +17,31 @@ const TOUCH_POINTER_QUERY = '(pointer: coarse)';
 const isTouchPrimaryDevice = () =>
     window.matchMedia(TOUCH_POINTER_QUERY).matches;
 
+// Single source for the fixed column widths so the header and the row cells
+// below can't drift out of alignment.
+const COLUMN_WIDTH_CLASS = {
+    size: 'w-[90px]',
+    type: 'w-[140px]',
+    modified: 'w-[170px]',
+} as const;
+
 const COLUMNS = [
     { key: 'name', label: 'Name', className: 'flex flex-1 min-w-0' },
-    { key: 'size', label: 'Size', className: 'hidden w-[90px] md:flex' },
-    { key: 'type', label: 'Type', className: 'hidden w-[140px] md:flex' },
-    { key: 'modified', label: 'Modified', className: 'flex w-[170px]' },
+    {
+        key: 'size',
+        label: 'Size',
+        className: `hidden ${COLUMN_WIDTH_CLASS.size} md:flex`,
+    },
+    {
+        key: 'type',
+        label: 'Type',
+        className: `hidden ${COLUMN_WIDTH_CLASS.type} md:flex`,
+    },
+    {
+        key: 'modified',
+        label: 'Modified',
+        className: `flex ${COLUMN_WIDTH_CLASS.modified}`,
+    },
 ] as const satisfies readonly {
     key: string;
     label: string;
@@ -271,13 +291,19 @@ function PostRow({
                     {item.filename}
                 </span>
             </div>
-            <div className="hidden w-[90px] px-2 py-[2px] md:block">
+            <div
+                className={`hidden ${COLUMN_WIDTH_CLASS.size} px-2 py-[2px] md:block`}
+            >
                 {item.size}
             </div>
-            <div className="hidden w-[140px] px-2 py-[2px] md:block">
+            <div
+                className={`hidden ${COLUMN_WIDTH_CLASS.type} px-2 py-[2px] md:block`}
+            >
                 {item.type}
             </div>
-            <div className="w-[170px] px-2 py-[2px]">{item.modified}</div>
+            <div className={`${COLUMN_WIDTH_CLASS.modified} px-2 py-[2px]`}>
+                {item.modified}
+            </div>
         </div>
     );
 }

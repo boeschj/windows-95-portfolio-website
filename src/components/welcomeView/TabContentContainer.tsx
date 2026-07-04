@@ -97,12 +97,13 @@ function Win95Tab({ value, label, isActive, isLast }: Win95TabProps) {
         ? ACTIVE_TAB_RIGHT_EDGE
         : ACTIVE_TAB_SEAM_OVERHANG;
     const activeCover = cn(ACTIVE_TAB_BOTTOM_BORDER_COVER, activeRightEdge);
+    const tabHeight = isActive ? 'h-[38px]' : 'mt-[3px] h-[35px]';
 
     return (
         <div
             className={cn(
                 'win95-border-tab relative w-[100px] rounded-t',
-                isActive ? 'h-[38px]' : 'mt-[3px] h-[35px]',
+                tabHeight,
                 isActive && activeCover
             )}
         >

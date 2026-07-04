@@ -34,30 +34,35 @@ export const viewport: Viewport = {
     initialScale: 1,
 };
 
+const SITE_TITLE = "Jordan's Portfolio Site";
+const SITE_DESCRIPTION = "Jordan's portfolio site.";
+const SITE_CREATOR = 'Jordan Boesch';
+const FAVICON_PATH = 'favicons/favicon-32x32.png';
+
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
-    title: "Jordan's Portfolio Site",
-    description: "Jordan's portfolio site.",
-    creator: 'Jordan Boesch',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    creator: SITE_CREATOR,
     icons: {
-        icon: 'favicons/favicon-32x32.png',
-        shortcut: 'favicons/favicon-32x32.png',
+        icon: FAVICON_PATH,
+        shortcut: FAVICON_PATH,
         apple: 'favicons/apple-touch-icon.png',
         other: {
             rel: 'icon',
-            url: 'favicons/favicon-32x32.png',
+            url: FAVICON_PATH,
         },
     },
     twitter: {
         card: 'summary_large_image',
-        title: "Jordan's Portfolio Site",
-        description: "Jordan's portfolio site.",
-        creator: 'Jordan Boesch',
+        title: SITE_TITLE,
+        description: SITE_DESCRIPTION,
+        creator: SITE_CREATOR,
     },
     openGraph: {
-        title: "Jordan's Portfolio Site",
-        description: "Jordan's portfolio site.",
-        authors: ['Jordan Boesch'],
+        title: SITE_TITLE,
+        description: SITE_DESCRIPTION,
+        authors: [SITE_CREATOR],
     },
 };
 
