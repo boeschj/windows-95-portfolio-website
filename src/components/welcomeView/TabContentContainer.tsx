@@ -31,12 +31,13 @@ export function TabContentContainer({ children }: TabContentContainerProps) {
             className="flex h-[calc(100%-90px)] flex-col"
         >
             <Tabs.List className="flex flex-row">
-                {TABS.map((tab) => (
+                {TABS.map((tab, index) => (
                     <Win95Tab
                         key={tab.key}
                         value={tab.key}
                         label={tab.label}
                         isActive={selectedTab.key === tab.key}
+                        isLast={index === TABS.length - 1}
                     />
                 ))}
             </Tabs.List>
@@ -65,28 +66,42 @@ const ACTIVE_TAB_BOTTOM_BORDER_COVER = `
     after:absolute
     after:bottom-[-4px]
     after:left-0
-    after:right-[-1px]
     after:z-30
     after:h-[7px]
     after:border-l-[1px]
-    after:border-white
+    after:border-l-white
     after:bg-windows-gray
     after:content-[""]
 `;
+
+// Interior tabs overhang 1px past their right edge to hide the dark seam that
+// fractional flex widths open up against the neighbouring tab.
+const ACTIVE_TAB_SEAM_OVERHANG = 'after:right-[-1px]';
+
+// The last tab has no neighbour to seal against, so the overhang would paint
+// over its own raised right border. Carry that border down the seam instead.
+const ACTIVE_TAB_RIGHT_EDGE =
+    'after:right-0 after:border-r-[1px] after:border-r-tab-b-3';
 
 interface Win95TabProps {
     value: (typeof TABS)[number]['key'];
     label: string;
     isActive: boolean;
+    isLast: boolean;
 }
 
-function Win95Tab({ value, label, isActive }: Win95TabProps) {
+function Win95Tab({ value, label, isActive, isLast }: Win95TabProps) {
+    const activeRightEdge = isLast
+        ? ACTIVE_TAB_RIGHT_EDGE
+        : ACTIVE_TAB_SEAM_OVERHANG;
+    const activeCover = cn(ACTIVE_TAB_BOTTOM_BORDER_COVER, activeRightEdge);
+
     return (
         <div
             className={cn(
                 'win95-border-tab relative w-[100px] rounded-t',
                 isActive ? 'h-[38px]' : 'mt-[3px] h-[35px]',
-                isActive && ACTIVE_TAB_BOTTOM_BORDER_COVER
+                isActive && activeCover
             )}
         >
             <Tabs.Tab value={value} className="bg-windows-gray h-[30px] w-full">
