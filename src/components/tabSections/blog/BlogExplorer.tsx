@@ -78,7 +78,7 @@ export function BlogExplorer({ items }: BlogExplorerProps) {
                 onSort={handleSort}
             />
             <div className="min-h-0 flex-1">
-                <Win95ScrollArea viewportClassName="bg-white">
+                <Win95ScrollArea viewportClassName="h-full w-full bg-white">
                     <PostRows
                         items={sortedItems}
                         selectedSlug={selectedSlug}
