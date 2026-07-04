@@ -13,10 +13,10 @@ const SORT_DIRECTION = { asc: 'asc', desc: 'desc' } as const;
 type SortDirection = (typeof SORT_DIRECTION)[keyof typeof SORT_DIRECTION];
 
 const COLUMNS = [
-    { key: 'name', label: 'Name', className: 'flex-1 min-w-0' },
-    { key: 'size', label: 'Size', className: 'w-[90px]' },
-    { key: 'type', label: 'Type', className: 'w-[140px]' },
-    { key: 'modified', label: 'Modified', className: 'w-[170px]' },
+    { key: 'name', label: 'Name', className: 'flex flex-1 min-w-0' },
+    { key: 'size', label: 'Size', className: 'hidden w-[90px] md:flex' },
+    { key: 'type', label: 'Type', className: 'hidden w-[140px] md:flex' },
+    { key: 'modified', label: 'Modified', className: 'flex w-[170px]' },
 ] as const satisfies readonly {
     key: string;
     label: string;
@@ -124,7 +124,7 @@ function ColumnHeaderRow({
                             onSort(column.key);
                         }}
                         className={cn(
-                            'win95-header-button bg-windows-gray flex items-center gap-1 px-2 py-[3px] text-left',
+                            'win95-header-button bg-windows-gray items-center gap-1 px-2 py-[3px] text-left',
                             column.className
                         )}
                     >
@@ -256,8 +256,12 @@ function PostRow({
                     {item.filename}
                 </span>
             </div>
-            <div className="w-[90px] px-2 py-[2px]">{item.size}</div>
-            <div className="w-[140px] px-2 py-[2px]">{item.type}</div>
+            <div className="hidden w-[90px] px-2 py-[2px] md:block">
+                {item.size}
+            </div>
+            <div className="hidden w-[140px] px-2 py-[2px] md:block">
+                {item.type}
+            </div>
             <div className="w-[170px] px-2 py-[2px]">{item.modified}</div>
         </div>
     );
@@ -266,11 +270,11 @@ function PostRow({
 function StatusBar({ count }: { count: number }) {
     return (
         <div className="flex flex-none gap-[2px] pt-[3px]">
-            <div className="win95-status-panel flex-1 px-[10px] py-[2px] text-[15px]">
+            <div className="win95-status-panel flex-1 px-[10px] py-[2px] text-[15px] whitespace-nowrap">
                 {fileCountLabel(count)}
             </div>
-            <div className="win95-status-panel flex-1 px-[10px] py-[2px]" />
-            <div className="win95-status-panel relative w-[200px] px-[10px] py-[2px]">
+            <div className="win95-status-panel hidden flex-1 px-[10px] py-[2px] md:block" />
+            <div className="win95-status-panel relative hidden w-[200px] px-[10px] py-[2px] md:block">
                 <ResizeGrip />
             </div>
         </div>

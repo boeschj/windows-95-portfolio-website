@@ -2,7 +2,7 @@ export const TABS = [
     { key: 0, route: 'about', title: "Hi, I'm Jordan 👋", label: 'About Me' },
     { key: 1, route: 'experience', title: 'My Work', label: 'Experience' },
     { key: 2, route: 'skills', title: 'My Skills', label: 'Skills' },
-    { key: 3, route: 'blog', title: 'My Blog', label: 'Blog' },
+    { key: 3, route: 'blog', title: 'Blog', label: 'Blog' },
 ] as const satisfies readonly {
     key: number;
     route: string;
@@ -18,9 +18,7 @@ export const DEFAULT_TAB = TABS[0];
 
 export const TAB_QUERY_PARAM = 'tab';
 
-const TAB_BY_ROUTE = new Map<string, Tab>(
-    TABS.map((tab) => [tab.route, tab])
-);
+const TAB_BY_ROUTE = new Map<string, Tab>(TABS.map((tab) => [tab.route, tab]));
 
 export function getTabByRoute(route: string | null | undefined): Tab {
     if (!route) {
