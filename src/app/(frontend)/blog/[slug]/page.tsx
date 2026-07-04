@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
 import { getPostBySlug, getPublishedSlugs } from '@/data/posts';
 import { BLOG_AUTHOR, postDescription } from '@/data/postView';
+import { buildPostSchema } from '@/data/seoSchema';
+import { JsonLd } from '@/components/JsonLd';
 import { PostReader } from '@/components/blog/PostReader';
 
 import type { Metadata } from 'next';
@@ -60,5 +62,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         notFound();
     }
 
-    return <PostReader post={post} />;
+    return (
+        <>
+            <JsonLd data={buildPostSchema(post)} />
+            <PostReader post={post} />
+        </>
+    );
 }

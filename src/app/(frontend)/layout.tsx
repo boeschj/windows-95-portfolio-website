@@ -1,5 +1,7 @@
 import localFont from 'next/font/local';
 import { SITE_URL } from '@/constants/application.constants';
+import { PERSON_SCHEMA } from '@/data/seoSchema';
+import { JsonLd } from '@/components/JsonLd';
 import '@/styles/globals.css';
 
 import type { Metadata, Viewport } from 'next';
@@ -52,7 +54,10 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en" className={msSansSerif.variable}>
-            <body>{children}</body>
+            <body>
+                <JsonLd data={PERSON_SCHEMA} />
+                {children}
+            </body>
         </html>
     );
 }
