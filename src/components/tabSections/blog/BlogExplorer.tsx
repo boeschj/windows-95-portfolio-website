@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { fileCountLabel } from '@/data/postView';
 import { cn } from '@/utils';
@@ -116,11 +116,19 @@ function ColumnHeaderRow({
         <div className="bg-windows-gray flex text-[15px]">
             {COLUMNS.map((column) => {
                 const isActive = column.key === sortKey;
+                const directionLabel =
+                    sortDirection === SORT_DIRECTION.asc
+                        ? 'ascending'
+                        : 'descending';
+                const sortLabel = isActive
+                    ? `Sort by ${column.label}, currently ${directionLabel}`
+                    : `Sort by ${column.label}`;
 
                 return (
                     <button
                         key={column.key}
                         type="button"
+                        aria-label={sortLabel}
                         onClick={() => {
                             onSort(column.key);
                         }}
@@ -160,6 +168,9 @@ interface PostRowsProps {
 }
 
 function PostRows({ items, selectedSlug, onSelect, onOpen }: PostRowsProps) {
+    const listRef = useRef<HTMLDivElement>(null);
+    const [activeIndex, setActiveIndex] = useState(0);
+
     if (items.length === 0) {
         return (
             <div className="flex h-full items-center justify-center p-6 text-[15px] text-black/60">
@@ -168,15 +179,48 @@ function PostRows({ items, selectedSlug, onSelect, onOpen }: PostRowsProps) {
         );
     }
 
+    const focusRowAt = (index: number) => {
+        const clampedIndex = Math.max(0, Math.min(items.length - 1, index));
+        setActiveIndex(clampedIndex);
+        onSelect(items[clampedIndex].slug);
+        const rows =
+            listRef.current?.querySelectorAll<HTMLElement>('[role="option"]');
+        rows?.[clampedIndex]?.focus();
+    };
+
+    const handleRowKeyDown =
+        (index: number) => (event: React.KeyboardEvent) => {
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                focusRowAt(index + 1);
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                focusRowAt(index - 1);
+            } else if (event.key === 'Home') {
+                event.preventDefault();
+                focusRowAt(0);
+            } else if (event.key === 'End') {
+                event.preventDefault();
+                focusRowAt(items.length - 1);
+            } else if (event.key === 'Enter') {
+                onOpen(items[index].slug);
+            }
+        };
+
     return (
-        <div role="listbox" aria-label="Blog posts">
-            {items.map((item) => (
+        <div role="listbox" aria-label="Blog posts" ref={listRef}>
+            {items.map((item, index) => (
                 <PostRow
                     key={item.slug}
                     item={item}
                     isSelected={item.slug === selectedSlug}
-                    onSelect={onSelect}
+                    isActive={index === activeIndex}
+                    onSelect={() => {
+                        setActiveIndex(index);
+                        onSelect(item.slug);
+                    }}
                     onOpen={onOpen}
+                    onKeyDown={handleRowKeyDown(index)}
                 />
             ))}
         </div>
@@ -186,27 +230,30 @@ function PostRows({ items, selectedSlug, onSelect, onOpen }: PostRowsProps) {
 interface PostRowProps {
     item: BlogListItem;
     isSelected: boolean;
-    onSelect: (slug: string) => void;
+    isActive: boolean;
+    onSelect: () => void;
     onOpen: (slug: string) => void;
+    onKeyDown: (event: React.KeyboardEvent) => void;
 }
 
-function PostRow({ item, isSelected, onSelect, onOpen }: PostRowProps) {
+function PostRow({
+    item,
+    isSelected,
+    isActive,
+    onSelect,
+    onOpen,
+    onKeyDown,
+}: PostRowProps) {
     return (
         <div
             role="option"
             aria-selected={isSelected}
-            tabIndex={0}
-            onClick={() => {
-                onSelect(item.slug);
-            }}
+            tabIndex={isActive ? 0 : -1}
+            onClick={onSelect}
             onDoubleClick={() => {
                 onOpen(item.slug);
             }}
-            onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                    onOpen(item.slug);
-                }
-            }}
+            onKeyDown={onKeyDown}
             className="blog-row flex cursor-default items-center text-[15px] text-black"
         >
             <div className="flex min-w-0 flex-1 items-center gap-1.5 px-2 py-[2px]">

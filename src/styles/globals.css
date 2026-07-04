@@ -185,6 +185,11 @@
     outline: none;
 }
 
+.blog-row:focus-visible .blog-filename:not(.blog-filename-selected) {
+    outline: 1px dotted #000;
+    outline-offset: -1px;
+}
+
 .blog-filename-selected {
     background: var(--color-windows-blue);
     color: #fff;
@@ -340,4 +345,15 @@
     font-size: 13px;
     font-style: italic;
     color: #666;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
