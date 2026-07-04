@@ -2,7 +2,9 @@ import Link from 'next/link';
 import { RichText } from '@payloadcms/richtext-lexical/react';
 import { Footer } from '@/components/footer/Footer';
 import { Win95ScrollArea } from '@/components/Win95ScrollArea';
+import { CodeBlock } from './CodeBlock';
 import { toPostView } from '@/data/postView';
+import { highlightCode } from '@/lib/highlight';
 import { NotepadIcon } from './NotepadIcon';
 import { hrefForTab } from '@/config/tabs';
 
@@ -17,9 +19,11 @@ interface PostReaderProps {
     post: Post;
 }
 
-export function PostReader({ post }: PostReaderProps) {
+export async function PostReader({ post }: PostReaderProps) {
     const { filename, title, metaLine } = toPostView(post);
     const windowTitle = `${filename}${NOTEPAD_TITLE_SUFFIX}`;
+
+    await highlightCodeNodes(post.content);
 
     return (
         <div className="bg-windows-gray fixed inset-0 flex flex-col overflow-hidden md:pb-taskbar-height">
@@ -43,35 +47,85 @@ export function PostReader({ post }: PostReaderProps) {
     );
 }
 
-function collectCodeText(node: unknown): string {
-    if (
-        typeof node !== 'object' ||
-        node === null ||
-        !('children' in node) ||
-        !Array.isArray(node.children)
-    ) {
+interface CodeNode {
+    type?: string;
+    language?: string;
+    root?: unknown;
+    children?: unknown[];
+    highlightedHtml?: string;
+    rawCode?: string;
+}
+
+function asNode(value: unknown): CodeNode | null {
+    return typeof value === 'object' && value !== null ? value : null;
+}
+
+function collectCodeText(node: CodeNode): string {
+    if (!Array.isArray(node.children)) {
         return '';
     }
 
     return node.children
-        .map((child: unknown) => {
-            if (typeof child !== 'object' || child === null) {
+        .map((child) => {
+            const childNode = asNode(child);
+            if (!childNode) {
                 return '';
             }
-            if ('type' in child && child.type === 'linebreak') {
+            if (childNode.type === 'linebreak') {
                 return '\n';
             }
-            if ('text' in child && typeof child.text === 'string') {
-                return child.text;
+            if ('text' in childNode && typeof childNode.text === 'string') {
+                return childNode.text;
             }
             return '';
         })
         .join('');
 }
 
+function findCodeNodes(value: unknown): CodeNode[] {
+    const node = asNode(value);
+    if (!node) {
+        return [];
+    }
+
+    const self = node.type === 'code' ? [node] : [];
+    const fromChildren = Array.isArray(node.children)
+        ? node.children.flatMap(findCodeNodes)
+        : [];
+    const fromRoot =
+        node.root !== undefined ? findCodeNodes(node.root) : [];
+
+    return [...self, ...fromChildren, ...fromRoot];
+}
+
+// Highlighting is async (Shiki), so it runs here at render/build time and the
+// result is stashed on each code node for the synchronous JSX converter below.
+async function highlightCodeNodes(content: unknown): Promise<void> {
+    const codeNodes = findCodeNodes(content);
+
+    await Promise.all(
+        codeNodes.map(async (node) => {
+            const code = collectCodeText(node);
+            node.rawCode = code;
+            node.highlightedHtml = await highlightCode(
+                code,
+                typeof node.language === 'string' ? node.language : 'text'
+            );
+        })
+    );
+}
+
 const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
     ...defaultConverters,
-    code: ({ node }) => <pre>{collectCodeText(node)}</pre>,
+    code: ({ node }) => {
+        const codeNode = asNode(node);
+        return (
+            <CodeBlock
+                html={codeNode?.highlightedHtml ?? ''}
+                code={codeNode?.rawCode ?? ''}
+            />
+        );
+    },
 });
 
 function PostBody({ post }: PostReaderProps) {

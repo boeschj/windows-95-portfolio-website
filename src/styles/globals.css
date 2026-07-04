@@ -318,14 +318,9 @@
     box-shadow: inset 0 0 0 1px #cdd3d6;
 }
 
-.notepad-prose pre {
+.notepad-code {
+    position: relative;
     margin: 0 0 18px;
-    padding: 16px 18px;
-    overflow-x: auto;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    line-height: 1.55;
-    color: #1a1a1a;
     background: #f4f4f4;
     box-shadow:
         inset -1px -1px #fff,
@@ -334,11 +329,22 @@
         inset 2px 2px #c0c4c8;
 }
 
-.notepad-prose pre code {
-    padding: 0;
+.notepad-code-scroll {
+    overflow-x: auto;
+    padding: 16px 18px;
+}
+
+.notepad-code pre {
+    margin: 0;
+    background: transparent !important;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.notepad-code pre code {
+    font-family: inherit;
     background: none;
-    box-shadow: none;
-    font-size: inherit;
 }
 
 .notepad-prose blockquote {
