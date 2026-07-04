@@ -17,6 +17,7 @@ async function revalidatePostPaths(slug: string) {
     try {
         const { revalidatePath } = await import('next/cache');
         revalidatePath(BLOG_INDEX_PATH);
+        revalidatePath('/llms.txt');
         revalidatePath(`/blog/${slug}`);
     } catch {
         // revalidatePath only works inside the Next.js request context (the
