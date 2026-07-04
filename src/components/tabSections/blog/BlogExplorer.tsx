@@ -163,7 +163,6 @@ interface PostRowsProps {
 
 function PostRows({ items, selectedSlug, onSelect, onOpen }: PostRowsProps) {
     const listRef = useRef<HTMLDivElement>(null);
-    const [activeIndex, setActiveIndex] = useState(0);
 
     if (items.length === 0) {
         return (
@@ -173,9 +172,13 @@ function PostRows({ items, selectedSlug, onSelect, onOpen }: PostRowsProps) {
         );
     }
 
+    // Single source of truth: the roving-tabindex row is derived from the
+    // selection, so it survives a re-sort instead of pointing at a stale index.
+    const selectedIndex = items.findIndex((item) => item.slug === selectedSlug);
+    const activeIndex = Math.max(0, selectedIndex);
+
     const focusRowAt = (index: number) => {
         const clampedIndex = Math.max(0, Math.min(items.length - 1, index));
-        setActiveIndex(clampedIndex);
         onSelect(items[clampedIndex].slug);
         const rows =
             listRef.current?.querySelectorAll<HTMLElement>('[role="option"]');
@@ -210,7 +213,6 @@ function PostRows({ items, selectedSlug, onSelect, onOpen }: PostRowsProps) {
                     isSelected={item.slug === selectedSlug}
                     isActive={index === activeIndex}
                     onSelect={() => {
-                        setActiveIndex(index);
                         onSelect(item.slug);
                     }}
                     onOpen={onOpen}
@@ -262,7 +264,7 @@ function PostRow({
                 <DocumentIcon />
                 <span
                     className={cn(
-                        'min-w-0 truncate px-[3px]',
+                        'blog-filename min-w-0 truncate px-[3px]',
                         isSelected && 'blog-filename-selected'
                     )}
                 >
