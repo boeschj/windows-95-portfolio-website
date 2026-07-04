@@ -5,8 +5,6 @@ import {
     editorConfigFactory,
 } from '@payloadcms/richtext-lexical';
 
-console.log('>>> seed-showcase module loaded');
-
 const SLUG = 'inside-an-mpc-wallet';
 const TITLE = 'Inside a Multi-Party Computation Wallet';
 const SHOWCASE_MEDIA_ID = 4;

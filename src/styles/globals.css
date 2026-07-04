@@ -187,15 +187,6 @@
     position: relative !important;
 }
 
-.hide-native-scrollbar {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.hide-native-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
 .blog-row {
     outline: none;
 }
