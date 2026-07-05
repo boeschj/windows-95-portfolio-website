@@ -6,3 +6,6 @@ node_modules
 .env
 .gstack/
 .vercel
+
+# Bun lockfile — CI migrates pnpm-lock.yaml; do not commit
+bun.lock
