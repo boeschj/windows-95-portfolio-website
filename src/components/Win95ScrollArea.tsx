@@ -26,12 +26,31 @@ const ARROW = {
             borderTop: '4px solid currentColor',
         },
     },
+    left: {
+        position: 'left-0',
+        style: {
+            borderTop: '4px solid transparent',
+            borderBottom: '4px solid transparent',
+            borderRight: '4px solid currentColor',
+        },
+    },
+    right: {
+        position: 'right-0',
+        style: {
+            borderTop: '4px solid transparent',
+            borderBottom: '4px solid transparent',
+            borderLeft: '4px solid currentColor',
+        },
+    },
 } as const;
 
 type ArrowDirection = keyof typeof ARROW;
 
 const THUMB_CLASS =
     'win95-scroll-thumb win95-border-raised bg-windows-gray flex-1';
+
+const ARROW_BUTTON_CLASS =
+    'win95-scroll-arrow win95-border-raised bg-windows-gray absolute flex items-center justify-center';
 
 interface Win95ScrollAreaProps {
     children: React.ReactNode;
@@ -49,10 +68,10 @@ export function Win95ScrollArea({
     };
 
     return (
-        <ScrollArea.Root className="flex h-full w-full">
+        <ScrollArea.Root className="grid h-full w-full grid-cols-[minmax(0,1fr)_1.5rem] grid-rows-[minmax(0,1fr)_1.5rem]">
             <ScrollArea.Viewport
                 ref={viewportRef}
-                className={cn('min-w-0 flex-1', viewportClassName)}
+                className={cn('min-h-0 min-w-0', viewportClassName)}
             >
                 <ScrollArea.Content className="win95-scroll-content">
                     {children}
@@ -82,6 +101,8 @@ export function Win95ScrollArea({
                     }}
                 />
             </ScrollArea.Scrollbar>
+            <HorizontalScrollbarRail />
+            <div className="bg-windows-gray" />
         </ScrollArea.Root>
     );
 }
@@ -99,13 +120,39 @@ function ScrollArrowButton({ direction, onClick }: ScrollArrowButtonProps) {
             type="button"
             aria-label={`Scroll ${direction}`}
             onClick={onClick}
-            className={cn(
-                'win95-scroll-arrow win95-border-raised bg-windows-gray absolute right-0 left-0 flex items-center justify-center',
-                arrow.position
-            )}
+            className={cn(ARROW_BUTTON_CLASS, 'right-0 left-0', arrow.position)}
             style={{ height: SCROLL_BUTTON_SIZE_PX }}
         >
             <span className="block h-0 w-0" style={arrow.style} />
         </button>
+    );
+}
+
+function HorizontalScrollbarRail() {
+    return (
+        <div
+            aria-hidden
+            className="win95-scrollbar-track relative flex h-full w-full touch-none select-none"
+            style={{
+                paddingLeft: SCROLL_BUTTON_SIZE_PX,
+                paddingRight: SCROLL_BUTTON_SIZE_PX,
+            }}
+        >
+            <DecorativeScrollArrow direction="left" />
+            <DecorativeScrollArrow direction="right" />
+        </div>
+    );
+}
+
+function DecorativeScrollArrow({ direction }: { direction: ArrowDirection }) {
+    const arrow = ARROW[direction];
+
+    return (
+        <span
+            className={cn(ARROW_BUTTON_CLASS, 'top-0 bottom-0', arrow.position)}
+            style={{ width: SCROLL_BUTTON_SIZE_PX }}
+        >
+            <span className="block h-0 w-0" style={arrow.style} />
+        </span>
     );
 }
