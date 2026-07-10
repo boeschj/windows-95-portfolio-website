@@ -33,7 +33,7 @@ export async function generateMetadata({
     const canonicalUrl = `/blog/${slug}`;
 
     return {
-        title: `${post.title} — ${BLOG_AUTHOR}`,
+        title: post.title,
         description,
         alternates: { canonical: canonicalUrl },
         openGraph: {
@@ -41,7 +41,7 @@ export async function generateMetadata({
             title: post.title,
             description,
             url: canonicalUrl,
-            siteName: `${BLOG_AUTHOR} — Blog`,
+            siteName: `${BLOG_AUTHOR}'s blog`,
             publishedTime: post.publishedAt ?? undefined,
             modifiedTime: post.updatedAt,
             authors: [BLOG_AUTHOR],
