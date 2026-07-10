@@ -1,5 +1,8 @@
 'use client';
 
+import { Button } from '@/components/buttons/Button';
+import { cn } from '@/utils';
+
 interface CopyButtonProps {
     code: string;
 }
@@ -10,13 +13,17 @@ export function CopyButton({ code }: CopyButtonProps) {
     };
 
     return (
-        <button
+        <Button
             type="button"
             onClick={handleCopy}
             aria-label="Copy code"
-            className="notepad-copy-button bg-windows-gray absolute top-[6px] right-[6px] z-10 px-2 py-[1px] text-[13px] text-black"
+            className={cn(
+                'bg-windows-gray absolute top-1.5 right-1.5 z-10 px-2 py-px text-[13px] text-black',
+                'transition-transform duration-60 ease-out',
+                'active:shadow-win95-sunken active:translate-x-px active:translate-y-px'
+            )}
         >
             Copy
-        </button>
+        </Button>
     );
 }

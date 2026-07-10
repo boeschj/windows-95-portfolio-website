@@ -1,46 +1,41 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/buttons/Button';
+import { Win95ScrollArea } from '@/components/Win95ScrollArea';
 import { fileCountLabel } from '@/data/postView';
 import { cn } from '@/utils';
-import { Win95ScrollArea } from '@/components/Win95ScrollArea';
-import { DocumentIcon } from './DocumentIcon';
 
 import type { BlogListItem } from '@/data/postView';
+import { DocumentIcon } from '@/components/icons/Icons';
 
 const SORT_DIRECTION = { asc: 'asc', desc: 'desc' } as const;
 type SortDirection = (typeof SORT_DIRECTION)[keyof typeof SORT_DIRECTION];
 
-const TOUCH_POINTER_QUERY = '(pointer: coarse)';
-
-const isTouchPrimaryDevice = () =>
-    window.matchMedia(TOUCH_POINTER_QUERY).matches;
-
-// Single source for the fixed column widths so the header and the row cells
-// below can't drift out of alignment.
 const COLUMN_WIDTH_CLASS = {
     size: 'w-[90px]',
     type: 'w-[140px]',
-    modified: 'w-[170px]',
+    modified: 'w-[120px]',
 } as const;
+const CELL_CLASS = 'overflow-hidden px-2 py-0.5 whitespace-nowrap';
 
 const COLUMNS = [
-    { key: 'name', label: 'Name', className: 'flex flex-1 min-w-0' },
+    { key: 'name', label: 'Name', className: 'w-full' },
     {
         key: 'size',
         label: 'Size',
-        className: `hidden ${COLUMN_WIDTH_CLASS.size} md:flex`,
+        className: cn('hidden md:table-cell', COLUMN_WIDTH_CLASS.size),
     },
     {
         key: 'type',
         label: 'Type',
-        className: `hidden ${COLUMN_WIDTH_CLASS.type} md:flex`,
+        className: cn('hidden md:table-cell', COLUMN_WIDTH_CLASS.type),
     },
     {
         key: 'modified',
         label: 'Modified',
-        className: `flex ${COLUMN_WIDTH_CLASS.modified}`,
+        className: COLUMN_WIDTH_CLASS.modified,
     },
 ] as const satisfies readonly {
     key: string;
@@ -65,51 +60,39 @@ interface BlogExplorerProps {
 }
 
 export function BlogExplorer({ items }: BlogExplorerProps) {
-    const router = useRouter();
-    const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
     const [sortKey, setSortKey] = useState<ColumnKey>('name');
-    const [sortDirection, setSortDirection] = useState<SortDirection>(
-        SORT_DIRECTION.asc
-    );
-
+    const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
     const directionFactor = sortDirection === SORT_DIRECTION.asc ? 1 : -1;
     const sortedItems = [...items].sort(
         (a, b) => COMPARATORS[sortKey](a, b) * directionFactor
     );
 
     const handleSort = (key: ColumnKey) => {
-        if (key === sortKey) {
-            setSortDirection((previous) =>
-                previous === SORT_DIRECTION.asc
-                    ? SORT_DIRECTION.desc
-                    : SORT_DIRECTION.asc
-            );
-            return;
-        }
-
+        setSortDirection((current) =>
+            key === sortKey && current === SORT_DIRECTION.asc
+                ? SORT_DIRECTION.desc
+                : SORT_DIRECTION.asc
+        );
         setSortKey(key);
-        setSortDirection(SORT_DIRECTION.asc);
-    };
-
-    const openPost = (slug: string) => {
-        router.push(`/blog/${slug}`);
     };
 
     return (
         <div className="bg-windows-gray flex min-h-0 flex-1 flex-col">
-            <ColumnHeaderRow
-                sortKey={sortKey}
-                sortDirection={sortDirection}
-                onSort={handleSort}
-            />
             <div className="min-h-0 flex-1">
                 <Win95ScrollArea viewportClassName="h-full w-full bg-white">
-                    <PostRows
-                        items={sortedItems}
-                        selectedSlug={selectedSlug}
-                        onSelect={setSelectedSlug}
-                        onOpen={openPost}
-                    />
+                    <table className="w-full table-fixed text-[15px] text-black">
+                        <HeaderRow
+                            sortKey={sortKey}
+                            sortDirection={sortDirection}
+                            onSort={handleSort}
+                        />
+                        <tbody>
+                            {sortedItems.map((item) => (
+                                <PostRow key={item.slug} item={item} />
+                            ))}
+                        </tbody>
+                    </table>
+                    {sortedItems.length === 0 ? <EmptyState /> : null}
                 </Win95ScrollArea>
             </div>
             <StatusBar count={items.length} />
@@ -117,193 +100,100 @@ export function BlogExplorer({ items }: BlogExplorerProps) {
     );
 }
 
-interface ColumnHeaderRowProps {
+interface HeaderRowProps {
     sortKey: ColumnKey;
     sortDirection: SortDirection;
     onSort: (key: ColumnKey) => void;
 }
 
-function ColumnHeaderRow({
-    sortKey,
-    sortDirection,
-    onSort,
-}: ColumnHeaderRowProps) {
+function HeaderRow({ sortKey, sortDirection, onSort }: HeaderRowProps) {
     return (
-        <div className="bg-windows-gray flex text-[15px]">
-            {COLUMNS.map((column) => {
-                const isActive = column.key === sortKey;
-                const directionLabel =
-                    sortDirection === SORT_DIRECTION.asc
-                        ? 'ascending'
-                        : 'descending';
-                const sortLabel = isActive
-                    ? `Sort by ${column.label}, currently ${directionLabel}`
-                    : `Sort by ${column.label}`;
+        <thead className="bg-windows-gray">
+            <tr>
+                {COLUMNS.map((column) => {
+                    const isActive = column.key === sortKey;
+                    const directionLabel =
+                        sortDirection === SORT_DIRECTION.asc
+                            ? 'ascending'
+                            : 'descending';
 
-                return (
-                    <button
-                        key={column.key}
-                        type="button"
-                        aria-label={sortLabel}
-                        onClick={() => {
-                            onSort(column.key);
-                        }}
-                        className={cn(
-                            'win95-header-button bg-windows-gray items-center gap-1 px-2 py-[3px] text-left',
-                            column.className
-                        )}
-                    >
-                        <span className="truncate">{column.label}</span>
-                        {isActive ? (
-                            <SortCaret direction={sortDirection} />
-                        ) : null}
-                    </button>
-                );
-            })}
-        </div>
-    );
-}
-
-function SortCaret({ direction }: { direction: SortDirection }) {
-    const glyph = direction === SORT_DIRECTION.asc ? '▲' : '▼';
-
-    return (
-        <span className="text-[9px] leading-none text-black" aria-hidden="true">
-            {glyph}
-        </span>
-    );
-}
-
-interface PostRowsProps {
-    items: BlogListItem[];
-    selectedSlug: string | null;
-    onSelect: (slug: string) => void;
-    onOpen: (slug: string) => void;
-}
-
-function PostRows({ items, selectedSlug, onSelect, onOpen }: PostRowsProps) {
-    const listRef = useRef<HTMLDivElement>(null);
-
-    if (items.length === 0) {
-        return (
-            <div className="flex h-full items-center justify-center p-6 text-[15px] text-black/60">
-                No posts found.
-            </div>
-        );
-    }
-
-    // Single source of truth: the roving-tabindex row is derived from the
-    // selection, so it survives a re-sort instead of pointing at a stale index.
-    const selectedIndex = items.findIndex((item) => item.slug === selectedSlug);
-    const activeIndex = Math.max(0, selectedIndex);
-
-    const focusRowAt = (index: number) => {
-        const clampedIndex = Math.max(0, Math.min(items.length - 1, index));
-        onSelect(items[clampedIndex].slug);
-        const rows =
-            listRef.current?.querySelectorAll<HTMLElement>('[role="option"]');
-        rows?.[clampedIndex]?.focus();
-    };
-
-    const handleRowKeyDown =
-        (index: number) => (event: React.KeyboardEvent) => {
-            if (event.key === 'ArrowDown') {
-                event.preventDefault();
-                focusRowAt(index + 1);
-            } else if (event.key === 'ArrowUp') {
-                event.preventDefault();
-                focusRowAt(index - 1);
-            } else if (event.key === 'Home') {
-                event.preventDefault();
-                focusRowAt(0);
-            } else if (event.key === 'End') {
-                event.preventDefault();
-                focusRowAt(items.length - 1);
-            } else if (event.key === 'Enter') {
-                onOpen(items[index].slug);
-            }
-        };
-
-    return (
-        <div role="listbox" aria-label="Blog posts" ref={listRef}>
-            {items.map((item, index) => (
-                <PostRow
-                    key={item.slug}
-                    item={item}
-                    isSelected={item.slug === selectedSlug}
-                    isActive={index === activeIndex}
-                    onSelect={() => {
-                        onSelect(item.slug);
-                    }}
-                    onOpen={onOpen}
-                    onKeyDown={handleRowKeyDown(index)}
-                />
-            ))}
-        </div>
+                    return (
+                        <th
+                            key={column.key}
+                            className={cn(
+                                'overflow-hidden p-0 whitespace-nowrap',
+                                column.className
+                            )}
+                        >
+                            <Button
+                                type="button"
+                                aria-label={
+                                    isActive
+                                        ? `Sort by ${column.label}, currently ${directionLabel}`
+                                        : `Sort by ${column.label}`
+                                }
+                                onClick={() => {
+                                    onSort(column.key);
+                                }}
+                                className="win95-header-button flex h-full w-full items-center gap-1 overflow-hidden px-2 py-[3px] text-left font-normal whitespace-nowrap"
+                            >
+                                <span className="truncate">{column.label}</span>
+                            </Button>
+                        </th>
+                    );
+                })}
+            </tr>
+        </thead>
     );
 }
 
 interface PostRowProps {
     item: BlogListItem;
-    isSelected: boolean;
-    isActive: boolean;
-    onSelect: () => void;
-    onOpen: (slug: string) => void;
-    onKeyDown: (event: React.KeyboardEvent) => void;
 }
 
-function PostRow({
-    item,
-    isSelected,
-    isActive,
-    onSelect,
-    onOpen,
-    onKeyDown,
-}: PostRowProps) {
-    const handleClick = () => {
-        if (isTouchPrimaryDevice()) {
-            onOpen(item.slug);
-            return;
-        }
-        onSelect();
-    };
-
+function PostRow({ item }: PostRowProps) {
     return (
-        <div
-            role="option"
-            aria-selected={isSelected}
-            tabIndex={isActive ? 0 : -1}
-            onClick={handleClick}
-            onDoubleClick={() => {
-                onOpen(item.slug);
-            }}
-            onKeyDown={onKeyDown}
-            className="blog-row flex cursor-default items-center text-[15px] text-black"
-        >
-            <div className="flex min-w-0 flex-1 items-center gap-1.5 px-2 py-[2px]">
-                <DocumentIcon />
-                <span
-                    className={cn(
-                        'blog-filename min-w-0 truncate px-[3px]',
-                        isSelected && 'blog-filename-selected'
-                    )}
+        <tr>
+            <td className={CELL_CLASS}>
+                <Link
+                    href={`/blog/${item.slug}`}
+                    className="flex min-w-0 items-center gap-1.5 text-black no-underline"
                 >
-                    {item.filename}
-                </span>
-            </div>
-            <div
-                className={`hidden ${COLUMN_WIDTH_CLASS.size} px-2 py-[2px] md:block`}
+                    <DocumentIcon />
+                    <span className="block min-w-0 truncate px-0.75">
+                        {item.filename}
+                    </span>
+                </Link>
+            </td>
+            <td
+                className={cn(
+                    'hidden md:table-cell',
+                    CELL_CLASS,
+                    COLUMN_WIDTH_CLASS.size
+                )}
             >
                 {item.size}
-            </div>
-            <div
-                className={`hidden ${COLUMN_WIDTH_CLASS.type} px-2 py-[2px] md:block`}
+            </td>
+            <td
+                className={cn(
+                    'hidden md:table-cell',
+                    CELL_CLASS,
+                    COLUMN_WIDTH_CLASS.type
+                )}
             >
                 {item.type}
-            </div>
-            <div className={`${COLUMN_WIDTH_CLASS.modified} px-2 py-[2px]`}>
+            </td>
+            <td className={cn(CELL_CLASS, COLUMN_WIDTH_CLASS.modified)}>
                 {item.modified}
-            </div>
+            </td>
+        </tr>
+    );
+}
+
+function EmptyState() {
+    return (
+        <div className="flex h-full items-center justify-center p-6 text-[15px] text-black/60">
+            No posts found.
         </div>
     );
 }
@@ -315,28 +205,7 @@ function StatusBar({ count }: { count: number }) {
                 {fileCountLabel(count)}
             </div>
             <div className="win95-status-panel hidden flex-1 px-[10px] py-[2px] md:block" />
-            <div className="win95-status-panel relative hidden w-[200px] px-[10px] py-[2px] md:block">
-                <ResizeGrip />
-            </div>
+            <div className="win95-status-panel hidden w-50 px-2.5 py-0.5 md:block" />
         </div>
-    );
-}
-
-function ResizeGrip() {
-    return (
-        <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            className="absolute right-[2px] bottom-[2px]"
-            aria-hidden="true"
-        >
-            <path d="M13 5 L5 13 M13 9 L9 13 M13 1 L1 13" stroke="#808080" />
-            <path
-                d="M13 6 L6 13 M13 10 L10 13 M13 2 L2 13"
-                stroke="#fff"
-                transform="translate(1,1)"
-            />
-        </svg>
     );
 }

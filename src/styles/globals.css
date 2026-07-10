@@ -50,6 +50,25 @@
     --color-focus-outline: #3f3f3f;
     --color-tooltip-bg: #ffffe1;
 
+    --shadow-win95-raised:
+        inset -1px -1px var(--color-raised-b-4),
+        inset -2px -2px var(--color-raised-b-3),
+        inset -3px -3px var(--color-raised-b-2),
+        inset -4px -4px var(--color-raised-b-1),
+        inset 1px 1px var(--color-raised-t-1),
+        inset 2px 2px var(--color-raised-t-2),
+        inset 3px 3px var(--color-raised-t-3),
+        inset 4px 4px var(--color-raised-t-4);
+    --shadow-win95-sunken:
+        inset -1px -1px var(--color-sunken-t-1),
+        inset -2px -2px var(--color-sunken-t-2),
+        inset -3px -3px var(--color-sunken-t-3),
+        inset -4px -4px var(--color-sunken-t-4),
+        inset 1px 1px var(--color-sunken-b-1),
+        inset 2px 2px var(--color-sunken-b-2),
+        inset 3px 3px var(--color-sunken-b-3),
+        inset 4px 4px var(--color-sunken-b-4);
+
     --breakpoint-xs: 380px;
 
     --spacing-taskbar-height: 35px;
@@ -60,15 +79,7 @@
 @layer components {
     .win95-border-raised {
         padding: 4px;
-        box-shadow:
-            inset -1px -1px var(--color-raised-b-4),
-            inset -2px -2px var(--color-raised-b-3),
-            inset -3px -3px var(--color-raised-b-2),
-            inset -4px -4px var(--color-raised-b-1),
-            inset 1px 1px var(--color-raised-t-1),
-            inset 2px 2px var(--color-raised-t-2),
-            inset 3px 3px var(--color-raised-t-3),
-            inset 4px 4px var(--color-raised-t-4);
+        box-shadow: var(--shadow-win95-raised);
     }
 
     .win95-border-raised-light {
@@ -84,15 +95,7 @@
 
     .win95-border-sunken {
         padding: 4px;
-        box-shadow:
-            inset -1px -1px var(--color-sunken-t-1),
-            inset -2px -2px var(--color-sunken-t-2),
-            inset -3px -3px var(--color-sunken-t-3),
-            inset -4px -4px var(--color-sunken-t-4),
-            inset 1px 1px var(--color-sunken-b-1),
-            inset 2px 2px var(--color-sunken-b-2),
-            inset 3px 3px var(--color-sunken-b-3),
-            inset 4px 4px var(--color-sunken-b-4);
+        box-shadow: var(--shadow-win95-sunken);
     }
 
     .win95-border-sunken-light {
@@ -133,78 +136,54 @@
 
     .win95-header-button {
         box-shadow:
-            inset -1px -1px #000,
-            inset -2px -2px #808080,
-            inset 1px 1px #fff,
-            inset 2px 2px #dfdfdf;
+            inset -1px -1px var(--color-raised-light-b-3),
+            inset -2px -2px var(--color-raised-light-b-2),
+            inset 1px 1px var(--color-raised-light-t-2),
+            inset 2px 2px var(--color-sunken-light-b-1);
     }
 
     .win95-header-button:active {
         box-shadow:
-            inset 1px 1px #000,
-            inset 2px 2px #808080,
-            inset -1px -1px #fff,
-            inset -2px -2px #dfdfdf;
+            inset 1px 1px var(--color-raised-light-b-3),
+            inset 2px 2px var(--color-raised-light-b-2),
+            inset -1px -1px var(--color-raised-light-t-2),
+            inset -2px -2px var(--color-sunken-light-b-1);
     }
 
     .win95-thin-raised {
         box-shadow:
-            inset -1px -1px #000,
-            inset -2px -2px #808080,
-            inset 1px 1px #fff,
-            inset 2px 2px #dfdfdf;
+            inset -1px -1px var(--color-raised-light-b-3),
+            inset -2px -2px var(--color-raised-light-b-2),
+            inset 1px 1px var(--color-raised-light-t-2),
+            inset 2px 2px var(--color-sunken-light-b-1);
     }
 
     .win95-thin-sunken {
         box-shadow:
-            inset -1px -1px #fff,
-            inset -2px -2px #dfdfdf,
-            inset 1px 1px #000,
-            inset 2px 2px #808080;
+            inset -1px -1px var(--color-raised-light-t-2),
+            inset -2px -2px var(--color-sunken-light-b-1),
+            inset 1px 1px var(--color-raised-light-b-3),
+            inset 2px 2px var(--color-raised-light-b-2);
     }
 
     .win95-status-panel {
         box-shadow:
-            inset -1px -1px #fff,
-            inset -2px -2px #dfdfdf,
-            inset 1px 1px #808080,
-            inset 2px 2px #c0c4c8;
+            inset -1px -1px var(--color-raised-light-t-2),
+            inset -2px -2px var(--color-sunken-light-b-1),
+            inset 1px 1px var(--color-raised-light-b-2),
+            inset 2px 2px var(--color-windows-gray);
     }
 }
 
-/* base-ui ScrollArea.Content defaults to inline min-width: fit-content so wide
-   content can scroll horizontally. This area is vertical-only, so let content
-   shrink to the viewport and reflow instead of overflowing sideways. */
 .win95-scroll-content {
     width: 100%;
     min-width: 0 !important;
 }
 
-/* base-ui positions the scrollbar as an absolute overlay; make it an in-flow
-   flex channel instead so the viewport reserves real space beside it and
-   content never runs underneath the scrollbar. */
 .win95-scrollbar-track {
     position: relative !important;
 }
 
-.blog-row {
-    outline: none;
-}
-
-.blog-row:focus-visible .blog-filename:not(.blog-filename-selected) {
-    outline: 1px dotted #000;
-    outline-offset: -1px;
-}
-
-.blog-filename-selected {
-    background: var(--color-windows-blue);
-    color: #fff;
-    outline: 1px dotted #fff;
-    outline-offset: -1px;
-}
-
-/* Keep the scrollbar rail + arrows visible when content fits, but hide the
-   thumb and grey the arrows to read as a disabled Win95 scrollbar. */
 .win95-scrollbar-track:not([data-has-overflow-y]) .win95-scroll-thumb {
     visibility: hidden;
 }
@@ -242,10 +221,6 @@
     line-height: 1.6;
 }
 
-/* Reading body uses the authentic Win95 MS Serif bitmap face at its native
-   19px height; headings and chrome keep MS Sans Serif. Descendants (links,
-   bold, italic) are covered too so the global sans rule can't override them;
-   inline code keeps its higher-specificity monospace rule. */
 .notepad-prose p,
 .notepad-prose p *,
 .notepad-prose li,
@@ -324,60 +299,6 @@
     font-smooth: never;
     background: #dfe3e6;
     box-shadow: inset 0 0 0 1px #808080;
-}
-
-.notepad-code {
-    position: relative;
-    margin: 0 0 18px;
-    background: #f4f4f4;
-    box-shadow:
-        inset -1px -1px #fff,
-        inset -2px -2px #dfdfdf,
-        inset 1px 1px #808080,
-        inset 2px 2px #c0c4c8;
-}
-
-.notepad-code-scroll {
-    overflow-x: auto;
-    padding: 16px 18px;
-}
-
-.notepad-code pre {
-    margin: 0;
-    background: transparent !important;
-    font-family: var(--font-fixedsys), 'Courier New', monospace;
-    font-size: 17px;
-    line-height: 1.5;
-    -webkit-font-smoothing: none;
-    font-smooth: never;
-}
-
-/* Shiki wraps every token in a <span>; the global `*` sans rule targets those
-   spans directly, so they must be pulled back to the code font explicitly. */
-.notepad-code pre code,
-.notepad-code pre code * {
-    font-family: inherit;
-    background: none;
-}
-
-/* Raised until pressed, then sinks and nudges 1px down-right like a real
-   Win95 button. Mirrors .win95-header-button:active from the components layer. */
-.notepad-copy-button {
-    box-shadow:
-        inset -1px -1px #000,
-        inset -2px -2px #808080,
-        inset 1px 1px #fff,
-        inset 2px 2px #dfdfdf;
-    transition: transform 60ms ease-out;
-}
-
-.notepad-copy-button:active {
-    box-shadow:
-        inset 1px 1px #000,
-        inset 2px 2px #808080,
-        inset -1px -1px #fff,
-        inset -2px -2px #dfdfdf;
-    transform: translate(1px, 1px);
 }
 
 .notepad-prose blockquote {

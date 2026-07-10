@@ -1,4 +1,5 @@
 import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext';
+import { format, parseISO } from 'date-fns';
 
 import type { Post } from '@/payload-types';
 
@@ -9,6 +10,8 @@ const BYTES_PER_KILOBYTE = 1024;
 const WORDS_PER_MINUTE = 200;
 const META_SEPARATOR = ' · ';
 const DESCRIPTION_MAX_LENGTH = 155;
+const EXPLORER_DATE_FORMAT = 'MM/dd/yy';
+const POST_DATE_FORMAT = 'MMMM d, yyyy';
 
 export interface BlogListItem {
     slug: string;
@@ -68,7 +71,7 @@ export function postDescription(post: Post): string {
         return text;
     }
 
-    return `${text.slice(0, DESCRIPTION_MAX_LENGTH).trimEnd()}…`;
+    return `${text.slice(0, DESCRIPTION_MAX_LENGTH).trimEnd()}...`;
 }
 
 function contentSizeBytes(post: Post): number {
@@ -82,24 +85,13 @@ function formatFileSize(bytes: number): string {
 }
 
 function formatExplorerDate(isoDate: string): string {
-    return new Intl.DateTimeFormat('en-US', {
-        month: '2-digit',
-        day: '2-digit',
-        year: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true,
-    }).format(new Date(isoDate));
+    return format(parseISO(isoDate), EXPLORER_DATE_FORMAT);
 }
 
 function formatPostDate(post: Post): string {
     const isoDate = post.publishedAt ?? post.createdAt;
 
-    return new Intl.DateTimeFormat('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-    }).format(new Date(isoDate));
+    return format(parseISO(isoDate), POST_DATE_FORMAT);
 }
 
 function formatReadTime(post: Post): string {

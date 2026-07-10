@@ -29,6 +29,7 @@
         "@react95/fonts": "^1.0.1",
         "@t3-oss/env-nextjs": "^0.13.11",
         "clsx": "^2.1.1",
+        "date-fns": "^4.4.0",
         "graphql": "^16.14.2",
         "next": "16.2.10",
         "payload": "^3.85.2",

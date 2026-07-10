@@ -38,8 +38,6 @@ export async function getPublishedSlugs(): Promise<string[]> {
     return docs.map((doc) => doc.slug);
 }
 
-// Deduped per request: generateMetadata and the page body both call this for
-// the same slug within one render.
 export const getPostBySlug = cache(
     async (slug: string): Promise<Post | null> => {
         const payload = await getPayload({ config });

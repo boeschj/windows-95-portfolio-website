@@ -12,10 +12,14 @@ const TAB_PANEL_CLASS = 'flex h-full min-h-0 w-full flex-col';
 
 interface TabContentContainerProps {
     panels: Record<TabRoute, ReactNode>;
+    initialRoute: string | null;
 }
 
-export function TabContentContainer({ panels }: TabContentContainerProps) {
-    const { selectedTab, selectTab } = useTabRoute();
+export function TabContentContainer({
+    panels,
+    initialRoute,
+}: TabContentContainerProps) {
+    const { selectedTab, selectTab } = useTabRoute({ initialRoute });
 
     const handleValueChange = (value: unknown) => {
         const nextTab = TABS.find((tab) => tab.key === value);
@@ -75,13 +79,8 @@ const ACTIVE_TAB_BOTTOM_BORDER_COVER = `
     after:content-[""]
 `;
 
-// Interior tabs overhang 1px past their right edge to hide the dark seam that
-// fractional flex widths open up against the neighbouring tab.
 const ACTIVE_TAB_SEAM_OVERHANG = 'after:right-[-1px]';
 
-// The last tab has no neighbour to seal against, so the overhang would paint
-// over its own raised right border. Carry that border down the seam instead,
-// reproducing win95-border-tab's full 3px right edge so it lines up exactly.
 const ACTIVE_TAB_RIGHT_EDGE =
     'after:right-0 after:[box-shadow:inset_-1px_0_var(--color-tab-b-3),inset_-2px_0_var(--color-tab-b-2),inset_-3px_0_var(--color-tab-b-1)]';
 
@@ -102,12 +101,12 @@ function Win95Tab({ value, label, isActive, isLast }: Win95TabProps) {
     return (
         <div
             className={cn(
-                'win95-border-tab relative w-[100px] rounded-t',
+                'win95-border-tab relative w-25 rounded-t',
                 tabHeight,
                 isActive && activeCover
             )}
         >
-            <Tabs.Tab value={value} className="bg-windows-gray h-[30px] w-full">
+            <Tabs.Tab value={value} className="bg-windows-gray h-7.5 w-full">
                 {label}
             </Tabs.Tab>
         </div>
