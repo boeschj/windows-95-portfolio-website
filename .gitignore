@@ -4,3 +4,5 @@ node_modules
 *.tsbuildinfo
 .env.local
 .env
+.gstack/
+.vercel

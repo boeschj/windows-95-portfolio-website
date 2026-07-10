@@ -18,7 +18,7 @@ export function Button({ className, pressed = false, ...props }: ButtonProps) {
         <BaseButton
             className={cn(
                 borderStyle,
-                'win95-focus-inset bg-windows-gray',
+                'win95-focus-inset bg-windows-gray cursor:pointer',
                 className
             )}
             {...props}

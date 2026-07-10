@@ -1,13 +1,37 @@
 export const TABS = [
-    { key: 0, title: "Hi, I'm Jordan 👋", label: 'About Me' },
-    { key: 1, title: 'My Work', label: 'Experience' },
-    { key: 2, title: 'My Skills', label: 'Skills' },
-] as const;
+    { key: 0, route: 'about', title: "Hi, I'm Jordan 👋", label: 'About Me' },
+    { key: 1, route: 'experience', title: 'My Work', label: 'Experience' },
+    { key: 2, route: 'skills', title: 'My Skills', label: 'Skills' },
+    { key: 3, route: 'blog', title: 'Blog', label: 'Blog' },
+] as const satisfies readonly {
+    key: number;
+    route: string;
+    title: string;
+    label: string;
+}[];
 
-export type TabKey = (typeof TABS)[number]['key'];
+export type Tab = (typeof TABS)[number];
+export type TabKey = Tab['key'];
+export type TabRoute = Tab['route'];
 
-const VALID_TAB_KEYS = new Set<number>(TABS.map((tab) => tab.key));
+export const DEFAULT_TAB = TABS[0];
 
-export function isValidTabKey(value: unknown): value is TabKey {
-    return typeof value === 'number' && VALID_TAB_KEYS.has(value);
+export const TAB_QUERY_PARAM = 'tab';
+
+const TAB_BY_ROUTE = new Map<string, Tab>(TABS.map((tab) => [tab.route, tab]));
+
+export function getTabByRoute(route: string | null | undefined): Tab {
+    if (!route) {
+        return DEFAULT_TAB;
+    }
+
+    return TAB_BY_ROUTE.get(route) ?? DEFAULT_TAB;
+}
+
+export function hrefForTab(route: TabRoute): string {
+    if (route === DEFAULT_TAB.route) {
+        return '/';
+    }
+
+    return `/?${TAB_QUERY_PARAM}=${route}`;
 }

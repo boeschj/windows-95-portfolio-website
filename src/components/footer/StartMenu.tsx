@@ -2,23 +2,39 @@
 
 import Image from 'next/image';
 import { Menu } from '@base-ui/react/menu';
-import { useSetAtom } from 'jotai';
-import { tabSelectedAtom } from '@/store';
 import { TABS } from '@/config/tabs';
+import { useTabRoute } from '@/hooks/useTabRoute';
 import { links } from '@/config/aboutMe';
 import { IMAGE_PATH } from '@/constants/application.constants';
 import { Button } from '@/components/buttons/Button';
 
-import type { TabKey } from '@/config/tabs';
+import type { TabRoute } from '@/config/tabs';
 
 const MENU_ITEM_CLASS =
     'data-[highlighted]:bg-windows-blue flex h-10 w-full cursor-pointer items-center justify-center text-xl data-[highlighted]:text-white';
 
-export function StartMenu() {
-    const setTabSelected = useSetAtom(tabSelectedAtom);
+const START_BUTTON_CLASS =
+    'flex h-[28px] cursor-pointer items-center justify-center space-x-2 px-1 pb-1 text-lg font-[1100] tracking-wide';
 
-    const handleTabSelection = (tabKey: TabKey) => () => {
-        setTabSelected(tabKey);
+function StartButtonContent() {
+    return (
+        <>
+            <Image
+                src={`${IMAGE_PATH}/icons/win_95.svg`}
+                alt="Win95"
+                height="28"
+                width="28"
+            />
+            <div>Start</div>
+        </>
+    );
+}
+
+export function StartMenu() {
+    const { selectTab } = useTabRoute();
+
+    const handleTabSelection = (route: TabRoute) => () => {
+        selectTab(route);
     };
 
     return (
@@ -28,15 +44,9 @@ export function StartMenu() {
                     <Button
                         {...triggerProps}
                         pressed={state.open}
-                        className="flex h-[28px] cursor-pointer items-center justify-center space-x-2 px-1 pb-1 text-lg font-[1100] tracking-wide"
+                        className={START_BUTTON_CLASS}
                     >
-                        <Image
-                            src={`${IMAGE_PATH}/icons/win_95.svg`}
-                            alt="Win95"
-                            height="28"
-                            width="28"
-                        />
-                        <div>Start</div>
+                        <StartButtonContent />
                     </Button>
                 )}
             />
@@ -46,7 +56,7 @@ export function StartMenu() {
                         {TABS.map((tab) => (
                             <Menu.Item
                                 key={tab.key}
-                                onClick={handleTabSelection(tab.key)}
+                                onClick={handleTabSelection(tab.route)}
                                 className={MENU_ITEM_CLASS}
                             >
                                 {tab.label}
