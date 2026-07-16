@@ -5,16 +5,18 @@ import { lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
+import { Experiences } from './collections/Experiences';
 import { Media } from './collections/Media';
 import { Posts } from './collections/Posts';
 import { Users } from './collections/Users';
+import { MEDIA_PREFIX } from './constants/application.constants';
 import { env } from './env';
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
 
 export default buildConfig({
     editor: lexicalEditor(),
-    collections: [Users, Posts, Media],
+    collections: [Users, Posts, Experiences, Media],
     secret: env.PAYLOAD_SECRET,
     db: postgresAdapter({
         pool: {
@@ -37,7 +39,7 @@ export default buildConfig({
             collections: {
                 media: {
                     disableLocalStorage: true,
-                    prefix: 'blog-assets',
+                    prefix: MEDIA_PREFIX,
                 },
             },
         }),

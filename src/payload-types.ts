@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     posts: Post;
+    experiences: Experience;
     media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -79,6 +80,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    experiences: ExperiencesSelect<false> | ExperiencesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -152,6 +154,10 @@ export interface Post {
   id: number;
   title: string;
   slug: string;
+  /**
+   * About-page posts are rendered inline on the About tab and hidden from the blog listing.
+   */
+  category?: ('blog' | 'about') | null;
   content?: {
     root: {
       type: string;
@@ -169,6 +175,44 @@ export interface Post {
   } | null;
   status?: ('draft' | 'published') | null;
   publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experiences".
+ */
+export interface Experience {
+  id: number;
+  company: string;
+  role: string;
+  logo: number | Media;
+  /**
+   * Optional link to the company website.
+   */
+  url?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  startDate: string;
+  /**
+   * Leave empty for a current role ("Present").
+   */
+  endDate?: string | null;
+  slug: string;
+  status?: ('draft' | 'published') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -223,6 +267,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'experiences';
+        value: number | Experience;
       } | null)
     | ({
         relationTo: 'media';
@@ -299,9 +347,27 @@ export interface UsersSelect<T extends boolean = true> {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  category?: T;
   content?: T;
   status?: T;
   publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "experiences_select".
+ */
+export interface ExperiencesSelect<T extends boolean = true> {
+  company?: T;
+  role?: T;
+  logo?: T;
+  url?: T;
+  content?: T;
+  startDate?: T;
+  endDate?: T;
+  slug?: T;
+  status?: T;
   updatedAt?: T;
   createdAt?: T;
 }
