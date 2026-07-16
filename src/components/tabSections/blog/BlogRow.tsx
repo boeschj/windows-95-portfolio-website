@@ -1,16 +1,17 @@
 import Link from 'next/link';
 import { DocumentIcon } from '@/components/icons/Icons';
 import { cn } from '@/utils';
+import { CELL_CLASS } from '@/components/explorer/explorerTable';
 
-import { CELL_CLASS, COLUMN_WIDTH_CLASS } from './blogTable';
+import { COLUMN_WIDTH_CLASS } from './blogColumns';
 
 import type { BlogListItem } from '@/data/postView';
 
-interface PostRowProps {
+interface BlogRowProps {
     item: BlogListItem;
 }
 
-export function PostRow({ item }: PostRowProps) {
+export function BlogRow({ item }: BlogRowProps) {
     const postHref = `/blog/${item.slug}`;
 
     return (

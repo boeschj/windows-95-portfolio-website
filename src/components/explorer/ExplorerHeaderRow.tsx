@@ -1,24 +1,30 @@
 import { Button } from '@/components/buttons/Button';
 import { cn } from '@/utils';
 
-import { COLUMNS, SORT_DIRECTION } from './blogTable';
+import { SORT_DIRECTION } from './explorerTable';
 
-import type { ColumnKey, SortDirection } from './blogTable';
+import type { ExplorerColumn, SortDirection } from './explorerTable';
 
-interface HeaderRowProps {
-    sortKey: ColumnKey;
+interface ExplorerHeaderRowProps<TKey extends string> {
+    columns: readonly ExplorerColumn<TKey>[];
+    sortKey: TKey;
     sortDirection: SortDirection;
-    onSort: (key: ColumnKey) => void;
+    onSort: (key: TKey) => void;
 }
 
-export function HeaderRow({ sortKey, sortDirection, onSort }: HeaderRowProps) {
+export function ExplorerHeaderRow<TKey extends string>({
+    columns,
+    sortKey,
+    sortDirection,
+    onSort,
+}: ExplorerHeaderRowProps<TKey>) {
     const directionLabel =
         sortDirection === SORT_DIRECTION.asc ? 'ascending' : 'descending';
 
     return (
         <thead className="bg-windows-gray">
             <tr>
-                {COLUMNS.map((column) => {
+                {columns.map((column) => {
                     const isActive = column.key === sortKey;
                     const ariaLabel = isActive
                         ? `Sort by ${column.label}, currently ${directionLabel}`
