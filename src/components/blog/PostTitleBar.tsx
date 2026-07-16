@@ -5,11 +5,13 @@ import {
     NotepadIcon,
     XIcon,
 } from '../icons/Icons';
-import { hrefForTab } from '@/config/tabs';
 
-const BLOG_HREF = hrefForTab('blog');
+interface TitleBarProps {
+    title: string;
+    backHref: string;
+}
 
-export function TitleBar({ title }: { title: string }) {
+export function TitleBar({ title, backHref }: TitleBarProps) {
     return (
         <div className="bg-windows-blue flex h-7 items-center justify-between pr-0.5 pl-1">
             <div className="flex items-center gap-1.5">
@@ -18,9 +20,13 @@ export function TitleBar({ title }: { title: string }) {
             </div>
             <div className="flex items-center gap-0.5">
                 {TITLE_BAR_BUTTON_KINDS.map((kind) => (
-                    <TitleBarButton key={kind} kind={kind} />
+                    <TitleBarButton
+                        key={kind}
+                        kind={kind}
+                        backHref={backHref}
+                    />
                 ))}
-                <CloseButton />
+                <CloseButton backHref={backHref} />
             </div>
         </div>
     );
@@ -32,24 +38,25 @@ const TITLE_BUTTON_CLASS =
 const TITLE_BAR_BUTTON_KINDS = ['minimize', 'maximize'] as const;
 type TitleBarButtonKind = (typeof TITLE_BAR_BUTTON_KINDS)[number];
 
-function TitleBarButton({ kind }: { kind: TitleBarButtonKind }) {
+interface TitleBarButtonProps {
+    kind: TitleBarButtonKind;
+    backHref: string;
+}
+
+function TitleBarButton({ kind, backHref }: TitleBarButtonProps) {
     const icon =
         kind === 'minimize' ? <MinimizeButtonIcon /> : <MaximizeButtonIcon />;
 
     return (
-        <Link href={BLOG_HREF} aria-label={kind} className={TITLE_BUTTON_CLASS}>
+        <Link href={backHref} aria-label={kind} className={TITLE_BUTTON_CLASS}>
             {icon}
         </Link>
     );
 }
 
-function CloseButton() {
+function CloseButton({ backHref }: { backHref: string }) {
     return (
-        <Link
-            href={BLOG_HREF}
-            aria-label="Close"
-            className={TITLE_BUTTON_CLASS}
-        >
+        <Link href={backHref} aria-label="Close" className={TITLE_BUTTON_CLASS}>
             <XIcon size={8} />
         </Link>
     );

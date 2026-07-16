@@ -1,64 +1,44 @@
 import Link from 'next/link';
-import { RichText } from '@payloadcms/richtext-lexical/react';
 import { Footer } from '@/components/footer/Footer';
 import { Win95ScrollArea } from '@/components/Win95ScrollArea';
 import { NotepadIcon } from '@/components/icons/Icons';
-import { toPostView } from '@/data/postView';
-import { hrefForTab } from '@/config/tabs';
-import { createCodeConverters } from './codeConverters';
-
-import type { Post } from '@/payload-types';
+import { PostArticle } from './PostArticle';
 import { TitleBar } from './PostTitleBar';
 
-const BLOG_HREF = hrefForTab('blog');
+import type { ReaderDocument } from '@/data/reader';
+
 const NOTEPAD_TITLE_SUFFIX = ' - Notepad';
 const MENU_ITEMS = ['File', 'Edit', 'Search', 'Help'] as const;
 
-interface PostReaderProps {
-    post: Post;
+interface NotepadReaderProps {
+    doc: ReaderDocument;
+    backHref: string;
 }
 
-export function PostReader({ post }: PostReaderProps) {
-    const { filename, title, metaLine } = toPostView(post);
+export function NotepadReader({ doc, backHref }: NotepadReaderProps) {
+    const { filename, title, metaLine, content } = doc;
     const windowTitle = `${filename}${NOTEPAD_TITLE_SUFFIX}`;
 
     return (
         <div className="bg-windows-bg md:pb-taskbar-height fixed inset-0 flex flex-col overflow-hidden">
             <div className="win95-border-raised bg-windows-gray mx-auto flex min-h-0 w-full max-w-screen-2xl flex-1 flex-col">
-                <TitleBar title={windowTitle} />
+                <TitleBar title={windowTitle} backHref={backHref} />
                 <MenuBar />
                 <div className="win95-border-sunken bg-windows-gray flex min-h-0 flex-1">
                     <Win95ScrollArea viewportClassName="h-full w-full bg-white px-6 py-8 md:px-12 md:py-9">
-                        <article className="notepad-prose">
-                            <h1>{title}</h1>
-                            <p className="notepad-meta">{metaLine}</p>
-                            <PostBody post={post} />
-                        </article>
+                        <PostArticle
+                            content={content}
+                            title={title}
+                            metaLine={metaLine}
+                            showHeader
+                        />
                     </Win95ScrollArea>
                 </div>
             </div>
             <Footer>
-                <NotepadTaskbarButton title={windowTitle} />
+                <NotepadTaskbarButton title={windowTitle} backHref={backHref} />
             </Footer>
         </div>
-    );
-}
-
-interface PostBodyProps {
-    post: Post;
-}
-
-function PostBody({ post }: PostBodyProps) {
-    if (!post.content) {
-        return <p>This post has no content yet.</p>;
-    }
-
-    return (
-        <RichText
-            data={post.content}
-            disableContainer
-            converters={createCodeConverters()}
-        />
     );
 }
 
@@ -77,10 +57,15 @@ function MenuBar() {
     );
 }
 
-function NotepadTaskbarButton({ title }: { title: string }) {
+interface NotepadTaskbarButtonProps {
+    title: string;
+    backHref: string;
+}
+
+function NotepadTaskbarButton({ title, backHref }: NotepadTaskbarButtonProps) {
     return (
         <Link
-            href={BLOG_HREF}
+            href={backHref}
             className="win95-thin-sunken bg-windows-gray flex h-7 max-w-[320px] flex-none items-center gap-1.5 px-2.5 text-black no-underline"
         >
             <NotepadIcon size={14} />
