@@ -1,16 +1,23 @@
 import { notFound } from 'next/navigation';
-import { getPostBySlug, getPublishedSlugs } from '@/data/posts';
-import { BLOG_AUTHOR, postDescription } from '@/data/postView';
+import { getPostBySlug, getBlogSlugs } from '@/data/posts';
+import {
+    BLOG_AUTHOR,
+    postDescription,
+    toReaderDocument,
+} from '@/data/postView';
 import { buildPostSchema } from '@/data/seoSchema';
+import { hrefForTab } from '@/config/tabs';
 import { JsonLd } from '@/components/JsonLd';
-import { PostReader } from '@/components/blog/PostReader';
+import { NotepadReader } from '@/components/blog/NotepadReader';
 
 import type { Metadata } from 'next';
+
+const BLOG_HREF = hrefForTab('blog');
 
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-    const slugs = await getPublishedSlugs();
+    const slugs = await getBlogSlugs();
 
     return slugs.map((slug) => ({ slug }));
 }
@@ -62,10 +69,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         notFound();
     }
 
+    const doc = toReaderDocument(post);
+
     return (
         <>
             <JsonLd data={buildPostSchema(post)} />
-            <PostReader post={post} />
+            <NotepadReader doc={doc} backHref={BLOG_HREF} />
         </>
     );
 }
