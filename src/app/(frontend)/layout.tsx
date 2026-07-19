@@ -1,6 +1,7 @@
 import localFont from 'next/font/local';
 import { SITE_URL } from '@/constants/application.constants';
-import { PERSON_SCHEMA } from '@/data/seoSchema';
+import { buildPersonSchema } from '@/data/seoSchema';
+import { getSiteSettings } from '@/data/siteSettings';
 import { JsonLd } from '@/components/JsonLd';
 import '@react95/fonts/serif/10pt';
 import '@react95/fonts/serif/14pt';
@@ -66,18 +67,20 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const { githubUrl, linkedinUrl } = await getSiteSettings();
+
     return (
         <html
             lang="en"
             className={`${msSansSerif.variable} ${fixedsys.variable}`}
         >
             <body>
-                <JsonLd data={PERSON_SCHEMA} />
+                <JsonLd data={buildPersonSchema(githubUrl, linkedinUrl)} />
                 {children}
             </body>
         </html>

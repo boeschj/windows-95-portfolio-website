@@ -1,5 +1,4 @@
 import { SITE_URL } from '@/constants/application.constants';
-import { links } from '@/config/aboutMe';
 import { BLOG_AUTHOR, postDescription } from './postView';
 import { experienceDescription } from './experienceView';
 
@@ -8,14 +7,19 @@ import type { Experience, Post } from '@/payload-types';
 const SCHEMA_CONTEXT = 'https://schema.org';
 const AUTHOR_JOB_TITLE = 'Software Engineer';
 
-export const PERSON_SCHEMA: Record<string, unknown> = {
-    '@context': SCHEMA_CONTEXT,
-    '@type': 'Person',
-    name: BLOG_AUTHOR,
-    url: SITE_URL,
-    jobTitle: AUTHOR_JOB_TITLE,
-    sameAs: [links.github, links.linkedIn],
-};
+export function buildPersonSchema(
+    githubUrl: string,
+    linkedinUrl: string
+): Record<string, unknown> {
+    return {
+        '@context': SCHEMA_CONTEXT,
+        '@type': 'Person',
+        name: BLOG_AUTHOR,
+        url: SITE_URL,
+        jobTitle: AUTHOR_JOB_TITLE,
+        sameAs: [githubUrl, linkedinUrl],
+    };
+}
 
 export function buildExperienceSchema(
     experience: Experience

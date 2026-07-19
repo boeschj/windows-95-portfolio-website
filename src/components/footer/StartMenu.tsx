@@ -4,11 +4,15 @@ import Image from 'next/image';
 import { Menu } from '@base-ui/react/menu';
 import { TABS } from '@/config/tabs';
 import { useTabRoute } from '@/hooks/useTabRoute';
-import { links } from '@/config/aboutMe';
 import { IMAGE_PATH } from '@/constants/application.constants';
 import { Button } from '@/components/buttons/Button';
 
 import type { TabRoute } from '@/config/tabs';
+
+interface StartMenuProps {
+    githubUrl: string;
+    linkedinUrl: string;
+}
 
 const MENU_ITEM_CLASS =
     'data-[highlighted]:bg-windows-blue flex h-10 w-full cursor-pointer items-center justify-center text-xl data-[highlighted]:text-white';
@@ -30,7 +34,7 @@ function StartButtonContent() {
     );
 }
 
-export function StartMenu() {
+export function StartMenu({ githubUrl, linkedinUrl }: StartMenuProps) {
     const { selectTab } = useTabRoute();
 
     const handleTabSelection = (route: TabRoute) => () => {
@@ -65,7 +69,7 @@ export function StartMenu() {
                         <Menu.Separator className="bg-windows-gray border-raised-b-2 mx-1 h-px border-t" />
                         <Menu.Item className={MENU_ITEM_CLASS}>
                             <a
-                                href={links.github}
+                                href={githubUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
@@ -74,7 +78,7 @@ export function StartMenu() {
                         </Menu.Item>
                         <Menu.Item className={MENU_ITEM_CLASS}>
                             <a
-                                href={links.linkedIn}
+                                href={linkedinUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >

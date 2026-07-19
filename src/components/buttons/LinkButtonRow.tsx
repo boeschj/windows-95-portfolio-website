@@ -1,4 +1,4 @@
-import { links } from '@/config/aboutMe';
+import { getSiteSettings } from '@/data/siteSettings';
 import { cn } from '@/utils';
 import { LinkButton } from './LinkButton';
 
@@ -6,7 +6,9 @@ interface LinkButtonRowProps {
     className?: string;
 }
 
-export function LinkButtonRow({ className }: LinkButtonRowProps) {
+export async function LinkButtonRow({ className }: LinkButtonRowProps) {
+    const { githubUrl, linkedinUrl } = await getSiteSettings();
+
     return (
         <div
             className={cn(
@@ -14,8 +16,8 @@ export function LinkButtonRow({ className }: LinkButtonRowProps) {
                 className
             )}
         >
-            <LinkButton profileUrl={links.github} text={'Github'} />
-            <LinkButton profileUrl={links.linkedIn} text={'LinkedIn'} />
+            <LinkButton profileUrl={githubUrl} text={'Github'} />
+            <LinkButton profileUrl={linkedinUrl} text={'LinkedIn'} />
         </div>
     );
 }
