@@ -4,6 +4,7 @@ import type {
     CollectionConfig,
 } from 'payload';
 import type { Post } from '@/payload-types';
+import { revalidatePaths } from '@/lib/revalidate';
 import {
     PUBLISH_STATUS,
     PUBLISH_STATUS_OPTIONS,
@@ -12,41 +13,21 @@ import {
 
 export { PUBLISH_STATUS as POST_STATUS };
 
-export const POST_CATEGORY = {
-    BLOG: 'blog',
-    ABOUT: 'about',
-} as const;
-
-const POST_CATEGORY_OPTIONS = [
-    { label: 'Blog post', value: POST_CATEGORY.BLOG },
-    { label: 'About page', value: POST_CATEGORY.ABOUT },
-];
-
-const BLOG_INDEX_PATH = '/';
-
-async function revalidatePostPaths(slug: string) {
-    try {
-        const { revalidatePath } = await import('next/cache');
-        revalidatePath(BLOG_INDEX_PATH);
-        revalidatePath('/llms.txt');
-        revalidatePath(`/blog/${slug}`);
-    } catch {
-        // revalidatePath only works inside the Next.js request context (the
-        // admin API routes); ignore when Payload runs elsewhere (CLI, seeds).
-    }
+function revalidatePost(slug: string) {
+    return revalidatePaths('/', '/llms.txt', `/blog/${slug}`);
 }
 
 const revalidateAfterChange: CollectionAfterChangeHook<Post> = async ({
     doc,
 }) => {
-    await revalidatePostPaths(doc.slug);
+    await revalidatePost(doc.slug);
     return doc;
 };
 
 const revalidateAfterDelete: CollectionAfterDeleteHook<Post> = async ({
     doc,
 }) => {
-    await revalidatePostPaths(doc.slug);
+    await revalidatePost(doc.slug);
     return doc;
 };
 
@@ -54,7 +35,7 @@ export const Posts: CollectionConfig = {
     slug: 'posts',
     admin: {
         useAsTitle: 'title',
-        defaultColumns: ['title', 'category', 'status', 'publishedAt'],
+        defaultColumns: ['title', 'status', 'publishedAt'],
     },
     access: {
         read: readPublishedOrAuthenticated,
@@ -76,17 +57,6 @@ export const Posts: CollectionConfig = {
             unique: true,
             admin: {
                 position: 'sidebar',
-            },
-        },
-        {
-            name: 'category',
-            type: 'select',
-            defaultValue: POST_CATEGORY.BLOG,
-            options: POST_CATEGORY_OPTIONS,
-            admin: {
-                position: 'sidebar',
-                description:
-                    'About-page posts are rendered inline on the About tab and hidden from the blog listing.',
             },
         },
         {

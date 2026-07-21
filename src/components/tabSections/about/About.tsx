@@ -1,13 +1,14 @@
 import Image from 'next/image';
 import { Win95ScrollArea } from '@/components/Win95ScrollArea';
 import { PostArticle } from '@/components/blog/PostArticle';
-import { getAboutPost } from '@/data/posts';
+import { getAbout } from '@/data/about';
 import { IMAGE_PATH } from '@/constants/application.constants';
 
 const PHOTO_SIZE_PX = 300;
+const EMPTY_ABOUT_LABEL = 'More about me coming soon.';
 
 export async function About() {
-    const post = await getAboutPost();
+    const about = await getAbout();
 
     return (
         <div className="bg-windows-gray flex min-h-0 flex-1 flex-col">
@@ -22,7 +23,10 @@ export async function About() {
                         className="xs:size-50 size-37.5 object-contain md:size-75"
                     />
                 </div>
-                <PostArticle content={post?.content ?? null} />
+                <PostArticle
+                    content={about.content ?? null}
+                    emptyContentLabel={EMPTY_ABOUT_LABEL}
+                />
             </Win95ScrollArea>
         </div>
     );

@@ -9,6 +9,7 @@ import { Experiences } from './collections/Experiences';
 import { Media } from './collections/Media';
 import { Posts } from './collections/Posts';
 import { Users } from './collections/Users';
+import { About } from './globals/About';
 import { SiteSettings } from './globals/SiteSettings';
 import { MEDIA_PREFIX } from './constants/application.constants';
 import { env } from './env';
@@ -18,7 +19,7 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 export default buildConfig({
     editor: lexicalEditor(),
     collections: [Users, Posts, Experiences, Media],
-    globals: [SiteSettings],
+    globals: [SiteSettings, About],
     secret: env.PAYLOAD_SECRET,
     db: postgresAdapter({
         pool: {
