@@ -3,46 +3,74 @@ import { createRichTextConverters } from './richTextConverters';
 
 import type { RichTextContent } from '@/data/reader';
 
-interface PostArticleProps {
+type PostArticleProps = {
     content: RichTextContent;
-    title?: string;
-    metaLine?: string;
-    showHeader?: boolean;
-}
+    emptyContentLabel: string;
+} & (
+    | {
+          showHeader: true;
+          title: string;
+          metaLine: string;
+          externalUrl?: string;
+      }
+    | { showHeader?: false }
+);
 
-export function PostArticle({
-    content,
-    title,
-    metaLine,
-    showHeader = false,
-}: PostArticleProps) {
+export function PostArticle(props: PostArticleProps) {
     return (
         <article className="notepad-prose">
-            {showHeader ? (
-                <ArticleHeader title={title} metaLine={metaLine} />
-            ) : null}
-            <ArticleBody content={content} />
+            {props.showHeader && (
+                <ArticleHeader
+                    title={props.title}
+                    metaLine={props.metaLine}
+                    externalUrl={props.externalUrl}
+                />
+            )}
+            <ArticleBody
+                content={props.content}
+                emptyContentLabel={props.emptyContentLabel}
+            />
         </article>
     );
 }
 
 interface ArticleHeaderProps {
-    title?: string;
-    metaLine?: string;
+    title: string;
+    metaLine: string;
+    externalUrl?: string;
 }
 
-function ArticleHeader({ title, metaLine }: ArticleHeaderProps) {
+function ArticleHeader({ title, metaLine, externalUrl }: ArticleHeaderProps) {
     return (
         <>
             <h1>{title}</h1>
-            <p className="notepad-meta">{metaLine}</p>
+            <p className="notepad-meta">
+                {metaLine}
+                {externalUrl && <MetaLink url={externalUrl} />}
+            </p>
         </>
     );
 }
 
-function ArticleBody({ content }: { content: RichTextContent }) {
+function MetaLink({ url }: { url: string }) {
+    return (
+        <>
+            {' · '}
+            <a href={url} target="_blank" rel="noopener noreferrer">
+                Website
+            </a>
+        </>
+    );
+}
+
+interface ArticleBodyProps {
+    content: RichTextContent;
+    emptyContentLabel: string;
+}
+
+function ArticleBody({ content, emptyContentLabel }: ArticleBodyProps) {
     if (!content) {
-        return <p>This post has no content yet.</p>;
+        return <p>{emptyContentLabel}</p>;
     }
 
     return (

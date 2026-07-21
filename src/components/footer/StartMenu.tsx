@@ -67,24 +67,22 @@ export function StartMenu({ githubUrl, linkedinUrl }: StartMenuProps) {
                             </Menu.Item>
                         ))}
                         <Menu.Separator className="bg-windows-gray border-raised-b-2 mx-1 h-px border-t" />
-                        <Menu.Item className={MENU_ITEM_CLASS}>
-                            <a
-                                href={githubUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Github
-                            </a>
-                        </Menu.Item>
-                        <Menu.Item className={MENU_ITEM_CLASS}>
-                            <a
-                                href={linkedinUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                LinkedIn
-                            </a>
-                        </Menu.Item>
+                        <Menu.LinkItem
+                            href={githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={MENU_ITEM_CLASS}
+                        >
+                            Github
+                        </Menu.LinkItem>
+                        <Menu.LinkItem
+                            href={linkedinUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={MENU_ITEM_CLASS}
+                        >
+                            LinkedIn
+                        </Menu.LinkItem>
                     </Menu.Popup>
                 </Menu.Positioner>
             </Menu.Portal>

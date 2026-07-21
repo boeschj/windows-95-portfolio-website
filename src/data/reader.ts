@@ -11,6 +11,8 @@ export interface ReaderDocument {
     title: string;
     metaLine: string;
     content: RichTextContent;
+    emptyContentLabel: string;
+    externalUrl?: string;
 }
 
 export function richTextToPlainText(content: RichTextContent): string {
@@ -21,12 +23,20 @@ export function richTextToPlainText(content: RichTextContent): string {
     return convertLexicalToPlaintext({ data: content });
 }
 
-export function richTextDescription(content: RichTextContent): string {
-    const text = richTextToPlainText(content).replace(/\s+/g, ' ').trim();
+export function hasRichTextContent(content: RichTextContent): boolean {
+    return richTextToPlainText(content).trim().length > 0;
+}
 
-    if (text.length <= DESCRIPTION_MAX_LENGTH) {
-        return text;
+export function richTextDescription(content: RichTextContent): string {
+    const plainText = richTextToPlainText(content);
+    const collapsedWhitespace = plainText.replace(/\s+/g, ' ');
+    const trimmedText = collapsedWhitespace.trim();
+
+    if (trimmedText.length <= DESCRIPTION_MAX_LENGTH) {
+        return trimmedText;
     }
 
-    return `${text.slice(0, DESCRIPTION_MAX_LENGTH).trimEnd()}...`;
+    const truncated = trimmedText.slice(0, DESCRIPTION_MAX_LENGTH).trimEnd();
+
+    return `${truncated}...`;
 }

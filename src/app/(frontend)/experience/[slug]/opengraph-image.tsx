@@ -1,25 +1,20 @@
-import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import { ImageResponse } from 'next/og';
 import { getExperienceBySlug } from '@/data/experiences';
 import { formatDateRange } from '@/data/experienceView';
-import { BLOG_AUTHOR } from '@/data/postView';
+import { SITE_AUTHOR } from '@/constants/application.constants';
+import {
+    OG_CONTENT_TYPE,
+    OG_SIZE,
+    renderNotepadOg,
+} from '@/components/og/notepadOg';
 
 export const revalidate = 3600;
 
-export const size = { width: 1200, height: 630 };
-export const contentType = 'image/png';
-export const alt = `${BLOG_AUTHOR}'s Experience`;
+export const size = OG_SIZE;
+export const contentType = OG_CONTENT_TYPE;
+export const alt = `${SITE_AUTHOR}'s Experience`;
 
-const FONT_PATH = join(process.cwd(), 'public', 'fonts', 'MS-Sans-Serif.woff');
-const FONT_FAMILY = 'MS Sans Serif';
-
-const WIN95_DESKTOP = '#55aaaa';
-const WIN95_GRAY = '#c0c4c8';
-const WIN95_BLUE = '#0000a8';
-const WIN95_WHITE = '#fff';
-const WIN95_BLACK = '#000';
-const WIN95_META = '#555';
+const META_SEPARATOR = ' · ';
+const WINDOW_TITLE_SUFFIX = '  Notepad';
 
 interface OgImageProps {
     params: Promise<{ slug: string }>;
@@ -28,95 +23,13 @@ interface OgImageProps {
 export default async function ExperienceOgImage({ params }: OgImageProps) {
     const { slug } = await params;
     const experience = await getExperienceBySlug(slug);
-    const title = experience?.company ?? 'Experience';
-    const metaParts = experience
-        ? [experience.role, formatDateRange(experience)]
-        : [BLOG_AUTHOR];
-    const metaLine = metaParts.join(' · ');
-    const windowTitle = `${slug}.txt  Notepad`;
-    const fontData = await readFile(FONT_PATH);
+    const metaLine = experience
+        ? [experience.role, formatDateRange(experience)].join(META_SEPARATOR)
+        : SITE_AUTHOR;
 
-    return new ImageResponse(
-        <div
-            style={{
-                display: 'flex',
-                height: '100%',
-                width: '100%',
-                padding: '64px',
-                background: WIN95_DESKTOP,
-                fontFamily: FONT_FAMILY,
-            }}
-        >
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    width: '100%',
-                    padding: '4px',
-                    background: WIN95_GRAY,
-                    borderTop: `3px solid ${WIN95_WHITE}`,
-                    borderLeft: `3px solid ${WIN95_WHITE}`,
-                    borderRight: `3px solid ${WIN95_BLACK}`,
-                    borderBottom: `3px solid ${WIN95_BLACK}`,
-                }}
-            >
-                <div
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        padding: '12px 18px',
-                        background: WIN95_BLUE,
-                        color: WIN95_WHITE,
-                        fontSize: 30,
-                        fontWeight: 700,
-                    }}
-                >
-                    {windowTitle}
-                </div>
-                <div
-                    style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        flex: 1,
-                        justifyContent: 'center',
-                        padding: '64px',
-                        background: WIN95_WHITE,
-                    }}
-                >
-                    <div
-                        style={{
-                            display: 'flex',
-                            fontSize: 72,
-                            fontWeight: 800,
-                            lineHeight: 1.1,
-                            color: WIN95_BLACK,
-                        }}
-                    >
-                        {title}
-                    </div>
-                    <div
-                        style={{
-                            display: 'flex',
-                            marginTop: 36,
-                            fontSize: 32,
-                            color: WIN95_META,
-                        }}
-                    >
-                        {metaLine}
-                    </div>
-                </div>
-            </div>
-        </div>,
-        {
-            ...size,
-            fonts: [
-                {
-                    name: FONT_FAMILY,
-                    data: fontData,
-                    style: 'normal',
-                    weight: 400,
-                },
-            ],
-        }
-    );
+    return renderNotepadOg({
+        windowTitle: `${slug}.txt${WINDOW_TITLE_SUFFIX}`,
+        title: experience?.company ?? 'Experience',
+        metaLine,
+    });
 }

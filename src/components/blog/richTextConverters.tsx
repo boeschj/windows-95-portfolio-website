@@ -18,26 +18,45 @@ interface UploadMediaNode {
     height?: unknown;
 }
 
+type RenderableUploadMedia = UploadMediaNode & {
+    url: string;
+    width: number;
+    height: number;
+};
+
 const asNode = (value: unknown): CodeNode | null =>
     typeof value === 'object' && value !== null ? value : null;
 
 const asUploadMedia = (value: unknown): UploadMediaNode | null =>
     typeof value === 'object' && value !== null ? value : null;
 
-export function collectCodeText(node: CodeNode): string {
-    let text = '';
+function isLineBreak(node: CodeNode): boolean {
+    return node.type === 'linebreak';
+}
 
-    for (const child of node.children ?? []) {
-        const childNode = asNode(child);
+function isTextNode(node: CodeNode): node is CodeNode & { text: string } {
+    return typeof node.text === 'string';
+}
 
-        if (childNode?.type === 'linebreak') {
-            text += '\n';
-        } else if (typeof childNode?.text === 'string') {
-            text += childNode.text;
-        }
+function childToText(child: unknown): string {
+    const node = asNode(child);
+
+    if (!node) {
+        return '';
     }
+    if (isLineBreak(node)) {
+        return '\n';
+    }
+    if (isTextNode(node)) {
+        return node.text;
+    }
+    return '';
+}
 
-    return text;
+export function collectCodeText(node: CodeNode): string {
+    const childTexts = (node.children ?? []).map(childToText);
+
+    return childTexts.join('');
 }
 
 interface ResolvedUploadMedia {
@@ -47,27 +66,33 @@ interface ResolvedUploadMedia {
     height: number;
 }
 
+function isRenderableUploadMedia(
+    media: UploadMediaNode
+): media is RenderableUploadMedia {
+    return (
+        typeof media.url === 'string' &&
+        typeof media.width === 'number' &&
+        typeof media.height === 'number'
+    );
+}
+
 function resolveUploadMedia(value: unknown): ResolvedUploadMedia | null {
     const media = asUploadMedia(value);
 
     if (!media) {
         return null;
     }
-
-    const hasRenderableImage =
-        typeof media.url === 'string' &&
-        typeof media.width === 'number' &&
-        typeof media.height === 'number';
-
-    if (!hasRenderableImage) {
+    if (!isRenderableUploadMedia(media)) {
         return null;
     }
 
+    const alt = typeof media.alt === 'string' ? media.alt : '';
+
     return {
-        src: String(media.url),
-        alt: typeof media.alt === 'string' ? media.alt : '',
-        width: Number(media.width),
-        height: Number(media.height),
+        src: media.url,
+        alt,
+        width: media.width,
+        height: media.height,
     };
 }
 

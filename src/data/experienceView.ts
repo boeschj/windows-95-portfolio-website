@@ -1,14 +1,12 @@
-import { format, parseISO } from 'date-fns';
-
-import { richTextDescription } from './reader';
+import { hasRichTextContent, richTextDescription } from './reader';
 
 import type { ReaderDocument } from './reader';
 import type { Experience, Media } from '@/payload-types';
 
-const MONTH_YEAR_FORMAT = 'MM/yyyy';
 const PRESENT_LABEL = 'Present';
 const DATE_RANGE_SEPARATOR = ' - ';
 const META_SEPARATOR = ' · ';
+const EMPTY_EXPERIENCE_LABEL = 'No write-up for this role yet.';
 
 export interface ExperienceListItem {
     slug: string;
@@ -16,14 +14,16 @@ export interface ExperienceListItem {
     role: string;
     datesLabel: string;
     startTimestamp: number;
+    endTimestamp: number | null;
+    hasContent: boolean;
     logoUrl: string | null;
     logoAlt: string;
 }
 
 export function formatDateRange(experience: Experience): string {
-    const start = format(parseISO(experience.startDate), MONTH_YEAR_FORMAT);
+    const start = formatMonthYear(experience.startDate);
     const end = experience.endDate
-        ? format(parseISO(experience.endDate), MONTH_YEAR_FORMAT)
+        ? formatMonthYear(experience.endDate)
         : PRESENT_LABEL;
 
     return `${start}${DATE_RANGE_SEPARATOR}${end}`;
@@ -39,7 +39,11 @@ export function toExperienceListItem(
         company: experience.company,
         role: experience.role,
         datesLabel: formatDateRange(experience),
-        startTimestamp: new Date(experience.startDate).getTime(),
+        startTimestamp: toTimestamp(experience.startDate),
+        endTimestamp: experience.endDate
+            ? toTimestamp(experience.endDate)
+            : null,
+        hasContent: hasRichTextContent(experience.content),
         logoUrl: logo.url,
         logoAlt: logo.alt,
     };
@@ -57,11 +61,27 @@ export function toExperienceReaderDocument(
         title: experience.company,
         metaLine,
         content: experience.content,
+        emptyContentLabel: EMPTY_EXPERIENCE_LABEL,
+        externalUrl: experience.url ?? undefined,
     };
 }
 
 export function experienceDescription(experience: Experience): string {
     return richTextDescription(experience.content);
+}
+
+export function experienceCountLabel(count: number): string {
+    return `${String(count)} item(s) found`;
+}
+
+function formatMonthYear(isoDate: string): string {
+    const [year, month] = isoDate.slice(0, 7).split('-');
+
+    return `${month}/${year}`;
+}
+
+function toTimestamp(isoDate: string): number {
+    return new Date(isoDate).getTime();
 }
 
 interface ResolvedLogo {

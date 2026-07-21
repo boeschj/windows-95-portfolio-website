@@ -28,6 +28,7 @@ export function BlogExplorer({ items }: BlogExplorerProps) {
             renderRow={(item) => <BlogRow item={item} />}
             statusLabel={fileCountLabel(items.length)}
             emptyLabel={EMPTY_LABEL}
+            ariaLabel="Blog posts"
         />
     );
 }

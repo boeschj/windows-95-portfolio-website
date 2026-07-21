@@ -4,37 +4,28 @@ import type {
     CollectionConfig,
 } from 'payload';
 import type { Experience } from '@/payload-types';
+import { revalidatePaths } from '@/lib/revalidate';
 import {
     PUBLISH_STATUS,
     PUBLISH_STATUS_OPTIONS,
     readPublishedOrAuthenticated,
 } from './publishing';
 
-const EXPERIENCE_INDEX_PATH = '/';
-
-async function revalidateExperiencePaths(slug: string) {
-    try {
-        const { revalidatePath } = await import('next/cache');
-        revalidatePath(EXPERIENCE_INDEX_PATH);
-        revalidatePath('/llms.txt');
-        revalidatePath(`/experience/${slug}`);
-    } catch {
-        // revalidatePath only works inside the Next.js request context (the
-        // admin API routes); ignore when Payload runs elsewhere (CLI, seeds).
-    }
+function revalidateExperience(slug: string) {
+    return revalidatePaths('/', '/llms.txt', `/experience/${slug}`);
 }
 
 const revalidateAfterChange: CollectionAfterChangeHook<Experience> = async ({
     doc,
 }) => {
-    await revalidateExperiencePaths(doc.slug);
+    await revalidateExperience(doc.slug);
     return doc;
 };
 
 const revalidateAfterDelete: CollectionAfterDeleteHook<Experience> = async ({
     doc,
 }) => {
-    await revalidateExperiencePaths(doc.slug);
+    await revalidateExperience(doc.slug);
     return doc;
 };
 

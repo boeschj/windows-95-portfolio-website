@@ -5,6 +5,13 @@ import { SORT_DIRECTION } from './explorerTable';
 
 import type { ExplorerColumn, SortDirection } from './explorerTable';
 
+const ARIA_SORT_BY_DIRECTION = {
+    [SORT_DIRECTION.asc]: 'ascending',
+    [SORT_DIRECTION.desc]: 'descending',
+} as const satisfies Record<SortDirection, 'ascending' | 'descending'>;
+
+const ARIA_SORT_INACTIVE = 'none';
+
 interface ExplorerHeaderRowProps<TKey extends string> {
     columns: readonly ExplorerColumn<TKey>[];
     sortKey: TKey;
@@ -29,10 +36,15 @@ export function ExplorerHeaderRow<TKey extends string>({
                     const ariaLabel = isActive
                         ? `Sort by ${column.label}, currently ${directionLabel}`
                         : `Sort by ${column.label}`;
+                    const ariaSort = isActive
+                        ? ARIA_SORT_BY_DIRECTION[sortDirection]
+                        : ARIA_SORT_INACTIVE;
 
                     return (
                         <th
                             key={column.key}
+                            scope="col"
+                            aria-sort={ariaSort}
                             className={cn(
                                 'overflow-hidden p-0 whitespace-nowrap',
                                 column.className

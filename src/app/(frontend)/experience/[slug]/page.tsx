@@ -4,8 +4,11 @@ import {
     experienceDescription,
     toExperienceReaderDocument,
 } from '@/data/experienceView';
-import { BLOG_AUTHOR } from '@/data/postView';
 import { buildExperienceSchema } from '@/data/seoSchema';
+import {
+    EXPERIENCE_ROUTE,
+    SITE_AUTHOR,
+} from '@/constants/application.constants';
 import { hrefForTab } from '@/config/tabs';
 import { JsonLd } from '@/components/JsonLd';
 import { NotepadReader } from '@/components/blog/NotepadReader';
@@ -38,7 +41,7 @@ export async function generateMetadata({
 
     const title = `${experience.company} — ${experience.role}`;
     const description = experienceDescription(experience);
-    const canonicalUrl = `/experience/${slug}`;
+    const canonicalUrl = `${EXPERIENCE_ROUTE}/${slug}`;
 
     return {
         title,
@@ -49,8 +52,8 @@ export async function generateMetadata({
             title,
             description,
             url: canonicalUrl,
-            siteName: `${BLOG_AUTHOR}'s portfolio`,
-            authors: [BLOG_AUTHOR],
+            siteName: `${SITE_AUTHOR}'s portfolio`,
+            authors: [SITE_AUTHOR],
         },
         twitter: {
             card: 'summary_large_image',

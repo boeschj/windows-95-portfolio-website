@@ -4,6 +4,8 @@ export type SortDirection =
 
 export const CELL_CLASS = 'overflow-hidden px-2 py-0.5 whitespace-nowrap';
 
+export const HIDDEN_ON_MOBILE = 'hidden md:table-cell';
+
 export interface ExplorerColumn<TKey extends string> {
     key: TKey;
     label: string;

@@ -2,6 +2,7 @@
 
 import { Explorer } from '@/components/explorer/Explorer';
 import { SORT_DIRECTION } from '@/components/explorer/explorerTable';
+import { experienceCountLabel } from '@/data/experienceView';
 import {
     EXPERIENCE_COLUMNS,
     EXPERIENCE_COMPARATORS,
@@ -29,10 +30,7 @@ export function ExperienceExplorer({ items }: ExperienceExplorerProps) {
             renderRow={(item) => <ExperienceRow item={item} />}
             statusLabel={experienceCountLabel(items.length)}
             emptyLabel={EMPTY_LABEL}
+            ariaLabel="Work experience"
         />
     );
-}
-
-function experienceCountLabel(count: number): string {
-    return `${String(count)} item(s) found`;
 }

@@ -1,11 +1,8 @@
 import { notFound } from 'next/navigation';
 import { getPostBySlug, getBlogSlugs } from '@/data/posts';
-import {
-    BLOG_AUTHOR,
-    postDescription,
-    toReaderDocument,
-} from '@/data/postView';
+import { postDescription, toReaderDocument } from '@/data/postView';
 import { buildPostSchema } from '@/data/seoSchema';
+import { BLOG_ROUTE, SITE_AUTHOR } from '@/constants/application.constants';
 import { hrefForTab } from '@/config/tabs';
 import { JsonLd } from '@/components/JsonLd';
 import { NotepadReader } from '@/components/blog/NotepadReader';
@@ -37,7 +34,7 @@ export async function generateMetadata({
     }
 
     const description = postDescription(post);
-    const canonicalUrl = `/blog/${slug}`;
+    const canonicalUrl = `${BLOG_ROUTE}/${slug}`;
 
     return {
         title: post.title,
@@ -48,10 +45,10 @@ export async function generateMetadata({
             title: post.title,
             description,
             url: canonicalUrl,
-            siteName: `${BLOG_AUTHOR}'s blog`,
+            siteName: `${SITE_AUTHOR}'s blog`,
             publishedTime: post.publishedAt ?? undefined,
             modifiedTime: post.updatedAt,
-            authors: [BLOG_AUTHOR],
+            authors: [SITE_AUTHOR],
         },
         twitter: {
             card: 'summary_large_image',

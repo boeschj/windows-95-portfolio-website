@@ -1,13 +1,8 @@
 import type { GlobalAfterChangeHook, GlobalConfig } from 'payload';
+import { revalidatePaths } from '@/lib/revalidate';
 
 const revalidateAfterChange: GlobalAfterChangeHook = async () => {
-    try {
-        const { revalidatePath } = await import('next/cache');
-        revalidatePath('/', 'layout');
-    } catch {
-        // revalidatePath only works inside the Next.js request context (the
-        // admin API routes); ignore when Payload runs elsewhere (CLI, seeds).
-    }
+    await revalidatePaths(['/', 'layout']);
 };
 
 export const SiteSettings: GlobalConfig = {

@@ -23,6 +23,7 @@ interface ExplorerProps<TRow, TKey extends string> {
     renderRow: (row: TRow) => ReactNode;
     statusLabel: string;
     emptyLabel: string;
+    ariaLabel: string;
 }
 
 export function Explorer<TRow, TKey extends string>({
@@ -35,6 +36,7 @@ export function Explorer<TRow, TKey extends string>({
     renderRow,
     statusLabel,
     emptyLabel,
+    ariaLabel,
 }: ExplorerProps<TRow, TKey>) {
     const { sortedRows, sortKey, sortDirection, handleSort } = useSortedRows(
         rows,
@@ -48,7 +50,10 @@ export function Explorer<TRow, TKey extends string>({
         <div className="bg-windows-gray flex min-h-0 flex-1 flex-col">
             <div className="min-h-0 flex-1">
                 <Win95ScrollArea viewportClassName="h-full w-full bg-white">
-                    <table className="w-full table-fixed text-[15px] text-black">
+                    <table
+                        aria-label={ariaLabel}
+                        className="text-win95 w-full table-fixed text-black"
+                    >
                         <ExplorerHeaderRow
                             columns={columns}
                             sortKey={sortKey}
@@ -63,7 +68,7 @@ export function Explorer<TRow, TKey extends string>({
                             ))}
                         </tbody>
                     </table>
-                    {hasRows ? null : <EmptyState label={emptyLabel} />}
+                    {!hasRows && <EmptyState label={emptyLabel} />}
                 </Win95ScrollArea>
             </div>
             <ExplorerStatusBar label={statusLabel} />
@@ -73,7 +78,7 @@ export function Explorer<TRow, TKey extends string>({
 
 function EmptyState({ label }: { label: string }) {
     return (
-        <div className="flex h-full items-center justify-center p-6 text-[15px] text-black/60">
+        <div className="text-win95 flex h-full items-center justify-center p-6 text-black/60">
             {label}
         </div>
     );

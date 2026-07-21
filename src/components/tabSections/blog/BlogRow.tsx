@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import { DocumentIcon } from '@/components/icons/Icons';
 import { cn } from '@/utils';
-import { CELL_CLASS } from '@/components/explorer/explorerTable';
+import {
+    CELL_CLASS,
+    HIDDEN_ON_MOBILE,
+} from '@/components/explorer/explorerTable';
+import { BLOG_ROUTE } from '@/constants/application.constants';
 
 import { COLUMN_WIDTH_CLASS } from './blogColumns';
 
@@ -12,7 +16,7 @@ interface BlogRowProps {
 }
 
 export function BlogRow({ item }: BlogRowProps) {
-    const postHref = `/blog/${item.slug}`;
+    const postHref = `${BLOG_ROUTE}/${item.slug}`;
 
     return (
         <tr>
@@ -29,7 +33,7 @@ export function BlogRow({ item }: BlogRowProps) {
             </td>
             <td
                 className={cn(
-                    'hidden md:table-cell',
+                    HIDDEN_ON_MOBILE,
                     CELL_CLASS,
                     COLUMN_WIDTH_CLASS.size
                 )}
@@ -38,7 +42,7 @@ export function BlogRow({ item }: BlogRowProps) {
             </td>
             <td
                 className={cn(
-                    'hidden md:table-cell',
+                    HIDDEN_ON_MOBILE,
                     CELL_CLASS,
                     COLUMN_WIDTH_CLASS.type
                 )}

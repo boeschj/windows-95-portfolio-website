@@ -1,4 +1,5 @@
 import { cn } from '@/utils';
+import { HIDDEN_ON_MOBILE } from '@/components/explorer/explorerTable';
 
 import type { BlogListItem } from '@/data/postView';
 import type {
@@ -17,12 +18,12 @@ export const BLOG_COLUMNS = [
     {
         key: 'size',
         label: 'Size',
-        className: cn('hidden md:table-cell', COLUMN_WIDTH_CLASS.size),
+        className: cn(HIDDEN_ON_MOBILE, COLUMN_WIDTH_CLASS.size),
     },
     {
         key: 'type',
         label: 'Type',
-        className: cn('hidden md:table-cell', COLUMN_WIDTH_CLASS.type),
+        className: cn(HIDDEN_ON_MOBILE, COLUMN_WIDTH_CLASS.type),
     },
     {
         key: 'modified',

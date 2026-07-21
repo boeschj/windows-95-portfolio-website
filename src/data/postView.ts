@@ -1,18 +1,19 @@
 import { format, parseISO } from 'date-fns';
 
+import { SITE_AUTHOR } from '@/constants/application.constants';
 import { richTextDescription, richTextToPlainText } from './reader';
 
 import type { ReaderDocument } from './reader';
 import type { Post } from '@/payload-types';
 
 export const MARKDOWN_FILE_TYPE = 'Markdown File';
-export const BLOG_AUTHOR = 'Jordan Boesch';
 
 const BYTES_PER_KILOBYTE = 1024;
 const WORDS_PER_MINUTE = 200;
 const META_SEPARATOR = ' · ';
 const EXPLORER_DATE_FORMAT = 'MM/dd/yy';
 const POST_DATE_FORMAT = 'MMMM d, yyyy';
+const EMPTY_POST_LABEL = 'This post has no content yet.';
 
 export interface BlogListItem {
     slug: string;
@@ -52,7 +53,7 @@ export function toBlogListItem(post: Post): BlogListItem {
 }
 
 export function toPostView(post: Post): PostView {
-    const metaParts = [formatPostDate(post), BLOG_AUTHOR, formatReadTime(post)];
+    const metaParts = [formatPostDate(post), SITE_AUTHOR, formatReadTime(post)];
 
     return {
         filename: postFilename(post),
@@ -64,7 +65,13 @@ export function toPostView(post: Post): PostView {
 export function toReaderDocument(post: Post): ReaderDocument {
     const { filename, title, metaLine } = toPostView(post);
 
-    return { filename, title, metaLine, content: post.content };
+    return {
+        filename,
+        title,
+        metaLine,
+        content: post.content,
+        emptyContentLabel: EMPTY_POST_LABEL,
+    };
 }
 
 export function fileCountLabel(count: number): string {
@@ -103,6 +110,8 @@ function formatReadTime(post: Post): string {
 }
 
 function countWords(post: Post): number {
-    return richTextToPlainText(post.content).trim().split(/\s+/).filter(Boolean)
-        .length;
+    const plainText = richTextToPlainText(post.content).trim();
+    const words = plainText.split(/\s+/).filter(Boolean);
+
+    return words.length;
 }

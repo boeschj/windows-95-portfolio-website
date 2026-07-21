@@ -16,7 +16,14 @@ interface NotepadReaderProps {
 }
 
 export function NotepadReader({ doc, backHref }: NotepadReaderProps) {
-    const { filename, title, metaLine, content } = doc;
+    const {
+        filename,
+        title,
+        metaLine,
+        content,
+        emptyContentLabel,
+        externalUrl,
+    } = doc;
     const windowTitle = `${filename}${NOTEPAD_TITLE_SUFFIX}`;
 
     return (
@@ -28,9 +35,11 @@ export function NotepadReader({ doc, backHref }: NotepadReaderProps) {
                     <Win95ScrollArea viewportClassName="h-full w-full bg-white px-6 py-8 md:px-12 md:py-9">
                         <PostArticle
                             content={content}
+                            emptyContentLabel={emptyContentLabel}
+                            showHeader
                             title={title}
                             metaLine={metaLine}
-                            showHeader
+                            externalUrl={externalUrl}
                         />
                     </Win95ScrollArea>
                 </div>
@@ -44,7 +53,7 @@ export function NotepadReader({ doc, backHref }: NotepadReaderProps) {
 
 function MenuBar() {
     return (
-        <div className="flex gap-0.5 px-0.5 pt-0.75 pb-1.25 text-[15px] text-black">
+        <div className="text-win95 flex gap-0.5 px-0.5 pt-0.75 pb-1.25 text-black">
             {MENU_ITEMS.map((item) => (
                 <span
                     key={item}
@@ -69,7 +78,7 @@ function NotepadTaskbarButton({ title, backHref }: NotepadTaskbarButtonProps) {
             className="win95-thin-sunken bg-windows-gray flex h-7 max-w-[320px] flex-none items-center gap-1.5 px-2.5 text-black no-underline"
         >
             <NotepadIcon size={14} />
-            <span className="overflow-hidden text-[15px] font-bold text-ellipsis whitespace-nowrap">
+            <span className="text-win95 overflow-hidden font-bold text-ellipsis whitespace-nowrap">
                 {title}
             </span>
         </Link>

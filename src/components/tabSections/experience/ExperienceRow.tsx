@@ -1,37 +1,33 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/utils';
-import { CELL_CLASS } from '@/components/explorer/explorerTable';
+import {
+    CELL_CLASS,
+    HIDDEN_ON_MOBILE,
+} from '@/components/explorer/explorerTable';
+import { EXPERIENCE_ROUTE } from '@/constants/application.constants';
 
 import { COLUMN_WIDTH_CLASS } from './experienceColumns';
 
 import type { ExperienceListItem } from '@/data/experienceView';
 
 const LOGO_SIZE_PX = 16;
+const COMPANY_LABEL_CLASS =
+    'flex min-w-0 items-center gap-1.5 text-black no-underline';
 
 interface ExperienceRowProps {
     item: ExperienceListItem;
 }
 
 export function ExperienceRow({ item }: ExperienceRowProps) {
-    const experienceHref = `/experience/${item.slug}`;
-
     return (
         <tr>
             <td className={CELL_CLASS}>
-                <Link
-                    href={experienceHref}
-                    className="flex min-w-0 items-center gap-1.5 text-black no-underline"
-                >
-                    <ExperienceLogo item={item} />
-                    <span className="block min-w-0 truncate px-0.75">
-                        {item.company}
-                    </span>
-                </Link>
+                <CompanyLabel item={item} />
             </td>
             <td
                 className={cn(
-                    'hidden md:table-cell',
+                    HIDDEN_ON_MOBILE,
                     CELL_CLASS,
                     COLUMN_WIDTH_CLASS.role
                 )}
@@ -42,6 +38,28 @@ export function ExperienceRow({ item }: ExperienceRowProps) {
                 {item.datesLabel}
             </td>
         </tr>
+    );
+}
+
+function CompanyLabel({ item }: ExperienceRowProps) {
+    const experienceHref = `${EXPERIENCE_ROUTE}/${item.slug}`;
+    const label = (
+        <>
+            <ExperienceLogo item={item} />
+            <span className="block min-w-0 truncate px-0.75">
+                {item.company}
+            </span>
+        </>
+    );
+
+    if (!item.hasContent) {
+        return <div className={COMPANY_LABEL_CLASS}>{label}</div>;
+    }
+
+    return (
+        <Link href={experienceHref} className={COMPANY_LABEL_CLASS}>
+            {label}
+        </Link>
     );
 }
 
