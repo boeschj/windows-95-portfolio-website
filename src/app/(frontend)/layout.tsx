@@ -38,7 +38,8 @@ export const viewport: Viewport = {
 const SITE_TITLE = "Jordan's Portfolio Site";
 const SITE_DESCRIPTION = "Jordan's portfolio site.";
 const SITE_CREATOR = 'Jordan Boesch';
-const FAVICON_PATH = 'favicons/favicon-32x32.png';
+const FAVICON_PATH = '/favicons/favicon-32x32.png';
+const APPLE_TOUCH_ICON_PATH = '/favicons/apple-touch-icon.png';
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     icons: {
         icon: FAVICON_PATH,
         shortcut: FAVICON_PATH,
-        apple: 'favicons/apple-touch-icon.png',
+        apple: APPLE_TOUCH_ICON_PATH,
         other: {
             rel: 'icon',
             url: FAVICON_PATH,

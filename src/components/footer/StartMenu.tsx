@@ -28,6 +28,7 @@ function StartButtonContent() {
                 alt="Win95"
                 height="28"
                 width="28"
+                className="size-7 flex-none object-contain"
             />
             <div>Start</div>
         </>
