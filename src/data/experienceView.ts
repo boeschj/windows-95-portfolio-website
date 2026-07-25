@@ -1,7 +1,8 @@
 import { hasRichTextContent, richTextDescription } from './reader';
+import { resolveMedia } from './media';
 
 import type { ReaderDocument } from './reader';
-import type { Experience, Media } from '@/payload-types';
+import type { Experience } from '@/payload-types';
 
 const PRESENT_LABEL = 'Present';
 const DATE_RANGE_SEPARATOR = ' - ';
@@ -32,7 +33,7 @@ export function formatDateRange(experience: Experience): string {
 export function toExperienceListItem(
     experience: Experience
 ): ExperienceListItem {
-    const logo = resolveLogo(experience.logo);
+    const logo = resolveMedia(experience.logo);
 
     return {
         slug: experience.slug,
@@ -82,21 +83,4 @@ function formatMonthYear(isoDate: string): string {
 
 function toTimestamp(isoDate: string): number {
     return new Date(isoDate).getTime();
-}
-
-interface ResolvedLogo {
-    url: string | null;
-    alt: string;
-}
-
-function resolveLogo(logo: Experience['logo']): ResolvedLogo {
-    if (!isPopulatedMedia(logo)) {
-        return { url: null, alt: '' };
-    }
-
-    return { url: logo.url ?? null, alt: logo.alt ?? '' };
-}
-
-function isPopulatedMedia(logo: Experience['logo']): logo is Media {
-    return typeof logo === 'object';
 }

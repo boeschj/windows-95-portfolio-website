@@ -452,6 +452,7 @@ export interface SiteSetting {
  */
 export interface About {
   id: number;
+  photo?: (number | null) | Media;
   content?: {
     root: {
       type: string;
@@ -486,6 +487,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
  * via the `definition` "about_select".
  */
 export interface AboutSelect<T extends boolean = true> {
+  photo?: T;
   content?: T;
   updatedAt?: T;
   createdAt?: T;

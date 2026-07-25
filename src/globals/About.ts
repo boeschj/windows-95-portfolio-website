@@ -18,6 +18,11 @@ export const About: GlobalConfig = {
     },
     fields: [
         {
+            name: 'photo',
+            type: 'upload',
+            relationTo: 'media',
+        },
+        {
             name: 'content',
             type: 'richText',
         },
