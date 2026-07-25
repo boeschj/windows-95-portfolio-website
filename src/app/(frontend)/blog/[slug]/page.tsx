@@ -1,16 +1,20 @@
 import { notFound } from 'next/navigation';
-import { getPostBySlug, getPublishedSlugs } from '@/data/posts';
-import { BLOG_AUTHOR, postDescription } from '@/data/postView';
+import { getPostBySlug, getBlogSlugs } from '@/data/posts';
+import { postDescription, toReaderDocument } from '@/data/postView';
 import { buildPostSchema } from '@/data/seoSchema';
+import { BLOG_ROUTE, SITE_AUTHOR } from '@/constants/application.constants';
+import { hrefForTab } from '@/config/tabs';
 import { JsonLd } from '@/components/JsonLd';
-import { PostReader } from '@/components/blog/PostReader';
+import { NotepadReader } from '@/components/blog/NotepadReader';
 
 import type { Metadata } from 'next';
+
+const BLOG_HREF = hrefForTab('blog');
 
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
-    const slugs = await getPublishedSlugs();
+    const slugs = await getBlogSlugs();
 
     return slugs.map((slug) => ({ slug }));
 }
@@ -30,7 +34,7 @@ export async function generateMetadata({
     }
 
     const description = postDescription(post);
-    const canonicalUrl = `/blog/${slug}`;
+    const canonicalUrl = `${BLOG_ROUTE}/${slug}`;
 
     return {
         title: post.title,
@@ -41,10 +45,10 @@ export async function generateMetadata({
             title: post.title,
             description,
             url: canonicalUrl,
-            siteName: `${BLOG_AUTHOR}'s blog`,
+            siteName: `${SITE_AUTHOR}'s blog`,
             publishedTime: post.publishedAt ?? undefined,
             modifiedTime: post.updatedAt,
-            authors: [BLOG_AUTHOR],
+            authors: [SITE_AUTHOR],
         },
         twitter: {
             card: 'summary_large_image',
@@ -62,10 +66,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         notFound();
     }
 
+    const doc = toReaderDocument(post);
+
     return (
         <>
             <JsonLd data={buildPostSchema(post)} />
-            <PostReader post={post} />
+            <NotepadReader doc={doc} backHref={BLOG_HREF} />
         </>
     );
 }

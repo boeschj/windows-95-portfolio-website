@@ -74,6 +74,8 @@
     --spacing-taskbar-height: 35px;
 
     --font-ms-sans-serif: 'MS Sans Serif';
+
+    --text-win95: 15px;
 }
 
 @layer components {

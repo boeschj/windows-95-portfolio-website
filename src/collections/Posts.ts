@@ -1,67 +1,41 @@
 import type {
-    Access,
     CollectionAfterChangeHook,
     CollectionAfterDeleteHook,
     CollectionConfig,
 } from 'payload';
 import type { Post } from '@/payload-types';
+import { revalidatePaths } from '@/lib/revalidate';
+import {
+    PUBLISH_STATUS,
+    PUBLISH_STATUS_OPTIONS,
+    readPublishedOrAuthenticated,
+} from './publishing';
 
-export const POST_STATUS = {
-    DRAFT: 'draft',
-    PUBLISHED: 'published',
-} as const;
+export { PUBLISH_STATUS as POST_STATUS };
 
-const BLOG_INDEX_PATH = '/';
-
-async function revalidatePostPaths(slug: string) {
-    try {
-        const { revalidatePath } = await import('next/cache');
-        revalidatePath(BLOG_INDEX_PATH);
-        revalidatePath('/llms.txt');
-        revalidatePath(`/blog/${slug}`);
-    } catch {
-        // revalidatePath only works inside the Next.js request context (the
-        // admin API routes); ignore when Payload runs elsewhere (CLI, seeds).
-    }
+function revalidatePost(slug: string) {
+    return revalidatePaths('/', '/llms.txt', `/blog/${slug}`);
 }
 
 const revalidateAfterChange: CollectionAfterChangeHook<Post> = async ({
     doc,
 }) => {
-    await revalidatePostPaths(doc.slug);
+    await revalidatePost(doc.slug);
     return doc;
 };
 
 const revalidateAfterDelete: CollectionAfterDeleteHook<Post> = async ({
     doc,
 }) => {
-    await revalidatePostPaths(doc.slug);
+    await revalidatePost(doc.slug);
     return doc;
-};
-
-const POST_STATUS_OPTIONS = [
-    { label: 'Draft', value: POST_STATUS.DRAFT },
-    { label: 'Published', value: POST_STATUS.PUBLISHED },
-];
-
-const readPublishedOrAuthenticated: Access = ({ req }) => {
-    const isAuthenticated = Boolean(req.user);
-
-    if (isAuthenticated) {
-        return true;
-    }
-
-    return {
-        status: {
-            equals: POST_STATUS.PUBLISHED,
-        },
-    };
 };
 
 export const Posts: CollectionConfig = {
     slug: 'posts',
     admin: {
         useAsTitle: 'title',
+        defaultColumns: ['title', 'status', 'publishedAt'],
     },
     access: {
         read: readPublishedOrAuthenticated,
@@ -92,8 +66,8 @@ export const Posts: CollectionConfig = {
         {
             name: 'status',
             type: 'select',
-            defaultValue: POST_STATUS.DRAFT,
-            options: POST_STATUS_OPTIONS,
+            defaultValue: PUBLISH_STATUS.DRAFT,
+            options: PUBLISH_STATUS_OPTIONS,
             admin: {
                 position: 'sidebar',
             },

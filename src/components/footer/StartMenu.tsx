@@ -4,11 +4,15 @@ import Image from 'next/image';
 import { Menu } from '@base-ui/react/menu';
 import { TABS } from '@/config/tabs';
 import { useTabRoute } from '@/hooks/useTabRoute';
-import { links } from '@/config/aboutMe';
 import { IMAGE_PATH } from '@/constants/application.constants';
 import { Button } from '@/components/buttons/Button';
 
 import type { TabRoute } from '@/config/tabs';
+
+interface StartMenuProps {
+    githubUrl: string;
+    linkedinUrl: string;
+}
 
 const MENU_ITEM_CLASS =
     'data-[highlighted]:bg-windows-blue flex h-10 w-full cursor-pointer items-center justify-center text-xl data-[highlighted]:text-white';
@@ -24,13 +28,14 @@ function StartButtonContent() {
                 alt="Win95"
                 height="28"
                 width="28"
+                className="size-7 flex-none object-contain"
             />
             <div>Start</div>
         </>
     );
 }
 
-export function StartMenu() {
+export function StartMenu({ githubUrl, linkedinUrl }: StartMenuProps) {
     const { selectTab } = useTabRoute();
 
     const handleTabSelection = (route: TabRoute) => () => {
@@ -63,24 +68,22 @@ export function StartMenu() {
                             </Menu.Item>
                         ))}
                         <Menu.Separator className="bg-windows-gray border-raised-b-2 mx-1 h-px border-t" />
-                        <Menu.Item className={MENU_ITEM_CLASS}>
-                            <a
-                                href={links.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Github
-                            </a>
-                        </Menu.Item>
-                        <Menu.Item className={MENU_ITEM_CLASS}>
-                            <a
-                                href={links.linkedIn}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                LinkedIn
-                            </a>
-                        </Menu.Item>
+                        <Menu.LinkItem
+                            href={githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={MENU_ITEM_CLASS}
+                        >
+                            Github
+                        </Menu.LinkItem>
+                        <Menu.LinkItem
+                            href={linkedinUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={MENU_ITEM_CLASS}
+                        >
+                            LinkedIn
+                        </Menu.LinkItem>
                     </Menu.Popup>
                 </Menu.Positioner>
             </Menu.Portal>

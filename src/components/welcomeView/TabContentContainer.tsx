@@ -42,6 +42,7 @@ export function TabContentContainer({
                         value={tab.key}
                         label={tab.label}
                         isActive={selectedTab.key === tab.key}
+                        isFirst={index === 0}
                         isLast={index === TABS.length - 1}
                     />
                 ))}
@@ -79,6 +80,8 @@ const ACTIVE_TAB_BOTTOM_BORDER_COVER = `
     after:content-[""]
 `;
 
+const ACTIVE_TAB_LEFT_EDGE = 'after:left-[1px]';
+
 const ACTIVE_TAB_SEAM_OVERHANG = 'after:right-[-1px]';
 
 const ACTIVE_TAB_RIGHT_EDGE =
@@ -88,14 +91,20 @@ interface Win95TabProps {
     value: (typeof TABS)[number]['key'];
     label: string;
     isActive: boolean;
+    isFirst: boolean;
     isLast: boolean;
 }
 
-function Win95Tab({ value, label, isActive, isLast }: Win95TabProps) {
+function Win95Tab({ value, label, isActive, isFirst, isLast }: Win95TabProps) {
+    const activeLeftEdge = isFirst && ACTIVE_TAB_LEFT_EDGE;
     const activeRightEdge = isLast
         ? ACTIVE_TAB_RIGHT_EDGE
         : ACTIVE_TAB_SEAM_OVERHANG;
-    const activeCover = cn(ACTIVE_TAB_BOTTOM_BORDER_COVER, activeRightEdge);
+    const activeCover = cn(
+        ACTIVE_TAB_BOTTOM_BORDER_COVER,
+        activeLeftEdge,
+        activeRightEdge
+    );
     const tabHeight = isActive ? 'h-[38px]' : 'mt-[3px] h-[35px]';
 
     return (

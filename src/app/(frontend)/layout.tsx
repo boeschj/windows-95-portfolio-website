@@ -1,6 +1,7 @@
 import localFont from 'next/font/local';
 import { SITE_URL } from '@/constants/application.constants';
-import { PERSON_SCHEMA } from '@/data/seoSchema';
+import { buildPersonSchema } from '@/data/seoSchema';
+import { getSiteSettings } from '@/data/siteSettings';
 import { JsonLd } from '@/components/JsonLd';
 import '@react95/fonts/serif/10pt';
 import '@react95/fonts/serif/14pt';
@@ -37,7 +38,8 @@ export const viewport: Viewport = {
 const SITE_TITLE = "Jordan's Portfolio Site";
 const SITE_DESCRIPTION = "Jordan's portfolio site.";
 const SITE_CREATOR = 'Jordan Boesch';
-const FAVICON_PATH = 'favicons/favicon-32x32.png';
+const FAVICON_PATH = '/favicons/favicon-32x32.png';
+const APPLE_TOUCH_ICON_PATH = '/favicons/apple-touch-icon.png';
 
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
@@ -47,7 +49,7 @@ export const metadata: Metadata = {
     icons: {
         icon: FAVICON_PATH,
         shortcut: FAVICON_PATH,
-        apple: 'favicons/apple-touch-icon.png',
+        apple: APPLE_TOUCH_ICON_PATH,
         other: {
             rel: 'icon',
             url: FAVICON_PATH,
@@ -66,18 +68,20 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+    const { githubUrl, linkedinUrl } = await getSiteSettings();
+
     return (
         <html
             lang="en"
             className={`${msSansSerif.variable} ${fixedsys.variable}`}
         >
             <body>
-                <JsonLd data={PERSON_SCHEMA} />
+                <JsonLd data={buildPersonSchema(githubUrl, linkedinUrl)} />
                 {children}
             </body>
         </html>

@@ -1,17 +1,19 @@
-import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext';
 import { format, parseISO } from 'date-fns';
 
+import { SITE_AUTHOR } from '@/constants/application.constants';
+import { richTextDescription, richTextToPlainText } from './reader';
+
+import type { ReaderDocument } from './reader';
 import type { Post } from '@/payload-types';
 
 export const MARKDOWN_FILE_TYPE = 'Markdown File';
-export const BLOG_AUTHOR = 'Jordan Boesch';
 
 const BYTES_PER_KILOBYTE = 1024;
 const WORDS_PER_MINUTE = 200;
 const META_SEPARATOR = ' · ';
-const DESCRIPTION_MAX_LENGTH = 155;
 const EXPLORER_DATE_FORMAT = 'MM/dd/yy';
 const POST_DATE_FORMAT = 'MMMM d, yyyy';
+const EMPTY_POST_LABEL = 'This post has no content yet.';
 
 export interface BlogListItem {
     slug: string;
@@ -51,7 +53,7 @@ export function toBlogListItem(post: Post): BlogListItem {
 }
 
 export function toPostView(post: Post): PostView {
-    const metaParts = [formatPostDate(post), BLOG_AUTHOR, formatReadTime(post)];
+    const metaParts = [formatPostDate(post), SITE_AUTHOR, formatReadTime(post)];
 
     return {
         filename: postFilename(post),
@@ -60,18 +62,24 @@ export function toPostView(post: Post): PostView {
     };
 }
 
+export function toReaderDocument(post: Post): ReaderDocument {
+    const { filename, title, metaLine } = toPostView(post);
+
+    return {
+        filename,
+        title,
+        metaLine,
+        content: post.content,
+        emptyContentLabel: EMPTY_POST_LABEL,
+    };
+}
+
 export function fileCountLabel(count: number): string {
     return `${String(count)} file(s) found`;
 }
 
 export function postDescription(post: Post): string {
-    const text = postPlainText(post).replace(/\s+/g, ' ').trim();
-
-    if (text.length <= DESCRIPTION_MAX_LENGTH) {
-        return text;
-    }
-
-    return `${text.slice(0, DESCRIPTION_MAX_LENGTH).trimEnd()}...`;
+    return richTextDescription(post.content);
 }
 
 function contentSizeBytes(post: Post): number {
@@ -102,13 +110,8 @@ function formatReadTime(post: Post): string {
 }
 
 function countWords(post: Post): number {
-    return postPlainText(post).trim().split(/\s+/).filter(Boolean).length;
-}
+    const plainText = richTextToPlainText(post.content).trim();
+    const words = plainText.split(/\s+/).filter(Boolean);
 
-function postPlainText(post: Post): string {
-    if (!post.content) {
-        return '';
-    }
-
-    return convertLexicalToPlaintext({ data: post.content });
+    return words.length;
 }

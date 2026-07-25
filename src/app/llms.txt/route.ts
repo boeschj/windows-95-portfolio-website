@@ -1,23 +1,24 @@
-import { SITE_URL } from '@/constants/application.constants';
-import { getPublishedPosts } from '@/data/posts';
+import {
+    BLOG_ROUTE,
+    SITE_AUTHOR,
+    SITE_SUMMARY,
+    SITE_URL,
+} from '@/constants/application.constants';
+import { getBlogPosts } from '@/data/posts';
 import { postDescription } from '@/data/postView';
 
 export const revalidate = 3600;
 
-const SITE_TITLE = 'Jordan Boesch';
-const SITE_SUMMARY =
-    "Founder and product engineer writing about interesting things I've built.";
-
 export async function GET() {
-    const posts = await getPublishedPosts();
+    const posts = await getBlogPosts();
 
     const postLines = posts.map(
         (post) =>
-            `- [${post.title}](${SITE_URL}/blog/${post.slug}): ${postDescription(post)}`
+            `- [${post.title}](${SITE_URL}${BLOG_ROUTE}/${post.slug}): ${postDescription(post)}`
     );
 
     const body = [
-        `# ${SITE_TITLE}`,
+        `# ${SITE_AUTHOR}`,
         '',
         `> ${SITE_SUMMARY}`,
         '',
