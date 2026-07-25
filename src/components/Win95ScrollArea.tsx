@@ -46,11 +46,18 @@ const ARROW = {
 
 type ArrowDirection = keyof typeof ARROW;
 
-const THUMB_CLASS =
-    'win95-scroll-thumb win95-border-raised bg-windows-gray flex-1';
+const VERTICAL_THUMB_CLASS =
+    'win95-scroll-thumb win95-border-raised bg-windows-gray w-full';
+
+const HORIZONTAL_THUMB_CLASS =
+    'win95-scroll-thumb win95-border-raised bg-windows-gray h-full';
 
 const ARROW_BUTTON_CLASS =
     'win95-scroll-arrow win95-border-raised bg-windows-gray absolute flex items-center justify-center';
+
+function isVerticalArrow(direction: ArrowDirection): boolean {
+    return direction === 'up' || direction === 'down';
+}
 
 interface Win95ScrollAreaProps {
     children: React.ReactNode;
@@ -65,6 +72,10 @@ export function Win95ScrollArea({
 
     const scrollVerticalBy = (pixels: number) => {
         viewportRef.current?.scrollBy({ top: pixels, behavior: 'instant' });
+    };
+
+    const scrollHorizontalBy = (pixels: number) => {
+        viewportRef.current?.scrollBy({ left: pixels, behavior: 'instant' });
     };
 
     return (
@@ -87,7 +98,7 @@ export function Win95ScrollArea({
                     paddingBottom: SCROLL_BUTTON_SIZE_PX,
                 }}
             >
-                <ScrollArea.Thumb className={THUMB_CLASS} />
+                <ScrollArea.Thumb className={VERTICAL_THUMB_CLASS} />
                 <ScrollArrowButton
                     direction="up"
                     onClick={() => {
@@ -101,7 +112,31 @@ export function Win95ScrollArea({
                     }}
                 />
             </ScrollArea.Scrollbar>
-            <HorizontalScrollbarRail />
+
+            <ScrollArea.Scrollbar
+                keepMounted
+                orientation="horizontal"
+                className="win95-scrollbar-track m-0 flex h-6 touch-none select-none"
+                style={{
+                    paddingLeft: SCROLL_BUTTON_SIZE_PX,
+                    paddingRight: SCROLL_BUTTON_SIZE_PX,
+                }}
+            >
+                <ScrollArea.Thumb className={HORIZONTAL_THUMB_CLASS} />
+                <ScrollArrowButton
+                    direction="left"
+                    onClick={() => {
+                        scrollHorizontalBy(-SCROLL_STEP_PX);
+                    }}
+                />
+                <ScrollArrowButton
+                    direction="right"
+                    onClick={() => {
+                        scrollHorizontalBy(SCROLL_STEP_PX);
+                    }}
+                />
+            </ScrollArea.Scrollbar>
+
             <div className="bg-windows-gray" />
         </ScrollArea.Root>
     );
@@ -114,45 +149,21 @@ interface ScrollArrowButtonProps {
 
 function ScrollArrowButton({ direction, onClick }: ScrollArrowButtonProps) {
     const arrow = ARROW[direction];
+    const isVertical = isVerticalArrow(direction);
+    const crossAxisSpan = isVertical ? 'right-0 left-0' : 'top-0 bottom-0';
+    const sizeStyle = isVertical
+        ? { height: SCROLL_BUTTON_SIZE_PX }
+        : { width: SCROLL_BUTTON_SIZE_PX };
 
     return (
         <button
             type="button"
             aria-label={`Scroll ${direction}`}
             onClick={onClick}
-            className={cn(ARROW_BUTTON_CLASS, 'right-0 left-0', arrow.position)}
-            style={{ height: SCROLL_BUTTON_SIZE_PX }}
+            className={cn(ARROW_BUTTON_CLASS, crossAxisSpan, arrow.position)}
+            style={sizeStyle}
         >
             <span className="block h-0 w-0" style={arrow.style} />
         </button>
-    );
-}
-
-function HorizontalScrollbarRail() {
-    return (
-        <div
-            aria-hidden
-            className="win95-scrollbar-track relative flex h-full w-full touch-none select-none"
-            style={{
-                paddingLeft: SCROLL_BUTTON_SIZE_PX,
-                paddingRight: SCROLL_BUTTON_SIZE_PX,
-            }}
-        >
-            <DecorativeScrollArrow direction="left" />
-            <DecorativeScrollArrow direction="right" />
-        </div>
-    );
-}
-
-function DecorativeScrollArrow({ direction }: { direction: ArrowDirection }) {
-    const arrow = ARROW[direction];
-
-    return (
-        <span
-            className={cn(ARROW_BUTTON_CLASS, 'top-0 bottom-0', arrow.position)}
-            style={{ width: SCROLL_BUTTON_SIZE_PX }}
-        >
-            <span className="block h-0 w-0" style={arrow.style} />
-        </span>
     );
 }

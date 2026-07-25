@@ -52,7 +52,7 @@ export function Explorer<TRow, TKey extends string>({
                 <Win95ScrollArea viewportClassName="h-full w-full bg-white">
                     <table
                         aria-label={ariaLabel}
-                        className="text-win95 w-full table-fixed text-black"
+                        className="text-win95 w-full text-black"
                     >
                         <ExplorerHeaderRow
                             columns={columns}

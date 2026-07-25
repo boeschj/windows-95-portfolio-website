@@ -1,6 +1,3 @@
-import { cn } from '@/utils';
-import { HIDDEN_ON_MOBILE } from '@/components/explorer/explorerTable';
-
 import type { ExperienceListItem } from '@/data/experienceView';
 import type {
     ExplorerColumn,
@@ -9,23 +6,10 @@ import type {
 
 const CURRENT_ROLE_RANK = Number.MAX_SAFE_INTEGER;
 
-export const COLUMN_WIDTH_CLASS = {
-    role: 'w-[34%]',
-    dates: 'w-[200px]',
-} as const;
-
 export const EXPERIENCE_COLUMNS = [
-    { key: 'company', label: 'Company', className: 'w-full' },
-    {
-        key: 'role',
-        label: 'Role',
-        className: cn(HIDDEN_ON_MOBILE, COLUMN_WIDTH_CLASS.role),
-    },
-    {
-        key: 'dates',
-        label: 'Dates',
-        className: COLUMN_WIDTH_CLASS.dates,
-    },
+    { key: 'company', label: 'Company', className: '' },
+    { key: 'role', label: 'Role', className: '' },
+    { key: 'dates', label: 'Dates', className: '' },
 ] as const satisfies readonly ExplorerColumn<string>[];
 
 export type ExperienceColumnKey = (typeof EXPERIENCE_COLUMNS)[number]['key'];

@@ -1,35 +1,14 @@
-import { cn } from '@/utils';
-import { HIDDEN_ON_MOBILE } from '@/components/explorer/explorerTable';
-
 import type { BlogListItem } from '@/data/postView';
 import type {
     ExplorerColumn,
     RowComparator,
 } from '@/components/explorer/explorerTable';
 
-export const COLUMN_WIDTH_CLASS = {
-    size: 'w-[90px]',
-    type: 'w-[140px]',
-    modified: 'w-[120px]',
-} as const;
-
 export const BLOG_COLUMNS = [
     { key: 'name', label: 'Name', className: 'w-full' },
-    {
-        key: 'size',
-        label: 'Size',
-        className: cn(HIDDEN_ON_MOBILE, COLUMN_WIDTH_CLASS.size),
-    },
-    {
-        key: 'type',
-        label: 'Type',
-        className: cn(HIDDEN_ON_MOBILE, COLUMN_WIDTH_CLASS.type),
-    },
-    {
-        key: 'modified',
-        label: 'Modified',
-        className: COLUMN_WIDTH_CLASS.modified,
-    },
+    { key: 'size', label: 'Size', className: '' },
+    { key: 'type', label: 'Type', className: '' },
+    { key: 'modified', label: 'Modified', className: '' },
 ] as const satisfies readonly ExplorerColumn<string>[];
 
 export type BlogColumnKey = (typeof BLOG_COLUMNS)[number]['key'];

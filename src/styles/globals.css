@@ -186,7 +186,10 @@
     position: relative !important;
 }
 
-.win95-scrollbar-track:not([data-has-overflow-y]) .win95-scroll-thumb {
+.win95-scrollbar-track[data-orientation='vertical']:not([data-has-overflow-y])
+    .win95-scroll-thumb,
+.win95-scrollbar-track[data-orientation='horizontal']:not([data-has-overflow-x])
+    .win95-scroll-thumb {
     visibility: hidden;
 }
 
@@ -194,7 +197,10 @@
     color: #000;
 }
 
-.win95-scrollbar-track:not([data-has-overflow-y]) .win95-scroll-arrow {
+.win95-scrollbar-track[data-orientation='vertical']:not([data-has-overflow-y])
+    .win95-scroll-arrow,
+.win95-scrollbar-track[data-orientation='horizontal']:not([data-has-overflow-x])
+    .win95-scroll-arrow {
     color: #808080;
 }
 
