@@ -46,8 +46,11 @@ function CompanyLabel({ item }: ExperienceRowProps) {
     const label = (
         <>
             <ExperienceLogo item={item} />
-            <span className="block min-w-0 truncate px-0.75">
-                {item.company}
+            <span className="flex min-w-0 flex-col px-0.75">
+                <span className="truncate">{item.company}</span>
+                <span className="truncate text-black/60 md:hidden">
+                    {item.role}
+                </span>
             </span>
         </>
     );
