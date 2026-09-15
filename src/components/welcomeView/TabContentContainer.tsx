@@ -1,46 +1,34 @@
-'use client';
-
+import Link from 'next/link';
 import { Tabs } from '@base-ui/react/tabs';
-import { TABS } from '@/config/tabs';
-import { useTabRoute } from '@/hooks/useTabRoute';
+import { TABS, getTabByRoute, hrefForTab } from '@/config/tabs';
 import { cn } from '@/utils';
 
-import type { TabRoute } from '@/config/tabs';
+import type { Tab, TabRoute } from '@/config/tabs';
 import type { ReactNode } from 'react';
 
 const TAB_PANEL_CLASS = 'flex h-full min-h-0 w-full flex-col';
 
 interface TabContentContainerProps {
     panels: Record<TabRoute, ReactNode>;
-    initialRoute: string | null;
+    activeRoute: string | null;
 }
 
 export function TabContentContainer({
     panels,
-    initialRoute,
+    activeRoute,
 }: TabContentContainerProps) {
-    const { selectedTab, selectTab } = useTabRoute({ initialRoute });
-
-    const handleValueChange = (value: unknown) => {
-        const nextTab = TABS.find((tab) => tab.key === value);
-
-        if (nextTab) {
-            selectTab(nextTab.route);
-        }
-    };
+    const selectedTab = getTabByRoute(activeRoute);
 
     return (
         <Tabs.Root
             value={selectedTab.key}
-            onValueChange={handleValueChange}
             className="flex h-[calc(100%-90px)] flex-col"
         >
             <Tabs.List className="flex flex-row">
                 {TABS.map((tab, index) => (
                     <Win95Tab
                         key={tab.key}
-                        value={tab.key}
-                        label={tab.label}
+                        tab={tab}
                         isActive={selectedTab.key === tab.key}
                         isFirst={index === 0}
                         isLast={index === TABS.length - 1}
@@ -88,14 +76,13 @@ const ACTIVE_TAB_RIGHT_EDGE =
     'after:right-0 after:[box-shadow:inset_-1px_0_var(--color-tab-b-3),inset_-2px_0_var(--color-tab-b-2),inset_-3px_0_var(--color-tab-b-1)]';
 
 interface Win95TabProps {
-    value: (typeof TABS)[number]['key'];
-    label: string;
+    tab: Tab;
     isActive: boolean;
     isFirst: boolean;
     isLast: boolean;
 }
 
-function Win95Tab({ value, label, isActive, isFirst, isLast }: Win95TabProps) {
+function Win95Tab({ tab, isActive, isFirst, isLast }: Win95TabProps) {
     const activeLeftEdge = isFirst && ACTIVE_TAB_LEFT_EDGE;
     const activeRightEdge = isLast
         ? ACTIVE_TAB_RIGHT_EDGE
@@ -115,8 +102,13 @@ function Win95Tab({ value, label, isActive, isFirst, isLast }: Win95TabProps) {
                 isActive && activeCover
             )}
         >
-            <Tabs.Tab value={value} className="bg-windows-gray h-7.5 w-full">
-                {label}
+            <Tabs.Tab
+                value={tab.key}
+                nativeButton={false}
+                render={<Link href={hrefForTab(tab.route)} />}
+                className="bg-windows-gray flex h-7.5 w-full items-center justify-center text-black no-underline"
+            >
+                {tab.label}
             </Tabs.Tab>
         </div>
     );

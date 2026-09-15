@@ -12,3 +12,5 @@ export const SITE_SUMMARY =
 export const BLOG_ROUTE = '/blog';
 
 export const EXPERIENCE_ROUTE = '/experience';
+
+export const HOME_ROUTE = '/';

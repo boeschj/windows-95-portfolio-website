@@ -1,3 +1,5 @@
+import { HOME_ROUTE } from '@/constants/application.constants';
+
 export const TABS = [
     { key: 0, route: 'about', title: "Hi, I'm Jordan 👋", label: 'About Me' },
     { key: 1, route: 'experience', title: 'My Work', label: 'Experience' },
@@ -30,7 +32,7 @@ export function getTabByRoute(route: string | null | undefined): Tab {
 
 export function hrefForTab(route: TabRoute): string {
     if (route === DEFAULT_TAB.route) {
-        return '/';
+        return HOME_ROUTE;
     }
 
     return `/?${TAB_QUERY_PARAM}=${route}`;

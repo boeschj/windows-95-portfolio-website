@@ -7,16 +7,16 @@ import { Skills } from '@/components/tabSections/skills/Skills';
 import { Blog } from '@/components/tabSections/blog/Blog';
 
 interface WelcomeViewProps {
-    initialRoute: string | null;
+    activeRoute: string | null;
 }
 
-export function WelcomeView({ initialRoute }: WelcomeViewProps) {
+export function WelcomeView({ activeRoute }: WelcomeViewProps) {
     return (
         <div className="win95-border-raised bg-windows-gray h-full w-full pb-6">
             <Header />
             <div className="flex h-full grow flex-col justify-between gap-5 p-2 md:p-5">
                 <TabContentContainer
-                    initialRoute={initialRoute}
+                    activeRoute={activeRoute}
                     panels={{
                         about: <About />,
                         experience: <Experience />,

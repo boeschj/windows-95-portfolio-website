@@ -1,13 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Menu } from '@base-ui/react/menu';
-import { TABS } from '@/config/tabs';
-import { useTabRoute } from '@/hooks/useTabRoute';
+import { TABS, hrefForTab } from '@/config/tabs';
 import { IMAGE_PATH } from '@/constants/application.constants';
 import { Button } from '@/components/buttons/Button';
-
-import type { TabRoute } from '@/config/tabs';
 
 interface StartMenuProps {
     githubUrl: string;
@@ -36,12 +34,6 @@ function StartButtonContent() {
 }
 
 export function StartMenu({ githubUrl, linkedinUrl }: StartMenuProps) {
-    const { selectTab } = useTabRoute();
-
-    const handleTabSelection = (route: TabRoute) => () => {
-        selectTab(route);
-    };
-
     return (
         <Menu.Root>
             <Menu.Trigger
@@ -59,13 +51,13 @@ export function StartMenu({ githubUrl, linkedinUrl }: StartMenuProps) {
                 <Menu.Positioner side="top" align="start" sideOffset={4}>
                     <Menu.Popup className="win95-border-raised bg-windows-gray w-72">
                         {TABS.map((tab) => (
-                            <Menu.Item
+                            <Menu.LinkItem
                                 key={tab.key}
-                                onClick={handleTabSelection(tab.route)}
+                                render={<Link href={hrefForTab(tab.route)} />}
                                 className={MENU_ITEM_CLASS}
                             >
                                 {tab.label}
-                            </Menu.Item>
+                            </Menu.LinkItem>
                         ))}
                         <Menu.Separator className="bg-windows-gray border-raised-b-2 mx-1 h-px border-t" />
                         <Menu.LinkItem
