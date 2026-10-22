@@ -1,7 +1,11 @@
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { postgresAdapter } from '@payloadcms/db-postgres';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import {
+    BlocksFeature,
+    CodeBlock,
+    lexicalEditor,
+} from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
@@ -16,6 +20,11 @@ import {
     SITE_URL,
     WWW_SITE_URL,
 } from './constants/application.constants';
+import {
+    CODE_BLOCK_SLUG,
+    CODE_LANGUAGES,
+    DEFAULT_CODE_LANGUAGE,
+} from './config/codeLanguages';
 import { env } from './env';
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
@@ -27,8 +36,19 @@ const DEPLOYMENT_ORIGINS =
 const ALLOWED_ADMIN_ORIGINS = [SITE_URL, WWW_SITE_URL, ...DEPLOYMENT_ORIGINS];
 const CSRF_ORIGINS = IS_DEPLOYED_ON_VERCEL ? ALLOWED_ADMIN_ORIGINS : [];
 
+const codeBlock = CodeBlock({
+    slug: CODE_BLOCK_SLUG,
+    languages: CODE_LANGUAGES,
+    defaultLanguage: DEFAULT_CODE_LANGUAGE,
+});
+
 export default buildConfig({
-    editor: lexicalEditor(),
+    editor: lexicalEditor({
+        features: ({ defaultFeatures }) => [
+            ...defaultFeatures,
+            BlocksFeature({ blocks: [codeBlock] }),
+        ],
+    }),
     collections: [Users, Posts, Experiences, Media],
     globals: [SiteSettings, About],
     secret: env.PAYLOAD_SECRET,

@@ -1,7 +1,21 @@
 import { BlogImage } from './BlogImage';
 import { CodeBlock } from './CodeBlock';
+import { CODE_BLOCK_SLUG } from '@/config/codeLanguages';
 
+import type {
+    DefaultNodeTypes,
+    SerializedBlockNode,
+} from '@payloadcms/richtext-lexical';
 import type { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react';
+
+interface CodeBlockFields {
+    blockType: typeof CODE_BLOCK_SLUG;
+    blockName?: string | null;
+    code?: string | null;
+    language?: string | null;
+}
+
+type RichTextNode = DefaultNodeTypes | SerializedBlockNode<CodeBlockFields>;
 
 interface CodeNode {
     type?: string;
@@ -96,9 +110,17 @@ function resolveUploadMedia(value: unknown): ResolvedUploadMedia | null {
     };
 }
 
-export function createRichTextConverters(): JSXConvertersFunction {
+export function createRichTextConverters(): JSXConvertersFunction<RichTextNode> {
     return ({ defaultConverters }) => ({
         ...defaultConverters,
+        blocks: {
+            [CODE_BLOCK_SLUG]: ({ node }) => {
+                const code = node.fields.code ?? '';
+                const language = node.fields.language ?? undefined;
+
+                return <CodeBlock code={code} language={language} />;
+            },
+        },
         code: ({ node }) => {
             const codeNode = asNode(node) ?? {};
             const language =
