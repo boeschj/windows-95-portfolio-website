@@ -1,13 +1,20 @@
 import type { CollectionConfig } from 'payload';
 
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+
 export const Users: CollectionConfig = {
     slug: 'users',
-    auth: true,
+    auth: {
+        cookies: {
+            secure: IS_PRODUCTION,
+            sameSite: 'Lax',
+        },
+    },
     admin: {
         useAsTitle: 'email',
     },
     access: {
-        create: () => false, //comment out to allow users to be created / deleted
+        create: () => false,
         delete: () => false,
     },
     fields: [],

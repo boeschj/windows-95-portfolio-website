@@ -21,6 +21,9 @@ export default buildConfig({
     collections: [Users, Posts, Experiences, Media],
     globals: [SiteSettings, About],
     secret: env.PAYLOAD_SECRET,
+    graphQL: {
+        disable: true,
+    },
     db: postgresAdapter({
         pool: {
             connectionString: env.DATABASE_URL,
