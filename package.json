@@ -4,6 +4,7 @@
     "type": "module",
     "private": true,
     "scripts": {
+        "payload": "payload",
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
@@ -15,7 +16,8 @@
         "typecheck": "tsc --noEmit",
         "precommit": "pnpm run lint && pnpm run format && pnpm run typecheck",
         "payload:generate-types": "payload generate:types",
-        "payload:generate-importmap": "payload generate:importmap"
+        "payload:generate-importmap": "payload generate:importmap",
+        "ci": "payload migrate && pnpm build"
     },
     "engines": {
         "node": ">=24.0.0"
