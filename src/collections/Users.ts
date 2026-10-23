@@ -7,7 +7,6 @@ export const Users: CollectionConfig = {
     auth: {
         cookies: {
             secure: IS_PRODUCTION,
-            sameSite: 'Lax',
         },
     },
     admin: {
