@@ -17,7 +17,7 @@
         "precommit": "pnpm run lint && pnpm run format && pnpm run typecheck",
         "payload:generate-types": "payload generate:types",
         "payload:generate-importmap": "payload generate:importmap",
-        "ci": "payload migrate && pnpm build"
+        "ci": "payload run scripts/check-no-dev-push.ts && payload migrate && pnpm build"
     },
     "engines": {
         "node": ">=24.0.0"
