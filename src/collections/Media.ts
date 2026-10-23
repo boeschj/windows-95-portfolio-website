@@ -8,15 +8,10 @@ const ALLOWED_IMAGE_MIME_TYPES = [
     'image/avif',
 ];
 
-const MAX_INPUT_PIXELS_ACROSS_ALL_FRAMES = 1_000_000_000;
-
 export const Media: CollectionConfig = {
     slug: 'media',
     upload: {
         mimeTypes: ALLOWED_IMAGE_MIME_TYPES,
-        constructorOptions: {
-            limitInputPixels: MAX_INPUT_PIXELS_ACROSS_ALL_FRAMES,
-        },
     },
     access: {
         read: () => true,

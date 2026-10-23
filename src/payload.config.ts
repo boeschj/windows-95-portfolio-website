@@ -27,6 +27,8 @@ import {
 } from './config/codeLanguages';
 import { env } from './env';
 
+import type { SharpInput, SharpOptions } from 'sharp';
+
 const currentDir = dirname(fileURLToPath(import.meta.url));
 
 const IS_DEPLOYED_ON_VERCEL = Boolean(env.VERCEL);
@@ -35,6 +37,8 @@ const DEPLOYMENT_ORIGINS =
     DEPLOYMENT_HOSTNAMES.filter(isDefined).map(toHttpsOrigin);
 const ALLOWED_ADMIN_ORIGINS = [SITE_URL, WWW_SITE_URL, ...DEPLOYMENT_ORIGINS];
 const CSRF_ORIGINS = IS_DEPLOYED_ON_VERCEL ? ALLOWED_ADMIN_ORIGINS : [];
+
+const MAX_INPUT_PIXELS_ACROSS_ALL_FRAMES = 1_000_000_000;
 
 const codeBlock = CodeBlock({
     slug: CODE_BLOCK_SLUG,
@@ -59,7 +63,7 @@ export default buildConfig({
         },
         push: false,
     }),
-    sharp,
+    sharp: sharpWithAnimationPixelLimit,
     plugins: [
         s3Storage({
             bucket: env.R2_BUCKET,
@@ -89,6 +93,16 @@ export default buildConfig({
         },
     },
 });
+
+function sharpWithAnimationPixelLimit(
+    input?: SharpInput,
+    options?: SharpOptions
+) {
+    return sharp(input, {
+        ...options,
+        limitInputPixels: MAX_INPUT_PIXELS_ACROSS_ALL_FRAMES,
+    });
+}
 
 function isDefined(value: string | undefined): value is string {
     return value !== undefined;
