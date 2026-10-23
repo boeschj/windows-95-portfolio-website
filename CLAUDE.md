@@ -17,7 +17,16 @@ pnpm format       # Prettier check
 pnpm format:fix   # Prettier write
 pnpm typecheck    # tsc --noEmit
 pnpm precommit    # lint + format + typecheck
+pnpm payload migrate:create <name>   # Generate a migration after changing collections or fields
 ```
+
+## Database
+
+One Neon Postgres database serves local dev, preview deployments, and production. Schema push is off (`push: false`), so `pnpm dev` never changes the schema; migrations in `src/migrations` do.
+
+Vercel builds with `pnpm run ci`, which refuses to deploy if a dev-push marker exists, runs `payload migrate`, then `next build`. Every deployment, previews included, migrates the shared database, so keep migrations additive and compatible with the code that's already deployed. Drop columns in a follow-up after the code that stops using them is live.
+
+Never run `migrate:down`, `migrate:reset`, `migrate:refresh`, or `migrate:fresh`: they run against production.
 
 No test framework is configured.
 
