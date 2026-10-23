@@ -1,9 +1,11 @@
 import { Footer } from '@/components/footer/Footer';
 import { WelcomeView } from '@/components/welcomeView/WelcomeView';
 
+import type { ReactNode } from 'react';
+
 export const revalidate = 3600;
 
-export default function Page() {
+export default function HomeLayout({ children }: { children: ReactNode }) {
     return (
         <div className="bg-windows-bg flex min-h-screen w-full flex-col items-center justify-center">
             <main
@@ -12,6 +14,7 @@ export default function Page() {
                 }
             >
                 <WelcomeView />
+                {children}
             </main>
             <div className="md:pt-taskbar-height w-full pt-0">
                 <Footer />

@@ -17,4 +17,6 @@ export const BLOG_ROUTE = '/blog';
 
 export const EXPERIENCE_ROUTE = '/experience';
 
+export const SKILLS_ROUTE = '/skills';
+
 export const HOME_ROUTE = '/';

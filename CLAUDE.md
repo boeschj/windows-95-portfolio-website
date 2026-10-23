@@ -48,7 +48,7 @@ No test framework is configured.
 
 **Server components by default** — `'use client'` is used only in components that need interactivity (tab container, clock, start menu). Tab content (About, Experience, Skills) are server components passed into the client boundary via composition.
 
-**Tab system** — `TABS` in `src/config/tabs.ts` maps tab keys to titles and labels using `as const satisfies`. The `TabKey` type is derived from this config at the type level. `WelcomeView` passes server-rendered tab content as children into the client `TabContentContainer`.
+**Tab system** — each tab is its own static route (`/`, `/experience`, `/skills`, `/blog`) under the `(frontend)/(home)` route group. Its layout renders `WelcomeView` once, so all four panels stay mounted across tab changes, and the tab pages themselves render nothing. `TABS` in `src/config/tabs.ts` holds each tab's `href`, and `TabContentContainer` picks the active tab from `usePathname()`. Old `/?tab=` links redirect via `next.config.ts`.
 
 **Win95 design system** — custom border utilities (`win95-border-raised`, `win95-border-sunken`, etc.) are defined as Tailwind `@layer components` in `globals.css` using `box-shadow` compositions. Theme colors (windows-gray, windows-blue, windows-bg), a custom `xs: 380px` breakpoint, and shared spacing tokens (taskbar-height) are in the `@theme` block.
 

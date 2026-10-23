@@ -1,68 +1,27 @@
 'use client';
 
-import { Suspense } from 'react';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Tabs } from '@base-ui/react/tabs';
-import {
-    DEFAULT_TAB,
-    TABS,
-    TAB_QUERY_PARAM,
-    getTabByRoute,
-    hrefForTab,
-} from '@/config/tabs';
+import { TABS, getTabByPathname } from '@/config/tabs';
 import { cn } from '@/utils';
 
 import type { Tab, TabRoute } from '@/config/tabs';
-import type { BaseUIEvent } from '@base-ui/react/types';
-import type { MouseEvent, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 const TAB_PANEL_CLASS = 'flex h-full min-h-0 w-full flex-col';
 
-type TabPanels = Record<TabRoute, ReactNode>;
-
 interface TabContentContainerProps {
-    panels: TabPanels;
+    panels: Record<TabRoute, ReactNode>;
 }
 
 export function TabContentContainer({ panels }: TabContentContainerProps) {
-    const prerenderedTabs = (
-        <Win95Tabs panels={panels} selectedTab={DEFAULT_TAB} />
-    );
-
-    return (
-        <Suspense fallback={prerenderedTabs}>
-            <UrlSelectedWin95Tabs panels={panels} />
-        </Suspense>
-    );
-}
-
-function UrlSelectedWin95Tabs({ panels }: TabContentContainerProps) {
-    const searchParams = useSearchParams();
-    const selectedRoute = searchParams.get(TAB_QUERY_PARAM);
-    const selectedTab = getTabByRoute(selectedRoute);
-
-    return <Win95Tabs panels={panels} selectedTab={selectedTab} />;
-}
-
-interface Win95TabsProps {
-    panels: TabPanels;
-    selectedTab: Tab;
-}
-
-function Win95Tabs({ panels, selectedTab }: Win95TabsProps) {
-    const handleValueChange = (value: unknown) => {
-        const nextTab = TABS.find((tab) => tab.key === value);
-
-        if (nextTab) {
-            showTabInUrl(nextTab.route);
-        }
-    };
+    const pathname = usePathname();
+    const selectedTab = getTabByPathname(pathname);
 
     return (
         <Tabs.Root
             value={selectedTab.key}
-            onValueChange={handleValueChange}
             className="flex h-[calc(100%-90px)] flex-col"
         >
             <Tabs.List className="flex flex-row">
@@ -135,15 +94,6 @@ function Win95Tab({ tab, isActive, isFirst, isLast }: Win95TabProps) {
     );
     const tabHeight = isActive ? 'h-[38px]' : 'mt-[3px] h-[35px]';
 
-    const handleTabClick = (event: BaseUIEvent<MouseEvent<HTMLElement>>) => {
-        if (isModifiedClick(event)) {
-            event.preventBaseUIHandler();
-            return;
-        }
-
-        event.preventDefault();
-    };
-
     return (
         <div
             className={cn(
@@ -155,20 +105,11 @@ function Win95Tab({ tab, isActive, isFirst, isLast }: Win95TabProps) {
             <Tabs.Tab
                 value={tab.key}
                 nativeButton={false}
-                render={<Link href={hrefForTab(tab.route)} prefetch={false} />}
-                onClick={handleTabClick}
+                render={<Link href={tab.href} scroll={false} />}
                 className="bg-windows-gray flex h-7.5 w-full items-center justify-center text-black no-underline"
             >
                 {tab.label}
             </Tabs.Tab>
         </div>
     );
-}
-
-function showTabInUrl(route: TabRoute) {
-    window.history.replaceState(null, '', hrefForTab(route));
-}
-
-function isModifiedClick(event: MouseEvent) {
-    return event.metaKey || event.ctrlKey || event.shiftKey || event.altKey;
 }

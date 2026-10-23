@@ -1,13 +1,43 @@
-import { HOME_ROUTE } from '@/constants/application.constants';
+import {
+    BLOG_ROUTE,
+    EXPERIENCE_ROUTE,
+    HOME_ROUTE,
+    SKILLS_ROUTE,
+} from '../constants/application.constants';
 
 export const TABS = [
-    { key: 0, route: 'about', title: "Hi, I'm Jordan 👋", label: 'About Me' },
-    { key: 1, route: 'experience', title: 'My Work', label: 'Experience' },
-    { key: 2, route: 'skills', title: 'My Skills', label: 'Skills' },
-    { key: 3, route: 'blog', title: 'Blog', label: 'Blog' },
+    {
+        key: 0,
+        route: 'about',
+        href: HOME_ROUTE,
+        title: "Hi, I'm Jordan 👋",
+        label: 'About Me',
+    },
+    {
+        key: 1,
+        route: 'experience',
+        href: EXPERIENCE_ROUTE,
+        title: 'My Work',
+        label: 'Experience',
+    },
+    {
+        key: 2,
+        route: 'skills',
+        href: SKILLS_ROUTE,
+        title: 'My Skills',
+        label: 'Skills',
+    },
+    {
+        key: 3,
+        route: 'blog',
+        href: BLOG_ROUTE,
+        title: 'Blog',
+        label: 'Blog',
+    },
 ] as const satisfies readonly {
     key: number;
     route: string;
+    href: string;
     title: string;
     label: string;
 }[];
@@ -18,22 +48,10 @@ export type TabRoute = Tab['route'];
 
 export const DEFAULT_TAB = TABS[0];
 
-export const TAB_QUERY_PARAM = 'tab';
+export const LEGACY_TAB_QUERY_PARAM = 'tab';
 
-const TAB_BY_ROUTE = new Map<string, Tab>(TABS.map((tab) => [tab.route, tab]));
+const TAB_BY_HREF = new Map<string, Tab>(TABS.map((tab) => [tab.href, tab]));
 
-export function getTabByRoute(route: string | null | undefined): Tab {
-    if (!route) {
-        return DEFAULT_TAB;
-    }
-
-    return TAB_BY_ROUTE.get(route) ?? DEFAULT_TAB;
-}
-
-export function hrefForTab(route: TabRoute): string {
-    if (route === DEFAULT_TAB.route) {
-        return HOME_ROUTE;
-    }
-
-    return `/?${TAB_QUERY_PARAM}=${route}`;
+export function getTabByPathname(pathname: string): Tab {
+    return TAB_BY_HREF.get(pathname) ?? DEFAULT_TAB;
 }

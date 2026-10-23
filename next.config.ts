@@ -1,10 +1,13 @@
 import { withPayload } from '@payloadcms/next/withPayload';
 import {
+    HOME_ROUTE,
     MEDIA_ORIGIN,
     MEDIA_PREFIX,
 } from './src/constants/application.constants';
+import { LEGACY_TAB_QUERY_PARAM, TABS } from './src/config/tabs';
 
 import type { NextConfig } from 'next';
+import type { Tab } from './src/config/tabs';
 
 const ONE_YEAR_SECONDS = 31536000;
 const MEDIA_URL_PATTERN = new URL(`${MEDIA_ORIGIN}/${MEDIA_PREFIX}/**`);
@@ -25,6 +28,8 @@ const SECURITY_HEADERS = [
     { key: 'X-Content-Type-Options', value: 'nosniff' },
     { key: 'Permissions-Policy', value: PERMISSIONS_POLICY },
 ];
+
+const LEGACY_TAB_REDIRECTS = TABS.filter(hasOwnPath).map(toLegacyTabRedirect);
 
 const nextConfig: NextConfig = {
     poweredByHeader: false,
@@ -51,6 +56,28 @@ const nextConfig: NextConfig = {
             },
         ]);
     },
+    redirects() {
+        return Promise.resolve(LEGACY_TAB_REDIRECTS);
+    },
 };
 
 export default withPayload(nextConfig);
+
+function hasOwnPath(tab: Tab): boolean {
+    return tab.href !== HOME_ROUTE;
+}
+
+function toLegacyTabRedirect(tab: Tab) {
+    return {
+        source: HOME_ROUTE,
+        has: [
+            {
+                type: 'query' as const,
+                key: LEGACY_TAB_QUERY_PARAM,
+                value: tab.route,
+            },
+        ],
+        destination: tab.href,
+        permanent: true,
+    };
+}
