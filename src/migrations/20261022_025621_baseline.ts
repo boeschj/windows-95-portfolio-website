@@ -1,4 +1,4 @@
-import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
+import { MigrateUpArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
@@ -180,21 +180,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   CREATE INDEX "about_photo_idx" ON "about" USING btree ("photo_id");`)
 }
 
-export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
-  await db.execute(sql`
-   DROP TABLE "users_sessions" CASCADE;
-  DROP TABLE "users" CASCADE;
-  DROP TABLE "posts" CASCADE;
-  DROP TABLE "experiences" CASCADE;
-  DROP TABLE "media" CASCADE;
-  DROP TABLE "payload_kv" CASCADE;
-  DROP TABLE "payload_locked_documents" CASCADE;
-  DROP TABLE "payload_locked_documents_rels" CASCADE;
-  DROP TABLE "payload_preferences" CASCADE;
-  DROP TABLE "payload_preferences_rels" CASCADE;
-  DROP TABLE "payload_migrations" CASCADE;
-  DROP TABLE "site_settings" CASCADE;
-  DROP TABLE "about" CASCADE;
-  DROP TYPE "public"."enum_posts_status";
-  DROP TYPE "public"."enum_experiences_status";`)
+export async function down(): Promise<void> {
+  throw new Error('The baseline migration cannot be rolled back because it would drop every table.')
 }
