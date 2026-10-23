@@ -1,4 +1,5 @@
 import { BlogImage } from './BlogImage';
+import { BlogVideo } from './BlogVideo';
 import { CodeBlock } from './CodeBlock';
 import { CODE_BLOCK_SLUG } from '@/config/codeLanguages';
 
@@ -30,6 +31,7 @@ interface UploadMediaNode {
     alt?: unknown;
     width?: unknown;
     height?: unknown;
+    mimeType?: unknown;
 }
 
 type RenderableUploadMedia = UploadMediaNode & {
@@ -37,6 +39,13 @@ type RenderableUploadMedia = UploadMediaNode & {
     width: number;
     height: number;
 };
+
+type RenderableUploadVideo = UploadMediaNode & {
+    url: string;
+    mimeType: string;
+};
+
+const VIDEO_MIME_TYPE_PREFIX = 'video/';
 
 const asNode = (value: unknown): CodeNode | null =>
     typeof value === 'object' && value !== null ? value : null;
@@ -90,6 +99,38 @@ function isRenderableUploadMedia(
     );
 }
 
+function isRenderableUploadVideo(
+    media: UploadMediaNode
+): media is RenderableUploadVideo {
+    return (
+        typeof media.url === 'string' &&
+        typeof media.mimeType === 'string' &&
+        media.mimeType.startsWith(VIDEO_MIME_TYPE_PREFIX)
+    );
+}
+
+function readAltText(media: UploadMediaNode): string {
+    return typeof media.alt === 'string' ? media.alt : '';
+}
+
+interface ResolvedUploadVideo {
+    src: string;
+    label: string;
+}
+
+function resolveUploadVideo(value: unknown): ResolvedUploadVideo | null {
+    const media = asUploadMedia(value);
+
+    if (!media) {
+        return null;
+    }
+    if (!isRenderableUploadVideo(media)) {
+        return null;
+    }
+
+    return { src: media.url, label: readAltText(media) };
+}
+
 function resolveUploadMedia(value: unknown): ResolvedUploadMedia | null {
     const media = asUploadMedia(value);
 
@@ -100,11 +141,9 @@ function resolveUploadMedia(value: unknown): ResolvedUploadMedia | null {
         return null;
     }
 
-    const alt = typeof media.alt === 'string' ? media.alt : '';
-
     return {
         src: media.url,
-        alt,
+        alt: readAltText(media),
         width: media.width,
         height: media.height,
     };
@@ -136,6 +175,12 @@ export function createRichTextConverters(): JSXConvertersFunction<RichTextNode> 
             );
         },
         upload: ({ node }) => {
+            const video = resolveUploadVideo(node.value);
+
+            if (video) {
+                return <BlogVideo src={video.src} label={video.label} />;
+            }
+
             const media = resolveUploadMedia(node.value);
 
             if (!media) {
