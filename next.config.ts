@@ -1,15 +1,15 @@
 import { withPayload } from '@payloadcms/next/withPayload';
-import { MEDIA_PREFIX } from './src/constants/application.constants';
+import {
+    MEDIA_ORIGIN,
+    MEDIA_PREFIX,
+} from './src/constants/application.constants';
 
 import type { NextConfig } from 'next';
 
 const ONE_YEAR_SECONDS = 31536000;
-const MEDIA_FILE_ROUTE = '/api/media/file/:path*';
-const MEDIA_FILE_PATHNAME = '/api/media/file/**';
-const MEDIA_FILE_SEARCH = `?prefix=${MEDIA_PREFIX}`;
+const MEDIA_URL_PATTERN = new URL(`${MEDIA_ORIGIN}/${MEDIA_PREFIX}/**`);
 const STATIC_IMAGE_PATHNAME = '/images/**';
 const NO_SEARCH = '';
-const IMMUTABLE_CACHE_CONTROL = `public, max-age=${ONE_YEAR_SECONDS}, immutable`;
 const ALL_ROUTES = '/:path*';
 const CONTENT_SECURITY_POLICY = [
     "frame-ancestors 'self'",
@@ -35,14 +35,11 @@ const nextConfig: NextConfig = {
     },
     images: {
         minimumCacheTTL: ONE_YEAR_SECONDS,
+        remotePatterns: [MEDIA_URL_PATTERN],
         localPatterns: [
             {
                 pathname: STATIC_IMAGE_PATHNAME,
                 search: NO_SEARCH,
-            },
-            {
-                pathname: MEDIA_FILE_PATHNAME,
-                search: MEDIA_FILE_SEARCH,
             },
         ],
     },
@@ -51,15 +48,6 @@ const nextConfig: NextConfig = {
             {
                 source: ALL_ROUTES,
                 headers: SECURITY_HEADERS,
-            },
-            {
-                source: MEDIA_FILE_ROUTE,
-                headers: [
-                    {
-                        key: 'Cache-Control',
-                        value: IMMUTABLE_CACHE_CONTROL,
-                    },
-                ],
             },
         ]);
     },

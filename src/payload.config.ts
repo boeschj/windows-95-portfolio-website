@@ -16,6 +16,7 @@ import { Users } from './collections/Users';
 import { About } from './globals/About';
 import { SiteSettings } from './globals/SiteSettings';
 import {
+    MEDIA_ORIGIN,
     MEDIA_PREFIX,
     SITE_URL,
     WWW_SITE_URL,
@@ -81,6 +82,8 @@ export default buildConfig({
                 media: {
                     disableLocalStorage: true,
                     prefix: MEDIA_PREFIX,
+                    generateFileURL: ({ filename, prefix }) =>
+                        buildPublicMediaUrl(filename, prefix),
                 },
             },
         }),
@@ -111,4 +114,11 @@ function isDefined(value: string | undefined): value is string {
 
 function toHttpsOrigin(hostname: string): string {
     return `https://${hostname}`;
+}
+
+function buildPublicMediaUrl(filename: string, prefix: string | undefined) {
+    const encodedFilename = encodeURIComponent(filename);
+    const objectKey = [prefix, encodedFilename].filter(isDefined).join('/');
+
+    return `${MEDIA_ORIGIN}/${objectKey}`;
 }
