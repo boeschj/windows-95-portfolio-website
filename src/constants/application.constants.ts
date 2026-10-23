@@ -2,6 +2,8 @@ export const IMAGE_PATH = '/images';
 
 export const SITE_URL = 'https://jordanboesch.com';
 
+export const WWW_SITE_URL = 'https://www.jordanboesch.com';
+
 export const MEDIA_PREFIX = 'blog-assets';
 
 export const SITE_AUTHOR = 'Jordan Boesch';

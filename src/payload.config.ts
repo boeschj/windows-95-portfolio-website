@@ -11,16 +11,28 @@ import { Posts } from './collections/Posts';
 import { Users } from './collections/Users';
 import { About } from './globals/About';
 import { SiteSettings } from './globals/SiteSettings';
-import { MEDIA_PREFIX } from './constants/application.constants';
+import {
+    MEDIA_PREFIX,
+    SITE_URL,
+    WWW_SITE_URL,
+} from './constants/application.constants';
 import { env } from './env';
 
 const currentDir = dirname(fileURLToPath(import.meta.url));
+
+const IS_DEPLOYED_ON_VERCEL = Boolean(env.VERCEL);
+const DEPLOYMENT_HOSTNAMES = [env.VERCEL_URL, env.VERCEL_BRANCH_URL];
+const DEPLOYMENT_ORIGINS =
+    DEPLOYMENT_HOSTNAMES.filter(isDefined).map(toHttpsOrigin);
+const ALLOWED_ADMIN_ORIGINS = [SITE_URL, WWW_SITE_URL, ...DEPLOYMENT_ORIGINS];
+const CSRF_ORIGINS = IS_DEPLOYED_ON_VERCEL ? ALLOWED_ADMIN_ORIGINS : [];
 
 export default buildConfig({
     editor: lexicalEditor(),
     collections: [Users, Posts, Experiences, Media],
     globals: [SiteSettings, About],
     secret: env.PAYLOAD_SECRET,
+    csrf: CSRF_ORIGINS,
     db: postgresAdapter({
         pool: {
             connectionString: env.DATABASE_URL,
@@ -57,3 +69,11 @@ export default buildConfig({
         },
     },
 });
+
+function isDefined(value: string | undefined): value is string {
+    return value !== undefined;
+}
+
+function toHttpsOrigin(hostname: string): string {
+    return `https://${hostname}`;
+}
