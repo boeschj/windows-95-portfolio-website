@@ -22,6 +22,7 @@ import {
     WWW_SITE_URL,
 } from './constants/application.constants';
 import {
+    CODE_BLOCK_INTERFACE_NAME,
     CODE_BLOCK_SLUG,
     CODE_LANGUAGES,
     DEFAULT_CODE_LANGUAGE,
@@ -45,6 +46,9 @@ const codeBlock = CodeBlock({
     slug: CODE_BLOCK_SLUG,
     languages: CODE_LANGUAGES,
     defaultLanguage: DEFAULT_CODE_LANGUAGE,
+    fieldOverrides: {
+        interfaceName: CODE_BLOCK_INTERFACE_NAME,
+    },
 });
 
 export default buildConfig({

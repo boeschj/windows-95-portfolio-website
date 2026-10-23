@@ -3,18 +3,12 @@ import { BlogVideo } from './BlogVideo';
 import { CodeBlock } from './CodeBlock';
 import { CODE_BLOCK_SLUG } from '@/config/codeLanguages';
 
+import type { CodeBlockFields } from '@/payload-types';
 import type {
     DefaultNodeTypes,
     SerializedBlockNode,
 } from '@payloadcms/richtext-lexical';
 import type { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react';
-
-interface CodeBlockFields {
-    blockType: typeof CODE_BLOCK_SLUG;
-    blockName?: string | null;
-    code?: string | null;
-    language?: string | null;
-}
 
 type RichTextNode = DefaultNodeTypes | SerializedBlockNode<CodeBlockFields>;
 
