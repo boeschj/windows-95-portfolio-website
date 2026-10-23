@@ -76,6 +76,7 @@ export default buildConfig({
                     secretAccessKey: env.R2_SECRET_ACCESS_KEY,
                 },
             },
+            clientUploads: true,
             collections: {
                 media: {
                     disableLocalStorage: true,
