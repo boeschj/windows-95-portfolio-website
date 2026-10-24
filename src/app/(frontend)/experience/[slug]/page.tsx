@@ -9,13 +9,10 @@ import {
     EXPERIENCE_ROUTE,
     SITE_AUTHOR,
 } from '@/constants/application.constants';
-import { hrefForTab } from '@/config/tabs';
 import { JsonLd } from '@/components/JsonLd';
 import { NotepadReader } from '@/components/blog/NotepadReader';
 
 import type { Metadata } from 'next';
-
-const EXPERIENCE_HREF = hrefForTab('experience');
 
 export const revalidate = 3600;
 
@@ -76,7 +73,7 @@ export default async function ExperiencePage({ params }: ExperiencePageProps) {
     return (
         <>
             <JsonLd data={buildExperienceSchema(experience)} />
-            <NotepadReader doc={doc} backHref={EXPERIENCE_HREF} />
+            <NotepadReader doc={doc} backHref={EXPERIENCE_ROUTE} />
         </>
     );
 }
