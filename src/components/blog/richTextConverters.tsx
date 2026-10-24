@@ -1,6 +1,7 @@
 import { BlogImage } from './BlogImage';
 import { BlogVideo } from './BlogVideo';
 import { CodeBlock } from './CodeBlock';
+import { NewTabLink } from './NewTabLink';
 import { CODE_BLOCK_SLUG } from '@/config/codeLanguages';
 
 import type { CodeBlockFields } from '@/payload-types';
@@ -146,6 +147,16 @@ function resolveUploadMedia(value: unknown): ResolvedUploadMedia | null {
 export function createRichTextConverters(): JSXConvertersFunction<RichTextNode> {
     return ({ defaultConverters }) => ({
         ...defaultConverters,
+        link: ({ node, nodesToJSX }) => {
+            const children = nodesToJSX({ nodes: node.children });
+
+            return <NewTabLink href={node.fields.url}>{children}</NewTabLink>;
+        },
+        autolink: ({ node, nodesToJSX }) => {
+            const children = nodesToJSX({ nodes: node.children });
+
+            return <NewTabLink href={node.fields.url}>{children}</NewTabLink>;
+        },
         blocks: {
             [CODE_BLOCK_SLUG]: ({ node }) => {
                 const code = node.fields.code ?? '';
