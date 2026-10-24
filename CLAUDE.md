@@ -33,7 +33,7 @@ No test framework is configured.
 ## Tech Stack
 
 - **Next.js 16** (App Router, React Compiler enabled) with **React 19**
-- **TypeScript 5.9** (strict mode, path alias `@/*` → `./src/*`)
+- **TypeScript 7** (the native Go compiler; strict mode, path alias `@/*` → `./src/*`). `next build` type-checks through the local `tsc`.
 - **Tailwind CSS v4** (CSS-first config in `globals.css` `@theme` block, no JS config)
 - **Jotai** for state (1 atom: `tabSelectedAtom`)
 - **@base-ui/react** for headless UI primitives (Tabs, Menu, Progress, Tooltip, Collapsible, ScrollArea)
