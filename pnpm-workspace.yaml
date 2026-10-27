@@ -1,0 +1,16 @@
+overrides:
+    'baseline-browser-mapping@>=2 <2.11.0': '^2.11.0'
+    'brace-expansion@<2': '^1.1.21'
+    'brace-expansion@>=4 <6': '^5.0.12'
+    'browserslist@>=4 <4.28.7': '^4.28.7'
+    'dompurify@>=3 <3.4.16': '^3.4.16'
+    'fast-copy@>=3 <3.1.0': '^3.1.0'
+    'fast-uri@>=3 <3.1.8': '^3.1.8'
+    'js-yaml@>=4 <5': '^4.3.2'
+    'nanoid@<4': '^3.3.18'
+    'postcss@>=8 <8.5.23': '^8.5.23'
+    'source-map-js@>=1 <1.2.2': '^1.2.2'
+
+allowBuilds:
+    '@parcel/watcher': false
+    esbuild: false
