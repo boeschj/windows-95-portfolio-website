@@ -3,13 +3,10 @@ import { getPostBySlug, getBlogSlugs } from '@/data/posts';
 import { postDescription, toReaderDocument } from '@/data/postView';
 import { buildPostSchema } from '@/data/seoSchema';
 import { BLOG_ROUTE, SITE_AUTHOR } from '@/constants/application.constants';
-import { hrefForTab } from '@/config/tabs';
 import { JsonLd } from '@/components/JsonLd';
 import { NotepadReader } from '@/components/blog/NotepadReader';
 
 import type { Metadata } from 'next';
-
-const BLOG_HREF = hrefForTab('blog');
 
 export const revalidate = 3600;
 
@@ -71,7 +68,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     return (
         <>
             <JsonLd data={buildPostSchema(post)} />
-            <NotepadReader doc={doc} backHref={BLOG_HREF} />
+            <NotepadReader doc={doc} backHref={BLOG_ROUTE} />
         </>
     );
 }

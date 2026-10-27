@@ -1,6 +1,9 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Tabs } from '@base-ui/react/tabs';
-import { TABS, getTabByRoute, hrefForTab } from '@/config/tabs';
+import { TABS, getTabByPathname } from '@/config/tabs';
 import { cn } from '@/utils';
 
 import type { Tab, TabRoute } from '@/config/tabs';
@@ -10,14 +13,11 @@ const TAB_PANEL_CLASS = 'flex h-full min-h-0 w-full flex-col';
 
 interface TabContentContainerProps {
     panels: Record<TabRoute, ReactNode>;
-    activeRoute: string | null;
 }
 
-export function TabContentContainer({
-    panels,
-    activeRoute,
-}: TabContentContainerProps) {
-    const selectedTab = getTabByRoute(activeRoute);
+export function TabContentContainer({ panels }: TabContentContainerProps) {
+    const pathname = usePathname();
+    const selectedTab = getTabByPathname(pathname);
 
     return (
         <Tabs.Root
@@ -105,7 +105,7 @@ function Win95Tab({ tab, isActive, isFirst, isLast }: Win95TabProps) {
             <Tabs.Tab
                 value={tab.key}
                 nativeButton={false}
-                render={<Link href={hrefForTab(tab.route)} />}
+                render={<Link href={tab.href} scroll={false} />}
                 className="bg-windows-gray flex h-7.5 w-full items-center justify-center text-black no-underline"
             >
                 {tab.label}

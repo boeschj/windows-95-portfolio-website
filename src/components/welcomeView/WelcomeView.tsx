@@ -6,17 +6,12 @@ import { Experience } from '@/components/tabSections/experience/Experience';
 import { Skills } from '@/components/tabSections/skills/Skills';
 import { Blog } from '@/components/tabSections/blog/Blog';
 
-interface WelcomeViewProps {
-    activeRoute: string | null;
-}
-
-export function WelcomeView({ activeRoute }: WelcomeViewProps) {
+export function WelcomeView() {
     return (
         <div className="win95-border-raised bg-windows-gray h-full w-full pb-6">
             <Header />
             <div className="flex h-full grow flex-col justify-between gap-5 p-2 md:p-5">
                 <TabContentContainer
-                    activeRoute={activeRoute}
                     panels={{
                         about: <About />,
                         experience: <Experience />,

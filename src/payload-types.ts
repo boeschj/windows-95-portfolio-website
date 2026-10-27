@@ -140,6 +140,7 @@ export interface User {
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
+  resetPasswordRequestedAt?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   sessions?:
@@ -219,6 +220,8 @@ export interface Experience {
   createdAt: string;
 }
 /**
+ * PNG, JPEG, GIF, WebP, AVIF, MP4, or WebM. Export screen recordings as MP4: they're a fraction of a GIF's size and start playing right away.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
@@ -226,6 +229,7 @@ export interface Media {
   id: number;
   alt?: string | null;
   prefix?: string | null;
+  _objectKey?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -332,6 +336,7 @@ export interface UsersSelect<T extends boolean = true> {
   resetPasswordExpiration?: T;
   salt?: T;
   hash?: T;
+  resetPasswordRequestedAt?: T;
   loginAttempts?: T;
   lockUntil?: T;
   sessions?:
@@ -379,6 +384,7 @@ export interface ExperiencesSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   prefix?: T;
+  _objectKey?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -502,6 +508,35 @@ export interface CollectionsWidget {
     [k: string]: unknown;
   };
   width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CodeBlockFields".
+ */
+export interface CodeBlockFields {
+  language?:
+    | (
+        | 'typescript'
+        | 'tsx'
+        | 'javascript'
+        | 'json'
+        | 'html'
+        | 'css'
+        | 'shell'
+        | 'sql'
+        | 'python'
+        | 'go'
+        | 'rust'
+        | 'yaml'
+        | 'markdown'
+        | 'diff'
+        | 'plaintext'
+      )
+    | null;
+  code?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'Code';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

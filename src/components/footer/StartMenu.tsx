@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Menu } from '@base-ui/react/menu';
-import { TABS, hrefForTab } from '@/config/tabs';
+import { TABS } from '@/config/tabs';
 import { IMAGE_PATH } from '@/constants/application.constants';
 import { Button } from '@/components/buttons/Button';
 
@@ -53,7 +53,7 @@ export function StartMenu({ githubUrl, linkedinUrl }: StartMenuProps) {
                         {TABS.map((tab) => (
                             <Menu.LinkItem
                                 key={tab.key}
-                                render={<Link href={hrefForTab(tab.route)} />}
+                                render={<Link href={tab.href} />}
                                 className={MENU_ITEM_CLASS}
                             >
                                 {tab.label}

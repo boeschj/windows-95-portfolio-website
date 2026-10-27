@@ -68,6 +68,7 @@ export default tseslint.config(
             'scripts/**',
             'src/app/(payload)/**',
             'src/payload-types.ts',
+            'src/migrations/**',
         ],
     }
 );

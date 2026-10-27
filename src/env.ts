@@ -9,6 +9,9 @@ export const env = createEnv({
         R2_ENDPOINT: z.url(),
         R2_ACCESS_KEY_ID: z.string().min(1),
         R2_SECRET_ACCESS_KEY: z.string().min(1),
+        VERCEL: z.string().optional(),
+        VERCEL_URL: z.string().optional(),
+        VERCEL_BRANCH_URL: z.string().optional(),
     },
     experimental__runtimeEnv: {},
 });

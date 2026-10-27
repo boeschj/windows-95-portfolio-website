@@ -1,4 +1,9 @@
-import { SITE_AUTHOR, SITE_URL } from '@/constants/application.constants';
+import {
+    BLOG_ROUTE,
+    EXPERIENCE_ROUTE,
+    SITE_AUTHOR,
+    SITE_URL,
+} from '@/constants/application.constants';
 import { postDescription } from './postView';
 import { experienceDescription } from './experienceView';
 
@@ -9,13 +14,13 @@ const AUTHOR_JOB_TITLE = 'Software Engineer';
 
 interface BreadcrumbSection {
     name: string;
-    tab: string;
+    href: string;
 }
 
-const BLOG_SECTION: BreadcrumbSection = { name: 'Blog', tab: 'blog' };
+const BLOG_SECTION: BreadcrumbSection = { name: 'Blog', href: BLOG_ROUTE };
 const EXPERIENCE_SECTION: BreadcrumbSection = {
     name: 'Experience',
-    tab: 'experience',
+    href: EXPERIENCE_ROUTE,
 };
 
 const AUTHOR_NODE = { '@type': 'Person', name: SITE_AUTHOR, url: SITE_URL };
@@ -95,7 +100,7 @@ function buildBreadcrumbs(
                 '@type': 'ListItem',
                 position: 2,
                 name: section.name,
-                item: `${SITE_URL}/?tab=${section.tab}`,
+                item: `${SITE_URL}${section.href}`,
             },
             {
                 '@type': 'ListItem',
