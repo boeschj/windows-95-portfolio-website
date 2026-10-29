@@ -28,7 +28,7 @@ export function NotepadReader({ doc, backHref }: NotepadReaderProps) {
 
     return (
         <div className="bg-windows-bg md:pb-taskbar-height fixed inset-0 flex flex-col overflow-hidden">
-            <div className="win95-border-raised bg-windows-gray mx-auto flex min-h-0 w-full max-w-screen-2xl flex-1 flex-col">
+            <div className="win95-border-raised bg-windows-gray mx-auto flex min-h-0 w-full max-w-6xl flex-1 flex-col md:my-6">
                 <TitleBar title={windowTitle} backHref={backHref} />
                 <MenuBar />
                 <div className="win95-border-sunken bg-windows-gray flex min-h-0 flex-1">
