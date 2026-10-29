@@ -12,7 +12,7 @@ export const Skills: GlobalConfig = {
     },
     admin: {
         description:
-            'The Skills tab summary. The icons below it come from tags that have an icon, grouped by category. Reorder them from the Tags list.',
+            'The Skills tab summary. The icons below it come from tags that have an icon. Reorder them from the Tags list.',
     },
     hooks: {
         afterChange: [revalidateAfterChange],

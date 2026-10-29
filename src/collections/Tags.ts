@@ -19,8 +19,8 @@ export const TAG_CATEGORY = {
     TOOLING: 'tooling',
 } as const;
 
-export const TAG_CATEGORY_OPTIONS = [
-    { label: 'Languages', value: TAG_CATEGORY.LANGUAGE },
+const TAG_CATEGORY_OPTIONS = [
+    { label: 'Language', value: TAG_CATEGORY.LANGUAGE },
     { label: 'Frontend', value: TAG_CATEGORY.FRONTEND },
     { label: 'Backend', value: TAG_CATEGORY.BACKEND },
     { label: 'AI', value: TAG_CATEGORY.AI },

@@ -523,7 +523,7 @@ export interface About {
   createdAt?: string | null;
 }
 /**
- * The Skills tab summary. The icons below it come from tags that have an icon, grouped by category. Reorder them from the Tags list.
+ * The Skills tab summary. The icons below it come from tags that have an icon. Reorder them from the Tags list.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "skills".
