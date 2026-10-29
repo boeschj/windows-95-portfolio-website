@@ -10,7 +10,7 @@ export default function HomeLayout({ children }: { children: ReactNode }) {
         <div className="bg-windows-bg flex min-h-screen w-full flex-col items-center justify-center">
             <main
                 className={
-                    'flex h-dvh w-full max-w-screen-2xl grow flex-col items-center justify-center md:h-36 md:p-12'
+                    'flex h-dvh w-full max-w-6xl grow flex-col items-center justify-center md:h-36 md:p-12'
                 }
             >
                 <WelcomeView />
