@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     posts: Post;
     experiences: Experience;
+    tags: Tag;
     media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -81,6 +82,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     experiences: ExperiencesSelect<false> | ExperiencesSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -94,10 +96,12 @@ export interface Config {
   globals: {
     'site-settings': SiteSetting;
     about: About;
+    skills: Skill;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     about: AboutSelect<false> | AboutSelect<true>;
+    skills: SkillsSelect<false> | SkillsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -178,8 +182,50 @@ export interface Post {
   } | null;
   status?: ('draft' | 'published') | null;
   publishedAt?: string | null;
+  /**
+   * Tech used. Pick existing tags or create new ones.
+   */
+  tags?: (number | Tag)[] | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * Tags with an icon show on the Skills tab. Drag rows to set their order.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: number;
+  _order?: string | null;
+  name: string;
+  category: 'language' | 'frontend' | 'backend' | 'ai' | 'infrastructure' | 'tooling';
+  icon?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * PNG, JPEG, GIF, WebP, AVIF, SVG, MP4, or WebM. Export screen recordings as MP4: they're a fraction of a GIF's size and start playing right away.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt?: string | null;
+  prefix?: string | null;
+  _objectKey?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -216,31 +262,12 @@ export interface Experience {
   endDate?: string | null;
   slug: string;
   status?: ('draft' | 'published') | null;
+  /**
+   * Tech used. Pick existing tags or create new ones.
+   */
+  tags?: (number | Tag)[] | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * PNG, JPEG, GIF, WebP, AVIF, MP4, or WebM. Export screen recordings as MP4: they're a fraction of a GIF's size and start playing right away.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt?: string | null;
-  prefix?: string | null;
-  _objectKey?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -277,6 +304,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'experiences';
         value: number | Experience;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: number | Tag;
       } | null)
     | ({
         relationTo: 'media';
@@ -357,6 +388,7 @@ export interface PostsSelect<T extends boolean = true> {
   content?: T;
   status?: T;
   publishedAt?: T;
+  tags?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -374,6 +406,19 @@ export interface ExperiencesSelect<T extends boolean = true> {
   endDate?: T;
   slug?: T;
   status?: T;
+  tags?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  _order?: T;
+  name?: T;
+  category?: T;
+  icon?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -478,6 +523,18 @@ export interface About {
   createdAt?: string | null;
 }
 /**
+ * The Skills tab summary. The icons below it come from tags that have an icon. Reorder them from the Tags list.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "skills".
+ */
+export interface Skill {
+  id: number;
+  summary?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
@@ -495,6 +552,16 @@ export interface SiteSettingsSelect<T extends boolean = true> {
 export interface AboutSelect<T extends boolean = true> {
   photo?: T;
   content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "skills_select".
+ */
+export interface SkillsSelect<T extends boolean = true> {
+  summary?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

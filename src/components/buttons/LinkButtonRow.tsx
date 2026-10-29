@@ -12,7 +12,7 @@ export async function LinkButtonRow({ className }: LinkButtonRowProps) {
     return (
         <div
             className={cn(
-                'flex flex-row items-end justify-end space-x-5 pb-2 md:p-0',
+                'flex flex-row items-end justify-end space-x-5',
                 className
             )}
         >

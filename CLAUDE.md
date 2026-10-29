@@ -11,8 +11,8 @@ Windows 95 themed personal portfolio website. Single-page Next.js app deployed o
 ```bash
 pnpm dev          # Dev server (prints local network IP)
 pnpm build        # Production build
-pnpm lint         # ESLint (flat config, strict TS)
-pnpm lint:fix     # ESLint autofix
+pnpm lint         # Oxlint (type-aware, config in .oxlintrc.json)
+pnpm lint:fix     # Oxlint autofix
 pnpm format       # Prettier check
 pnpm format:fix   # Prettier write
 pnpm typecheck    # tsc --noEmit
@@ -33,11 +33,11 @@ No test framework is configured.
 ## Tech Stack
 
 - **Next.js 16** (App Router, React Compiler enabled) with **React 19**
-- **TypeScript 5.9** (strict mode, path alias `@/*` → `./src/*`)
+- **TypeScript 7** (the native Go compiler; strict mode, path alias `@/*` → `./src/*`). `next build` type-checks through the local `tsc`.
 - **Tailwind CSS v4** (CSS-first config in `globals.css` `@theme` block, no JS config)
 - **Jotai** for state (1 atom: `tabSelectedAtom`)
 - **@base-ui/react** for headless UI primitives (Tabs, Menu, Progress, Tooltip, Collapsible, ScrollArea)
-- **ESLint 9** flat config with `strictTypeChecked` + `stylisticTypeChecked`
+- **Oxlint** with type-aware rules via `oxlint-tsgolint` (migrated from ESLint's `strictTypeChecked` + `stylisticTypeChecked`, react, react-hooks including React Compiler rules, jsx-a11y, and Next.js rules)
 - **Prettier** (4-space indent, single quotes, semicolons, tailwind plugin)
 
 ## Architecture

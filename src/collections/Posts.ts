@@ -10,6 +10,7 @@ import {
     PUBLISH_STATUS_OPTIONS,
     readPublishedOrAuthenticated,
 } from './publishing';
+import { TAGS_FIELD } from './Tags';
 
 export { PUBLISH_STATUS as POST_STATUS };
 
@@ -82,5 +83,6 @@ export const Posts: CollectionConfig = {
                 },
             },
         },
+        TAGS_FIELD,
     ],
 };

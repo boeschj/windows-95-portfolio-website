@@ -1,20 +1,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { CELL_CLASS } from '@/components/explorer/explorerTable';
+import {
+    CELL_CLASS,
+    ITEM_CLASS,
+    ITEM_LINK_CLASS,
+    LINK_ROW_CLASS,
+} from '@/components/explorer/explorerTable';
 import { EXPERIENCE_ROUTE } from '@/constants/application.constants';
 
 import type { ExperienceListItem } from '@/data/experienceView';
 
 const LOGO_SIZE_PX = 16;
-const COMPANY_LABEL_CLASS = 'flex items-center gap-1.5 text-black no-underline';
 
 interface ExperienceRowProps {
     item: ExperienceListItem;
 }
 
 export function ExperienceRow({ item }: ExperienceRowProps) {
+    const rowClass = item.hasContent ? LINK_ROW_CLASS : undefined;
+
     return (
-        <tr>
+        <tr className={rowClass}>
             <td className={CELL_CLASS}>
                 <CompanyLabel item={item} />
             </td>
@@ -34,11 +40,11 @@ function CompanyLabel({ item }: ExperienceRowProps) {
     );
 
     if (!item.hasContent) {
-        return <div className={COMPANY_LABEL_CLASS}>{label}</div>;
+        return <div className={ITEM_CLASS}>{label}</div>;
     }
 
     return (
-        <Link href={experienceHref} className={COMPANY_LABEL_CLASS}>
+        <Link href={experienceHref} className={ITEM_LINK_CLASS}>
             {label}
         </Link>
     );

@@ -48,6 +48,7 @@
     --color-top-t-4: #a5bdc0;
 
     --color-focus-outline: #3f3f3f;
+    --color-highlight-outline: #ffff57;
     --color-tooltip-bg: #ffffe1;
 
     --shadow-win95-raised:
@@ -262,6 +263,10 @@
     font-size: 22px;
     font-weight: 800;
     border-bottom: 2px solid #000;
+}
+
+.notepad-prose > h2:first-child {
+    margin-top: 0;
 }
 
 .notepad-prose h3 {
