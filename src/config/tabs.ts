@@ -10,35 +10,30 @@ export const TABS = [
         key: 0,
         route: 'about',
         href: HOME_ROUTE,
-        title: "Hi, I'm Jordan 👋",
         label: 'About Me',
     },
     {
         key: 1,
         route: 'experience',
         href: EXPERIENCE_ROUTE,
-        title: 'My Work',
         label: 'Experience',
     },
     {
         key: 2,
         route: 'skills',
         href: SKILLS_ROUTE,
-        title: 'My Skills',
         label: 'Skills',
     },
     {
         key: 3,
         route: 'blog',
         href: BLOG_ROUTE,
-        title: 'Blog',
         label: 'Blog',
     },
 ] as const satisfies readonly {
     key: number;
     route: string;
     href: string;
-    title: string;
     label: string;
 }[];
 

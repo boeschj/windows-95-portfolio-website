@@ -8,9 +8,9 @@ import { Blog } from '@/components/tabSections/blog/Blog';
 
 export function WelcomeView() {
     return (
-        <div className="win95-border-raised bg-windows-gray h-full w-full pb-6">
+        <div className="win95-border-raised bg-windows-gray flex h-full w-full flex-col">
             <Header />
-            <div className="flex h-full grow flex-col justify-between gap-5 p-2 md:p-5">
+            <div className="flex min-h-0 flex-1 flex-col justify-between gap-5 p-2 md:p-5">
                 <TabContentContainer
                     panels={{
                         about: <About />,

@@ -9,7 +9,7 @@ import { cn } from '@/utils';
 import type { Tab, TabRoute } from '@/config/tabs';
 import type { ReactNode } from 'react';
 
-const TAB_PANEL_CLASS = 'flex h-full min-h-0 w-full flex-col';
+const TAB_PANEL_CLASS = 'flex min-h-0 w-full flex-1 flex-col';
 
 interface TabContentContainerProps {
     panels: Record<TabRoute, ReactNode>;
@@ -22,7 +22,7 @@ export function TabContentContainer({ panels }: TabContentContainerProps) {
     return (
         <Tabs.Root
             value={selectedTab.key}
-            className="flex h-[calc(100%-90px)] flex-col"
+            className="flex min-h-0 flex-1 flex-col"
         >
             <Tabs.List className="flex flex-row">
                 {TABS.map((tab, index) => (
@@ -35,11 +35,8 @@ export function TabContentContainer({ panels }: TabContentContainerProps) {
                     />
                 ))}
             </Tabs.List>
-            <div className="win95-border-raised flex h-full flex-col p-4 md:p-6">
-                <h1 className="mb-2 h-10 w-full text-center text-3xl leading-10 font-extrabold md:mb-5 md:text-[50px]">
-                    {selectedTab.title}
-                </h1>
-                <div className="win95-border-sunken flex h-[calc(100%-40px)] flex-col md:h-[calc(100%-60px)]">
+            <div className="win95-border-raised flex min-h-0 flex-1 flex-col p-4 md:p-6">
+                <div className="win95-border-sunken flex min-h-0 flex-1 flex-col">
                     {TABS.map((tab) => (
                         <Tabs.Panel
                             key={tab.key}
