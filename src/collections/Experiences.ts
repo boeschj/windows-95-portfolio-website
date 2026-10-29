@@ -10,6 +10,7 @@ import {
     PUBLISH_STATUS_OPTIONS,
     readPublishedOrAuthenticated,
 } from './publishing';
+import { TAGS_FIELD } from './Tags';
 
 function revalidateExperience(slug: string) {
     return revalidatePaths('/', '/llms.txt', `/experience/${slug}`);
@@ -110,5 +111,6 @@ export const Experiences: CollectionConfig = {
                 position: 'sidebar',
             },
         },
+        TAGS_FIELD,
     ],
 };

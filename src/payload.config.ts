@@ -12,9 +12,11 @@ import sharp from 'sharp';
 import { Experiences } from './collections/Experiences';
 import { Media } from './collections/Media';
 import { Posts } from './collections/Posts';
+import { Tags } from './collections/Tags';
 import { Users } from './collections/Users';
 import { About } from './globals/About';
 import { SiteSettings } from './globals/SiteSettings';
+import { Skills } from './globals/Skills';
 import {
     MEDIA_ORIGIN,
     MEDIA_PREFIX,
@@ -58,8 +60,8 @@ export default buildConfig({
             BlocksFeature({ blocks: [codeBlock] }),
         ],
     }),
-    collections: [Users, Posts, Experiences, Media],
-    globals: [SiteSettings, About],
+    collections: [Users, Posts, Experiences, Tags, Media],
+    globals: [SiteSettings, About, Skills],
     secret: env.PAYLOAD_SECRET,
     csrf: CSRF_ORIGINS,
     db: postgresAdapter({

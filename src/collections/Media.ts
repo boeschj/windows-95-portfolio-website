@@ -6,12 +6,13 @@ const ALLOWED_UPLOAD_MIME_TYPES = [
     'image/gif',
     'image/webp',
     'image/avif',
+    'image/svg+xml',
     'video/mp4',
     'video/webm',
 ];
 
 const UPLOAD_GUIDANCE =
-    "PNG, JPEG, GIF, WebP, AVIF, MP4, or WebM. Export screen recordings as MP4: they're a fraction of a GIF's size and start playing right away.";
+    "PNG, JPEG, GIF, WebP, AVIF, SVG, MP4, or WebM. Export screen recordings as MP4: they're a fraction of a GIF's size and start playing right away.";
 
 export const Media: CollectionConfig = {
     slug: 'media',

@@ -1,54 +1,49 @@
 import Image from 'next/image';
-import { cn } from '@/utils';
+import { resolveMedia } from '@/data/media';
 
-import type { TechItem } from '@/types/configTypes';
+import type { Tag } from '@/payload-types';
 
-const IMAGE_SIZE_PX = 50;
+const ICON_SIZE_PX = 48;
 
 interface SkillSectionProps {
     title: string;
-    skills: TechItem[];
-    className?: string;
+    tags: Tag[];
 }
 
-export function SkillSection({ title, skills, className }: SkillSectionProps) {
+export function SkillSection({ title, tags }: SkillSectionProps) {
     return (
-        <div className={className}>
-            <h3 className="mx-auto flex grow justify-center py-3 text-center text-2xl font-extrabold underline">
-                {title}
-            </h3>
-            <div className="grid grid-cols-3 px-5 text-center lg:grid-cols-8">
-                {skills.map((skill) => (
-                    <SkillIcon
-                        key={`${skill.type}-${skill.name}`}
-                        skill={skill}
-                    />
+        <>
+            <h2>{title}</h2>
+            <div className="grid grid-cols-[repeat(auto-fill,minmax(6.5rem,1fr))] gap-x-2 gap-y-6 pt-2">
+                {tags.map((tag) => (
+                    <SkillIcon key={tag.id} tag={tag} />
                 ))}
             </div>
-        </div>
+        </>
     );
 }
 
 interface SkillIconProps {
-    skill: TechItem;
+    tag: Tag;
 }
 
-function SkillIcon({ skill }: SkillIconProps) {
+function SkillIcon({ tag }: SkillIconProps) {
+    const icon = resolveMedia(tag.icon);
+
+    if (!icon.url) {
+        return null;
+    }
+
     return (
-        <div
-            className={cn(
-                'flex flex-col items-center justify-center p-1',
-                skill.type === 'tool' && 'first:my-auto first:mt-5'
-            )}
-        >
+        <div className="flex flex-col items-center gap-2 text-center">
             <Image
-                className="m-1"
-                src={skill.imageUrl}
-                alt={`${skill.name} icon`}
-                width={IMAGE_SIZE_PX}
-                height={IMAGE_SIZE_PX}
+                src={icon.url}
+                alt=""
+                width={ICON_SIZE_PX}
+                height={ICON_SIZE_PX}
+                className="size-12 object-contain"
             />
-            <div className="text-xl">{skill.name}</div>
+            <span className="text-lg leading-tight">{tag.name}</span>
         </div>
     );
 }

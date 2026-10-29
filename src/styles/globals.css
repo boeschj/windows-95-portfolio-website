@@ -265,6 +265,10 @@
     border-bottom: 2px solid #000;
 }
 
+.notepad-prose > h2:first-child {
+    margin-top: 0;
+}
+
 .notepad-prose h3 {
     margin: 22px 0 8px;
     font-size: 18px;
