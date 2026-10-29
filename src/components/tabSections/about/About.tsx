@@ -7,6 +7,7 @@ import { resolveMedia } from '@/data/media';
 const PHOTO_SIZE_PX = 300;
 const EMPTY_ABOUT_LABEL = 'More about me coming soon.';
 const DEFAULT_PHOTO_ALT = "It's me!";
+const ABOUT_HEADING = "Hi, I'm Jordan 👋";
 
 export async function About() {
     const about = await getAbout();
@@ -16,6 +17,9 @@ export async function About() {
     return (
         <div className="bg-windows-gray flex min-h-0 flex-1 flex-col">
             <Win95ScrollArea viewportClassName="h-full w-full bg-white px-6 py-8 md:px-12 md:py-9">
+                <h2 className="mb-6 text-center text-3xl leading-tight font-extrabold md:mb-8 md:text-[50px]">
+                    {ABOUT_HEADING}
+                </h2>
                 {photo.url && (
                     <div className="mb-6 flex justify-center md:mb-8">
                         <Image
